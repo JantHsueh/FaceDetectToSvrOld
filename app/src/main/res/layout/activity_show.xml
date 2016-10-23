@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#000"
+    >
+<View
+    android:layout_width="0dp"
+    android:layout_weight="1"
+    android:layout_height="match_parent"
+    />
+
+<RelativeLayout 
+	android:layout_width="0dp"
+	android:layout_weight="9"
+    android:layout_height="match_parent"
+    
+	>
+
+ <LinearLayout 
+    android:id="@+id/loginRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/auth_result_bg"
+    android:layout_marginTop="50dp"
+    android:layout_marginBottom="45dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+     >
+     <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="65dp"
+    android:layout_marginTop="25dp"
+    android:orientation="vertical"
+    android:gravity="center"
+     >
+     <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:src="@drawable/antu_result_true"
+     />
+     </LinearLayout>   
+    
+	<LinearLayout
+	android:id="@+id/LinearLayout01"
+	android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:layout_marginTop="15dp"
+    android:layout_marginBottom="30dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+	     >
+	    <LinearLayout
+	        android:id="@+id/LinearLayout11"
+	        android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:background="@drawable/auth_lift">
+	        <ImageView
+	            android:id="@+id/imageView1"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="0.82"
+	            android:src="@drawable/nobody" 
+	            android:paddingTop="20dp"
+				android:paddingBottom="20dp"
+	            />
+	    </LinearLayout>
+        <View
+            android:layout_height="match_parent"
+            android:layout_width="40dp"
+            />
+	    <LinearLayout
+	        android:id="@+id/LinearLayout12"
+	         android:layout_width="0dp"
+            android:layout_height="match_parent"
+           android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:background="@drawable/auth_right1"
+           android:gravity="center" >
+	        <ImageView
+	            android:id="@+id/imageView2"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="0.73"
+	            android:src="@drawable/nobody"
+	             android:paddingTop="20dp"
+				android:paddingBottom="20dp"
+	            
+	             />
+	    </LinearLayout>
+	</LinearLayout>
+<!-- 
+	<LinearLayout
+	    android:id="@+id/LinearLayout02"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	   
+	    android:orientation="vertical" >
+
+		<TextView
+		    android:id="@+id/textFaceid"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginLeft="40px" 
+		    android:layout_marginTop="20px"
+		    android:textSize="20dp"
+		    android:text="身份ID:" />
+
+		<TextView
+		    android:id="@+id/textName"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginLeft="40px" 
+		    android:layout_marginTop="10px"
+		    android:textSize="20dp"
+		    android:text="注册名称:" />
+		<TextView
+		    android:id="@+id/textType"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginLeft="40px" 
+		    android:layout_marginTop="10px"
+		    android:textSize="20dp"
+		    android:text="人脸类型:" />
+		
+		<TextView
+		    android:id="@+id/textScore"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:textSize="20dp"
+		    android:layout_marginLeft="40px" 
+		    android:layout_marginTop="10px"
+		    android:text="相似度:" />
+
+		<TextView
+		    android:id="@+id/textTime"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginLeft="40px" 
+		    android:layout_marginTop="10px"
+		    android:textSize="20dp"
+		    android:text="抓拍时间:" />
+
+	</LinearLayout>
+
+		<LinearLayout
+		    android:id="@+id/LinearLayout04"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_marginBottom="10dp"
+		    android:layout_weight="1.0"
+		    android:gravity="bottom"
+		    android:orientation="vertical" >
+
+		    <Button
+		        android:id="@+id/btnSave"
+		        android:layout_width="fill_parent"
+		        android:layout_height="50dp"
+		        android:layout_marginLeft="40px"
+		        android:layout_marginRight="40px"
+		        android:background="@drawable/btn_long"
+		        android:onClick="saveRecord"
+		        android:text="保存"
+		        android:textColor="@color/white" />
+
+		    <Button
+		        android:id="@+id/btnUnSave"
+		        android:layout_width="fill_parent"
+		        android:layout_height="50dp"
+		        android:layout_marginLeft="40px"
+		        android:layout_marginRight="40px"
+		        android:layout_marginTop="10px"
+		        android:background="@drawable/btn_long_red"
+		        android:onClick="unsaveRecord"
+		        android:text="放弃"
+		        android:textColor="@color/white" />
+
+		</LinearLayout>
+		 -->
+</LinearLayout>
+</RelativeLayout>
+
+<RelativeLayout
+    android:layout_width="0dp"
+    android:layout_weight="1"
+    android:layout_height="match_parent"
+    >
+ 	<LinearLayout
+ 	android:layout_width="wrap_content"
+    android:layout_height="match_parent"    
+    android:orientation="vertical"
+    android:layout_marginTop="20dp"
+    android:layout_marginRight="10dp"
+    android:layout_alignParentRight="true"
+ 	    >
+	<ImageView
+    android:layout_width="25dp"
+    android:layout_height="25dp" 
+    android:orientation="vertical"
+    android:background="@drawable/back"
+    android:onClick="goBack"
+        />
+<ImageView
+    android:layout_marginTop="5dp"
+    android:layout_width="25dp"
+    android:layout_height="25dp" 
+    android:orientation="vertical"
+    android:background="@drawable/setting"
+    android:onClick="toSetting"
+        />
+<ImageView
+    android:layout_marginTop="5dp"
+    android:layout_width="25dp"
+    android:layout_height="25dp" 
+    android:orientation="vertical"
+    android:background="@drawable/history"
+    android:onClick="toHistory"
+        /> 
+   
+ 	</LinearLayout>
+ </RelativeLayout>
+</LinearLayout>
