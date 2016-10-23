@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#000"
+    >
+<View
+    android:layout_width="0dp"
+    android:layout_weight="1"
+    android:layout_height="match_parent"
+    />
+<RelativeLayout 
+	android:layout_width="0dp"
+	android:layout_weight="9"
+    android:layout_height="match_parent"
+	>
+	
+ <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@drawable/auth_result_bg"
+    android:layout_marginTop="30dp"
+    android:layout_marginBottom="45dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+     > 
+     <LinearLayout
+    android:layout_width="0dp"
+    android:layout_weight="3"
+    android:layout_height="match_parent" 
+    android:orientation="vertical" 
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="15dp"
+         >
+     <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="20dp" 
+         >
+     <!-- 选择日历日期 -->    
+     <LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent" 
+    android:orientation="horizontal"
+    android:layout_alignParentRight="true" 
+         >
+       <ImageButton
+        android:id="@+id/calendar_Left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="@null"
+        android:padding="8dp"
+        android:src="@drawable/calendar_lift_n" />
+      <TextView  
+        android:id="@+id/calendar_Center1" 
+         android:layout_width="wrap_content"  
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"  
+        android:textColor="@color/white" 
+        android:textSize="11sp"
+        android:text="2016年8月"
+        android:layout_marginTop="4.5dp"
+      />  
+    <ImageButton
+        android:id="@+id/calendar_Right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="@null"
+        android:padding="8dp"
+        android:src="@drawable/calendar_right_n" />  
+     </LinearLayout>
+     </RelativeLayout>
+         
+         
+     <LinearLayout
+    android:layout_marginTop="5dp"
+    android:layout_width="match_parent"
+    android:layout_weight="1"
+    android:layout_height="0dp" 
+    android:orientation="vertical"  
+    android:background="#000"
+         >
+   <!-- 日历 -->
+   <com.firs.view.CalendarView 
+   android:id="@+id/calendar"  
+   android:layout_width="fill_parent"  
+   android:layout_height="0dp"  
+   android:layout_weight="2"
+   
+      />  
+    </LinearLayout> 
+    <View
+    android:layout_width="match_parent"
+    android:layout_height="10dp"   
+        />
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_weight="1"
+    android:layout_height="0dp" 
+    android:orientation="vertical"  
+    android:background="#105E8F"
+         >
+   <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:orientation="vertical"  
+    
+       >
+    <View
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:background="@color/line_buttom" 
+        />
+     <ListView
+    android:id="@+id/listView1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:dividerHeight="0.5dp"
+    android:divider="@color/line_buttom"
+            />
+     <View
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:background="@color/line_buttom" 
+        />
+     </LinearLayout>
+      </LinearLayout> 
+      
+     <LinearLayout
+    android:layout_marginTop="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="15dp" 
+    android:orientation="horizontal"
+         >
+    <Button
+    android:id="@+id/bt1"
+    android:layout_marginLeft="10dp"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:text="导出" 
+    android:textSize="11sp"
+    android:textColor="@color/white"
+    android:background="@drawable/ok_n"
+            />
+    <Button
+    android:layout_marginLeft="10dp"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:text="取消" 
+    android:textSize="11sp"
+    android:textColor="@color/white"
+    android:background="@drawable/cancle_n"
+    android:onClick="goBack"
+            />
+     </LinearLayout> 
+    </LinearLayout>
+    
+     
+     
+     
+     
+     
+     <View
+    android:layout_width="20dp"
+    android:layout_height="match_parent"  
+         />
+     
+     
+     
+     
+     
+     <LinearLayout
+    android:layout_width="0dp"
+    android:layout_weight="2"
+    android:layout_height="match_parent" 
+    android:orientation="vertical" 
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="15dp"
+         >
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="身份证信息"
+    android:textSize="11sp"
+    android:textColor="@color/white"  
+    android:layout_marginLeft="25dp"  
+        
+        />
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_weight="1"
+    android:layout_height="0dp"
+    android:orientation="vertical" 
+    android:background="@drawable/auth_right1" 
+        >
+    <ImageView
+        android:id="@+id/imageView1"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_weight="0.82"
+	android:src="@drawable/nobody" 
+	android:paddingTop="20dp"
+	android:paddingBottom="20dp"
+	            />
+    </LinearLayout>
+    <View
+    android:layout_width="match_parent"
+    android:layout_height="10dp" 
+        />
+    
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="抓拍人脸信息"
+    android:textSize="11sp"
+    android:textColor="@color/white"  
+    android:layout_marginLeft="25dp"  
+        />
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_weight="1"
+    android:layout_height="0dp"
+    android:orientation="vertical" 
+    android:background="@drawable/auth_lift"   
+        >
+    <ImageView
+    android:id="@+id/imageView2"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_weight="0.82"
+	android:src="@drawable/nobody" 
+	android:paddingTop="20dp"
+	android:paddingBottom="20dp"
+	            />
+    </LinearLayout>
+     </LinearLayout>
+     
+     
+    <!--  
+     <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:layout_marginTop="15dp" 
+         >
+     <View
+         android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/line_buttom"
+        android:layout_marginLeft="15dp"
+        />      
+     <ListView
+            android:id="@+id/listView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:dividerHeight="0.5dp"
+            android:divider="@color/line_buttom"
+            android:layout_marginLeft="15dp"
+            
+             >
+        </ListView>
+        <View
+         android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/line_buttom"
+        android:layout_marginLeft="15dp"
+        /> 
+        </LinearLayout> -->
+        
+
+
+
+        
+</LinearLayout>
+</RelativeLayout>
+<View
+    android:layout_width="0dp"
+    android:layout_weight="1"
+    android:layout_height="match_parent"
+    />
+</LinearLayout>
+
+
+

@@ -1,0 +1,188 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    tools:context=".MainActivity" 
+    android:orientation="vertical"
+     android:background="@drawable/main_bg"
+    
+     >
+  <View
+    android:id="@+id/v_h_top"
+    android:layout_width="match_parent"
+    android:layout_weight="1"
+    android:layout_height="0dp"
+    android:layout_alignParentBottom="true"
+        />
+  
+  <!-- 垂直布局 -->
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_weight="8"
+    android:layout_height="0dp"
+    android:orientation="horizontal"
+      >
+    <View
+    android:id="@+id/v_w_lift"
+    android:layout_width="0dp"
+    android:layout_weight="1"
+    android:layout_height="match_parent"
+        />
+   <RelativeLayout
+    android:layout_width="0dp"
+      android:layout_weight="6"
+    android:layout_height="match_parent"
+        > 
+    <FrameLayout
+        android:id="@+id/preview"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/line_frame" >
+        <SurfaceView
+            android:id="@+id/surfaceView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="1dp"
+            android:onClick="click_Surface" />
+
+    </FrameLayout>
+    <TableRow
+         android:id="@+id/tableRow2"
+         android:layout_width="fill_parent"
+         android:layout_height="60dp"
+         android:layout_marginBottom="10dp"
+         android:layout_marginLeft="0dp"
+         android:layout_marginRight="0dp"
+         android:layout_marginTop="45dp"
+         android:gravity="center"
+         android:orientation="vertical" >
+      	
+          <Button
+              android:id="@+id/btnCamera"
+              android:layout_width="72dp"
+              android:layout_height="35dp"
+              android:layout_marginTop="5dp"
+              android:background="@drawable/btn_camera"
+              android:onClick="cameraChange"
+              android:visibility="gone"
+               />
+			
+        </TableRow>
+    
+    <SeekBar
+            android:id="@+id/seekBar1"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="200dp"          
+            android:rotation="270"
+            android:transformPivotX="150dp"
+            
+            
+     />
+
+    <LinearLayout
+        android:id="@+id/tableRow1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_vertical|center_horizontal|center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btnSetting"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="60dp"
+            android:background="@drawable/btn_left"
+            android:onClick="OtherSetPage"
+            
+            android:visibility="gone"
+            
+             />
+
+        <Button
+            android:id="@+id/imgViewMiddle"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/btn_takepicture"
+            android:onClick="SendPicture" />
+
+        <Button
+            android:id="@+id/btn1tomore"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="60dp"
+            android:onClick="onetoMore"
+            android:background="@drawable/btn_right" 
+            
+            android:visibility="gone"
+            />
+
+    </LinearLayout>
+    
+    </RelativeLayout>
+     <View
+    android:id="@+id/v_w_right"
+    android:layout_width="0dp"
+    android:layout_weight="1"
+    android:layout_height="match_parent"
+        />
+    </LinearLayout>
+    <!--<View
+    android:id="@+id/v_h_buttom"
+    android:layout_width="match_parent"
+    android:layout_weight="1"
+    android:layout_height="0dp"
+        />-->
+    <RelativeLayout
+        android:id="@+id/v_h_buttom"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        >
+        <LinearLayout
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="45dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+        <ImageView
+            android:layout_marginTop="5dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:orientation="vertical"
+            android:background="@drawable/history"
+            android:onClick="toHistory"
+            />
+            <ImageView
+                android:layout_marginTop="5dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:orientation="vertical"
+                android:background="@drawable/setting"
+                android:onClick="toSetting"
+                />
+            <ImageView
+                android:layout_marginTop="5dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:orientation="vertical"
+                android:background="@drawable/back"
+                android:onClick="goBack"
+                />
+
+</LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>
