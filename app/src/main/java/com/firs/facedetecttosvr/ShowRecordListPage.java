@@ -79,8 +79,9 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 		initView();
 		if(CalendarDate==null || CalendarDate.equals("")){
 			Date data=new Date();
-				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			CalendarDate=formatter.format(formatter);
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			CalendarDate=formatter.format(data);
+			Toast.makeText(ShowRecordListPage.this ,"当前日期："+CalendarDate, Toast.LENGTH_LONG).show();
 		}
 
 
@@ -249,7 +250,7 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 	protected void onResume() {
 		super.onResume();
 		initData();
-		listView.setAdapter(new MyAdapter());
+		//listView.setAdapter(new MyAdapter());
 	}
 
 	@Override
