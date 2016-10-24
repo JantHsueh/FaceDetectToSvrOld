@@ -7,7 +7,9 @@
 
 int giBytesPerPixel = 2;
 int giDepth = 16;
-//YUV2RGBËã·¨²ÎÊı
+
+//YUV2RGBç®—æ³•å‚æ•°
+
 int D[256],F[256],E[256];
 ////////////////////////////////////////////////////////////////////////////////
 // CMutex class
@@ -87,16 +89,18 @@ RGB yuv2rgb(BYTE y, BYTE u, BYTE v)
 }
 
 /******************************************************************************
- * º¯ÊıÃû³Æ£º CFramebuffer.CreateBmpFromYBuf
- * ¹¦ÄÜ£º ÓÉY·ÖÁ¿Êı¾İÊä³öBmpÍ¼Ïñ
- * ²ÎÊı£º 	nWidth: ¿í¶È
- 			nHeight: ¸ß¶È
- 			pYBuf: Y·ÖÁ¿Êı¾İ
- * ·µ»Ø£º Êä³öBMPÍ¼Ïñ
- * ´´½¨×÷Õß£º 
- * ´´½¨ÈÕÆÚ£º 2012-6-18
- * ĞŞ¸Ä×÷Õß£º
- * ĞŞ¸ÄÈÕÆÚ£º
+
+ * å‡½æ•°åç§°ï¼š CFramebuffer.CreateBmpFromYBuf
+ * åŠŸèƒ½ï¼š ç”±Yåˆ†é‡æ•°æ®è¾“å‡ºBmpå›¾åƒ
+ * å‚æ•°ï¼š 	nWidth: å®½åº¦
+ 			nHeight: é«˜åº¦
+ 			pYBuf: Yåˆ†é‡æ•°æ®
+ * è¿”å›ï¼š è¾“å‡ºBMPå›¾åƒ
+ * åˆ›å»ºä½œè€…ï¼š 
+ * åˆ›å»ºæ—¥æœŸï¼š 2012-6-18
+ * ä¿®æ”¹ä½œè€…ï¼š
+ * ä¿®æ”¹æ—¥æœŸï¼š
+
  ******************************************************************************/
 LPBMP CreateBmpFromYBuf(int nWidth, int nHeight, char* pYBuf)
 {
@@ -238,17 +242,19 @@ int jpeg_compress(char* pFileName, unsigned char* pData, int nWidth, int nHeight
 }
 
 /******************************************************************************
- * º¯ÊıÃû³Æ£º CFramebuffer.SaveJpg
- * ¹¦ÄÜ£º ±£´æJPGÍ¼Æ¬
- * ²ÎÊı£º pFileName±£´æµÄÍ¼Æ¬Ãû
- 		pBMP:±£´æµÄÍ¼Æ¬ÄÚÈİ
- 		bColor£º²ÊÉ«»òºÚ°×Í¼Æ¬
- 		nQuality:Í¼ÏñÖÊÁ¿
- * ·µ»Ø£º 
- * ´´½¨×÷Õß£º 
- * ´´½¨ÈÕÆÚ£º 
- * ĞŞ¸Ä×÷Õß£º
- * ĞŞ¸ÄÈÕÆÚ£º2012-6-14
+
+ * å‡½æ•°åç§°ï¼š CFramebuffer.SaveJpg
+ * åŠŸèƒ½ï¼š ä¿å­˜JPGå›¾ç‰‡
+ * å‚æ•°ï¼š pFileNameä¿å­˜çš„å›¾ç‰‡å
+ 		pBMP:ä¿å­˜çš„å›¾ç‰‡å†…å®¹
+ 		bColorï¼šå½©è‰²æˆ–é»‘ç™½å›¾ç‰‡
+ 		nQuality:å›¾åƒè´¨é‡
+ * è¿”å›ï¼š 
+ * åˆ›å»ºä½œè€…ï¼š 
+ * åˆ›å»ºæ—¥æœŸï¼š 
+ * ä¿®æ”¹ä½œè€…ï¼š
+ * ä¿®æ”¹æ—¥æœŸï¼š2012-6-14
+
  ******************************************************************************/
 BOOL SaveJpg(char* pFileName, LPBMP pBmp, BOOL bColor, int nQuality)
 {
@@ -368,9 +374,11 @@ void saveRgb(unsigned char* pRawBuf, int iLen)
 }
 
 /**************************************
-// YUV420SPÄæÊ±ÕëĞı×ª90¶È
-// direct: 1 ---Ë³Ê±Õë
-        0 ---ÄæÊ±Õë
+
+// YUV420SPé€†æ—¶é’ˆæ—‹è½¬90åº¦
+// direct: 1 ---é¡ºæ—¶é’ˆ
+        0 ---é€†æ—¶é’ˆ
+
 **************************************/
 void YUV420SPRotate90(void* pYuv420,void*pOutYuv420,int width,int height,int nDirect)
 {
@@ -430,7 +438,11 @@ void YUV420SPToYUV420P(char * yuv420sp,  char * yuv420, int  width,  int  height
     }
 
  #if 0
- 	//420SP¸ñÊ½: YYYYUV
+<<<<<<< HEAD
+ 	//420SPæ ¼å¼: YYYYUV
+=======
+ 	//420SPï¿½ï¿½Ê½: YYYYUV
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
     //copy  Cb(U)
     i = 0;
     for (j = 0;  j < PixelsCount / 2;  j+=2)
@@ -447,7 +459,9 @@ void YUV420SPToYUV420P(char * yuv420sp,  char * yuv420, int  width,  int  height
        i++;
     }
 #else
-	//420SP¸ñÊ½: YYYYVU
+
+	//420SPæ ¼å¼: YYYYVU
+
     //copy  Cb(U)
     i = 0;
     for (j = 0;  j < PixelsCount / 2;  j+=2)
@@ -549,8 +563,10 @@ return pBmp;
 
 
 /**************************************
-direct: 1 ---Ë³Ê±Õë
-        0 ---ÄæÊ±Õë
+
+direct: 1 ---é¡ºæ—¶é’ˆ
+        0 ---é€†æ—¶é’ˆ
+
 
 **************************************/
 /*
@@ -736,8 +752,10 @@ void* rotate90_yuv420p(void* pYuv420, int nWidth, int nHeight, void*pOutYuv420, 
 }
 */
 /**************************************
-direct: 1 ---Ë³Ê±Õë
-		0 ---ÄæÊ±Õë
+
+direct: 1 ---é¡ºæ—¶é’ˆ
+		0 ---é€†æ—¶é’ˆ
+
 
 **************************************/
 void* rotate90_yuv420p(void* pYuv420, int nWidth, int nHeight, void*pOutYuv420, BOOL bUV, int nDirect)
@@ -1183,13 +1201,17 @@ static unsigned int Conv_YCbCr_Rgb(unsigned char y0, unsigned char y1, unsigned 
 	return(rgb);
 }
 
-//Æ½ÃæYUV420×ªRGB24
+
+//å¹³é¢YUV420è½¬RGB24
+
 void YUV420p_to_RGB24(unsigned char *yuv420[3], unsigned char *rgb24, int width, int height) 
 {
 //  int begin = GetTickCount();
  int R1,G1,B1,Y,U,V;
  int x,y;
- int nWidth = width>>1; //É«¶ÈĞÅºÅ¿í¶È
+
+ int nWidth = width>>1; //è‰²åº¦ä¿¡å·å®½åº¦
+
  for (y=0;y<height;y++)
  {
   for (x=0;x<width;x++)
@@ -1201,7 +1223,9 @@ void YUV420p_to_RGB24(unsigned char *yuv420[3], unsigned char *rgb24, int width,
    G1 = Y - 0.34414*(U-128) - 0.71414*(V-128);
    B1 = Y + 1.772*(U-128);
 
-   //·ÀÖ¹Ô½½ç
+
+   //é˜²æ­¢è¶Šç•Œ
+
    if (R1>255)R1=255;
    if (R1<0)R1=0;
    if (G1>255)G1=255;
@@ -1309,7 +1333,9 @@ void yuv420p_to_rgb565_ex(int size_x, int size_y, char * pSrcBuf, RGB24x2 *pbuff
 	}
 }
 
-// ½«YUV420spÍ¼Ïñ×ª»»ÎªRGB24Í¼Ïñ
+
+// å°†YUV420spå›¾åƒè½¬æ¢ä¸ºRGB24å›¾åƒ
+
 void yuv420sp_to_rgb(int width, int height, unsigned char * pSrcBuf, RGB24x2 *pbuff)
 {
 	unsigned char *buffer_y = NULL;
@@ -1418,7 +1444,9 @@ void saveFile(const char* pSrcFile,unsigned char* pRawBuf, int iLen)
 
 
 /*
-	//³õÊ¼»¯YUV2RGB²ÎÊıÊı×é
+
+	//åˆå§‹åŒ–YUV2RGBå‚æ•°æ•°ç»„
+
 	void table_init()
 	{
 	    int i;
@@ -1446,7 +1474,9 @@ void saveFile(const char* pSrcFile,unsigned char* pRawBuf, int iLen)
 	    {
 	       int r,g,b,y;
 
-	        r = D[in[i].r];//²é±í
+
+	        r = D[in[i].r];//æŸ¥è¡¨
+
 	        g = E[in[i].g];
 	        b = F[in[i].b];
 	        y = r + g + b;
@@ -1462,17 +1492,21 @@ void saveFile(const char* pSrcFile,unsigned char* pRawBuf, int iLen)
 	    int in[] = {0};
 	    int out[] = {0};
 
-	    for(i = 0; i < IMGSIZE; i += 2) //Ò»´Î²¢ĞĞ´¦Àí2¸öÊı¾İ
+
+	    for(i = 0; i < IMGSIZE; i += 2) //ä¸€æ¬¡å¹¶è¡Œå¤„ç†2ä¸ªæ•°æ®
 	    {
 	       int r,g,b,y,r1,g1,b1,y1;
 
-	        r = D[in[i].r];//²é±í //ÕâÀï¸øµÚÒ»¸öALUÖ´ĞĞ
+	        r = D[in[i].r];//æŸ¥è¡¨ //è¿™é‡Œç»™ç¬¬ä¸€ä¸ªALUæ‰§è¡Œ
+
 	        g = E[in[i].g];
 	        b = F[in[i].b];
 	        y = r + g + b;
 	        out[i] = y;
 
-	        r1 = D[in[i + 1].r];//²é±í //ÕâÀï¸øµÚ¶ş¸öALUÖ´ĞĞ
+
+	        r1 = D[in[i + 1].r];//æŸ¥è¡¨ //è¿™é‡Œç»™ç¬¬äºŒä¸ªALUæ‰§è¡Œ
+
 	        g1 = E[in[i + 1].g];
 	        b1 = F[in[i + 1].b];
 	        y = r1 + g1 + b1;

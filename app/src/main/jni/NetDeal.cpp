@@ -1,17 +1,19 @@
 /********************************************************************************
-**  Copyright (c) 2012, ÉîÛÚÊĞ·ÉÈğË¹¿Æ¼¼ÓĞÏŞ¹«Ë¾
+
+**  Copyright (c) 2012, æ·±åœ³å¸‚é£ç‘æ–¯ç§‘æŠ€æœ‰é™å…¬å¸
 **  All rights reserved.
 **
-**  ÎÄ¼şÃû³Æ£º NetDeal.cpp
-**  ²Î¿¼£º¶ÔTCP¡¢UDP¡¢232¡¢485ËùÓĞ½»»¥ÒµÎñ´¦Àí
+**  æ–‡ä»¶åç§°ï¼š NetDeal.cpp
+**  å‚è€ƒï¼šå¯¹TCPã€UDPã€232ã€485æ‰€æœ‰äº¤äº’ä¸šåŠ¡å¤„ç†
 **
-**  µ±Ç°°æ±¾£º1.0
+**  å½“å‰ç‰ˆæœ¬ï¼š1.0
 **
-**  ´´½¨×÷Õß£ºÕÅ×æÒì
-**  ´´½¨ÈÕÆÚ:  2012.5.21
+**  åˆ›å»ºä½œè€…ï¼šå¼ ç¥–å¼‚
+**  åˆ›å»ºæ—¥æœŸ:  2012.5.21
 **
-**  ĞŞ¸Ä×÷Õß£º
-**  ĞŞ¸ÄÈÕÆÚ:
+**  ä¿®æ”¹ä½œè€…ï¼š
+**  ä¿®æ”¹æ—¥æœŸ:
+
 ********************************************************************************/
 #include <arpa/inet.h>
 #include <sys/types.h>
@@ -40,29 +42,33 @@ char g_chPwd[32] = {0};
 
 //using namespace FrameWork;
 
-/* ÖÕ¶Ë×÷Îª¿Í»§¶ËÊ±£¬±£´æÈ«¾ÖµÄsocket id */
+
+/* ç»ˆç«¯ä½œä¸ºå®¢æˆ·ç«¯æ—¶ï¼Œä¿å­˜å…¨å±€çš„socket id */
 int giClieFd = -1;
 int giServerFd[MAX_CONN_NUM] = {-1, -1, -1, -1, -1};
 
-unsigned int gaiResponsePkts = 1; 	//Ö÷¶¯ÉÏ±¨µÄÓ¦´ğÊı
-unsigned int gLastResponsePkt = 0;  //Ö÷¶¯ÉÏ±¨µÄÉÏ´Î×îºóÓ¦´ğÊı
-unsigned int guiUpResponseNum = 0;  //Ö÷¶¯ÉÏ±¨¼ÇÂ¼Ó¦´ğµÄ×ÜÊı£¬30ÌõĞ´Ò»´ÎÊ±¼äÅäÖÃ
+unsigned int gaiResponsePkts = 1; 	//ä¸»åŠ¨ä¸ŠæŠ¥çš„åº”ç­”æ•°
+unsigned int gLastResponsePkt = 0;  //ä¸»åŠ¨ä¸ŠæŠ¥çš„ä¸Šæ¬¡æœ€ååº”ç­”æ•°
+unsigned int guiUpResponseNum = 0;  //ä¸»åŠ¨ä¸ŠæŠ¥è®°å½•åº”ç­”çš„æ€»æ•°ï¼Œ30æ¡å†™ä¸€æ¬¡æ—¶é—´é…ç½®
+
 
 COMPARE_RESULT g_CompareResult;
 int g_Score = 30;
 
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º DoTcpServer
-** ¹¦ÄÜ£º ÖÕ¶Ë×÷Îª·şÎñÆ÷¶Ë£¬Ğ­Òé´¦Àíº¯Êı
-** ²ÎÊı£º   
-         TcpObj : tcpÁ¬½Ó¶ÔÏó
+
+** å‡½æ•°åç§°ï¼š DoTcpServer
+** åŠŸèƒ½ï¼š ç»ˆç«¯ä½œä¸ºæœåŠ¡å™¨ç«¯ï¼Œåè®®å¤„ç†å‡½æ•°
+** å‚æ•°ï¼š   
+         TcpObj : tcpè¿æ¥å¯¹è±¡
          InFd   : socket id
-** ·µ»Ø£º0-³É¹¦£¬ÆäËü-Ê§°Ü
-** ´´½¨×÷Õß£º ÑÕÍ¢¾ü
-** ´´½¨ÈÕÆÚ£º 2012-8-22
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+** è¿”å›ï¼š0-æˆåŠŸï¼Œå…¶å®ƒ-å¤±è´¥
+** åˆ›å»ºä½œè€…ï¼š é¢œå»·å†›
+** åˆ›å»ºæ—¥æœŸï¼š 2012-8-22
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+
 \**************************************************************/
 int DoTcpServer(CommLayerTcp *&TcpObj, int InFd)
 {
@@ -71,8 +77,10 @@ int DoTcpServer(CommLayerTcp *&TcpObj, int InFd)
 	PROTOCOL_PACK InStrProPack, OutStrProPack;
 	INLINK_SHARE StrInlinkShare;
 
-	time_t tRecvTime = 0;	/* SDK½ÓÊÕµ½Êı¾İ°üµÄÊ±¼ä */
-	time_t tNoRecvTime = 0; /* SDKÊÕ²»µ½Êı¾İµÄÊ±¼ä */
+
+	time_t tRecvTime = 0;	/* SDKæ¥æ”¶åˆ°æ•°æ®åŒ…çš„æ—¶é—´ */
+	time_t tNoRecvTime = 0; /* SDKæ”¶ä¸åˆ°æ•°æ®çš„æ—¶é—´ */
+
 
 	memset(&OutStrProPack, 0, sizeof(PROTOCOL_PACK));
 	OutStrProPack.data = NULL;
@@ -98,10 +106,12 @@ int DoTcpServer(CommLayerTcp *&TcpObj, int InFd)
 
 		ret = -1;
 
-		/* ¶ÁÈ¡±¨ÎÄÍ·²¿·Ö */
+
+		/* è¯»å–æŠ¥æ–‡å¤´éƒ¨åˆ† */
 		ret = TcpObj->ReadN(InFd, RECV_TIME_OUT, (void *)(&InStrProPack.head), sizeof(InStrProPack.head));
 #if 0
-		/* Èç¹ûretÎª-2£¬±íÃ÷Ã»ÓĞÊÕµ½Êı¾İ£¬Ôòcontinue */
+		/* å¦‚æœretä¸º-2ï¼Œè¡¨æ˜æ²¡æœ‰æ”¶åˆ°æ•°æ®ï¼Œåˆ™continue */
+
 		if (ret == -2)
 		{
 			continue;
@@ -109,10 +119,12 @@ int DoTcpServer(CommLayerTcp *&TcpObj, int InFd)
 #endif
 		if(ret == -2)
 		{
-			/* Èç¹ûretÎª-2£¬±íÃ÷Ã»ÓĞÊÕµ½Êı¾İ£¬Ôòcontinue */
+
+			/* å¦‚æœretä¸º-2ï¼Œè¡¨æ˜æ²¡æœ‰æ”¶åˆ°æ•°æ®ï¼Œåˆ™continue */
 			tNoRecvTime = time(NULL);
 
-			/* ÊÕ²»µ½SDKÊ±¼äÎª3¸öĞÄÌøÖÜÆÚÔòÖØÁ¬ */
+			/* æ”¶ä¸åˆ°SDKæ—¶é—´ä¸º3ä¸ªå¿ƒè·³å‘¨æœŸåˆ™é‡è¿ */
+
 			//TRACE("%d ... %s %d\r\n", tNoRecvTime - tRecvTime, __FUNCTION__, __LINE__);
 			if(tNoRecvTime - tRecvTime > 30)
 			{
@@ -126,7 +138,9 @@ int DoTcpServer(CommLayerTcp *&TcpObj, int InFd)
 
 		tRecvTime = time(NULL);
 
-		/* Èç¹ûretÎª0»òÎª-1£¬±íÃ÷ÍøÂçÒì³££¬Ôòbreak£¬ÖØÁ¬ */
+
+		/* å¦‚æœretä¸º0æˆ–ä¸º-1ï¼Œè¡¨æ˜ç½‘ç»œå¼‚å¸¸ï¼Œåˆ™breakï¼Œé‡è¿ */
+
 		if ((ret == 0) || (ret == -1))
 		{
 			LOGD("ret %d %s %d\r\n", ret, __FUNCTION__, __LINE__);
@@ -153,7 +167,9 @@ int DoTcpServer(CommLayerTcp *&TcpObj, int InFd)
 			ret = -1;
 			memset(InStrProPack.data, 0, sizeof(char)*(InStrProPack.head.dataLen + 1));
 
-			/* ¶ÁÈ¡±¨ÎÄÄÚÈİ²¿·Ö */
+
+			/* è¯»å–æŠ¥æ–‡å†…å®¹éƒ¨åˆ† */
+
 			ret = TcpObj->ReadN(InFd, RECV_TIME_OUT, (void *)InStrProPack.data, InStrProPack.head.dataLen);
 			if(ret <= 0)
 			{
@@ -170,12 +186,14 @@ int DoTcpServer(CommLayerTcp *&TcpObj, int InFd)
 			}			
 		}
 
-		/* ½øĞĞ±¨ÎÄÄÚÈİ½âÎö */
+
+		/* è¿›è¡ŒæŠ¥æ–‡å†…å®¹è§£æ */
 		ret = AllDealTcp(InFd, &StrInlinkShare, &InStrProPack, &OutStrProPack);
 		if (ret == 0)
 		{
-			/* Èç¹ûÊı¾İ°ü×ÓÀàĞÍÎªÊ¶±ğÓÃ»§»ò×¢²áÈËÁ³£¬Ôò²»ÔÚ´Ë´¦¼¯ÖĞ·¢ËÍÓ¦´ğ°ü£¬
-			   ¶øÓÉÕâ2¸ö×ÓÀàĞÍµÄ¾ßÌå´¦Àíº¯ÊıÀ´·¢ËÍÓ¦´ğ°ü */
+			/* å¦‚æœæ•°æ®åŒ…å­ç±»å‹ä¸ºè¯†åˆ«ç”¨æˆ·æˆ–æ³¨å†Œäººè„¸ï¼Œåˆ™ä¸åœ¨æ­¤å¤„é›†ä¸­å‘é€åº”ç­”åŒ…ï¼Œ
+			   è€Œç”±è¿™2ä¸ªå­ç±»å‹çš„å…·ä½“å¤„ç†å‡½æ•°æ¥å‘é€åº”ç­”åŒ… */
+
 			if ((USER_VERIFY_USER != InStrProPack.head.subType) && (USER_ENROLL_FACE != InStrProPack.head.subType))
 			{
 				if(CommLayerTcp::PushSendDataQueue(InFd, &OutStrProPack) == false)
@@ -199,15 +217,17 @@ int DoTcpServer(CommLayerTcp *&TcpObj, int InFd)
 }
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º DoTcpClient
-** ¹¦ÄÜ£º ÖÕ¶Ë×÷Îª¿Í»§¶Ë£¬Ğ­Òé´¦Àíº¯Êı
-** ²ÎÊı£º   
-         TcpObj : tcpÁ¬½Ó¶ÔÏó
-** ·µ»Ø£º0-³É¹¦£¬ÆäËü-Ê§°Ü
-** ´´½¨×÷Õß£º ÑÕÍ¢¾ü
-** ´´½¨ÈÕÆÚ£º 2012-8-22
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+
+** å‡½æ•°åç§°ï¼š DoTcpClient
+** åŠŸèƒ½ï¼š ç»ˆç«¯ä½œä¸ºå®¢æˆ·ç«¯ï¼Œåè®®å¤„ç†å‡½æ•°
+** å‚æ•°ï¼š   
+         TcpObj : tcpè¿æ¥å¯¹è±¡
+** è¿”å›ï¼š0-æˆåŠŸï¼Œå…¶å®ƒ-å¤±è´¥
+** åˆ›å»ºä½œè€…ï¼š é¢œå»·å†›
+** åˆ›å»ºæ—¥æœŸï¼š 2012-8-22
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+
 \**************************************************************/
 int DoTcpClient(CommLayerTcp *&TcpObj)
 {
@@ -220,8 +240,10 @@ int DoTcpClient(CommLayerTcp *&TcpObj)
 	bool IfReconn = false;
 	time_t tLastTime;
 	
-	time_t tRecvTime = 0;	/* SDK½ÓÊÕµ½Êı¾İ°üµÄÊ±¼ä */
-	time_t tNoRecvTime = 0; /* SDKÊÕ²»µ½Êı¾İµÄÊ±¼ä */
+
+	time_t tRecvTime = 0;	/* SDKæ¥æ”¶åˆ°æ•°æ®åŒ…çš„æ—¶é—´ */
+	time_t tNoRecvTime = 0; /* SDKæ”¶ä¸åˆ°æ•°æ®çš„æ—¶é—´ */
+
 
 	int i = 0;
 	int iClientAuthSucc = 0;
@@ -259,7 +281,9 @@ int DoTcpClient(CommLayerTcp *&TcpObj)
 			LOGD("ret %d %s %d\r\n", ret, __FUNCTION__, __LINE__);
 		}
 
-		/* Á¬½Ó·şÎñÆ÷¶Ë */
+
+		/* è¿æ¥æœåŠ¡å™¨ç«¯ */
+
 		if(!(TcpObj->CreateTcpClient()))
 		{
 			LOGD(">>>>>>>>>>>>>>>>>>>>>>> %s %d\r\n",__FUNCTION__, __LINE__);
@@ -277,7 +301,9 @@ int DoTcpClient(CommLayerTcp *&TcpObj)
 
 		//sleep(8);
 		
-		/* Á¬½ÓÈÏÖ¤ */
+
+		/* è¿æ¥è®¤è¯ */
+
 		ClientSendAuth(g_chUserName, g_chPwd);
 		
 		tRecvTime = time(NULL);
@@ -312,10 +338,12 @@ int DoTcpClient(CommLayerTcp *&TcpObj)
 		
 			ret = -1;
 
-			/* ¶ÁÈ¡±¨ÎÄÍ·²¿·Ö */
+
+			/* è¯»å–æŠ¥æ–‡å¤´éƒ¨åˆ† */
 			ret = TcpObj->ReadN(ClieFd, RECV_TIME_OUT, (void *)(&InStrProPack.head), sizeof(InStrProPack.head));
 
-			/* Èç¹ûretÎª0»òÎª-1£¬±íÃ÷ÍøÂçÒì³££¬Ôòbreak£¬ÖØÁ¬ */
+			/* å¦‚æœretä¸º0æˆ–ä¸º-1ï¼Œè¡¨æ˜ç½‘ç»œå¼‚å¸¸ï¼Œåˆ™breakï¼Œé‡è¿ */
+
 			if ((ret == 0) || (ret == -1)/* || (iUploadRecord == -3)*/)
 			{
 				LOGD("ret %d %s %d\r\n", ret, __FUNCTION__, __LINE__);
@@ -326,10 +354,12 @@ int DoTcpClient(CommLayerTcp *&TcpObj)
 			}
 			else if(ret == -2)
 			{
-				/* Èç¹ûretÎª-2£¬±íÃ÷Ã»ÓĞÊÕµ½Êı¾İ£¬Ôòcontinue */
+
+				/* å¦‚æœretä¸º-2ï¼Œè¡¨æ˜æ²¡æœ‰æ”¶åˆ°æ•°æ®ï¼Œåˆ™continue */
 				tNoRecvTime = time(NULL);
 
-				/* ÊÕ²»µ½SDKÊ±¼äÎª3¸öĞÄÌøÖÜÆÚÔòÖØÁ¬ */
+				/* æ”¶ä¸åˆ°SDKæ—¶é—´ä¸º3ä¸ªå¿ƒè·³å‘¨æœŸåˆ™é‡è¿ */
+
 				//TRACE("%d ... %s %d\r\n", tNoRecvTime - tRecvTime, __FUNCTION__, __LINE__);
 				if(tNoRecvTime - tRecvTime > 30)
 				{
@@ -395,7 +425,9 @@ int DoTcpClient(CommLayerTcp *&TcpObj)
 
 				ret = -1;
 				
-				/* ¶ÁÈ¡±¨ÎÄÄÚÈİ²¿·Ö */
+
+				/* è¯»å–æŠ¥æ–‡å†…å®¹éƒ¨åˆ† */
+
 				ret = TcpObj->ReadN(ClieFd, RECV_TIME_OUT, (void *)InStrProPack.data, InStrProPack.head.dataLen);
 				if((unsigned int)ret != InStrProPack.head.dataLen)
 				{
@@ -409,7 +441,9 @@ int DoTcpClient(CommLayerTcp *&TcpObj)
 
 			chksum += check_sum((unsigned char*)InStrProPack.data, InStrProPack.head.dataLen);
 
-			//¶ÁÈ¡Ğ£ÑéºÍ°üÎ²°Í 
+
+			//è¯»å–æ ¡éªŒå’ŒåŒ…å°¾å·´ 
+
 			
 			memset(ucProTail, 0, sizeof(ucProTail));
 			ret = TcpObj->ReadN(ClieFd, RECV_TIME_OUT, (void *)ucProTail, 3);
@@ -436,7 +470,9 @@ int DoTcpClient(CommLayerTcp *&TcpObj)
 			//InStrProPack.csuffix = ntohs(InStrProPack.csuffix);
 			LOGD("InStrProPack.csuffix[%02x]\r\n",InStrProPack.csuffix);
 
-			// Ğ£Ñé½á¹û±È½ÏºÍ°üÎ²±È½Ï 
+
+			// æ ¡éªŒç»“æœæ¯”è¾ƒå’ŒåŒ…å°¾æ¯”è¾ƒ 
+
 		//	TRACE("ucCheckXor: %x ucProTail: %x %s %d\r\n",ucCheckXor, ucProTail[0],__FUNCTION__, __LINE__);
 			//TRACE("InStrProPack.usTail: %x %s %d\r\n",InStrProPack.usTail, __FUNCTION__, __LINE__);
 			if(InStrProPack.csuffix != PROTOCOL_TAIL_FLAG)
@@ -445,12 +481,14 @@ int DoTcpClient(CommLayerTcp *&TcpObj)
 				//continue;
 			}
 			
-			/* ½øĞĞ±¨ÎÄÄÚÈİ½âÎö£¬²¢½«Óû·¢»ØµÄÊı¾İOutStrProPack²åÈë¶ÓÁĞ */
+
+			/* è¿›è¡ŒæŠ¥æ–‡å†…å®¹è§£æï¼Œå¹¶å°†æ¬²å‘å›çš„æ•°æ®OutStrProPackæ’å…¥é˜Ÿåˆ— */
 			ret = AllDealTcp(ClieFd, &StrInlinkShare, &InStrProPack, &OutStrProPack);
 			if (ret == 0)
 			{
-				/* Èç¹ûÊı¾İ°ü×ÓÀàĞÍÎªÊ¶±ğÓÃ»§»ò×¢²áÈËÁ³£¬Ôò²»ÔÚ´Ë´¦¼¯ÖĞ·¢ËÍÓ¦´ğ°ü£¬
-				   ¶øÓÉÕâ2¸ö×ÓÀàĞÍµÄ¾ßÌå´¦Àíº¯ÊıÀ´·¢ËÍÓ¦´ğ°ü */
+				/* å¦‚æœæ•°æ®åŒ…å­ç±»å‹ä¸ºè¯†åˆ«ç”¨æˆ·æˆ–æ³¨å†Œäººè„¸ï¼Œåˆ™ä¸åœ¨æ­¤å¤„é›†ä¸­å‘é€åº”ç­”åŒ…ï¼Œ
+				   è€Œç”±è¿™2ä¸ªå­ç±»å‹çš„å…·ä½“å¤„ç†å‡½æ•°æ¥å‘é€åº”ç­”åŒ… */
+
 				/*
 				if ((USER_VERIFY_USER != InStrProPack.head.subType) && (USER_ENROLL_FACE != InStrProPack.head.subType))
 				{
@@ -463,11 +501,13 @@ int DoTcpClient(CommLayerTcp *&TcpObj)
 			Free(InStrProPack.data);
 			Free(OutStrProPack.data);
 
-			//ÁÙÊ±Ê¹ÓÃÏÂ
+
+			//ä¸´æ—¶ä½¿ç”¨ä¸‹
 			//g_AuthFlag = 1;
 			//StrInlinkShare.authFlag = 1;
 
-			/* ·şÎñÆ÷ÑéÖ¤Ê§°Ü£¬ÖØÁ¬ */
+			/* æœåŠ¡å™¨éªŒè¯å¤±è´¥ï¼Œé‡è¿ */
+
 			if(StrInlinkShare.authFlag == -2)
 			{
 				LOGD("Reconnect... %s %d\r\n", __FUNCTION__, __LINE__);
@@ -480,7 +520,9 @@ int DoTcpClient(CommLayerTcp *&TcpObj)
 				iClientAuthSucc = TcpObj->GetClientAuthSucc();
 				if(iClientAuthSucc == 0)
 				{
-					/* ÈÏÖ¤³É¹¦£¬¿ÉÒÔ·¢ĞÄÌø */
+
+					/* è®¤è¯æˆåŠŸï¼Œå¯ä»¥å‘å¿ƒè·³ */
+
 					TcpObj->SetClientAuthSucc(1);
 				}
 			}
@@ -500,7 +542,9 @@ int DoTcpClient(CommLayerTcp *&TcpObj)
 
             giClieFd = -1;
 
-			/* ÖØÖÃ */
+
+			/* é‡ç½® */
+
 			TcpObj->SetClientAuthSucc(0);
             
 			//sleep(RECONNECT_SERVER_TIME);
@@ -532,7 +576,9 @@ int dataRcr(unsigned char* data, int len)
 	return sum;
 }
 
-unsigned short check_sum(unsigned char* data, int  data_len) //¼ÆËãÊı¾İĞ£ÑéºÍ
+
+unsigned short check_sum(unsigned char* data, int  data_len) //è®¡ç®—æ•°æ®æ ¡éªŒå’Œ
+
 {
     if ((NULL == data) || (0 == data_len))
     {
@@ -555,22 +601,24 @@ unsigned short check_sum(unsigned char* data, int  data_len) //¼ÆËãÊı¾İĞ£ÑéºÍ
 
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º TcpSendPack
-** ¹¦ÄÜ£º ¹¹Ôì·¢ËÍÊı¾İ°ü
-** ²ÎÊı£º
-			flag 	 : °ü±êÊ¶
-			index    : ĞòºÅ
-			packType : °üÀàĞÍ
-			subType  : ×ÓÀàĞÍ
-			dataLen  : Êı¾İ³¤¶È
-			data     :Êı¾İÄÚÈİ
-			OutStrProPack : ÏìÓ¦°ü
-** ·µ»Ø£º 0-³É¹¦
-          ÆäËü-Ê§°Ü
-** ´´½¨×÷Õß£º ÕÅ×æÒì
-** ´´½¨ÈÕÆÚ£º 2012-5-21
-** ĞŞ¸Ä×÷Õß£º
-** ĞŞ¸ÄÈÕÆÚ£º
+
+** å‡½æ•°åç§°ï¼š TcpSendPack
+** åŠŸèƒ½ï¼š æ„é€ å‘é€æ•°æ®åŒ…
+** å‚æ•°ï¼š
+			flag 	 : åŒ…æ ‡è¯†
+			index    : åºå·
+			packType : åŒ…ç±»å‹
+			subType  : å­ç±»å‹
+			dataLen  : æ•°æ®é•¿åº¦
+			data     :æ•°æ®å†…å®¹
+			OutStrProPack : å“åº”åŒ…
+** è¿”å›ï¼š 0-æˆåŠŸ
+          å…¶å®ƒ-å¤±è´¥
+** åˆ›å»ºä½œè€…ï¼š å¼ ç¥–å¼‚
+** åˆ›å»ºæ—¥æœŸï¼š 2012-5-21
+** ä¿®æ”¹ä½œè€…ï¼š
+** ä¿®æ”¹æ—¥æœŸï¼š
+
 \**************************************************************/
 int TcpSendPack(unsigned short flag, unsigned short index,
 			unsigned short packType,unsigned int msgtype, unsigned short subType, unsigned int dataLen, void *data, PROTOCOL_PACK *OutStrProPack)
@@ -610,18 +658,20 @@ int TcpSendPack(unsigned short flag, unsigned short index,
 }
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º AllDealTcp
-** ¹¦ÄÜ£º Ğ­Òé½âÎö£¬½øĞĞÏàÓ¦°üÀàĞÍ´¦Àí
-** ²ÎÊı£º 
+
+** å‡½æ•°åç§°ï¼š AllDealTcp
+** åŠŸèƒ½ï¼š åè®®è§£æï¼Œè¿›è¡Œç›¸åº”åŒ…ç±»å‹å¤„ç†
+** å‚æ•°ï¼š 
 		SockFd			: socket id
 		StrInlinkShare	: 
-		InStrProPack	: ½ÓÊÕµ½Êı¾İ°ü
-		OutStrProPack	: Òª·¢ËÍµÄÊı¾İ°ü
-** ·µ»Ø£º 0³É¹¦£»-1Ê§°Ü
-** ´´½¨×÷Õß£º ÕÅ×æÒì
-** ´´½¨ÈÕÆÚ£º 2012-5-21
-** ĞŞ¸Ä×÷Õß£º
-** ĞŞ¸ÄÈÕÆÚ£º
+		InStrProPack	: æ¥æ”¶åˆ°æ•°æ®åŒ…
+		OutStrProPack	: è¦å‘é€çš„æ•°æ®åŒ…
+** è¿”å›ï¼š 0æˆåŠŸï¼›-1å¤±è´¥
+** åˆ›å»ºä½œè€…ï¼š å¼ ç¥–å¼‚
+** åˆ›å»ºæ—¥æœŸï¼š 2012-5-21
+** ä¿®æ”¹ä½œè€…ï¼š
+** ä¿®æ”¹æ—¥æœŸï¼š
+
 \**************************************************************/
 int AllDealTcp(int SockFd, INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack,
 	PROTOCOL_PACK *OutStrProPack)
@@ -638,16 +688,20 @@ int AllDealTcp(int SockFd, INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrPro
 			//InStrProPack->head.packType, InStrProPack->head.subType, __FUNCTION__, __LINE__);
 	}
 
-	//²»ÊÇÊÖ»úÊı¾İ±¨£¬·µ»Ø±¨´í
+
+	//ä¸æ˜¯æ‰‹æœºæ•°æ®æŠ¥ï¼Œè¿”å›æŠ¥é”™
+
 	if(InStrProPack->head.packType != NTYPE_FACECAP_WORK)
 	{
 		return -1;
 	}
 
 
-	switch(InStrProPack->head.msgtype)		/* ·ÖÎöÊı¾İ°üÀàĞÍ */
+
+	switch(InStrProPack->head.msgtype)		/* åˆ†ææ•°æ®åŒ…ç±»å‹ */
 	{
-		case NMSG_CNT_LOGIN://´¦ÀíµÇÂ¼·µ»Ø½á¹û
+		case NMSG_CNT_LOGIN://å¤„ç†ç™»å½•è¿”å›ç»“æœ
+
 		{
 			StrInlinkShare->authFlag = DealMsgAuth(StrInlinkShare, InStrProPack, OutStrProPack);
 			if(StrInlinkShare->authFlag < 0)
@@ -661,7 +715,9 @@ int AllDealTcp(int SockFd, INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrPro
 			
 			break;
 		}
-		case NMSG_FACE_COMPARE://´¦ÀíÑéÖ¤·µ»Ø½á¹û
+
+		case NMSG_FACE_COMPARE://å¤„ç†éªŒè¯è¿”å›ç»“æœ
+
 		{
 			LOGD("InStrProPack->head.packType %d InStrProPack->head.subType %d %s %d\r\n", 
 			InStrProPack->head.packType, InStrProPack->head.subType, __FUNCTION__, __LINE__);
@@ -678,7 +734,9 @@ int AllDealTcp(int SockFd, INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrPro
 			
 			break;
 		}
-		case NMSG_FLIB_GET_SUB://´¦Àí»ñÈ¡ÈËÁ³Ä£°åÕÕÆ¬
+
+		case NMSG_FLIB_GET_SUB://å¤„ç†è·å–äººè„¸æ¨¡æ¿ç…§ç‰‡
+
 		{
 			LOGD("InStrProPack->head.packType %d InStrProPack->head.subType %d %s %d\r\n", 
 			InStrProPack->head.packType, InStrProPack->head.subType, __FUNCTION__, __LINE__);
@@ -709,7 +767,9 @@ int AllDealTcp(int SockFd, INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrPro
 			break;
 		}
 		
-		default://°üÀàĞÍ´íÎó 
+
+		default://åŒ…ç±»å‹é”™è¯¯ 
+
 		{
 			retVal = -1;
 
@@ -722,9 +782,11 @@ int AllDealTcp(int SockFd, INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrPro
 
 /* ------------------------------------------------------------------------- */
 /*
-**  º¯Êı: ²éÑ¯ÇëÇó£¨GET£©
-**  ¹¦ÄÜ: ´«ÈëÒ»¸öÊı¾İ°ü£¬¸ù¾İÊı¾İ°üµÄ×ÓÀàĞÍ×ö²»Í¬µÄ´¦Àí
-**  ·µ»Ø: ¸Ãº¯Êı´¦Àí³É¹¦·µ»Ø0£¬³ö´íÔò·µ»Ø-1
+
+**  å‡½æ•°: æŸ¥è¯¢è¯·æ±‚ï¼ˆGETï¼‰
+**  åŠŸèƒ½: ä¼ å…¥ä¸€ä¸ªæ•°æ®åŒ…ï¼Œæ ¹æ®æ•°æ®åŒ…çš„å­ç±»å‹åšä¸åŒçš„å¤„ç†
+**  è¿”å›: è¯¥å‡½æ•°å¤„ç†æˆåŠŸè¿”å›0ï¼Œå‡ºé”™åˆ™è¿”å›-1
+
 */
 int DealMsgGet(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROTOCOL_PACK *OutStrProPack)
 {
@@ -732,8 +794,8 @@ int DealMsgGet(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROTOC
 	int iret  = 0;
 	COMPARE_RESULT compareResult;
 	int score = 0;
-	
-	// ´¦Àí¸Ã×ÓÀàĞÍĞÅÏ¢
+
+	// å¤„ç†è¯¥å­ç±»å‹ä¿¡æ¯
 	switch(InStrProPack->head.subType)
 	{
 		case NMSG_SUBTYPE_RESPONSE:
@@ -761,7 +823,7 @@ int DealMsgGet(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROTOC
 						if(g_CompareResult.score/1000000 > g_Score)
 						{
 							g_CompareFlag = 1;
-							//·¢ËÍ¶ÁÈ¡×¢²áÕÕÆ¬
+							//å‘é€è¯»å–æ³¨å†Œç…§ç‰‡
 							
 							//int snedGetSvrPicture(unsigned int faceId);
 							snedGetSvrPicture(g_CompareResult.f_id);
@@ -809,8 +871,8 @@ int DealMsgGetFace(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PR
 	unsigned int faceLen = 0;
 	unsigned int faceId = 0;
 	char bufFile[256] = {0};
-	
-	// ´¦Àí¸Ã×ÓÀàĞÍĞÅÏ¢
+
+	// å¤„ç†è¯¥å­ç±»å‹ä¿¡æ¯
 	switch(InStrProPack->head.subType)
 	{
 		case NMSG_SUBTYPE_RESPONSE:
@@ -830,7 +892,7 @@ int DealMsgGetFace(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PR
 					{
 						
 						sprintf(bufFile,"/data/data/com.firs.facedetecttosvr/temp/%d.jpg",faceId);
-						//±£´æÕÕÆ¬
+						//ä¿å­˜ç…§ç‰‡
 						saveFile(bufFile,(unsigned char*)InStrProPack->data+344+sizeof(unsigned int), faceLen);
 						g_CompareFlag = 3;
 					}
@@ -848,7 +910,7 @@ int DealMsgGetFace(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PR
 						if(g_CompareResult.score/1000000 > 55)
 						{
 							g_CompareFlag = 1;
-							//·¢ËÍ¶ÁÈ¡×¢²áÕÕÆ¬
+							//å‘é€è¯»å–æ³¨å†Œç…§ç‰‡
 							
 							//int snedGetSvrPicture(unsigned int faceId);
 							snedGetSvrPicture(g_CompareResult.f_id);
@@ -889,14 +951,15 @@ int DealMsgGetFace(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PR
 	return retVal;
 }
 /**************************************************************\
-** º¯ÊıÃû³Æ£º DealHeartbeat
-** ¹¦ÄÜ£º ´¦ÀíĞÄÌø°ü
-** ²ÎÊı£º ¸Ãº¯Êı´¦Àí³É¹¦·µ»Ø0£¬³ö´íÔò·µ»Ø¸ºÊı
-** ·µ»Ø£º
-** ´´½¨×÷Õß£º ÑÕÍ¢¾ü
-** ´´½¨ÈÕÆÚ£º 2012-8-22
-** ĞŞ¸Ä×÷Õß£º
-** ĞŞ¸ÄÈÕÆÚ£º
+** å‡½æ•°åç§°ï¼š DealHeartbeat
+** åŠŸèƒ½ï¼š å¤„ç†å¿ƒè·³åŒ…
+** å‚æ•°ï¼š è¯¥å‡½æ•°å¤„ç†æˆåŠŸè¿”å›0ï¼Œå‡ºé”™åˆ™è¿”å›è´Ÿæ•°
+** è¿”å›ï¼š
+** åˆ›å»ºä½œè€…ï¼š é¢œå»·å†›
+** åˆ›å»ºæ—¥æœŸï¼š 2012-8-22
+** ä¿®æ”¹ä½œè€…ï¼š
+** ä¿®æ”¹æ—¥æœŸï¼š
+
 \**************************************************************/
 int DealHeartbeat(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROTOCOL_PACK *OutStrProPack)
 {
@@ -909,14 +972,14 @@ int DealHeartbeat(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PRO
 }
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º DealDoSendHeartbeat
-** ¹¦ÄÜ£º ·¢ËÍĞÄÌø
-** ²ÎÊı£º ¸Ãº¯Êı´¦Àí³É¹¦·µ»Ø0£¬³ö´íÔò·µ»Ø¸ºÊı
-** ·µ»Ø£º
-** ´´½¨×÷Õß£º ÑÕÍ¢¾ü
-** ´´½¨ÈÕÆÚ£º 2012-8-22
-** ĞŞ¸Ä×÷Õß£º
-** ĞŞ¸ÄÈÕÆÚ£º
+** å‡½æ•°åç§°ï¼š DealDoSendHeartbeat
+** åŠŸèƒ½ï¼š å‘é€å¿ƒè·³
+** å‚æ•°ï¼š è¯¥å‡½æ•°å¤„ç†æˆåŠŸè¿”å›0ï¼Œå‡ºé”™åˆ™è¿”å›è´Ÿæ•°
+** è¿”å›ï¼š
+** åˆ›å»ºä½œè€…ï¼š é¢œå»·å†›
+** åˆ›å»ºæ—¥æœŸï¼š 2012-8-22
+** ä¿®æ”¹ä½œè€…ï¼š
+** ä¿®æ”¹æ—¥æœŸï¼š
 \**************************************************************/
 int DealDoSendHeartbeat(CommLayerTcp *&TcpObj)
 {
@@ -947,7 +1010,7 @@ int DealDoSendHeartbeat(CommLayerTcp *&TcpObj)
 	return(ret);	
 }
 
-/* ·¢ËÍNAKÓ¦´ğ°ü */
+/* å‘é€NAKåº”ç­”åŒ… */
 int SendErrorMsg(unsigned short usPackIndex, int iErrorNo, char * pErrorMsg, PROTOCOL_PACK *OutStrProPack)
 {
 	ERROR_INFO strErrInfo;

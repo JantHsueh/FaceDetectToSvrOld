@@ -61,7 +61,8 @@
 
             <!--
                  android:theme="@android:style/Theme.Translucent"
-            	android:theme="@style/ActionSheetDialogStyle" 
+            	android:theme="@style/ActionSheetDialogStyle" 
+
             -->
         </activity>
         <activity
@@ -109,3 +110,4 @@
     </application>
 
 </manifest>
+

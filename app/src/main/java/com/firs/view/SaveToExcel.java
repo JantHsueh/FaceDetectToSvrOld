@@ -1,4 +1,6 @@
+
 package com.firs.view;
+
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -36,7 +38,9 @@ public class SaveToExcel {
 	static HashMap map = new HashMap();
 
 	/*
-	 * Õâ¸ö¸üÈ«
+
+	 * è¿™ä¸ªæ›´å…¨
+
 	 */
 	public static void main(String[] args) {
 		try {
@@ -50,7 +54,9 @@ public class SaveToExcel {
 			// copyDateAndFormat(new File("c:/a.xls"), 0, "c:/a2.xls");
 		}
 		catch (Exception e) {
-			// TODO ×Ô¶¯Éú³É catch ¿é
+
+			// TODO è‡ªåŠ¨ç”Ÿæˆ catch å—
+
 			e.printStackTrace();
 		}
 	}
@@ -63,19 +69,20 @@ public class SaveToExcel {
 		WritableCell cell = null;
 		CellFormat cf = null;
 
-		// ¼Ó´Ö
+		// åŠ ç²—
 		cell = sheet.getWritableCell(0, 0);
 		WritableFont bold = new WritableFont(WritableFont.ARIAL, WritableFont.DEFAULT_POINT_SIZE, WritableFont.BOLD);
 		cf = new WritableCellFormat(bold);
 		cell.setCellFormat(cf);
 
-		// ÉèÖÃÏÂ»®Ïß
+		// è®¾ç½®ä¸‹åˆ’çº¿
+
 		cell = sheet.getWritableCell(0, 1);
 		WritableFont underline = new WritableFont(WritableFont.ARIAL, WritableFont.DEFAULT_POINT_SIZE, WritableFont.NO_BOLD, false, UnderlineStyle.SINGLE);
 		cf = new WritableCellFormat(underline);
 		cell.setCellFormat(cf);
 
-		// Ö±½ØÌí¼Ó¿ÉÒÔ¸²¸Çµô
+		// ç›´æˆªæ·»åŠ å¯ä»¥è¦†ç›–æ‰
 		setCellValueDirectly(sheet, sheet.getCell(0, 2), new Double(4), CellType.NUMBER);
 
 		w2.write();
@@ -84,16 +91,16 @@ public class SaveToExcel {
 
 	public static void modifyDirectly1(File file) {
 		try {
-			// Excel»ñµÃÎÄ¼ş
+			// Excelè·å¾—æ–‡ä»¶
 			Workbook wb = Workbook.getWorkbook(file);
-			// ´ò¿ªÒ»¸öÎÄ¼şµÄ¸±±¾£¬²¢ÇÒÖ¸¶¨Êı¾İĞ´»Øµ½Ô­ÎÄ¼ş
+			// æ‰“å¼€ä¸€ä¸ªæ–‡ä»¶çš„å‰¯æœ¬ï¼Œå¹¶ä¸”æŒ‡å®šæ•°æ®å†™å›åˆ°åŸæ–‡ä»¶
 			WritableWorkbook book = Workbook.createWorkbook(file, wb);
 			WritableSheet sheet0 = book.getSheet(0);
-			sheet0.addCell(new Label(0, 1, "³ÂĞ¡ÎÈ"));
+			sheet0.addCell(new Label(0, 1, "é™ˆå°ç¨³"));
 
-			// Ìí¼ÓÒ»¸ö¹¤×÷±í
-			WritableSheet sheet = book.createSheet(" µÚ¶şÒ³ ", 1);
-			sheet.addCell(new Label(0, 0, " µÚ¶şÒ³µÄ²âÊÔÊı¾İ "));
+			// æ·»åŠ ä¸€ä¸ªå·¥ä½œè¡¨
+			WritableSheet sheet = book.createSheet(" ç¬¬äºŒé¡µ ", 1);
+			sheet.addCell(new Label(0, 0, " ç¬¬äºŒé¡µçš„æµ‹è¯•æ•°æ® "));
 			book.write();
 			book.close();
 		}
@@ -104,16 +111,16 @@ public class SaveToExcel {
 
 	public static void buildNewFormTemplete(File inputFile, File outputFile) {
 		try {
-			// Excel»ñµÃÎÄ¼ş
+			// Excelè·å¾—æ–‡ä»¶
 			Workbook wb = Workbook.getWorkbook(inputFile);
-			// ´ò¿ªÒ»¸öÎÄ¼şµÄ¸±±¾£¬²¢ÇÒÖ¸¶¨Êı¾İĞ´»Øµ½Ô­ÎÄ¼ş
+			// æ‰“å¼€ä¸€ä¸ªæ–‡ä»¶çš„å‰¯æœ¬ï¼Œå¹¶ä¸”æŒ‡å®šæ•°æ®å†™å›åˆ°åŸæ–‡ä»¶
 			WritableWorkbook book = Workbook.createWorkbook(outputFile, wb);
 			WritableSheet sheet0 = book.getSheet(0);
-			sheet0.addCell(new Label(0, 1, "³ÂĞ¡ÎÈ"));
+			sheet0.addCell(new Label(0, 1, "é™ˆå°ç¨³"));
 
-			// Ìí¼ÓÒ»¸ö¹¤×÷±í
-			WritableSheet sheet = book.createSheet(" µÚ¶şÒ³ ", 1);
-			sheet.addCell(new Label(0, 0, " µÚ¶şÒ³µÄ²âÊÔÊı¾İ "));
+			// æ·»åŠ ä¸€ä¸ªå·¥ä½œè¡¨
+			WritableSheet sheet = book.createSheet(" ç¬¬äºŒé¡µ ", 1);
+			sheet.addCell(new Label(0, 0, " ç¬¬äºŒé¡µçš„æµ‹è¯•æ•°æ® "));
 
 			book.write();
 			book.close();
@@ -126,7 +133,8 @@ public class SaveToExcel {
 	public static void copyDateAndFormat(File inputFile, int inputFileSheetIndex, String outputFilePath) throws Exception {
 		Workbook book = null;
 		Cell cell = null;
-		// 1.±ÜÃâÂÒÂëµÄÉèÖÃ
+
+		// 1.é¿å…ä¹±ç çš„è®¾ç½®
 		WorkbookSettings setting = new WorkbookSettings();
 		java.util.Locale locale = new java.util.Locale("zh", "CN");
 		setting.setLocale(locale);
@@ -134,21 +142,21 @@ public class SaveToExcel {
 		book = Workbook.getWorkbook(inputFile, setting);
 		Sheet readonlySheet = book.getSheet(inputFileSheetIndex);
 
-		OutputStream os = new FileOutputStream(outputFilePath);// Êä³öµÄExcelÎÄ¼şURL
-		WritableWorkbook wwb = Workbook.createWorkbook(os);// ´´½¨¿ÉĞ´¹¤×÷±¡
-		WritableSheet writableSheet = wwb.createSheet(readonlySheet.getName(), 0);// ´´½¨¿ÉĞ´¹¤×÷±í
+		OutputStream os = new FileOutputStream(outputFilePath);// è¾“å‡ºçš„Excelæ–‡ä»¶URL
+		WritableWorkbook wwb = Workbook.createWorkbook(os);// åˆ›å»ºå¯å†™å·¥ä½œè–„
+		WritableSheet writableSheet = wwb.createSheet(readonlySheet.getName(), 0);// åˆ›å»ºå¯å†™å·¥ä½œè¡¨
 
-		// 2.ÌÜĞ´²»Í¬Êı¾İ¸ñÊ½µÄÊı¾İ
+		// 2.èªŠå†™ä¸åŒæ•°æ®æ ¼å¼çš„æ•°æ®
 		for (int rowIndex = 0; rowIndex < readonlySheet.getRows(); rowIndex++) {
 			for (int colIndex = 0; colIndex < readonlySheet.getColumns(); colIndex++) {
 				cell = readonlySheet.getCell(colIndex, rowIndex);
-				// A2B2ÎªºÏ²¢µÄµ¥Ôª¸ñ£¬A2ÓĞÄÚÈİ£¬B2Îª¿Õ
+				// A2B2ä¸ºåˆå¹¶çš„å•å…ƒæ ¼ï¼ŒA2æœ‰å†…å®¹ï¼ŒB2ä¸ºç©º
 				// if(colIndex == 0 && rowIndex == 1){
 				// System.out.println(colIndex + "," + rowIndex + " type:" +
 				// cell.getType() +" :" + cell.getContents());
 				// }
 
-				// ¡¾ÓĞ¸÷ÖÖÉèÖÃ¸ñÊ½¡¿
+				// ã€æœ‰å„ç§è®¾ç½®æ ¼å¼ã€‘
 				if (cell.getType() == CellType.DATE || cell.getType() == CellType.DATE_FORMULA) {
 					writableSheet.addCell(new jxl.write.DateTime(colIndex, rowIndex, ((DateCell) cell).getDate(), new jxl.write.WritableCellFormat(cell.getCellFormat())));
 				}
@@ -156,16 +164,16 @@ public class SaveToExcel {
 					writableSheet.addCell(new jxl.write.Number(colIndex, rowIndex, ((jxl.NumberCell) cell).getValue(), new jxl.write.WritableCellFormat(cell.getCellFormat())));
 				}
 				else if (cell.getType() == CellType.EMPTY) {
-					// ¿ÕµÄÒÔ¼°ºÏ²¢µ¥Ôª¸ñÖĞµÚÒ»ÁĞÍâµÄ
+					// ç©ºçš„ä»¥åŠåˆå¹¶å•å…ƒæ ¼ä¸­ç¬¬ä¸€åˆ—å¤–çš„
 					// System.out.println("EMPTY:"+cell.getContents());
-					// System.err.println("¿Õµ¥Ôª¸ñ at " + colIndex + "," + rowIndex
+					// System.err.println("ç©ºå•å…ƒæ ¼ at " + colIndex + "," + rowIndex
 					// +" content:" + cell.getContents());
 				}
 				else if (cell.getType() == CellType.LABEL || cell.getType() == CellType.STRING_FORMULA) {
 					writableSheet.addCell(new Label(colIndex, rowIndex, cell.getContents(), new jxl.write.WritableCellFormat(cell.getCellFormat())));
 				}
 				else {
-					System.err.println("ÆäËüµ¥Ôª¸ñÀàĞÍ£º" + cell.getType() + " at " + colIndex + "," + rowIndex + " content:" + cell.getContents());
+					System.err.println("å…¶å®ƒå•å…ƒæ ¼ç±»å‹ï¼š" + cell.getType() + " at " + colIndex + "," + rowIndex + " content:" + cell.getContents());
 				}
 
 				// if(cell.getType() == CellType.STRING_FORMULA){
@@ -175,10 +183,10 @@ public class SaveToExcel {
 			}
 		}
 
-		// 3.´¦ÀíºÏ²¢µ¥Ôª¸ñµÄÊÂÇé(¸´ÖÆºÏ²¢µ¥Ôª¸ñ¸ñÊ½)
+		// 3.å¤„ç†åˆå¹¶å•å…ƒæ ¼çš„äº‹æƒ…(å¤åˆ¶åˆå¹¶å•å…ƒæ ¼æ ¼å¼)
 		Range[] range = readonlySheet.getMergedCells();
 		for (int i = 0; i < range.length; i++) {
-			// System.out.println("µÚ"+i+"´¦ºÏ²¢µÄµ¥Ôª¸ñ:"
+			// System.out.println("ç¬¬"+i+"å¤„åˆå¹¶çš„å•å…ƒæ ¼:"
 			// +",getTopLeft="+range[i].getTopLeft().getColumn()
 			// +","+range[i].getTopLeft().getRow()
 			// +",getBottomRight="+range[i].getBottomRight().getColumn()
@@ -189,7 +197,7 @@ public class SaveToExcel {
 			writableSheet.mergeCells(range[i].getTopLeft().getColumn(), range[i].getTopLeft().getRow(), range[i].getBottomRight().getColumn(), range[i].getBottomRight().getRow());
 		}
 
-		// 4.ÉèÖÃĞĞÁĞ¸ß¿í
+		// 4.è®¾ç½®è¡Œåˆ—é«˜å®½
 		for (int colIndex = 0; colIndex < readonlySheet.getColumns(); colIndex++) {
 			writableSheet.setColumnView(colIndex, readonlySheet.getColumnView(colIndex));
 		}
@@ -203,79 +211,85 @@ public class SaveToExcel {
 	}
 
 	public static void writeExcelUseFormat(String outputFilePath, String outputFileSheetName) throws Exception {
-		OutputStream os = new FileOutputStream(outputFilePath);// Êä³öµÄExcelÎÄ¼şURL
-		WritableWorkbook wwb = Workbook.createWorkbook(os);// ´´½¨¿ÉĞ´¹¤×÷±¡
-		WritableSheet sheet = wwb.createSheet(outputFileSheetName, 0);// ´´½¨¿ÉĞ´¹¤×÷±í
 
-		sheet.addCell(new Label(0, 0, "ºÅÂë"));
-		sheet.addCell(new Label(1, 0, "ÓĞĞ§ÆÚ"));
+		OutputStream os = new FileOutputStream(outputFilePath);// è¾“å‡ºçš„Excelæ–‡ä»¶URL
+		WritableWorkbook wwb = Workbook.createWorkbook(os);// åˆ›å»ºå¯å†™å·¥ä½œè–„
+		WritableSheet sheet = wwb.createSheet(outputFileSheetName, 0);// åˆ›å»ºå¯å†™å·¥ä½œè¡¨
 
-		// 1.Ğ´ÈëÊ±¼äµÄÊı¾İ¸ñÊ½
+		sheet.addCell(new Label(0, 0, "å·ç "));
+		sheet.addCell(new Label(1, 0, "æœ‰æ•ˆæœŸ"));
+
+		// 1.å†™å…¥æ—¶é—´çš„æ•°æ®æ ¼å¼
 		jxl.write.DateFormat df = new jxl.write.DateFormat("yyyy-MM-dd");
 		jxl.write.WritableCellFormat wcfDF = new jxl.write.WritableCellFormat(df);
-		jxl.write.DateTime labelDTF = new jxl.write.DateTime(1, 1, new Date(), wcfDF); // ×Ô¶¨Òå¸ñÊ½
+		jxl.write.DateTime labelDTF = new jxl.write.DateTime(1, 1, new Date(), wcfDF); // è‡ªå®šä¹‰æ ¼å¼
 		sheet.addCell(labelDTF);
 
-		// 2.×ÖÌåÑùÊ½
-		// WritableFont()·½·¨Àï²ÎÊıËµÃ÷£º
-		// Õâ¸ö·½·¨ËãÊÇÒ»¸öÈİÆ÷£¬¿ÉÒÔ·Å½øÈ¥ºÃ¶àÊôĞÔ
-		// µÚÒ»¸ö: TIMESÊÇ×ÖÌå´óĞ¡£¬ËûĞ´µÄÊÇ18
-		// µÚ¶ş¸ö: BOLDÊÇÅĞ¶ÏÊÇ·ñÎªĞ±Ìå,Ñ¡ÔñtrueÊ±ÎªĞ±Ìå
-		// µÚÈı¸ö: ARIAL
-		// µÚËÄ¸ö: UnderlineStyle.NO_UNDERLINE ÏÂ»®Ïß
-		// µÚÎå¸ö: jxl.format.Colour.RED ×ÖÌåÑÕÉ«ÊÇºìÉ«µÄ
+		// 2.å­—ä½“æ ·å¼
+		// WritableFont()æ–¹æ³•é‡Œå‚æ•°è¯´æ˜ï¼š
+		// è¿™ä¸ªæ–¹æ³•ç®—æ˜¯ä¸€ä¸ªå®¹å™¨ï¼Œå¯ä»¥æ”¾è¿›å»å¥½å¤šå±æ€§
+		// ç¬¬ä¸€ä¸ª: TIMESæ˜¯å­—ä½“å¤§å°ï¼Œä»–å†™çš„æ˜¯18
+		// ç¬¬äºŒä¸ª: BOLDæ˜¯åˆ¤æ–­æ˜¯å¦ä¸ºæ–œä½“,é€‰æ‹©trueæ—¶ä¸ºæ–œä½“
+		// ç¬¬ä¸‰ä¸ª: ARIAL
+		// ç¬¬å››ä¸ª: UnderlineStyle.NO_UNDERLINE ä¸‹åˆ’çº¿
+		// ç¬¬äº”ä¸ª: jxl.format.Colour.RED å­—ä½“é¢œè‰²æ˜¯çº¢è‰²çš„
 		jxl.write.WritableFont wf = new jxl.write.WritableFont(WritableFont.TIMES, 18, WritableFont.BOLD, true);
 		jxl.write.WritableCellFormat wcfF = new jxl.write.WritableCellFormat(wf);
-		wcfF.setWrap(true);// ×Ô¶¯»»ĞĞ
-		wcfF.setAlignment(jxl.format.Alignment.CENTRE);// °ÑË®Æ½¶ÔÆë·½Ê½Ö¸¶¨Îª¾ÓÖĞ
-		wcfF.setVerticalAlignment(jxl.format.VerticalAlignment.CENTRE);// °Ñ´¹Ö±¶ÔÆë·½Ê½Ö¸¶¨Îª¾ÓÖĞ
+		wcfF.setWrap(true);// è‡ªåŠ¨æ¢è¡Œ
+		wcfF.setAlignment(jxl.format.Alignment.CENTRE);// æŠŠæ°´å¹³å¯¹é½æ–¹å¼æŒ‡å®šä¸ºå±…ä¸­
+		wcfF.setVerticalAlignment(jxl.format.VerticalAlignment.CENTRE);// æŠŠå‚ç›´å¯¹é½æ–¹å¼æŒ‡å®šä¸ºå±…ä¸­
 		jxl.write.Label labelC = new jxl.write.Label(0, 1, "This is a Label cell", wcfF);
 		sheet.addCell(labelC);
 
-		// 3.Ìí¼Ó´øÓĞformattingµÄNumber¶ÔÏó
+		// 3.æ·»åŠ å¸¦æœ‰formattingçš„Numberå¯¹è±¡
+
 		jxl.write.NumberFormat nf = new jxl.write.NumberFormat("#.##");
 		jxl.write.WritableCellFormat wcfN = new jxl.write.WritableCellFormat(nf);
 		jxl.write.Number labelNF = new jxl.write.Number(0, 2, 3.1415926, wcfN);
 		sheet.addCell(labelNF);
 
-		// 4.Ìí¼ÓBoolean¶ÔÏó
+
+		// 4.æ·»åŠ Booleanå¯¹è±¡
 		jxl.write.Boolean labelB = new jxl.write.Boolean(0, 3, false);
 		sheet.addCell(labelB);
 
-		// 5.ÉèÖÃÒ»¸ö×¢½â
+		// 5.è®¾ç½®ä¸€ä¸ªæ³¨è§£
 		WritableCellFeatures cellFeatures = new WritableCellFeatures();
-		cellFeatures.setComment("Ìí¼ÓBoolean¶ÔÏó");
+		cellFeatures.setComment("æ·»åŠ Booleanå¯¹è±¡");
 		labelB.setCellFeatures(cellFeatures);
 
-		// 6.µ¥Ôª¸ñÄÚ»»ĞĞ
+		// 6.å•å…ƒæ ¼å†…æ¢è¡Œ
 		WritableCellFormat wrappedText = new WritableCellFormat(WritableWorkbook.ARIAL_10_PT);
-		wrappedText.setWrap(true);// ¿É»»ĞĞµÄlabelÑùÊ½
-		Label label = new Label(4, 0, "²âÊÔ,\012²âÊÔ¡£¡£¡£", wrappedText); // "\012"Ç¿ÖÆ»»ĞĞ
+		wrappedText.setWrap(true);// å¯æ¢è¡Œçš„labelæ ·å¼
+		Label label = new Label(4, 0, "æµ‹è¯•,\012æµ‹è¯•ã€‚ã€‚ã€‚", wrappedText); // "\012"å¼ºåˆ¶æ¢è¡Œ
 		sheet.addCell(label);
 
-		// 7.Êı×ÖµÄ¹«Ê½¼ÆËã
+		// 7.æ•°å­—çš„å…¬å¼è®¡ç®—
+
 		jxl.write.Number n = new jxl.write.Number(0, 9, 4.5);// A10
 		sheet.addCell(n);
 		n = new jxl.write.Number(1, 9, 8);// B10
 		sheet.addCell(n);
-		NumberFormat dp3 = new NumberFormat("#.###"); // ÉèÖÃµ¥Ôª¸ñÀïÃæµÄÊı×Ö¸ñÊ½
+
+		NumberFormat dp3 = new NumberFormat("#.###"); // è®¾ç½®å•å…ƒæ ¼é‡Œé¢çš„æ•°å­—æ ¼å¼
 		WritableCellFormat dp3cell = new WritableCellFormat(dp3);
 		dp3cell.setWrap(true);
-		Formula f = new Formula(2, 9, "(a10+b10)/2", dp3cell); // ÉèÖÃC10¹«Ê½
+		Formula f = new Formula(2, 9, "(a10+b10)/2", dp3cell); // è®¾ç½®C10å…¬å¼
 		sheet.addCell(f);
-		f = new Formula(3, 9, "SUM(A10:B10)", dp3cell);// ÉèÖÃD10¹«Ê½
+		f = new Formula(3, 9, "SUM(A10:B10)", dp3cell);// è®¾ç½®D10å…¬å¼
 		sheet.addCell(f);
 
-		// 8.ÉèÖÃsheetµÄÑùÊ½
-		sheet.getSettings().setProtected(true); // ÉèÖÃxlsµÄ±£»¤£¬µ¥Ôª¸ñÎªÖ»¶ÁµÄ
-		sheet.getSettings().setPassword("123"); // ÉèÖÃxlsµÄÃÜÂë
-		sheet.getSettings().setDefaultColumnWidth(10); // ÉèÖÃÁĞµÄÄ¬ÈÏ¿í¶È,2cm×óÓÒ
-		sheet.setRowView(3, 200);// ÉèÖÃµÚ4ĞĞ¸ß¶È
-		sheet.setRowView(2, false);// ÕâÑù¿ÉÒÔ×Ô¶¯°ÑĞĞ¸ßÀ©Õ¹
-		sheet.setColumnView(0, 300);// ÉèÖÃµÚ1ÁĞ¿í¶È£¬6cm×óÓÒ
-		sheet.mergeCells(0, 5, 1, 7);// ºÏ²¢µ¥Ôª¸ñ£ººÏ²¢A6B8Ò²¾ÍÊÇ1ÁĞ6ĞĞ Óë 2ÁĞ7ĞĞÖ®¼äµÄ¾ØĞÎ
+		// 8.è®¾ç½®sheetçš„æ ·å¼
+		sheet.getSettings().setProtected(true); // è®¾ç½®xlsçš„ä¿æŠ¤ï¼Œå•å…ƒæ ¼ä¸ºåªè¯»çš„
+		sheet.getSettings().setPassword("123"); // è®¾ç½®xlsçš„å¯†ç 
+		sheet.getSettings().setDefaultColumnWidth(10); // è®¾ç½®åˆ—çš„é»˜è®¤å®½åº¦,2cmå·¦å³
+		sheet.setRowView(3, 200);// è®¾ç½®ç¬¬4è¡Œé«˜åº¦
+		sheet.setRowView(2, false);// è¿™æ ·å¯ä»¥è‡ªåŠ¨æŠŠè¡Œé«˜æ‰©å±•
+		sheet.setColumnView(0, 300);// è®¾ç½®ç¬¬1åˆ—å®½åº¦ï¼Œ6cmå·¦å³
+		sheet.mergeCells(0, 5, 1, 7);// åˆå¹¶å•å…ƒæ ¼ï¼šåˆå¹¶A6B8ä¹Ÿå°±æ˜¯1åˆ—6è¡Œ ä¸ 2åˆ—7è¡Œä¹‹é—´çš„çŸ©å½¢
 
-		// 9.ÉèÖÃ±ß¿ò
+		// 9.è®¾ç½®è¾¹æ¡†
+
 		drawRect(sheet, 5, 6, 7, 6, BorderLineStyle.THICK, Colour.BLACK, null);
 
 		sheet.mergeCells(1, 2, 3, 3);
@@ -288,22 +302,24 @@ public class SaveToExcel {
 	public static void drawRect(WritableSheet sheet, int x, int y, int width, int height, BorderLineStyle style, Colour BorderColor, Colour bgColor) throws WriteException {
 		for (int w = 0; w < width; w++) {
 			for (int h = 0; h < height; h++) {
-				WritableCellFormat alignStyle = new WritableCellFormat(); // µ¥Ôª¸ñÑùÊ½
-				alignStyle.setAlignment(Alignment.CENTRE); // ÉèÖÃ¶ÔÆë·½Ê½
-				alignStyle.setVerticalAlignment(VerticalAlignment.CENTRE);// ÉèÖÃ¶ÔÆë·½Ê½
-				if (h == 0) // »­ÉÏ
-					alignStyle.setBorder(Border.TOP, style, BorderColor);// ÉèÖÃ±ß¿òµÄÑÕÉ«ºÍÑùÊ½
 
-				if (w == 0) // »­×ó
-					alignStyle.setBorder(Border.LEFT, style, BorderColor);// ÉèÖÃ±ß¿òµÄÑÕÉ«ºÍÑùÊ½
+				WritableCellFormat alignStyle = new WritableCellFormat(); // å•å…ƒæ ¼æ ·å¼
+				alignStyle.setAlignment(Alignment.CENTRE); // è®¾ç½®å¯¹é½æ–¹å¼
+				alignStyle.setVerticalAlignment(VerticalAlignment.CENTRE);// è®¾ç½®å¯¹é½æ–¹å¼
+				if (h == 0) // ç”»ä¸Š
+					alignStyle.setBorder(Border.TOP, style, BorderColor);// è®¾ç½®è¾¹æ¡†çš„é¢œè‰²å’Œæ ·å¼
 
-				if (w == width - 1) // »­ÓÒ
-					alignStyle.setBorder(Border.RIGHT, style, BorderColor);// ÉèÖÃ±ß¿òµÄÑÕÉ«ºÍÑùÊ½
+				if (w == 0) // ç”»å·¦
+					alignStyle.setBorder(Border.LEFT, style, BorderColor);// è®¾ç½®è¾¹æ¡†çš„é¢œè‰²å’Œæ ·å¼
 
-				if (h == height - 1) // »­ÏÂ
-					alignStyle.setBorder(Border.BOTTOM, style, BorderColor);// ÉèÖÃ±ß¿òµÄÑÕÉ«ºÍÑùÊ½
+				if (w == width - 1) // ç”»å³
+					alignStyle.setBorder(Border.RIGHT, style, BorderColor);// è®¾ç½®è¾¹æ¡†çš„é¢œè‰²å’Œæ ·å¼
+
+				if (h == height - 1) // ç”»ä¸‹
+					alignStyle.setBorder(Border.BOTTOM, style, BorderColor);// è®¾ç½®è¾¹æ¡†çš„é¢œè‰²å’Œæ ·å¼
 				// drawLine(sheet, x, y, Border.BOTTOM);
-				if (bgColor != null) alignStyle.setBackground(bgColor); // ±³¾²É«
+				if (bgColor != null) alignStyle.setBackground(bgColor); // èƒŒé™è‰²
+
 				Label mergelabel = new Label(x, y, "", alignStyle);
 				// topleftXIndex, topleftYIndex, bottomRightXIndex,
 				// bottomRightYIndex
@@ -320,7 +336,9 @@ public class SaveToExcel {
 		ArrayList<String> list = new ArrayList<String>();
 		Workbook book = null;
 		Cell cell = null;
-		// ±ÜÃâÂÒÂëµÄÉèÖÃ
+
+		// é¿å…ä¹±ç çš„è®¾ç½®
+
 		WorkbookSettings setting = new WorkbookSettings();
 		java.util.Locale locale = new java.util.Locale("zh", "CN");
 		setting.setLocale(locale);
@@ -328,14 +346,18 @@ public class SaveToExcel {
 		book = Workbook.getWorkbook(inputFile, setting);
 
 		Sheet sheet = book.getSheet(inputFileSheetIndex);
-		for (int rowIndex = 0; rowIndex < sheet.getRows(); rowIndex++) {// ExcelµÚÒ»ĞĞÎª±íÍ·,Òò´ËJ³õÖµÉèÎª1
-			for (int colIndex = 0; colIndex < sheet.getColumns(); colIndex++) {// Ö»Ğè´ÓExcelÖĞÈ¡³ö2ÁĞ
+
+		for (int rowIndex = 0; rowIndex < sheet.getRows(); rowIndex++) {// Excelç¬¬ä¸€è¡Œä¸ºè¡¨å¤´,å› æ­¤Jåˆå€¼è®¾ä¸º1
+			for (int colIndex = 0; colIndex < sheet.getColumns(); colIndex++) {// åªéœ€ä»Excelä¸­å–å‡º2åˆ—
+
 				cell = sheet.getCell(colIndex, rowIndex);
 				list.add(cell.getContents());
 			}
 		}
 
-		// ¡¾ÎÊÌâ£ºÈç¹ûÔÚÊµ¼Ê²¿ÊğµÄÊ±ºòÃ»ÓĞĞ´ÏÂÃæÕâ¾äÊÇ·ñ»áµ¼ÖÂ²»¶ÏÏûºÄµô·şÎñÆ÷µÄÄÚ´æ£¿jxlÀïÃæÓĞ¸öReadWrite.javaÃ»ÓĞ¹Ø±Õ¶ÁµÄ£¬Ö»¹Ø±ÕÁËĞ´µÄ¡¿
+
+		// ã€é—®é¢˜ï¼šå¦‚æœåœ¨å®é™…éƒ¨ç½²çš„æ—¶å€™æ²¡æœ‰å†™ä¸‹é¢è¿™å¥æ˜¯å¦ä¼šå¯¼è‡´ä¸æ–­æ¶ˆè€—æ‰æœåŠ¡å™¨çš„å†…å­˜ï¼Ÿjxlé‡Œé¢æœ‰ä¸ªReadWrite.javaæ²¡æœ‰å…³é—­è¯»çš„ï¼Œåªå…³é—­äº†å†™çš„ã€‘
+
 		book.close();
 
 		return list;
@@ -352,8 +374,10 @@ public class SaveToExcel {
 			sheet.addCell(new Label(cell.getColumn(), cell.getRow(), (String) newValue, new jxl.write.WritableCellFormat(cell.getCellFormat())));
 		}
 		else {
-			throw new Exception("²»Ö§³ÖµÄÆäËüµ¥Ôª¸ñÀàĞÍ£º" + type);
-			// System.err.println("²»Ö§³ÖµÄÆäËüµ¥Ôª¸ñÀàĞÍ£º" + cell.getType() + " at " +
+
+			throw new Exception("ä¸æ”¯æŒçš„å…¶å®ƒå•å…ƒæ ¼ç±»å‹ï¼š" + type);
+			// System.err.println("ä¸æ”¯æŒçš„å…¶å®ƒå•å…ƒæ ¼ç±»å‹ï¼š" + cell.getType() + " at " +
+
 			// cell.getColumn() + "," + cell.getRow() +" current content:" +
 			// cell.getContents());
 		}

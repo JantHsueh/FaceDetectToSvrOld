@@ -13,40 +13,44 @@ static const char *TAG="Face_Identify";
 static const char* classname = "com/firs/facedetecttosvr/common/Face_Native";
 
 /********************************************************************************
-**  Copyright (c) 2012, ÉîÛÚÊÐ·ÉÈðË¹¿Æ¼¼ÓÐÏÞ¹«Ë¾
+
+**  Copyright (c) 2012, æ·±åœ³å¸‚é£žç‘žæ–¯ç§‘æŠ€æœ‰é™å…¬å¸
 **  All rights reserved.
 **
-**  ÎÄ¼þÃû³Æ£º faceLib.h
-**  ²Î¿¼£º·ÉÈðË¹ÈËÁ³Ê¶±ð
+**  æ–‡ä»¶åç§°ï¼š faceLib.h
+**  å‚è€ƒï¼šé£žç‘žæ–¯äººè„¸è¯†åˆ«
 **
-**  µ±Ç°°æ±¾£º1.0
+**  å½“å‰ç‰ˆæœ¬ï¼š1.0
 **
-**  ´´½¨×÷Õß£ºjason
-**  ´´½¨ÈÕÆÚ:  2013.11.08
+**  åˆ›å»ºä½œè€…ï¼šjason
+**  åˆ›å»ºæ—¥æœŸ:  2013.11.08
 **
-**  ÐÞ¸Ä×÷Õß£º 
-**  ÐÞ¸ÄÈÕÆÚ: 
+**  ä¿®æ”¹ä½œè€…ï¼š 
+**  ä¿®æ”¹æ—¥æœŸ: 
+
 ********************************************************************************/
 
 #ifndef __FACE_LIB_H__
 #define __FACE_LIB_H__
 
-/* ¸Ã½á¹¹ÌåÎª¼ì²âµ½µÄÈËÑÛ¡¢Á³Î»ÖÃ×ø±ê */
+
+/* è¯¥ç»“æž„ä½“ä¸ºæ£€æµ‹åˆ°çš„äººçœ¼ã€è„¸ä½ç½®åæ ‡ */
 typedef struct __FacePositionData
 {
-    int iFaceLeft;          /* Á³×ó±ßX×ø±ê */
-    int iFaceTop;           /* Á³ÉÏ±ßY×ø±ê */
-    int iFaceRight;         /* Á³ÓÒ±ßX×ø±ê */
-    int iFaceBottom;        /* Á³ÏÂ±ßY×ø±ê */
-    int iEyeLeftX;          /* ×óÑÛX×ø±ê */
-    int iEyeLeftY;          /* ×óÑÛY×ø±ê */
-    int iEyeRightX;         /* ÓÒÑÛX×ø±ê */
-    int iEyeRightY;         /* ÓÒÑÛY×ø±ê */
-    int iDistance;			/* ¾àÀë 1Ì«Ô¶ £­1Ì«½ü */
-	int iMatchPos;			/* Ê¶±ð·ÖÊý */
+    int iFaceLeft;          /* è„¸å·¦è¾¹Xåæ ‡ */
+    int iFaceTop;           /* è„¸ä¸Šè¾¹Yåæ ‡ */
+    int iFaceRight;         /* è„¸å³è¾¹Xåæ ‡ */
+    int iFaceBottom;        /* è„¸ä¸‹è¾¹Yåæ ‡ */
+    int iEyeLeftX;          /* å·¦çœ¼Xåæ ‡ */
+    int iEyeLeftY;          /* å·¦çœ¼Yåæ ‡ */
+    int iEyeRightX;         /* å³çœ¼Xåæ ‡ */
+    int iEyeRightY;         /* å³çœ¼Yåæ ‡ */
+    int iDistance;			/* è·ç¦» 1å¤ªè¿œ ï¼1å¤ªè¿‘ */
+	int iMatchPos;			/* è¯†åˆ«åˆ†æ•° */
 }FACE_POSITION_DATA_STR;
 
-// Ëã·¨¿â¾ä±ú
+// ç®—æ³•åº“å¥æŸ„
+
 typedef void* OD_CE_HANDLE;
 typedef void* OD_CODEC_HANDLE;
 
@@ -60,7 +64,9 @@ typedef struct
 extern "C" {
 #endif
 
-// ´ò¿ªËã·¨¿âÒýÇæ
+
+// æ‰“å¼€ç®—æ³•åº“å¼•æ“Ž
+
 OD_CE_HANDLE OD_OpenEngine();
 
 OD_CODEC_HANDLE OD_OpenFacialCodec(OD_CE_HANDLE hCe, char* pStrAuxDir, char** ppFeatureInBuf, int* pnErrNo);
@@ -73,89 +79,105 @@ char *OD_mallocShareMem();
 void OD_CloseFacialCodec(OD_CODEC_HANDLE hCodec);
 
 
-// ¹Ø±ÕËã·¨¿âÒýÇæ
+
+// å…³é—­ç®—æ³•åº“å¼•æ“Ž
+
 void OD_CloseEngine(OD_CE_HANDLE hCe);
 
 
 int OD_DetectFacial(OD_CODEC_HANDLE hCodec, char* pYBuf, int nWidth, int nHeight, FI_FACIAL_DETECTX_RESULT* pResult);
 
 
-/* ´ò×® */
+
+/* æ‰“æ¡© */
+
 int DM2016_Authentication(char* pEncryptedCode, char* pPlanCode);
 
 
 /******************************************************************************
- * º¯ÊýÃû³Æ£º InitFaceLib
- * ¹¦ÄÜ£º ³õÊ¼»¯ÈËÁ³¿â
- * ²ÎÊý£º piUserId: ÓÃ»§idÊý×é iUserNum: ÓÃ»§Êý
- * ·µ»Ø£º ÎÞ
- * ´´½¨×÷Õß£º Jason
- * ´´½¨ÈÕÆÚ£º 2013-11-27
- * ÐÞ¸Ä×÷Õß£º
- * ÐÞ¸ÄÈÕÆÚ£º
+
+ * å‡½æ•°åç§°ï¼š InitFaceLib
+ * åŠŸèƒ½ï¼š åˆå§‹åŒ–äººè„¸åº“
+ * å‚æ•°ï¼š piUserId: ç”¨æˆ·idæ•°ç»„ iUserNum: ç”¨æˆ·æ•°
+ * è¿”å›žï¼š æ— 
+ * åˆ›å»ºä½œè€…ï¼š Jason
+ * åˆ›å»ºæ—¥æœŸï¼š 2013-11-27
+ * ä¿®æ”¹ä½œè€…ï¼š
+ * ä¿®æ”¹æ—¥æœŸï¼š
+
  ******************************************************************************/
 void InitFaceLib(int* piUserId, int iUserNum);
 
 /******************************************************************************
- * º¯ÊýÃû³Æ£º DeinitFaceLib
- * ¹¦ÄÜ£º ÊÍ·ÅÈËÁ³¿â×ÊÔ´
- * ²ÎÊý£º ÎÞ
- * ·µ»Ø£º ÎÞ
- * ´´½¨×÷Õß£º Jason
- * ´´½¨ÈÕÆÚ£º 2013-11-27
- * ÐÞ¸Ä×÷Õß£º
- * ÐÞ¸ÄÈÕÆÚ£º
+
+ * å‡½æ•°åç§°ï¼š DeinitFaceLib
+ * åŠŸèƒ½ï¼š é‡Šæ”¾äººè„¸åº“èµ„æº
+ * å‚æ•°ï¼š æ— 
+ * è¿”å›žï¼š æ— 
+ * åˆ›å»ºä½œè€…ï¼š Jason
+ * åˆ›å»ºæ—¥æœŸï¼š 2013-11-27
+ * ä¿®æ”¹ä½œè€…ï¼š
+ * ä¿®æ”¹æ—¥æœŸï¼š
+
  ******************************************************************************/
 void DeinitFaceLib();
 
 /******************************************************************************
- * º¯ÊýÃû³Æ£º GetFacePosition
- * ¹¦ÄÜ£º »ñÈ¡¼ì²âµ½µÄÈËÁ³µÄÎ»ÖÃ×ø±ê
- * ²ÎÊý£º pFacePositionData£º 			
- * ·µ»Ø£º ÎÞ£»
- * ´´½¨×÷Õß£º 
- * ´´½¨ÈÕÆÚ£º 2012-12-3
- * ÐÞ¸Ä×÷Õß£º
- * ÐÞ¸ÄÈÕÆÚ£º
+
+ * å‡½æ•°åç§°ï¼š GetFacePosition
+ * åŠŸèƒ½ï¼š èŽ·å–æ£€æµ‹åˆ°çš„äººè„¸çš„ä½ç½®åæ ‡
+ * å‚æ•°ï¼š pFacePositionDataï¼š 			
+ * è¿”å›žï¼š æ— ï¼›
+ * åˆ›å»ºä½œè€…ï¼š 
+ * åˆ›å»ºæ—¥æœŸï¼š 2012-12-3
+ * ä¿®æ”¹ä½œè€…ï¼š
+ * ä¿®æ”¹æ—¥æœŸï¼š
+
  ******************************************************************************/
 void GetFacePosition(FACE_POSITION_DATA_STR *pFacePositionData);
 
 /******************************************************************************
- * º¯ÊýÃû³Æ£º ClearFacePosition
- * ¹¦ÄÜ£º ÇåµôÈËÁ³×ø±êÐÅÏ¢
- * ²ÎÊý£º 
- * ·µ»Ø£º 
- * ´´½¨×÷Õß£º Jason
- * ´´½¨ÈÕÆÚ£º 2013-4-11
- * ÐÞ¸Ä×÷Õß£º
- * ÐÞ¸ÄÈÕÆÚ£º
+
+ * å‡½æ•°åç§°ï¼š ClearFacePosition
+ * åŠŸèƒ½ï¼š æ¸…æŽ‰äººè„¸åæ ‡ä¿¡æ¯
+ * å‚æ•°ï¼š 
+ * è¿”å›žï¼š 
+ * åˆ›å»ºä½œè€…ï¼š Jason
+ * åˆ›å»ºæ—¥æœŸï¼š 2013-4-11
+ * ä¿®æ”¹ä½œè€…ï¼š
+ * ä¿®æ”¹æ—¥æœŸï¼š
+
  ******************************************************************************/
 void ClearFacePosition();
 
 /******************************************************************************
- * º¯ÊýÃû³Æ£º VerifyFace
- * ¹¦ÄÜ£º Ê¶±ðÈËÁ³ 
- * ²ÎÊý£º puiMaxCompId:×î´ó·ÖÊý¶ÔÓ¦id£¬piMaxCompVal:×î´ó·ÖÊý£¬
-          uiId:´«ÈëuiIdÎª0Ê±´ú±í1:N£¬ÆäËüÎª1:1Ê¶±ð£¬Êä³ö·ÖÊý¼°id
- * ·µ»Ø£º -255Ã»¼ì²âµ½ÈËÁ³£¬-1Ê§°Ü£¬0³É¹¦
- * ´´½¨×÷Õß£º Jason
- * ´´½¨ÈÕÆÚ£º 2013-11-20
- * ÐÞ¸Ä×÷Õß£º
- * ÐÞ¸ÄÈÕÆÚ£º
+
+ * å‡½æ•°åç§°ï¼š VerifyFace
+ * åŠŸèƒ½ï¼š è¯†åˆ«äººè„¸ 
+ * å‚æ•°ï¼š puiMaxCompId:æœ€å¤§åˆ†æ•°å¯¹åº”idï¼ŒpiMaxCompVal:æœ€å¤§åˆ†æ•°ï¼Œ
+          uiId:ä¼ å…¥uiIdä¸º0æ—¶ä»£è¡¨1:Nï¼Œå…¶å®ƒä¸º1:1è¯†åˆ«ï¼Œè¾“å‡ºåˆ†æ•°åŠid
+ * è¿”å›žï¼š -255æ²¡æ£€æµ‹åˆ°äººè„¸ï¼Œ-1å¤±è´¥ï¼Œ0æˆåŠŸ
+ * åˆ›å»ºä½œè€…ï¼š Jason
+ * åˆ›å»ºæ—¥æœŸï¼š 2013-11-20
+ * ä¿®æ”¹ä½œè€…ï¼š
+ * ä¿®æ”¹æ—¥æœŸï¼š
+
  ******************************************************************************/
 int VerifyFace(unsigned int* puiMaxCompId, int* piMaxCompVal, unsigned int uiId);
 
 /******************************************************************************
- * º¯ÊýÃû³Æ£º EnrollFace
- * ¹¦ÄÜ£º ×¢²áÈËÁ³
- * ²ÎÊý£º uiId:ÓÃ»§id£¬iMaxNum:×î´ó×¢²áÕÅÊý
- * ·µ»Ø£º ÒÑ×¢²áÕÅÊý
- *        ×¢²á´«ÈëuiId > 0£¬µ±´ïµ½iMaxNumÊ±´æ´¢ÌØÕ÷²¢¼ÓÔØµ½Ëã·¨ÄÚ´æ,
- *        Íâ²¿ÐèÅÐ¶Ï·µ»ØÖµ£¬Èç¹û´ïµ½×î´óÖµiMaxNumÔò½áÊø×¢²áÈËÁ³¹ý³Ì
- * ´´½¨×÷Õß£º Jason
- * ´´½¨ÈÕÆÚ£º 2013-11-20
- * ÐÞ¸Ä×÷Õß£º
- * ÐÞ¸ÄÈÕÆÚ£º
+
+ * å‡½æ•°åç§°ï¼š EnrollFace
+ * åŠŸèƒ½ï¼š æ³¨å†Œäººè„¸
+ * å‚æ•°ï¼š uiId:ç”¨æˆ·idï¼ŒiMaxNum:æœ€å¤§æ³¨å†Œå¼ æ•°
+ * è¿”å›žï¼š å·²æ³¨å†Œå¼ æ•°
+ *        æ³¨å†Œä¼ å…¥uiId > 0ï¼Œå½“è¾¾åˆ°iMaxNumæ—¶å­˜å‚¨ç‰¹å¾å¹¶åŠ è½½åˆ°ç®—æ³•å†…å­˜,
+ *        å¤–éƒ¨éœ€åˆ¤æ–­è¿”å›žå€¼ï¼Œå¦‚æžœè¾¾åˆ°æœ€å¤§å€¼iMaxNumåˆ™ç»“æŸæ³¨å†Œäººè„¸è¿‡ç¨‹
+ * åˆ›å»ºä½œè€…ï¼š Jason
+ * åˆ›å»ºæ—¥æœŸï¼š 2013-11-20
+ * ä¿®æ”¹ä½œè€…ï¼š
+ * ä¿®æ”¹æ—¥æœŸï¼š
+
  ******************************************************************************/
 int EnrollFace(unsigned int uiId, int iMaxNum);
 

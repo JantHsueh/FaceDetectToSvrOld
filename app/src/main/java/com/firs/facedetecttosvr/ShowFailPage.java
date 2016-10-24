@@ -1,19 +1,32 @@
 package com.firs.facedetecttosvr;
 
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+import com.firs.cn.FaceNative;
+import com.firs.cn.compareresult;
+import com.firs.facedetecttosvr.R.id;
+
+import android.R.integer;
+import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Bundle;
+import android.view.Gravity;
+import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 public class ShowFailPage extends Activity {
 	

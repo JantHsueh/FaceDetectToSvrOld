@@ -40,162 +40,155 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ShowRecordDetailPage extends Activity {
-	
+
 	TextView text_score,text_name,text_time;
 	//EditText edit_remark;
 	String    str;
 	String    str1;
-	
+
 	public static MyDataBaseAdapter database;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);//È¥µô±êÌâÀ¸
+		requestWindowFeature(Window.FEATURE_NO_TITLE);//å»æ‰æ ‡é¢˜æ 
 		//getActionBar().setBackgroundDrawable(this.getResources().getDrawable(R.drawable.action_bar_bg));
 		setContentView(R.layout.activity_record_detail);
-		
-		Display currDisplay = getWindowManager().getDefaultDisplay();//»ñÈ¡ÆÁÄ»µ±Ç°·Ö±æÂÊ
+
+		Display currDisplay = getWindowManager().getDefaultDisplay();//è·å–å±å¹•å½“å‰åˆ†è¾¨ç‡
 		((Button)findViewById(R.id.btnSave)).setWidth(currDisplay.getWidth()/4);
 		((Button)findViewById(R.id.btnUnSave)).setWidth(currDisplay.getWidth()/4);
-		
+
 		//compareresult cpmrest = new compareresult();
-		//´´½¨Êı¾İ¿â
-        database = new MyDataBaseAdapter(this);
-		
-		//È¡µÃÊı¾İ¿â¶ÔÏó 
-        database.open();
-		
+		//åˆ›å»ºæ•°æ®åº“
+		database = new MyDataBaseAdapter(this);
+
+		//å–å¾—æ•°æ®åº“å¯¹è±¡
+		database.open();
+
 		text_score = (TextView)findViewById(R.id.textScore);
 		text_name = (TextView)findViewById(R.id.textName);
 		text_time = (TextView)findViewById(R.id.textTime);
-		
+
 		//edit_remark = (EditText)findViewById(R.id.editRemarks);
-		
+
 		Intent myIntent= getIntent(); // gets the previously created intent
 		String datetime = myIntent.getStringExtra("DATETIME"); // will return "FirstKeyValue"
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
- 		
+
 		try {
 			str = Long.toString(formatter.parse(datetime).getTime());
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}//»ñÈ¡µ±Ç°Ê±¼ä       
-		 Cursor cur = database.fetchCheckRecordInfoData(str);
+		}//è·å–å½“å‰æ—¶é—´
+		Cursor cur = database.fetchCheckRecordInfoData(str);
 		if(cur != null && cur.getCount() == 1)
-        {
+		{
 			MyApp.log("cur.count:"+cur.getCount()+ "timelong"+str);
-			text_score.setText("ÏàËÆ¶È: "+cur.getString(1)+" %");
-			text_name.setText("×¢²áÃû³Æ: "+cur.getString(2));
-			
-			Date    curDate = new Date(Long.parseLong(cur.getString(0)));//»ñÈ¡µ±Ç°Ê±¼ä       
-	 		str1 = formatter.format(curDate);
-			text_time.setText("±È¶ÔÊ±¼ä£º"+str1);
+			text_score.setText("ç›¸ä¼¼åº¦: "+cur.getString(1)+" %");
+			text_name.setText("æ³¨å†Œåç§°: "+cur.getString(2));
+
+			Date    curDate = new Date(Long.parseLong(cur.getString(0)));//è·å–å½“å‰æ—¶é—´
+			str1 = formatter.format(curDate);
+			text_time.setText("æ¯”å¯¹æ—¶é—´ï¼š"+str1);
 			//edit_remark.setText(cur.getString(5));
-			
+
 			ImageView image1 = (ImageView) findViewById(R.id.imageView1);
 			ImageView image2 = (ImageView) findViewById(R.id.imageView2);
-		    Bitmap bitmap = getLoacalBitmap(MyApp.FACE_PATH+cur.getString(0)+".jpg"); //´Ó±¾µØÈ¡Í¼Æ¬
-		    Bitmap bitmap2 = getLoacalBitmap(MyApp.FACE_PATH + cur.getString(0) + cur.getShort(3)+".jpg"); //´Ó±¾µØÈ¡Í¼Æ¬
-		    image1.setImageBitmap(bitmap);	//ÉèÖÃBitmap
-		    image2.setImageBitmap(bitmap2);	//ÉèÖÃBitmap
-        }
+			Bitmap bitmap = getLoacalBitmap(MyApp.FACE_PATH+cur.getString(0)+".jpg"); //ä»æœ¬åœ°å–å›¾ç‰‡
+			Bitmap bitmap2 = getLoacalBitmap(MyApp.FACE_PATH + cur.getString(0) + cur.getShort(3)+".jpg"); //ä»æœ¬åœ°å–å›¾ç‰‡
+			image1.setImageBitmap(bitmap);	//è®¾ç½®Bitmap
+			image2.setImageBitmap(bitmap2);	//è®¾ç½®Bitmap
+		}
 		else
 		{
-		 	text_score.setText("ÏàËÆ¶È: ");
-			text_name.setText("×¢²áÃû³Æ: "+"");
-			
-			//SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");       
-	 		Date    curDate1 = new Date(System.currentTimeMillis());//»ñÈ¡µ±Ç°Ê±¼ä       
-	 		str1 = formatter.format(curDate1);
-			//database.insertRecordInfoData(str, smilar.toString(), "wifi", "no");
-			text_time.setText("±È¶ÔÊ±¼ä£º"+str1);
-			
-		}
-	
-	}
-	 @Override
-	    protected void onPause() {
-        super.onPause();
-	    }
-	 @Override
-	    protected void onDestroy() {
-	        super.onDestroy();
-	        
-	        database.close();
+			text_score.setText("ç›¸ä¼¼åº¦: ");
+			text_name.setText("æ³¨å†Œåç§°: "+"");
 
-	    }
-	
+			//SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date    curDate1 = new Date(System.currentTimeMillis());//è·å–å½“å‰æ—¶é—´
+			str1 = formatter.format(curDate1);
+			//database.insertRecordInfoData(str, smilar.toString(), "wifi", "no");
+			text_time.setText("æ¯”å¯¹æ—¶é—´ï¼š"+str1);
+
+		}
+
+	}
+	@Override
+	protected void onPause() {
+		super.onPause();
+	}
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+
+		database.close();
+
+	}
+
 	public void deleteRecord(View v)
 	{
 		Dialog dialog = new AlertDialog.Builder(this)
-		.setTitle("ÌáÊ¾")//ÉèÖÃ±êÌâ
-		.setMessage("ÊÇ·ñÒªÉ¾³ı¸Ã¼ÇÂ¼?")//ÉèÖÃÄÚÈİ
-		.setPositiveButton("È·¶¨",//ÉèÖÃÈ·¶¨°´Å¥
-		new DialogInterface.OnClickListener() 
-		{
-			public void onClick(DialogInterface dialog, int whichButton)
-			{
-				Cursor cur = database.fetchCheckRecordInfoData(str);
-				if(cur != null && cur.getCount() == 1)
-		        {
-					deleteFile(MyApp.FACE_PATH+cur.getString(0)+".jpg");
-					deleteFile(MyApp.FACE_PATH + cur.getString(0) + cur.getShort(3)+".jpg");
-		        }
-				//µã»÷¡°È·¶¨¡±
-				database.deleteRecordInfoData(str);				
-				ShowRecordDetailPage.this.finish();
-			}
-		}).setNeutralButton("È¡Ïû", 
-		new DialogInterface.OnClickListener()
-		{
-			public void onClick(DialogInterface dialog, int whichButton)
-			{
-				//
-			}
-		}).create();//´´½¨°´Å¥
-	
-		// ÏÔÊ¾¶Ô»°¿ò
+				.setTitle("æç¤º")//è®¾ç½®æ ‡é¢˜
+				.setMessage("æ˜¯å¦è¦åˆ é™¤è¯¥è®°å½•?")//è®¾ç½®å†…å®¹
+				.setPositiveButton("ç¡®å®š",//è®¾ç½®ç¡®å®šæŒ‰é’®
+						new DialogInterface.OnClickListener()
+						{
+							public void onClick(DialogInterface dialog, int whichButton)
+							{
+								Cursor cur = database.fetchCheckRecordInfoData(str);
+								if(cur != null && cur.getCount() == 1)
+								{
+									deleteFile(MyApp.FACE_PATH+cur.getString(0)+".jpg");
+									deleteFile(MyApp.FACE_PATH + cur.getString(0) + cur.getShort(3)+".jpg");
+								}
+								//ç‚¹å‡»â€œç¡®å®šâ€
+								database.deleteRecordInfoData(str);
+								ShowRecordDetailPage.this.finish();
+							}
+						}).setNeutralButton("å–æ¶ˆ",
+						new DialogInterface.OnClickListener()
+						{
+							public void onClick(DialogInterface dialog, int whichButton)
+							{
+								//
+							}
+						}).create();//åˆ›å»ºæŒ‰é’®
+
+		// æ˜¾ç¤ºå¯¹è¯æ¡†
 		dialog.show();
 	}
 	public void returnBack(View v)
 	{
-		
+
 		ShowRecordDetailPage.this.finish();
 	}
-	
+
 	/**
-	* ¼ÓÔØ±¾µØÍ¼Æ¬
-	* http://bbs.3gstdy.com
-	* @param url
-	* @return
-	*/
+	 * åŠ è½½æœ¬åœ°å›¾ç‰‡
+	 * http://bbs.3gstdy.com
+	 * @param url
+	 * @return
+	 */
 	public static Bitmap getLoacalBitmap(String url) {
-	     try {
-	          FileInputStream fis = new FileInputStream(url);
-	          return BitmapFactory.decodeStream(fis);
-	     } catch (FileNotFoundException e) {
-	          e.printStackTrace();
-	          return null;
-	     }
+		try {
+			FileInputStream fis = new FileInputStream(url);
+			return BitmapFactory.decodeStream(fis);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
-	public  boolean deleteFile(String fileName){  
-	   File file = new File(fileName);  
-	   if(file.isFile() && file.exists()){  
-		       file.delete();  
-		      //System.out.println("É¾³ıµ¥¸öÎÄ¼ş"+fileName+"³É¹¦£¡");  
-	      return true;  
-	     }else{  
-			 // System.out.println("É¾³ıµ¥¸öÎÄ¼ş"+fileName+"Ê§°Ü£¡");  
-			  return false;  
-		  }  
-	  }
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.login, menu);
-		return true;
+	public  boolean deleteFile(String fileName){
+		File file = new File(fileName);
+		if(file.isFile() && file.exists()){
+			file.delete();
+			return true;
+		}else{
+			return false;
+		}
 	}
+
 
 }

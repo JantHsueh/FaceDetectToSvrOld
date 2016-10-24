@@ -9,11 +9,11 @@ import jxl.write.WritableWorkbook;
 import android.os.Environment;
 
 public class CreateExcel {
-	// ×¼±¸ÉèÖÃexcel¹¤×÷±íµÄ±êÌâ
+	// å‡†å¤‡è®¾ç½®excelå·¥ä½œè¡¨çš„æ ‡é¢˜
 	private WritableSheet sheet;
-	/**´´½¨Excel¹¤×÷±¡*/
+	/**åˆ›å»ºExcelå·¥ä½œè–„*/
 	private WritableWorkbook wwb;
-	private String[] title = { "ĞÕÃû", "ÈÕÆÚ", "×´Ì¬", "ÏàÊ¶¶È"};
+	private String[] title = { "å§“å", "æ—¥æœŸ", "çŠ¶æ€", "ç›¸è¯†åº¦"};
 
 	public CreateExcel() {
 		excelCreate();
@@ -21,15 +21,15 @@ public class CreateExcel {
 
 	public void excelCreate() {
 		try {
-			/**Êä³öµÄexcelÎÄ¼şµÄÂ·¾¶*/
+			/**è¾“å‡ºçš„excelæ–‡ä»¶çš„è·¯å¾„*/
 			String filePath = Environment.getExternalStorageDirectory() + "/RunVision";
 			File file = new File(filePath, "worlk.xls");
 			if (!file.exists()) {
 				file.createNewFile();
 			}
 			wwb = Workbook.createWorkbook(file);
-			/**Ìí¼ÓµÚÒ»¸ö¹¤×÷±í²¢ÉèÖÃµÚÒ»¸öSheetµÄÃû×Ö*/
-			sheet = wwb.createSheet("ÈËÁ³Ê¶±ğµÇ¼Ç±í", 0);
+			/**æ·»åŠ ç¬¬ä¸€ä¸ªå·¥ä½œè¡¨å¹¶è®¾ç½®ç¬¬ä¸€ä¸ªSheetçš„åå­—*/
+			sheet = wwb.createSheet("äººè„¸è¯†åˆ«ç™»è®°è¡¨", 0);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -39,25 +39,25 @@ public class CreateExcel {
 	public void saveDataToExcel(int index, String[] content) throws Exception {
 		Label label;
 		for (int i = 0; i < title.length; i++) {
-			/**Label(x,y,z)ÆäÖĞx´ú±íµ¥Ôª¸ñµÄµÚx+1ÁĞ£¬µÚy+1ĞĞ, µ¥Ôª¸ñµÄÄÚÈİÊÇy
-			 * ÔÚLabel¶ÔÏóµÄ×Ó¶ÔÏóÖĞÖ¸Ã÷µ¥Ôª¸ñµÄÎ»ÖÃºÍÄÚÈİ
+			/**Label(x,y,z)å…¶ä¸­xä»£è¡¨å•å…ƒæ ¼çš„ç¬¬x+1åˆ—ï¼Œç¬¬y+1è¡Œ, å•å…ƒæ ¼çš„å†…å®¹æ˜¯y
+			 * åœ¨Labelå¯¹è±¡çš„å­å¯¹è±¡ä¸­æŒ‡æ˜å•å…ƒæ ¼çš„ä½ç½®å’Œå†…å®¹
 			 * */
 			label = new Label(i, 0, title[i]);
-			/**½«¶¨ÒåºÃµÄµ¥Ôª¸ñÌí¼Óµ½¹¤×÷±íÖĞ*/
+			/**å°†å®šä¹‰å¥½çš„å•å…ƒæ ¼æ·»åŠ åˆ°å·¥ä½œè¡¨ä¸­*/
 			sheet.addCell(label);
 		}
 		/*
-		 * °ÑÊı¾İÌî³äµ½µ¥Ôª¸ñÖĞ
-		 * ĞèÒªÊ¹ÓÃjxl.write.Number
-		 * Â·¾¶±ØĞëÊ¹ÓÃÆäÍêÕûÂ·¾¶£¬·ñÔò»á³öÏÖ´íÎó
+		 * æŠŠæ•°æ®å¡«å……åˆ°å•å…ƒæ ¼ä¸­
+		 * éœ€è¦ä½¿ç”¨jxl.write.Number
+		 * è·¯å¾„å¿…é¡»ä½¿ç”¨å…¶å®Œæ•´è·¯å¾„ï¼Œå¦åˆ™ä¼šå‡ºç°é”™è¯¯
 		 */
 		for (int i = 0; i < title.length; i++) {
 			Label labeli = new Label(i, index, content[i]);
 			sheet.addCell(labeli);
 		}
-		// Ğ´ÈëÊı¾İ
+		// å†™å…¥æ•°æ®
 		wwb.write();
-		// ¹Ø±ÕÎÄ¼ş
+		// å…³é—­æ–‡ä»¶
 		wwb.close();
 	}
 

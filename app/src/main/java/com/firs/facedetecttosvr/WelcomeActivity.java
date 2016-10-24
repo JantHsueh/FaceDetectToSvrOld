@@ -50,6 +50,7 @@ public class WelcomeActivity extends Activity {
         //感知刷身份证
         auth();
 
+
     }
 
     /**
@@ -154,6 +155,7 @@ public class WelcomeActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
     }
+
 
 
 }

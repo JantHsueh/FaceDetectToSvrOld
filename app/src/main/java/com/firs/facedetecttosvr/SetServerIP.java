@@ -26,8 +26,9 @@ public class SetServerIP extends Activity {
 	EditText edit_port;
 	Button  bnt_setServer;
 	Button bnt_return;
-	
+
 	private Thread newThread;         //声明一个子线程
+
 	public static ProgressBar  progressBar;
 
 	@Override
@@ -53,7 +54,9 @@ public class SetServerIP extends Activity {
 		
 		progressBar=new ProgressBar(this,null,android.R.attr.progressBarStyleLarge);
 		progressBar.setIndeterminateDrawable(getResources().getDrawable(R.drawable.progressbar));
+
 		Display currDisplay = getWindowManager().getDefaultDisplay();//获取屏幕当前分辨率
+
 		int round = currDisplay.getWidth()/4;
         int displayWidth = currDisplay.getWidth()/2 - round/2;
         int displayHeight = currDisplay.getHeight()/4 - round/2-5;
@@ -88,12 +91,15 @@ public class SetServerIP extends Activity {
 						toast= Toast.makeText(getApplicationContext(), "服务器设置成功!", Toast.LENGTH_SHORT);
 					}else {
 						toast= Toast.makeText(getApplicationContext(), "参数保存失败!", Toast.LENGTH_SHORT);
+
 					}
 					toast.setGravity(Gravity.CENTER, 0, 0);
 					toast.show();
 					break;
 				case 2:
+
 					toast= Toast.makeText(getApplicationContext(), "服务器ip设置失败,请联系管理员。", Toast.LENGTH_SHORT);
+
 					toast.setGravity(Gravity.CENTER, 0, 0);
 					toast.show();
 					break;
@@ -110,11 +116,13 @@ public class SetServerIP extends Activity {
 	{
 		SetServerIP.this.finish();
 	}
+
 	//点击设置按钮  
 	public void  set_Server(View v) {
 		bnt_setServer.setEnabled(false);
 		progressBar.setVisibility(View.VISIBLE);
 		//把文本框输入的值保存到   本地
+
 		FaceNative.SetServerIP(edit_svrip.getText().toString().getBytes(), Integer.valueOf(edit_port.getText().toString()), 1);
 		new Thread() {
 		@Override
@@ -124,6 +132,7 @@ public class SetServerIP extends Activity {
 			long start_time = System.currentTimeMillis()/1000;
 			while(true)
 			{	//1.保存成功
+
 				if(FaceNative.getServerSockFlag() == 1)
 				{
 					Message message = new Message();
@@ -132,6 +141,7 @@ public class SetServerIP extends Activity {
 					break;
 				}
 				//2.保存时链接超时
+
 				if(System.currentTimeMillis()/1000 - start_time >= 30)
 				{
 					Message message = new Message();

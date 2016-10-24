@@ -16,6 +16,7 @@
 #include "faceLib.h"
 
 
+
 /* 最后一条上传记录时间 */
 time_t lastRecordTime = 0;
 char s_nVerifyTrapMode = 0;
@@ -30,6 +31,7 @@ int g_ServerSockFlag = 0;
 /*
 **  处理客户应答请求
 0-成功;负数-失败
+
 */
 int DealResponse(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROTOCOL_PACK *OutStrProPack)
 {
@@ -45,7 +47,11 @@ int DealResponse(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROT
 	int nRandom;
 	//MD5_CONTEXT md5_context;
 
+<<<<<<< HEAD
+	/*  �ж����ݰ����� */
+=======
 	/*  判断数据包类型 */
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 	if ((InStrProPack->head.subType == ACK) 
 		&& (InStrProPack->head.dataLen == 4) 
 		&& (InStrProPack->head.index == AUTH_INDEX))
@@ -76,7 +82,11 @@ int DealResponse(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROT
 		//MD5Update(&md5_context, (unsigned char*)szPlain, nPlainLen);
 		//MD5Final(md5HashCode, &md5_context);
 
+<<<<<<< HEAD
+		/* �ն��յ�����֤����󣬷�����֤����� */
+=======
 		/* 终端收到此认证请求后，返回认证随机数 */
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 		//retVal = TcpSendPack(PROTOCOL_HEAD_FLAG, InStrProPack->head.index, AUTH,
 		//	AUTH_AUTHENTICATE, sizeof( md5HashCode ), (void *)md5HashCode, OutStrProPack);
 	}
@@ -85,10 +95,17 @@ int DealResponse(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROT
 		&& (InStrProPack->head.index == AUTH_INDEX))
 	{
 		TRACE("Sucess Sucess Sucess Sucess Sucess ..............%s %d\r\n", __FUNCTION__, __LINE__);
+<<<<<<< HEAD
+		/* ��������֤�ɹ� */
+		StrInlinkShare->authFlag = 1;
+
+		/* ����Ҫ���� */
+=======
 		/* 服务器认证成功 */
 		StrInlinkShare->authFlag = 1;
 
 		/* 不需要返回 */
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 		retVal = -1;
 	}
 	else if((InStrProPack->head.subType == NAK) 
@@ -96,10 +113,17 @@ int DealResponse(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROT
 		&& (InStrProPack->head.index == AUTH_INDEX))
 	{
 		TRACE("Validation fails ..............%s %d\r\n", __FUNCTION__, __LINE__);
+<<<<<<< HEAD
+		/* ��������֤ʧ�� */
+		StrInlinkShare->authFlag = -2;
+
+		/* ����Ҫ���� */
+=======
 		/* 服务器认证失败 */
 		StrInlinkShare->authFlag = -2;
 
 		/* 不需要返回 */
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 		retVal = -1;
 	}
 	else
@@ -112,14 +136,17 @@ int DealResponse(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROT
 
 /* ------------------------------------------------------------------------- */
 /*
+
 **  处理客户连接认证请求
 **  获取认证随机数成功返回0，认证成功返回1，认证失败返回负数
+
 */
 int DealMsgAuth(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROTOCOL_PACK *OutStrProPack)
 {
 	LOGD("%s %d\r\n", __FUNCTION__, __LINE__);
 	int retVal = 1;
 	CONFIG_SECURITY_STR strCfgSecurity;
+
 
 	/*  判断数据包类型 */
 	if((InStrProPack->head.subType == NMSG_SUBTYPE_RESPONSE) 
@@ -137,7 +164,9 @@ int DealMsgAuth(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROTO
 		g_AuthFlag = -1;
 
 	}
+
 	else//其它，返回错误
+
 	{
 		retVal = -1;
 		g_AuthFlag = 0;
@@ -146,6 +175,7 @@ int DealMsgAuth(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROTO
 }
 
 /**********************************
+
 函数名称： ClientSendAuth
 函数功能: 发送与服务器连接鉴权函数
 入口参数：

@@ -9,7 +9,9 @@
 #define R unsigned char
 #define G unsigned char
 #define B unsigned char
-//Ã¿¸öÏñËØµÄ×Ö½ÚÊı
+
+//æ¯ä¸ªåƒç´ çš„å­—èŠ‚æ•°
+
 #define m_nBytesPerPixel  3
 
 #define RGB unsigned long
@@ -41,7 +43,9 @@ if(p != NULL)   \
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// »ù±¾ÀàĞÍ¶¨Òå
+
+// åŸºæœ¬ç±»å‹å®šä¹‰
+
 ///////////////////////////////////////////////////////////////////////////////////////
 #if defined(WIN32) || defined(OS_WINDOWS) || defined(SDK_WIN32)
 
@@ -112,22 +116,24 @@ if(p != NULL)   \
 
 
 
-// ÉèÖÃÌØÕ÷¹²Ïí»º³åÇø´óĞ¡£¨Ä¬ÈÏÊÇ20M£© 
+
+// è®¾ç½®ç‰¹å¾å…±äº«ç¼“å†²åŒºå¤§å°ï¼ˆé»˜è®¤æ˜¯20Mï¼‰ 
 #define OD_CODEC_BUF_SIZE  (1 * 1024)
-#define FACIAL_LIB_PATH     "/mnt/sdcard/faciallib"    /* Ëã·¨ÅäÖÃÄ¿Â¼ */
+#define FACIAL_LIB_PATH     "/mnt/sdcard/faciallib"    /* ç®—æ³•é…ç½®ç›®å½• */
 
-#define GENERAL_PATH_LEN		128		//Â·¾¶µÄ³¤¶È
-#define MAX_DIR_USER_NUM		2000	//Ã¿¸öÄ¿Â¼ÏÂ×î´óÄ¿Â¼Êı  ·ÀÖ¹Ã¿¸öÄ¿Â¼ÏÂÓÃ»§Êı¹ı¶à
-#define USER_DATA_DIR_NAME		"/mnt/sdcard/userData"    //ÓÃ»§ĞÅÏ¢±£´æÂ·¾¶
+#define GENERAL_PATH_LEN		128		//è·¯å¾„çš„é•¿åº¦
+#define MAX_DIR_USER_NUM		2000	//æ¯ä¸ªç›®å½•ä¸‹æœ€å¤§ç›®å½•æ•°  é˜²æ­¢æ¯ä¸ªç›®å½•ä¸‹ç”¨æˆ·æ•°è¿‡å¤š
+#define USER_DATA_DIR_NAME		"/mnt/sdcard/userData"    //ç”¨æˆ·ä¿¡æ¯ä¿å­˜è·¯å¾„
 
-#define FEATURESIZE_GENERAL     1024        /* ÌØÕ÷Öµ³¤¶È µ¥Î» byte */    
-#define MAX_FEATURE_NUM         10          /* Ä£°åÊı */
+#define FEATURESIZE_GENERAL     1024        /* ç‰¹å¾å€¼é•¿åº¦ å•ä½ byte */    
+#define MAX_FEATURE_NUM         10          /* æ¨¡æ¿æ•° */
 
-#define MAX_USER_NUM			5000	/* ×î´óÈËÊı */
+#define MAX_USER_NUM			5000	/* æœ€å¤§äººæ•° */
 
-#define FACEDETECT_FIND_NO_FACE		-255	/* ¼ì²â²»µ½ÈËÁ³³¡¾°Ê±·µ»ØµÄ´íÎóÂë */
+#define FACEDETECT_FIND_NO_FACE		-255	/* æ£€æµ‹ä¸åˆ°äººè„¸åœºæ™¯æ—¶è¿”å›çš„é”™è¯¯ç  */
 
-/* ÉãÏñÍ·²¿·Ö */
+/* æ‘„åƒå¤´éƒ¨åˆ† */
+
 #if 0
 #define SCREEN_WIDTH        240
 #define SCREEN_HEIGHT       320
@@ -160,7 +166,9 @@ if(p != NULL)   \
 #define V4L2_FRM_FMT_TILE       ('T')         /* YUV420 tile(macro block) mode */
 #define V4L2_FRM_FMT_PACK       ('P')         /* package frame format */
 
-//²ÊÉ« yuv420SP to RGB244
+
+//å½©è‰² yuv420SP to RGB244
+
 #define YCbCrtoR(Y,Cb,Cr)       (100*Y + 114*(Cr-128))/100
 #define YCbCrtoG(Y,Cb,Cr)       (100*Y - 39*(Cb-128) - 58*(Cr-128))/100
 #define YCbCrtoB(Y,Cb,Cr)       (100*Y + 203*(Cb-128))/100
@@ -330,7 +338,9 @@ static const signed short blueAdjust[] = {
 227, 229, 231, 233, 235, 238, 240, 242,
 };
 
-//´æ´¢2 ¸öÏñËØµã
+
+//å­˜å‚¨2 ä¸ªåƒç´ ç‚¹
+
 struct RGB24x2
 {
     R r0;
@@ -406,8 +416,9 @@ void Yuyv2Rgb565Rotate90Mirror(const void *pYuyvData, void *pRgb565Data, const u
 void Yuyv2yuv420pRotate90Mirror(const void *pYuyvData, void *pYuv420pData, const unsigned int w, const unsigned int h);
 
 /**************************************
-direct: 1 ---Ë³Ê±Õë
-        0 ---ÄæÊ±Õë
+
+direct: 1 ---é¡ºæ—¶é’ˆ
+        0 ---é€†æ—¶é’ˆ
 
 **************************************/
 void* rotate90_yuv420p(void* pYuv420, int nWidth, int nHeight, void*pOutYuv420, BOOL bUV, int nDirect);

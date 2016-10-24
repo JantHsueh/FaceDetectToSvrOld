@@ -29,9 +29,11 @@
  *  Created on: 2013-11-8
  *      Author: Administrator
  */
+
 //识别采集jpg图片质量
 #define DEFAULT_JPGE_QUALITY 100
 //图片最大旋转次数
+
 #define IMAGE_MAX_ROTATE_TIMES 2
 
 #define INVALID         0xFFFFFFFF
@@ -40,6 +42,7 @@
 #ifndef INVALID_HANDLE_VALUE
 #define INVALID_HANDLE_VALUE    ((HANDLE)INVALID)
 #endif
+
 
 /*******************************************全局变量*****************************************/
 /* 全局的传入算法的特征指针 */
@@ -67,6 +70,7 @@ int giTotalFeatureNum = 0;
 char gcaFeaturePwd[33] = { 0 };
 
 /* 记录全部用户与管理员的信息 */
+
 USERINFO gstrUserList[MAX_USER_NUM] = { 0 };
 
 static char s_D1_BUF[D1_WIDTH * D1_HEIGHT * 2];
@@ -75,7 +79,9 @@ static char s_SIF_BUF_TMP[2][SIF_HEIGHT * SIF_WIDTH * 2] = { { 0 } };
 
 char g_SIF_BUF_Send[SIF_HEIGHT * SIF_WIDTH * 2] = { 0 };
 
+
 /* 临时共享buf */
+
 char g_cShareMem[20 * 1024] = { 0 };
 
 HANDLE g_hVideoColor = INVALID_HANDLE_VALUE;
@@ -93,9 +99,11 @@ pthread_t gtReadIrdaID = 0;
 
 static char *s_pShareMem = NULL;
 
+
 /* 用户总数 */
 int giUserNum = 0;
 //是否存在抓拍到人脸的照片
+
 int giPictureFaceFlag = 0;
 
 
@@ -107,12 +115,14 @@ extern void StartNetModule();
 
 FI_FACIAL_DETECT_PARAM detect_param;
 
+
 // 打开算法库引擎
 OD_CE_HANDLE OD_OpenEngine() {
     OD_CE_HANDLE hCe = NULL;
 
     /* modified by ytj 20110808，根据5.2.2红外普通算法接口，
      FI_OpenEngine函数后2个参数需要指定cmemk内存的起始地址与结束地址 */
+
     hCe = (OD_CE_HANDLE) FI_OpenEngine(FI_FALSE, 0x88000000, 0x8BFFFFFF);
 
     return hCe;
@@ -231,7 +241,9 @@ void OD_CloseFacialCodec(OD_CODEC_HANDLE hCodec) {
     }
 }
 
+
 // 关闭算法库引擎
+
 void OD_CloseEngine(OD_CE_HANDLE hCe) {
     //TRACE("%s %d \r\n", __FUNCTION__, __LINE__);
 
@@ -252,7 +264,9 @@ int OD_DetectFacial(OD_CODEC_HANDLE hCodec, char* pYBuf, int nWidth,
     detect_param.bDetectEyeStatus = 1;
     detect_param.bDetectMouth = 1;
 
+
     /* added by ytj 20110808，6446平台使用 普通算法 */
+
     if (hCodec) {
         //LOGD("OD_DetectFacial() hCodec:%p line:%d", hCodec, __LINE__);
         ret = FI_FACIAL_DetectX(hCodec, pYBuf, &detect_param, pResult);
@@ -260,7 +274,9 @@ int OD_DetectFacial(OD_CODEC_HANDLE hCodec, char* pYBuf, int nWidth,
     return ret;
 }
 
+
 /* 打桩 */
+
 int DM2016_Authentication(char* pEncryptedCode, char* pPlanCode) {
     return 0;
 }
@@ -325,27 +341,35 @@ void DeInitFacial() {
 }
 
 /**
+
  *  初始化人脸识别算法库
  *  return 返回执行结果
+
  */
 
 //void initFaceLib(JNIEnv* env, jobject thiz) {
 JNIEXPORT void JNICALL Java_com_firs_cn_FaceNative_initFaceLib(JNIEnv* env, jobject thiz) {
     //LOGD("initFaceLib()");
+
     //初始化算法
+
     InitFacial();
     LOGD("DoTcpSendThreadPool %s %d\r\n", __FUNCTION__, __LINE__);
 }
 
 /**
+
  *  释放初始化人脸识别算法库
  *  return 返回执行结果
+
  */
 
 //void releaseFaceLib(JNIEnv* env, jobject thiz) {
 JNIEXPORT void JNICALL Java_com_firs_cn_FaceNative_releaseFaceLib(JNIEnv* env, jobject thiz) {
     //LOGD("releaseFaceLib()");
+
     //释放申请资源
+
     DeInitFacial();
 }
 
@@ -357,7 +381,9 @@ void RoateData(LONG width, LONG height, unsigned char * srcData, unsigned char *
 	unsigned char *tmpSrc = srcData;
 	unsigned char *tmpDst = dstData;
 	
+
 	width *= Bpp;		//每像素占三字节
+
 	for (i = 0; i < width; i += Bpp)
 		//for (i = width - 3; i >= 0 ; i -= 3)
 	{
@@ -377,7 +403,9 @@ void RoateData(LONG width, LONG height, unsigned char * srcData, unsigned char *
     {  
          
         int wh = width * height;  
+
         //旋转Y  
+
         int k = 0;  
         for(int i=0;i<width;i++) {  
             for(int j=0;j<height;j++)   
@@ -400,8 +428,10 @@ void RoateData(LONG width, LONG height, unsigned char * srcData, unsigned char *
     } 
 
 /**
+
  *  人脸识别
  *  return 返回执行结果
+
  */
 JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* env, jobject thiz, jint width,
         jint height, jboolean isFront, jbyteArray imgData) {
@@ -411,12 +441,15 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
     int ret1 = 10;
     int yWidth = width;
     int yHeight = height;
+
     //识别模式，默认为1注册模式
+
     int iMode = 1;
     int iEyeWidthMin = 0;
     int iEyeWidthMax = 0;
     int iEyeWidth = 0;
     int i = 0;
+
 
     //默认旋转90度
     signed short rotateValue = 0;
@@ -428,6 +461,7 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
     //传入的数据长度
     jsize len = (env)->GetArrayLength(imgData);
     // 图片数据存储空间
+
 
     char* g_SIF_BUF = new char[yWidth * yHeight * 2];
     memset(g_SIF_BUF, 0, yWidth * yHeight * 2);
@@ -444,7 +478,9 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
     //LOGD("recognizeFace() width:%d height:%d imgData.length:%d %s %d\r\n",width, height, len, __FUNCTION__, __LINE__);
     if (JNI_TRUE == isFront) {
         rotateValue = 270;
+
         //识别逆时针旋转90度
+
         //void YUV420SPToYUV420P ( void * yuv420sp,  void * yuv420,  int  width,  int  height )
         //LOGD("yWidth[%d] yHeight[%d]\r\n",yWidth,yHeight);
 
@@ -458,11 +494,13 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
         if (ret <= 0 || strFacialInfo.faceNum <= 0) {
             //LOGD("ret <= 0 || strFacialInfo.faceNum <= 0 %s %d\r\n",
             //        __FUNCTION__, __LINE__);
+
             //不旋转
             rotateValue = 0;
             memset(g_SIF_BUF, 0, yWidth * yHeight * 2);
             memcpy(g_SIF_BUF, jbts, len);
             // 识别原始图片
+
             memset(&strFacialInfo, 0, sizeof(strFacialInfo));
             ret = OD_DetectFacial(ghFacialCodec, g_SIF_BUF, yWidth, yHeight,
                     &strFacialInfo);
@@ -470,10 +508,12 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
             if (ret <= 0 || strFacialInfo.faceNum <= 0) {
                 int j = 0;
                 //LOGD("ret <= 0 %s %d\r\n", __FUNCTION__, __LINE__);
+
                 //拷贝数据到目标区域。
                 memset(g_Temp_BUF, 0, yWidth * yHeight * 2);
                 memcpy(g_Temp_BUF, jbts, len);
                 // 识别其他两个角度的图片
+
                 for (j = 0; j < IMAGE_MAX_ROTATE_TIMES; j++) {
                     int mWidth = yHeight;
                     rotateValue = ((j + 1) * 90);
@@ -492,7 +532,9 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
                     if (ret > 0 && strFacialInfo.faceNum > 0) {
                         break;
                     }
+
                     //拷贝数据到目标区域。
+
                     memset(g_Temp_BUF, 0, yWidth * yHeight * 2);
                     memcpy(g_Temp_BUF, g_SIF_BUF, yWidth * yHeight * 2);
                 }
@@ -501,7 +543,9 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
         }
     } else {
         rotateValue = 90;
+
         //识别逆时针旋转90度
+
 		YUV420SPToYUV420P( g_Temp_BUF,  g_Temp_BUF2,  yWidth,yHeight);
         rotate90_yuv420p(g_Temp_BUF2, yWidth, yHeight, g_SIF_BUF, TRUE, 1);
 		
@@ -514,11 +558,13 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
         if (ret <= 0 || strFacialInfo.faceNum <= 0) {
             //LOGD("ret <= 0 || strFacialInfo.faceNum <= 0 %s %d\r\n",
             //        __FUNCTION__, __LINE__);
+
             //不旋转
             rotateValue = 0;
             memset(g_Temp_BUF, 0, yWidth * yHeight * 2);
             memcpy(g_Temp_BUF, jbts, len);
             // 识别原始图片
+
             memset(&strFacialInfo, 0, sizeof(strFacialInfo));
             ret = OD_DetectFacial(ghFacialCodec, g_Temp_BUF, yWidth, yHeight,
                     &strFacialInfo);
@@ -526,10 +572,12 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
             if (ret <= 0 || strFacialInfo.faceNum <= 0) {
                 int j = 0;
                 //LOGD("ret <= 0 %s %d\r\n", __FUNCTION__, __LINE__);
+
                 //拷贝数据到目标区域。
                 memset(g_Temp_BUF, 0, yWidth * yHeight * 2);
                 memcpy(g_Temp_BUF, g_SIF_BUF,  yWidth * yHeight * 2);
                 // 识别其他两个角度的图片
+
                 for (j = 0; j < IMAGE_MAX_ROTATE_TIMES; j++) {
                     int mWidth = yHeight;
                     rotateValue = ((j + 1) * 90);
@@ -548,7 +596,9 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
                     if (ret > 0 && strFacialInfo.faceNum > 0) {
                         break;
                     }
+
                     //拷贝数据到目标区域。
+
                     memset(g_Temp_BUF, 0, yWidth * yHeight * 2);
                     memcpy(g_Temp_BUF, g_SIF_BUF, yWidth * yHeight * 2);
                 }
@@ -560,7 +610,9 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
    // delete[] g_SIF_BUF;
     //LOGD("recognizeFace() ret:%d nFaceNum:%d %s %d\r\n", ret, strFacialInfo.faceInfo[0].nFaceNum, __FUNCTION__, __LINE__);
     if (ret > 0) {
+
         int index = 0; //标记返回的人脸索引
+
         int maxFace = 0;
         int sumLen = 0;
 		int result = 0;
@@ -573,12 +625,16 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
 
 		//rotateYUV240SP((unsigned char*)jbts,(unsigned char*)g_SIF_BUF_Send,width,height);
 		
+
         // 保存原始图像YUV420SP格式
+
         //saveRaw((unsigned char*) g_SIF_BUF_Send, SIF_HEIGHT * SIF_WIDTH * 2);
         RGB24x2 *bmp = (RGB24x2*) malloc(3 * width * height);
         memset((unsigned char*) bmp, 0, 3 * width * height);
 		
+
         // 转换原始图片为RGB格式
+
         //yuv420sp_to_rgb(240, 320, (unsigned char*) g_SIF_BUF_Send, bmp);
 
 		yuv420p_to_rgb565_ex(240, 320, g_SIF_BUF_Send, bmp);
@@ -588,9 +644,11 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
 		//YUV420p_to_RGB24((unsigned char **)g_SIF_BUF_Send, (unsigned char *)bmp2, 240, 320);
 
 		//yuv420sp_to_rgb(width, height, (unsigned char*) g_SIF_BUF, bmp);
+
         // 保存RGB格式图像
          //saveRgb((unsigned char*)bmp, 3 * width * height);
         // 保存图像为JPG格式
+
         //LOGD("strFile[%s]\r\n",strFile);
 
 		//RoateData(width,height, (unsigned char*)bmp, (unsigned char*)bmp1, 1);
@@ -599,7 +657,9 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
         result = jpeg_compress((char*) strFile, (unsigned char*)bmp, 240,
                 320, TRUE, 100);
         if (0 != result) {
+
             //  JPG图像转换成功。
+
             ret = result;
         }
 		pthread_mutex_unlock(&gRwPicMutex);
@@ -621,7 +681,9 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
 	        }
 		*/
 
+
         // 返回的结果集
+
         pFace[0] = ret;
         pFace[1] = strFacialInfo.faceInfo[0].rcFace.left;
         pFace[2] = strFacialInfo.faceInfo[0].rcFace.top;
@@ -684,7 +746,9 @@ JNIEXPORT jint JNICALL Java_com_firs_cn_FaceNative_UserAuth( JNIEnv* env,jobject
 	char chUserName[32] = {0};
 	char chPwd[32] = {0};
 
+
 	//读取用户名
+
 	jbyte* jbtsUser = (env)->GetByteArrayElements(username, 0);
     jsize lenuser = (env)->GetArrayLength(username);
 	if(lenuser > sizeof(chUserName))
@@ -693,7 +757,9 @@ JNIEXPORT jint JNICALL Java_com_firs_cn_FaceNative_UserAuth( JNIEnv* env,jobject
 	}
 	memcpy(chUserName, jbtsUser, lenuser);
 
+
 	//读取密码
+
 	jbyte* jbtspwd = (env)->GetByteArrayElements(pwd, 0);
 	jsize lenpwd = (env)->GetArrayLength(pwd);
 	if(lenpwd > sizeof(chPwd))
@@ -720,9 +786,11 @@ JNIEXPORT void JNICALL Java_com_firs_cn_FaceNative_SetServerIP( JNIEnv* env,jobj
 {
 	char acIp[16] = {0};
 	
+
 	 // 传入的数据
     jbyte* jbts = (env)->GetByteArrayElements(ip, 0);
     //数据长度
+
     jsize len = (env)->GetArrayLength(ip);
 
 	if(len > sizeof(acIp))

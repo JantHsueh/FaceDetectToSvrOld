@@ -21,42 +21,48 @@ extern "C" {
 
 extern int iThreadExit;
 /*
-**  ·¢ËÍ³ö´íĞÅÏ¢½á¹¹
+
+**  å‘é€å‡ºé”™ä¿¡æ¯ç»“æ„
 */
 typedef struct ERROR_INFO
 {
-	int errorNo;			       /* ´íÎó´úÂë */
-	unsigned char errorLen;	/* ´íÎóĞÅÏ¢³¤¶È */
-	char errorMsg[256];		/* ´íÎóĞÅÏ¢ÃèÊö */
+	int errorNo;			       /* é”™è¯¯ä»£ç  */
+	unsigned char errorLen;	/* é”™è¯¯ä¿¡æ¯é•¿åº¦ */
+	char errorMsg[256];		/* é”™è¯¯ä¿¡æ¯æè¿° */
+
 	
 } PACK_ALIGN ERROR_INFO, *LPERROR_INFO;
 
 
-/* ÍøÂçÅäÖÃ */
+
+/* ç½‘ç»œé…ç½® */
 typedef struct ConfigNetWork 
 {
-    char cNetType;              /* ÍøÂçÀàĞÍ 0-DHCP, 1-STATIC, 2-ADSL */
-    char caIp[16];              /* ÖÕ¶Ë×ÔÉíµÄIPµØÖ· */
-    char caNetMask[16];         /* ×ÓÍøÑÚÂë */
-    char caGateway[16];         /* Íø¹Ø */
-    char caDns[16];				/* DNS ·şÎñÆ÷ */
+    char cNetType;              /* ç½‘ç»œç±»å‹ 0-DHCP, 1-STATIC, 2-ADSL */
+    char caIp[16];              /* ç»ˆç«¯è‡ªèº«çš„IPåœ°å€ */
+    char caNetMask[16];         /* å­ç½‘æ©ç  */
+    char caGateway[16];         /* ç½‘å…³ */
+    char caDns[16];				/* DNS æœåŠ¡å™¨ */
 	char caDns2[16]; 			
-    char caMac[6];              /* MACµØÖ· */
-    char caNtpServer[16];       /* ·Ç¿ÕÊ±Óë´ËSNTP ·şÎñÆ÷Í¬²½Ê±¼ä */
-    char cNtpServerMode;        /* NTP ·şÎñÄ£Ê½: 0-½ûÓÃ£¬1-·şÎñ¶Ë£¬2-¿Í»§¶Ë£¬3-·şÎñ¶Ë+¿Í»§¶Ë */
-    char caServerIP[16];		/* ÖÕ¶Ë×÷Îª¿Í»§¶Ë£¬Á¬½ÓµÄ·şÎñÆ÷IP */
-    int  iPort;					/* ÖÕ¶Ë×÷Îª¿Í»§¶Ë£¬Á¬½ÓµÄ·şÎñÆ÷¶Ë¿Ú */
+    char caMac[6];              /* MACåœ°å€ */
+    char caNtpServer[16];       /* éç©ºæ—¶ä¸æ­¤SNTP æœåŠ¡å™¨åŒæ­¥æ—¶é—´ */
+    char cNtpServerMode;        /* NTP æœåŠ¡æ¨¡å¼: 0-ç¦ç”¨ï¼Œ1-æœåŠ¡ç«¯ï¼Œ2-å®¢æˆ·ç«¯ï¼Œ3-æœåŠ¡ç«¯+å®¢æˆ·ç«¯ */
+    char caServerIP[16];		/* ç»ˆç«¯ä½œä¸ºå®¢æˆ·ç«¯ï¼Œè¿æ¥çš„æœåŠ¡å™¨IP */
+    int  iPort;					/* ç»ˆç«¯ä½œä¸ºå®¢æˆ·ç«¯ï¼Œè¿æ¥çš„æœåŠ¡å™¨ç«¯å£ */
+
 } CONFIG_NETWORK_STR;
 
 typedef struct ConfigSecurity 
 {
-	char caWifiPwd[32];    	 /* wifiÃÜÂë */
+
+	char caWifiPwd[32];    	 /* wifiå¯†ç  */
 	
-	char caUnlockPwd[32];    /* ¿ªÃÅÃÜÂë */
-	char caSdPwd[32];        /* SD¿¨ÃÜÂë */
-    char caWebUser[32];      /* ÍøÒ³µÇÂ¼ÓÃ»§Ãû */
-    char caWebPwd[32];       /* ÍøÒ³µÇÂ¼ÃÜÂë */
-	unsigned char cKeyboardOrder;    /* Êı×Ö¼üÅÅĞò 0-Õı³££¬1-ÂÒĞò */
+	char caUnlockPwd[32];    /* å¼€é—¨å¯†ç  */
+	char caSdPwd[32];        /* SDå¡å¯†ç  */
+    char caWebUser[32];      /* ç½‘é¡µç™»å½•ç”¨æˆ·å */
+    char caWebPwd[32];       /* ç½‘é¡µç™»å½•å¯†ç  */
+	unsigned char cKeyboardOrder;    /* æ•°å­—é”®æ’åº 0-æ­£å¸¸ï¼Œ1-ä¹±åº */
+
 }CONFIG_SECURITY_STR;
 
 #if 0
@@ -77,118 +83,223 @@ typedef struct ConfigSecurity
 #define CONFIG_WIEGAND_PATH     "config/configWiegand.xml"
 #define CONFIG_SYNC_PATH		"config/configSync.xml"
 
-/* ÏµÍ³ÅäÖÃ */
+<<<<<<< HEAD
+/* ç³»ç»Ÿé…ç½® */
 typedef struct ConfigSys
 { 
-	short sRecogRectX, sRecogRectY;		/* Ê¶±ğ¿òĞ£×¼×ø±ê */
+	short sRecogRectX, sRecogRectY;		/* è¯†åˆ«æ¡†æ ¡å‡†åæ ‡ */
 } CONFIG_SYS_STR;
 
-/* »ù±¾ÅäÖÃ */
+/* åŸºæœ¬é…ç½® */
 typedef struct ConfigBase
 { 
-    unsigned short usAlgorithmVersion;  /* Ëã·¨°æ±¾ */
-    unsigned char ucLanguage;           /* ÓïÑÔ 1-english, 2-¼òÌåÖĞÎÄ£¬3-·±ÌåÖĞÎÄ */
-    unsigned char ucTz;                 /* Ê±Çø */
-    unsigned char ucYear, ucMonth, ucDay, ucHour, ucMinute, ucSecond;   /* ÏµÍ³Ê±¼ä */
-    short sTouchX, sTouchY, sTouchWidth, sTouchHeight;  /* ´¥ÃşÆÁĞ£×¼×ø±ê */
-    unsigned char ucTouchFlip;          /* ÆÁÄ»·­×ª  0-normal, 1-flip */
-    short sVideoOffsetX, sVideoOffsetY, sVideoZoom; /* ²ÊÉ«¾µÍ·Ğ£×¼:  ²ÊÉ«Í¼ÏóĞèÒªµÄÆ«ÒÆ¼°·Å´ó±¶Êı( ±¶ÊıÀ©´ó100 ±¶×ª³É¶¨µã) */
-    int iAvg_x;                         /* ºÚ°×Í¼ÏñÓë²ÊÉ«Í¼ÏñX×ø±ê²î */
-    int iAvg_y;                         /* ºÚ°×Í¼ÏñÓë²ÊÉ«Í¼ÏñY×ø±ê²î */
-    char cWiegandOut;                   /* Î¤¸ùÊä³öµÄ×´Ì¬  0£º²»´æÔÚ  1£ºÎ¤¸ù26£¬2: Î¤¸ù34 */
-	char cDoorbell;						/* ÃÅÁå */
-    unsigned short usWiegandHID;        /* Î¤¸ùÊä³öµÄHIDÂë */
-    unsigned short usAttendInterval;    /* ¿¼ÇÚ¼ä¸ô 0 - ¿¼ÇÚÊ±¼ä¼ä¸ô²»ÉúĞ§£¬1 ~ 300£¬¿¼ÇÚÊ±¼ä¼ä¸ô£¬µ¥Î»Îª·ÖÖÓ */
-	short sRecogRectX, sRecogRectY;		/* Ê¶±ğ¿òĞ£×¼×ø±ê */
-	time_t  strLastGetUserRecords;      /* ×îºóÍ¬²½µÄÓÃ»§¼ÇÂ¼Ê±¼ä */
+    unsigned short usAlgorithmVersion;  /* ç®—æ³•ç‰ˆæœ¬ */
+    unsigned char ucLanguage;           /* è¯­è¨€ 1-english, 2-ç®€ä½“ä¸­æ–‡ï¼Œ3-ç¹ä½“ä¸­æ–‡ */
+    unsigned char ucTz;                 /* æ—¶åŒº */
+    unsigned char ucYear, ucMonth, ucDay, ucHour, ucMinute, ucSecond;   /* ç³»ç»Ÿæ—¶é—´ */
+    short sTouchX, sTouchY, sTouchWidth, sTouchHeight;  /* è§¦æ‘¸å±æ ¡å‡†åæ ‡ */
+    unsigned char ucTouchFlip;          /* å±å¹•ç¿»è½¬  0-normal, 1-flip */
+    short sVideoOffsetX, sVideoOffsetY, sVideoZoom; /* å½©è‰²é•œå¤´æ ¡å‡†:  å½©è‰²å›¾è±¡éœ€è¦çš„åç§»åŠæ”¾å¤§å€æ•°( å€æ•°æ‰©å¤§100 å€è½¬æˆå®šç‚¹) */
+    int iAvg_x;                         /* é»‘ç™½å›¾åƒä¸å½©è‰²å›¾åƒXåæ ‡å·® */
+    int iAvg_y;                         /* é»‘ç™½å›¾åƒä¸å½©è‰²å›¾åƒYåæ ‡å·® */
+    char cWiegandOut;                   /* éŸ¦æ ¹è¾“å‡ºçš„çŠ¶æ€  0ï¼šä¸å­˜åœ¨  1ï¼šéŸ¦æ ¹26ï¼Œ2: éŸ¦æ ¹34 */
+	char cDoorbell;						/* é—¨é“ƒ */
+    unsigned short usWiegandHID;        /* éŸ¦æ ¹è¾“å‡ºçš„HIDç  */
+    unsigned short usAttendInterval;    /* è€ƒå‹¤é—´éš” 0 - è€ƒå‹¤æ—¶é—´é—´éš”ä¸ç”Ÿæ•ˆï¼Œ1 ~ 300ï¼Œè€ƒå‹¤æ—¶é—´é—´éš”ï¼Œå•ä½ä¸ºåˆ†é’Ÿ */
+	short sRecogRectX, sRecogRectY;		/* è¯†åˆ«æ¡†æ ¡å‡†åæ ‡ */
+	time_t  strLastGetUserRecords;      /* æœ€ååŒæ­¥çš„ç”¨æˆ·è®°å½•æ—¶é—´ */
+=======
+/* ÏµÍ³ï¿½ï¿½ï¿½ï¿½ */
+typedef struct ConfigSys
+{ 
+	short sRecogRectX, sRecogRectY;		/* Ê¶ï¿½ï¿½ï¿½Ğ£×¼ï¿½ï¿½ï¿½ï¿½ */
+} CONFIG_SYS_STR;
+
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+typedef struct ConfigBase
+{ 
+    unsigned short usAlgorithmVersion;  /* ï¿½ã·¨ï¿½æ±¾ */
+    unsigned char ucLanguage;           /* ï¿½ï¿½ï¿½ï¿½ 1-english, 2-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½3-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+    unsigned char ucTz;                 /* Ê±ï¿½ï¿½ */
+    unsigned char ucYear, ucMonth, ucDay, ucHour, ucMinute, ucSecond;   /* ÏµÍ³Ê±ï¿½ï¿½ */
+    short sTouchX, sTouchY, sTouchWidth, sTouchHeight;  /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ£×¼ï¿½ï¿½ï¿½ï¿½ */
+    unsigned char ucTouchFlip;          /* ï¿½ï¿½Ä»ï¿½ï¿½×ª  0-normal, 1-flip */
+    short sVideoOffsetX, sVideoOffsetY, sVideoZoom; /* ï¿½ï¿½É«ï¿½ï¿½Í·Ğ£×¼:  ï¿½ï¿½É«Í¼ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Æ«ï¿½Æ¼ï¿½ï¿½Å´ï¿½ï¿½ï¿½( ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½100 ï¿½ï¿½×ªï¿½É¶ï¿½ï¿½ï¿½) */
+    int iAvg_x;                         /* ï¿½Ú°ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½É«Í¼ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½ */
+    int iAvg_y;                         /* ï¿½Ú°ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½É«Í¼ï¿½ï¿½Yï¿½ï¿½ï¿½ï¿½ï¿½ */
+    char cWiegandOut;                   /* Î¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬  0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  1ï¿½ï¿½Î¤ï¿½ï¿½26ï¿½ï¿½2: Î¤ï¿½ï¿½34 */
+	char cDoorbell;						/* ï¿½ï¿½ï¿½ï¿½ */
+    unsigned short usWiegandHID;        /* Î¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½HIDï¿½ï¿½ */
+    unsigned short usAttendInterval;    /* ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½ 0 - ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ§ï¿½ï¿½1 ~ 300ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»Îªï¿½ï¿½ï¿½ï¿½ */
+	short sRecogRectX, sRecogRectY;		/* Ê¶ï¿½ï¿½ï¿½Ğ£×¼ï¿½ï¿½ï¿½ï¿½ */
+	time_t  strLastGetUserRecords;      /* ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Â¼Ê±ï¿½ï¿½ */
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 } CONFIG_BASE_STR;
 
 
 
 typedef struct ConfigThreshold 
 {
-	unsigned char ucRecognise;      /* Ê¶±ğÃÅÏŞ */
-	unsigned char ucUpdate;         /* ¸üĞÂÃÅÏŞ */
-    unsigned char ucVerifyThreshold;/* ÑéÖ¤ÃÅÏŞ */  
-	unsigned char ucTemplateNum;    /* Ä£°åÊıÁ¿ */
-	unsigned char ucTemplateVerify; /* ¼ì²âÊ±¶Î 0x01-×¢²áÊ±ÆôÓÃ£¬0x02-Ê¶±ğÊ±ÆôÓÃ*/
-	unsigned char ucDiffThreshold;  /* ·ÀÖ¹Í¬ÈË×¢²áÃÅÏŞ */
-	unsigned char ucSecondAverage;	/* µÚ¶şÊ¶±ğÃÅÏŞ */
-	unsigned char ucSecondMaxNum;	/* µÚ¶şÊ¶±ğÃÅÏŞ´ÎÊı */		
+<<<<<<< HEAD
+	unsigned char ucRecognise;      /* è¯†åˆ«é—¨é™ */
+	unsigned char ucUpdate;         /* æ›´æ–°é—¨é™ */
+    unsigned char ucVerifyThreshold;/* éªŒè¯é—¨é™ */  
+	unsigned char ucTemplateNum;    /* æ¨¡æ¿æ•°é‡ */
+	unsigned char ucTemplateVerify; /* æ£€æµ‹æ—¶æ®µ 0x01-æ³¨å†Œæ—¶å¯ç”¨ï¼Œ0x02-è¯†åˆ«æ—¶å¯ç”¨*/
+	unsigned char ucDiffThreshold;  /* é˜²æ­¢åŒäººæ³¨å†Œé—¨é™ */
+	unsigned char ucSecondAverage;	/* ç¬¬äºŒè¯†åˆ«é—¨é™ */
+	unsigned char ucSecondMaxNum;	/* ç¬¬äºŒè¯†åˆ«é—¨é™æ¬¡æ•° */		
+=======
+	unsigned char ucRecognise;      /* Ê¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	unsigned char ucUpdate;         /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+    unsigned char ucVerifyThreshold;/* ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ */  
+	unsigned char ucTemplateNum;    /* Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	unsigned char ucTemplateVerify; /* ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ 0x01-×¢ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ã£ï¿½0x02-Ê¶ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½*/
+	unsigned char ucDiffThreshold;  /* ï¿½ï¿½Ö¹Í¬ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	unsigned char ucSecondAverage;	/* ï¿½Ú¶ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	unsigned char ucSecondMaxNum;	/* ï¿½Ú¶ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½ï¿½Ş´ï¿½ï¿½ï¿½ */		
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 }CONFIG_THRESHOLD_STR;
     
 
 
 typedef struct ConfigAttendance 
 {
-    int iRecordsPerPage;        /* Ã¿Ò³ÏÔÊ¾µÄ¼ÇÂ¼Êı */
-    int iTimeDay;               /* ÈÕÆÚ·Ö¸ôÊ±¼äµã £¬´ËÊ±¼äÖ®Ç°ÊÓÎªÍ·Ò»Ìì£¬·ñÔòÊÓÎªµ±Ìì */
-    int iTimeLate;              /* ÉÏ°àÍíµ½³¬¹ı´ËÊ±¼äÊÓÎªÎ´´ò¿¨ */
-    int iTimeEarlyLeave;        /* ÏÂ°àÔçÍË³¬¹ı´ËÊ±¼äÊÓÎªÎ´´ò¿¨ */
-    int iTimeUp1;               /* ÉÏÎçÉÏ°àÊ±¼ä */
-    int iTimeDown1;             /* ÉÏÎçÏÂ°àÊ±¼ä */
-    int iTimeUp2;               /* ÏÂÎçÉÏ°àÊ±¼ä */
-    int iTimeDown2;             /* ÏÂÎçÏÂ°àÊ±¼ä */
-    int iTimeUp3;               /* ÍíÉÏÉÏ°àÊ±¼ä */
-    int iTimeDown3;             /* ÍíÉÏÏÂ°àÊ±¼ä */
-    int iTimeUp4;               /* ±£Áô */
-    int iTimeDown4;             /* ±£Áô */
-    int iTimeOverTime;          /* ´ËÊ±¼äÖ®ºóÏÂ°à²ÅÊÓÎª¼Ó°à */
-    int iTimeLateGrace;       /* ³Ùµ½¿íÏŞ·ÖÖÓÊı */
-    int iTimeEarlyLeaveGrace; /* ÔçÍË¿íÏŞ·ÖÖÓÊı */
-    int iTimeNoon;              /* ÖĞÎç·Ö¸ôµã£¬Çø·ÖÉÏÎçÏÂ°à»¹ÊÇÏÂÎçÉÏ°à */
-    int iTimeEvening;           /* ÍíÉÏ·Ö¸ôµã£¬Çø·ÖÏÂÎçÏÂ°à»¹ÊÇÍíÉÏÉÏ°à */
+<<<<<<< HEAD
+    int iRecordsPerPage;        /* æ¯é¡µæ˜¾ç¤ºçš„è®°å½•æ•° */
+    int iTimeDay;               /* æ—¥æœŸåˆ†éš”æ—¶é—´ç‚¹ ï¼Œæ­¤æ—¶é—´ä¹‹å‰è§†ä¸ºå¤´ä¸€å¤©ï¼Œå¦åˆ™è§†ä¸ºå½“å¤© */
+    int iTimeLate;              /* ä¸Šç­æ™šåˆ°è¶…è¿‡æ­¤æ—¶é—´è§†ä¸ºæœªæ‰“å¡ */
+    int iTimeEarlyLeave;        /* ä¸‹ç­æ—©é€€è¶…è¿‡æ­¤æ—¶é—´è§†ä¸ºæœªæ‰“å¡ */
+    int iTimeUp1;               /* ä¸Šåˆä¸Šç­æ—¶é—´ */
+    int iTimeDown1;             /* ä¸Šåˆä¸‹ç­æ—¶é—´ */
+    int iTimeUp2;               /* ä¸‹åˆä¸Šç­æ—¶é—´ */
+    int iTimeDown2;             /* ä¸‹åˆä¸‹ç­æ—¶é—´ */
+    int iTimeUp3;               /* æ™šä¸Šä¸Šç­æ—¶é—´ */
+    int iTimeDown3;             /* æ™šä¸Šä¸‹ç­æ—¶é—´ */
+    int iTimeUp4;               /* ä¿ç•™ */
+    int iTimeDown4;             /* ä¿ç•™ */
+    int iTimeOverTime;          /* æ­¤æ—¶é—´ä¹‹åä¸‹ç­æ‰è§†ä¸ºåŠ ç­ */
+    int iTimeLateGrace;       /* è¿Ÿåˆ°å®½é™åˆ†é’Ÿæ•° */
+    int iTimeEarlyLeaveGrace; /* æ—©é€€å®½é™åˆ†é’Ÿæ•° */
+    int iTimeNoon;              /* ä¸­åˆåˆ†éš”ç‚¹ï¼ŒåŒºåˆ†ä¸Šåˆä¸‹ç­è¿˜æ˜¯ä¸‹åˆä¸Šç­ */
+    int iTimeEvening;           /* æ™šä¸Šåˆ†éš”ç‚¹ï¼ŒåŒºåˆ†ä¸‹åˆä¸‹ç­è¿˜æ˜¯æ™šä¸Šä¸Šç­ */
+=======
+    int iRecordsPerPage;        /* Ã¿Ò³ï¿½ï¿½Ê¾ï¿½Ä¼ï¿½Â¼ï¿½ï¿½ */
+    int iTimeDay;               /* ï¿½ï¿½ï¿½Ú·Ö¸ï¿½Ê±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Ö®Ç°ï¿½ï¿½ÎªÍ·Ò»ï¿½ì£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ */
+    int iTimeLate;              /* ï¿½Ï°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ÎªÎ´ï¿½ï¿½ */
+    int iTimeEarlyLeave;        /* ï¿½Â°ï¿½ï¿½ï¿½ï¿½Ë³ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ÎªÎ´ï¿½ï¿½ */
+    int iTimeUp1;               /* ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½Ê±ï¿½ï¿½ */
+    int iTimeDown1;             /* ï¿½ï¿½ï¿½ï¿½ï¿½Â°ï¿½Ê±ï¿½ï¿½ */
+    int iTimeUp2;               /* ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½Ê±ï¿½ï¿½ */
+    int iTimeDown2;             /* ï¿½ï¿½ï¿½ï¿½ï¿½Â°ï¿½Ê±ï¿½ï¿½ */
+    int iTimeUp3;               /* ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½Ê±ï¿½ï¿½ */
+    int iTimeDown3;             /* ï¿½ï¿½ï¿½ï¿½ï¿½Â°ï¿½Ê±ï¿½ï¿½ */
+    int iTimeUp4;               /* ï¿½ï¿½ï¿½ï¿½ */
+    int iTimeDown4;             /* ï¿½ï¿½ï¿½ï¿½ */
+    int iTimeOverTime;          /* ï¿½ï¿½Ê±ï¿½ï¿½Ö®ï¿½ï¿½ï¿½Â°ï¿½ï¿½ï¿½ï¿½Îªï¿½Ó°ï¿½ */
+    int iTimeLateGrace;       /* ï¿½Ùµï¿½ï¿½ï¿½ï¿½Ş·ï¿½ï¿½ï¿½ï¿½ï¿½ */
+    int iTimeEarlyLeaveGrace; /* ï¿½ï¿½ï¿½Ë¿ï¿½ï¿½Ş·ï¿½ï¿½ï¿½ï¿½ï¿½ */
+    int iTimeNoon;              /* ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ã£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â°à»¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ */
+    int iTimeEvening;           /* ï¿½ï¿½ï¿½Ï·Ö¸ï¿½ï¿½ã£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â°à»¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ */
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 }CONFIG_ATTENDANCE_STR;
 
 typedef struct ConfigScreen
 {
-    unsigned char ucStatus;     /* ¸ÃÆÁ±£Ê¹ÄÜ×´Ì¬£¬0 - ½ûÖ¹£¬1 - ¿ªÆô */		
-    char caPicPath[256];        /* ÆÁ±£Í¼Æ¬Â·¾¶ */
+<<<<<<< HEAD
+    unsigned char ucStatus;     /* è¯¥å±ä¿ä½¿èƒ½çŠ¶æ€ï¼Œ0 - ç¦æ­¢ï¼Œ1 - å¼€å¯ */		
+    char caPicPath[256];        /* å±ä¿å›¾ç‰‡è·¯å¾„ */
+=======
+    unsigned char ucStatus;     /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½×´Ì¬ï¿½ï¿½0 - ï¿½ï¿½Ö¹ï¿½ï¿½1 - ï¿½ï¿½ï¿½ï¿½ */		
+    char caPicPath[256];        /* ï¿½ï¿½ï¿½ï¿½Í¼Æ¬Â·ï¿½ï¿½ */
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 }CONFIG_SCREEN_STR ;
 
 typedef struct ConfigOthers
 {
-    unsigned char ucRecogMode;          /* È«¾ÖÊ¶±ğÄ£Ê½£¬0,Ò»¶ÔÒ»;1,Ò»¶Ô¶à;2,Ë¢¿¨ */
-    unsigned char ucSense;              /* ÈËÌå¸ĞÓ¦ */
-    unsigned char ucDoorMode;           /* Î¤¸ùÊä³ö¸ñÊ½£¬1, WG26; 2, WG34 */
-    char caDoorCommand[16];             /* ¿ªÃÅÃüÁîĞ­Òé */ 
-    int iCommLen;                       /* ÃüÁî³¤¶È */
-    unsigned char ucAlarmShell;         /* Íâ¿Ç²ğĞ¶±¨¾¯£¬0-¹Ø£¬1-¿ª */
-    time_t  strLastGetAccessRecords;    /* ×îºó»ñÈ¡¿¼ÇÚ¼ÇÂ¼Ê±¼ä */
-    unsigned short usaRs485ControlCode[4];  /* 485¶ÔÂë´úÂë */  
-    unsigned char ucAccessCode;         /* ·ÃÎÊ·½Ê½  0, WGCODE; 1, CARD*/
-    int iDoorTime;                      /* 485¿ªÃÅÑÓÊ± */
+<<<<<<< HEAD
+    unsigned char ucRecogMode;          /* å…¨å±€è¯†åˆ«æ¨¡å¼ï¼Œ0,ä¸€å¯¹ä¸€;1,ä¸€å¯¹å¤š;2,åˆ·å¡ */
+    unsigned char ucSense;              /* äººä½“æ„Ÿåº” */
+    unsigned char ucDoorMode;           /* éŸ¦æ ¹è¾“å‡ºæ ¼å¼ï¼Œ1, WG26; 2, WG34 */
+    char caDoorCommand[16];             /* å¼€é—¨å‘½ä»¤åè®® */ 
+    int iCommLen;                       /* å‘½ä»¤é•¿åº¦ */
+    unsigned char ucAlarmShell;         /* å¤–å£³æ‹†å¸æŠ¥è­¦ï¼Œ0-å…³ï¼Œ1-å¼€ */
+    time_t  strLastGetAccessRecords;    /* æœ€åè·å–è€ƒå‹¤è®°å½•æ—¶é—´ */
+    unsigned short usaRs485ControlCode[4];  /* 485å¯¹ç ä»£ç  */  
+    unsigned char ucAccessCode;         /* è®¿é—®æ–¹å¼  0, WGCODE; 1, CARD*/
+    int iDoorTime;                      /* 485å¼€é—¨å»¶æ—¶ */
     unsigned short usaRs485ControlCodeEx[2];
-    int iIoDoorTime;                    /* ¿ªÃÅ³ÖĞøÊ±¼ä: µ¥Î»Ãë£¬·¶Î§ 1-15 */
-    char cFaceCatch;                    /* ÈËÁ³×¥ÅÄÑ¡Ïî*/
-    char cSenseThreshold;               /* ¸ĞÓ¦ÁéÃô¼¶±ğ */  
-    unsigned char ucMGInput;        /* ¿ª¹ØÃÅ´ÅÊäÈë£¬0 - ¹Ø±Õ£¬1 - ¿ªÆô */	
-    unsigned char ucMGDelayTime;    /* ÃÅ´Å¸æ¾¯ÑÓ³ÙÊ±¼ä: µ¥Î»Ãë£¬·¶Î§ 1-99 */   
-    unsigned char ucFireInput;      /* Ïû·ÀÊäÈë£¬0 - ¹Ø±Õ£¬1 - ¿ªÆô */	
-    unsigned char ucIODoorOutPut;   /* ¿ª¹ØÁ¿Êä³ö£¬0 - ¹Ø±Õ£¬1 - ¿ªÆô */
-    unsigned char ucAudioOutPut;    /* ±¨¾¯Êä³ö£¬0 - ¹Ø±Õ£¬1 - ¿ªÆô */
-    unsigned char ucSyncMode;       /* Í¬²½·½Ê½£¬0 - ÊÖ¶¯£¬1 - ×Ô¶¯ */
-    unsigned char ucTimeMode;       /* Ê±¼äÏÔÊ¾·½Ê½£¬
+    int iIoDoorTime;                    /* å¼€é—¨æŒç»­æ—¶é—´: å•ä½ç§’ï¼ŒèŒƒå›´ 1-15 */
+    char cFaceCatch;                    /* äººè„¸æŠ“æ‹é€‰é¡¹*/
+    char cSenseThreshold;               /* æ„Ÿåº”çµæ•çº§åˆ« */  
+    unsigned char ucMGInput;        /* å¼€å…³é—¨ç£è¾“å…¥ï¼Œ0 - å…³é—­ï¼Œ1 - å¼€å¯ */	
+    unsigned char ucMGDelayTime;    /* é—¨ç£å‘Šè­¦å»¶è¿Ÿæ—¶é—´: å•ä½ç§’ï¼ŒèŒƒå›´ 1-99 */   
+    unsigned char ucFireInput;      /* æ¶ˆé˜²è¾“å…¥ï¼Œ0 - å…³é—­ï¼Œ1 - å¼€å¯ */	
+    unsigned char ucIODoorOutPut;   /* å¼€å…³é‡è¾“å‡ºï¼Œ0 - å…³é—­ï¼Œ1 - å¼€å¯ */
+    unsigned char ucAudioOutPut;    /* æŠ¥è­¦è¾“å‡ºï¼Œ0 - å…³é—­ï¼Œ1 - å¼€å¯ */
+    unsigned char ucSyncMode;       /* åŒæ­¥æ–¹å¼ï¼Œ0 - æ‰‹åŠ¨ï¼Œ1 - è‡ªåŠ¨ */
+    unsigned char ucTimeMode;       /* æ—¶é—´æ˜¾ç¤ºæ–¹å¼ï¼Œ
                                         0.YY-MM-DD, 1.YY/MM/DD, 2.MM-DD-YY
                                         3.MM/DD/YY, 4.DD-MM-YY, 5.DD/MM/YY */
-    struct ConfigScreen Screensaver[MAX_SCREEN_NUM];     /* ÆÁ±£Í¼Æ¬Â·¾¶ */
-    unsigned char ucCurScreensaverIndex;    /* µ±Ç°±£ÓÃÆÁ±£ÏÂ±ê */
+    struct ConfigScreen Screensaver[MAX_SCREEN_NUM];     /* å±ä¿å›¾ç‰‡è·¯å¾„ */
+    unsigned char ucCurScreensaverIndex;    /* å½“å‰ä¿ç”¨å±ä¿ä¸‹æ ‡ */
 
-	char caPhoneNum[12];					/* ÊÖ»úºÅÂë */
+	char caPhoneNum[12];					/* æ‰‹æœºå·ç  */
+=======
+    unsigned char ucRecogMode;          /* È«ï¿½ï¿½Ê¶ï¿½ï¿½Ä£Ê½ï¿½ï¿½0,Ò»ï¿½ï¿½Ò»;1,Ò»ï¿½Ô¶ï¿½;2,Ë¢ï¿½ï¿½ */
+    unsigned char ucSense;              /* ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ */
+    unsigned char ucDoorMode;           /* Î¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½1, WG26; 2, WG34 */
+    char caDoorCommand[16];             /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ­ï¿½ï¿½ */ 
+    int iCommLen;                       /* ï¿½ï¿½ï¿½î³¤ï¿½ï¿½ */
+    unsigned char ucAlarmShell;         /* ï¿½ï¿½Ç²ï¿½Ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0-ï¿½Ø£ï¿½1-ï¿½ï¿½ */
+    time_t  strLastGetAccessRecords;    /* ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ú¼ï¿½Â¼Ê±ï¿½ï¿½ */
+    unsigned short usaRs485ControlCode[4];  /* 485ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */  
+    unsigned char ucAccessCode;         /* ï¿½ï¿½ï¿½Ê·ï¿½Ê½  0, WGCODE; 1, CARD*/
+    int iDoorTime;                      /* 485ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê± */
+    unsigned short usaRs485ControlCodeEx[2];
+    int iIoDoorTime;                    /* ï¿½ï¿½ï¿½Å³ï¿½ï¿½ï¿½Ê±ï¿½ï¿½: ï¿½ï¿½Î»ï¿½ë£¬ï¿½ï¿½Î§ 1-15 */
+    char cFaceCatch;                    /* ï¿½ï¿½ï¿½ï¿½×¥ï¿½ï¿½Ñ¡ï¿½ï¿½*/
+    char cSenseThreshold;               /* ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */  
+    unsigned char ucMGInput;        /* ï¿½ï¿½ï¿½ï¿½ï¿½Å´ï¿½ï¿½ï¿½ï¿½ë£¬0 - ï¿½Ø±Õ£ï¿½1 - ï¿½ï¿½ï¿½ï¿½ */	
+    unsigned char ucMGDelayTime;    /* ï¿½Å´Å¸æ¾¯ï¿½Ó³ï¿½Ê±ï¿½ï¿½: ï¿½ï¿½Î»ï¿½ë£¬ï¿½ï¿½Î§ 1-99 */   
+    unsigned char ucFireInput;      /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë£¬0 - ï¿½Ø±Õ£ï¿½1 - ï¿½ï¿½ï¿½ï¿½ */	
+    unsigned char ucIODoorOutPut;   /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0 - ï¿½Ø±Õ£ï¿½1 - ï¿½ï¿½ï¿½ï¿½ */
+    unsigned char ucAudioOutPut;    /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0 - ï¿½Ø±Õ£ï¿½1 - ï¿½ï¿½ï¿½ï¿½ */
+    unsigned char ucSyncMode;       /* Í¬ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½0 - ï¿½Ö¶ï¿½ï¿½ï¿½1 - ï¿½Ô¶ï¿½ */
+    unsigned char ucTimeMode;       /* Ê±ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ê½ï¿½ï¿½
+                                        0.YY-MM-DD, 1.YY/MM/DD, 2.MM-DD-YY
+                                        3.MM/DD/YY, 4.DD-MM-YY, 5.DD/MM/YY */
+    struct ConfigScreen Screensaver[MAX_SCREEN_NUM];     /* ï¿½ï¿½ï¿½ï¿½Í¼Æ¬Â·ï¿½ï¿½ */
+    unsigned char ucCurScreensaverIndex;    /* ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â±ï¿½ */
+
+	char caPhoneNum[12];					/* ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ */
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 } CONFIG_OTHERS_STR;
 
 typedef struct ConfigAudIo 
 {
-    int iVolMic;                        /* ÂóÒôÁ¿ */
-    int iVolSpeaker;                    /* ÉùÒôÒôÁ¿ ¾²Òô 0 µÍ 1 ÖĞ 2 ¸ß 3 */
-    unsigned char ucMute;               /* °´¼ü¾²Òô±êÖ¾£¬0-·¢Éù£¬1-¾²Òô */
-    unsigned char ucMuteVoice;          /* ÓïÒô¾²Òô±êÖ¾£¬0-·¢Éù£¬1-¾²Òô */
-    unsigned char ucVoiceLang;          /* ·¢ÒôÓïÑÔ 0-english, 1-¼òÌåÖĞÎÄ£¬2-·±ÌåÖĞÎÄ(hk), 2-·±ÌåÖĞÎÄ(tw)*/
+<<<<<<< HEAD
+    int iVolMic;                        /* éº¦éŸ³é‡ */
+    int iVolSpeaker;                    /* å£°éŸ³éŸ³é‡ é™éŸ³ 0 ä½ 1 ä¸­ 2 é«˜ 3 */
+    unsigned char ucMute;               /* æŒ‰é”®é™éŸ³æ ‡å¿—ï¼Œ0-å‘å£°ï¼Œ1-é™éŸ³ */
+    unsigned char ucMuteVoice;          /* è¯­éŸ³é™éŸ³æ ‡å¿—ï¼Œ0-å‘å£°ï¼Œ1-é™éŸ³ */
+    unsigned char ucVoiceLang;          /* å‘éŸ³è¯­è¨€ 0-english, 1-ç®€ä½“ä¸­æ–‡ï¼Œ2-ç¹ä½“ä¸­æ–‡(hk), 2-ç¹ä½“ä¸­æ–‡(tw)*/
+=======
+    int iVolMic;                        /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+    int iVolSpeaker;                    /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 0 ï¿½ï¿½ 1 ï¿½ï¿½ 2 ï¿½ï¿½ 3 */
+    unsigned char ucMute;               /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½0-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1-ï¿½ï¿½ï¿½ï¿½ */
+    unsigned char ucMuteVoice;          /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½0-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1-ï¿½ï¿½ï¿½ï¿½ */
+    unsigned char ucVoiceLang;          /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0-english, 1-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½2-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(hk), 2-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(tw)*/
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 }CONFIG_AUDIO_STR;
 
 typedef	struct ConfigVideo 
 {
-    int iaBright[4];  /* ºÚ°×ÉãÏñÍ·²ÎÊı */
+<<<<<<< HEAD
+    int iaBright[4];  /* é»‘ç™½æ‘„åƒå¤´å‚æ•° */
+=======
+    int iaBright[4];  /* ï¿½Ú°ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½ */
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
     int iaContrast[4];
     int iaHue[4];
     int iaExposure[4]; 
@@ -202,654 +313,1241 @@ typedef struct ConfigReason
 
 typedef	struct ConfigLoginReason 
 {
-    unsigned char ucActive;         /* ¹¦ÄÜÊ¹ÄÜ */
-    unsigned char ucRecogMode[10]; /* 10¸ö¹¦ÄÜ¼ü¶ÔÓ¦µÄÊ¶±ğÄ£Ê½£¬0,Ò»¶ÔÒ»;1,Ò»¶Ô¶à;2, Ë¢¿¨ */
+<<<<<<< HEAD
+    unsigned char ucActive;         /* åŠŸèƒ½ä½¿èƒ½ */
+    unsigned char ucRecogMode[10]; /* 10ä¸ªåŠŸèƒ½é”®å¯¹åº”çš„è¯†åˆ«æ¨¡å¼ï¼Œ0,ä¸€å¯¹ä¸€;1,ä¸€å¯¹å¤š;2, åˆ·å¡ */
+=======
+    unsigned char ucActive;         /* ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ */
+    unsigned char ucRecogMode[10]; /* 10ï¿½ï¿½ï¿½ï¿½ï¿½Ü¼ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½Ê¶ï¿½ï¿½Ä£Ê½ï¿½ï¿½0,Ò»ï¿½ï¿½Ò»;1,Ò»ï¿½Ô¶ï¿½;2, Ë¢ï¿½ï¿½ */
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
     struct ConfigReason Reason[10];
 }CONFIG_LOGINREASON_STR;
 
 typedef	struct ConfigGroupAttr
 {
-    int iGroupId;        /* ×éID */
+<<<<<<< HEAD
+    int iGroupId;        /* ç»„ID */
     int iNumPrefix;     
     char caEquipPwd[32+1];
     unsigned char ucAttr; /*normal--0,disable--1,in--2,out--2*/
-    unsigned char ucType; /*0,¿ªÃÅ¶Ë; 1,¿ØÖÆ¶Ë*/
+    unsigned char ucType; /*0,å¼€é—¨ç«¯; 1,æ§åˆ¶ç«¯*/
+=======
+    int iGroupId;        /* ï¿½ï¿½ID */
+    int iNumPrefix;     
+    char caEquipPwd[32+1];
+    unsigned char ucAttr; /*normal--0,disable--1,in--2,out--2*/
+    unsigned char ucType; /*0,ï¿½ï¿½ï¿½Å¶ï¿½; 1,ï¿½ï¿½ï¿½Æ¶ï¿½*/
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
     char caEquipName[64+1];
     int iEquipId;
 }CONFIG_GROUPATTR_STR;
 
 typedef	struct ConfigAutoOnOff  
 {
-	char cHolidayOff;        /* ½Ú¼ÙÈÕ×Ô¶¯¹Ø»ú */
-	char cTimerOff;          /* ¶¨Ê±¿ª¹Ø»ú */
-	unsigned int auiOffTime[4];   /* ¹Ø»úÊ±¼ä */
-	unsigned int auiOnTime[4];    /* ¿ª»úÊ±¼ä */
-	char caForceOnPwd[16];    /* Ç¿ÖÆ¿ª»úÃÜÂë */
+<<<<<<< HEAD
+	char cHolidayOff;        /* èŠ‚å‡æ—¥è‡ªåŠ¨å…³æœº */
+	char cTimerOff;          /* å®šæ—¶å¼€å…³æœº */
+	unsigned int auiOffTime[4];   /* å…³æœºæ—¶é—´ */
+	unsigned int auiOnTime[4];    /* å¼€æœºæ—¶é—´ */
+	char caForceOnPwd[16];    /* å¼ºåˆ¶å¼€æœºå¯†ç  */
+=======
+	char cHolidayOff;        /* ï¿½Ú¼ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½Ø»ï¿½ */
+	char cTimerOff;          /* ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ø»ï¿½ */
+	unsigned int auiOffTime[4];   /* ï¿½Ø»ï¿½Ê±ï¿½ï¿½ */
+	unsigned int auiOnTime[4];    /* ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ */
+	char caForceOnPwd[16];    /* Ç¿ï¿½Æ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 }CONFIG_AUTO_ON_OFF_STR;
 
 typedef struct Ring
 {
-    unsigned char ucStatus;   /* ¸ÃÌõÏìÁåµÄÊ¹ÄÜ×´Ì¬£¬0 - ½ûÖ¹£¬1 - ¿ªÆô */		
+<<<<<<< HEAD
+    unsigned char ucStatus;   /* è¯¥æ¡å“é“ƒçš„ä½¿èƒ½çŠ¶æ€ï¼Œ0 - ç¦æ­¢ï¼Œ1 - å¼€å¯ */		
+    unsigned char ucHour;     /* å°æ—¶ */
+    unsigned char ucMinute;   /* åˆ†é’Ÿ */
+    unsigned char ucTimes;    /* æ’­æ”¾æ¬¡æ•° */
+    unsigned char ucIndex;    /* é“ƒå£°åºå· */
+    unsigned char ucaWeekday[7]; /* å‘¨ä¸€è‡³å‘¨æ—¥çš„ä½¿èƒ½çŠ¶æ€ï¼Œ0 - ç¦æ­¢ï¼Œ1 - å¼€å¯ */
+=======
+    unsigned char ucStatus;   /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½×´Ì¬ï¿½ï¿½0 - ï¿½ï¿½Ö¹ï¿½ï¿½1 - ï¿½ï¿½ï¿½ï¿½ */		
     unsigned char ucHour;     /* Ğ¡Ê± */
-    unsigned char ucMinute;   /* ·ÖÖÓ */
-    unsigned char ucTimes;    /* ²¥·Å´ÎÊı */
-    unsigned char ucIndex;    /* ÁåÉùĞòºÅ */
-    unsigned char ucaWeekday[7]; /* ÖÜÒ»ÖÁÖÜÈÕµÄÊ¹ÄÜ×´Ì¬£¬0 - ½ûÖ¹£¬1 - ¿ªÆô */
+    unsigned char ucMinute;   /* ï¿½ï¿½ï¿½ï¿½ */
+    unsigned char ucTimes;    /* ï¿½ï¿½ï¿½Å´ï¿½ï¿½ï¿½ */
+    unsigned char ucIndex;    /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+    unsigned char ucaWeekday[7]; /* ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½Ê¹ï¿½ï¿½×´Ì¬ï¿½ï¿½0 - ï¿½ï¿½Ö¹ï¿½ï¿½1 - ï¿½ï¿½ï¿½ï¿½ */
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 }RING_STR;
 
 typedef struct ConfigRing
 {
     struct Ring Ring[10];
-	unsigned int ulDuringTimes;		/* Ã¿´ÎÏìÁå³ÖĞø´ÎÊı */
+<<<<<<< HEAD
+	unsigned int ulDuringTimes;		/* æ¯æ¬¡å“é“ƒæŒç»­æ¬¡æ•° */
+=======
+	unsigned int ulDuringTimes;		/* Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 }CONFIG_RING_STR;
 
 #define MAX_HOLIDAY_NUM 24
 typedef struct Holiday
 {
-    unsigned char ucStatus;   /* Ê¹ÄÜ×´Ì¬£¬0 - ½ûÖ¹£¬1 - ¿ªÆô */		
-    char caName[33];          /* ½ÚÈÕÃû³Æ */
-    int iStartTime;           /* ¿ªÊ¼Ê±¼ä ¸ñÊ½ 20120501 */
-    int iEndTime;             /* ½áÊøÊ±¼ä ¸ñÊ½ 20120505 */
+<<<<<<< HEAD
+    unsigned char ucStatus;   /* ä½¿èƒ½çŠ¶æ€ï¼Œ0 - ç¦æ­¢ï¼Œ1 - å¼€å¯ */		
+    char caName[33];          /* èŠ‚æ—¥åç§° */
+    int iStartTime;           /* å¼€å§‹æ—¶é—´ æ ¼å¼ 20120501 */
+    int iEndTime;             /* ç»“æŸæ—¶é—´ æ ¼å¼ 20120505 */
+=======
+    unsigned char ucStatus;   /* Ê¹ï¿½ï¿½×´Ì¬ï¿½ï¿½0 - ï¿½ï¿½Ö¹ï¿½ï¿½1 - ï¿½ï¿½ï¿½ï¿½ */		
+    char caName[33];          /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+    int iStartTime;           /* ï¿½ï¿½Ê¼Ê±ï¿½ï¿½ ï¿½ï¿½Ê½ 20120501 */
+    int iEndTime;             /* ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ ï¿½ï¿½Ê½ 20120505 */
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 }HOLIDAY_STR;
 
 typedef struct ConfigHoliday
 {
-    unsigned char ucaWeekday[7]; /* ÖÜÒ»ÖÁÖÜÈÕµÄÊ¹ÄÜ×´Ì¬£¬0 - ½ûÖ¹£¬1 - ¿ªÆô */
+<<<<<<< HEAD
+    unsigned char ucaWeekday[7]; /* å‘¨ä¸€è‡³å‘¨æ—¥çš„ä½¿èƒ½çŠ¶æ€ï¼Œ0 - ç¦æ­¢ï¼Œ1 - å¼€å¯ */
+=======
+    unsigned char ucaWeekday[7]; /* ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½Ê¹ï¿½ï¿½×´Ì¬ï¿½ï¿½0 - ï¿½ï¿½Ö¹ï¿½ï¿½1 - ï¿½ï¿½ï¿½ï¿½ */
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
     struct Holiday Holiday[MAX_HOLIDAY_NUM];
 }CONFIG_HOLIDAY_STR;
 
 typedef	struct ConfigWiegand   
 {
-	int iBitWidth;              /* Î¤¸ùÊäÈëµÄÎ»¿í */
-	short sImpulseWidth;        /* Î¤¸ùÊäÈëµÄÂö³å¿í¶È ·¶Î§20¡«800us£¬ Ä¬ÈÏ100us */
-	short sImpulseInterval;     /* Î¤¸ùÊäÈëµÄÂö³å¼ä¸ô  ·¶Î§200-20000us  Ä¬ÈÏ900us */
-	char cOutPutMode;           /* Î¤¸ùÊä³öµÄ¸ñÊ½ 0£º²»´æÔÚ 1:´øÉè±¸ºÅµÄÎ¤¸ù26  2:²»´øÉè±¸ºÅµÄÎ¤¸ù26  3:´øÉè±¸ºÅµÄÎ¤¸ù34  4:²»´øÉè±¸ºÅµÄÎ¤¸ù34 */
-	unsigned char ucDevId;      /* Éè±¸ºÅ ·¶Î§0-255 */
-	short sImpulseWidthout;     /* Î¤¸ùÊä³öµÄÂö³å¿í¶È  ·¶Î§20¡«800us£¬ Ä¬ÈÏ100us */
-	short sImpulseIntervalout;  /* Î¤¸ùÊä³öµÄÂö³å¼ä¸ô  ·¶Î§200-20000us  Ä¬ÈÏ900us */
-	char cCardParse;            /* ¿¨ºÅ½âÎö  0£ºWG34   1£ºWG26   2£ºABA-10   3£ºABA-8   4£ºABA-5   Ä¬ÈÏÎªWG34 */
-	char cOutPutFormat;         /* Î¤¸ùÊä³öÄÚÈİ£¬0-¹¤ºÅ£¬1-¿¨ºÅ */
-	char caOoutPutContent[16];   /* Ñ¡Ôñ¹Ì¶¨ÄÚÈİÊ±£¬ ÒªÌîĞ´¸Ã×Ö¶Î  */
-	unsigned short cErrorId;    /* Ê§°Üid  ·¶Î§£º0-65534  µ±Ñ¡Ôñ¹Ø±ÕÊ±²»Êä³ö¡£Ä¬ÈÏÎª¹Ø±Õ¡£ */
-	unsigned short usAreaCode;  /* ÇøÂë Î¤¸ù26 <= 254 Î¤¸ù34 <= 65534 */
+<<<<<<< HEAD
+	int iBitWidth;              /* éŸ¦æ ¹è¾“å…¥çš„ä½å®½ */
+	short sImpulseWidth;        /* éŸ¦æ ¹è¾“å…¥çš„è„‰å†²å®½åº¦ èŒƒå›´20ï½800usï¼Œ é»˜è®¤100us */
+	short sImpulseInterval;     /* éŸ¦æ ¹è¾“å…¥çš„è„‰å†²é—´éš”  èŒƒå›´200-20000us  é»˜è®¤900us */
+	char cOutPutMode;           /* éŸ¦æ ¹è¾“å‡ºçš„æ ¼å¼ 0ï¼šä¸å­˜åœ¨ 1:å¸¦è®¾å¤‡å·çš„éŸ¦æ ¹26  2:ä¸å¸¦è®¾å¤‡å·çš„éŸ¦æ ¹26  3:å¸¦è®¾å¤‡å·çš„éŸ¦æ ¹34  4:ä¸å¸¦è®¾å¤‡å·çš„éŸ¦æ ¹34 */
+	unsigned char ucDevId;      /* è®¾å¤‡å· èŒƒå›´0-255 */
+	short sImpulseWidthout;     /* éŸ¦æ ¹è¾“å‡ºçš„è„‰å†²å®½åº¦  èŒƒå›´20ï½800usï¼Œ é»˜è®¤100us */
+	short sImpulseIntervalout;  /* éŸ¦æ ¹è¾“å‡ºçš„è„‰å†²é—´éš”  èŒƒå›´200-20000us  é»˜è®¤900us */
+	char cCardParse;            /* å¡å·è§£æ  0ï¼šWG34   1ï¼šWG26   2ï¼šABA-10   3ï¼šABA-8   4ï¼šABA-5   é»˜è®¤ä¸ºWG34 */
+	char cOutPutFormat;         /* éŸ¦æ ¹è¾“å‡ºå†…å®¹ï¼Œ0-å·¥å·ï¼Œ1-å¡å· */
+	char caOoutPutContent[16];   /* é€‰æ‹©å›ºå®šå†…å®¹æ—¶ï¼Œ è¦å¡«å†™è¯¥å­—æ®µ  */
+	unsigned short cErrorId;    /* å¤±è´¥id  èŒƒå›´ï¼š0-65534  å½“é€‰æ‹©å…³é—­æ—¶ä¸è¾“å‡ºã€‚é»˜è®¤ä¸ºå…³é—­ã€‚ */
+	unsigned short usAreaCode;  /* åŒºç  éŸ¦æ ¹26 <= 254 éŸ¦æ ¹34 <= 65534 */
 }CONFIG_WIEGAND_STR;
 
-/* Í¬²½ÅäÖÃ */
+/* åŒæ­¥é…ç½® */
 typedef struct ConfigSync
 {
-	char caIp[16];              /* Í¬²½¹¦ÄÜµÄ×éIPµØÖ· */
-	char caPwd[10];				/* Í¬²½¹¦ÄÜµÄÃÜÂë*/
-	unsigned char ucSwitch;		/* Í¬²½: 0 ¹Ø ; 1 ¿ª */
+	char caIp[16];              /* åŒæ­¥åŠŸèƒ½çš„ç»„IPåœ°å€ */
+	char caPwd[10];				/* åŒæ­¥åŠŸèƒ½çš„å¯†ç */
+	unsigned char ucSwitch;		/* åŒæ­¥: 0 å…³ ; 1 å¼€ */
+=======
+	int iBitWidth;              /* Î¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ */
+	short sImpulseWidth;        /* Î¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î§20ï¿½ï¿½800usï¿½ï¿½ Ä¬ï¿½ï¿½100us */
+	short sImpulseInterval;     /* Î¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½Î§200-20000us  Ä¬ï¿½ï¿½900us */
+	char cOutPutMode;           /* Î¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½Ê½ 0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1:ï¿½ï¿½ï¿½è±¸ï¿½Åµï¿½Î¤ï¿½ï¿½26  2:ï¿½ï¿½ï¿½ï¿½ï¿½è±¸ï¿½Åµï¿½Î¤ï¿½ï¿½26  3:ï¿½ï¿½ï¿½è±¸ï¿½Åµï¿½Î¤ï¿½ï¿½34  4:ï¿½ï¿½ï¿½ï¿½ï¿½è±¸ï¿½Åµï¿½Î¤ï¿½ï¿½34 */
+	unsigned char ucDevId;      /* ï¿½è±¸ï¿½ï¿½ ï¿½ï¿½Î§0-255 */
+	short sImpulseWidthout;     /* Î¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½Î§20ï¿½ï¿½800usï¿½ï¿½ Ä¬ï¿½ï¿½100us */
+	short sImpulseIntervalout;  /* Î¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½Î§200-20000us  Ä¬ï¿½ï¿½900us */
+	char cCardParse;            /* ï¿½ï¿½ï¿½Å½ï¿½ï¿½ï¿½  0ï¿½ï¿½WG34   1ï¿½ï¿½WG26   2ï¿½ï¿½ABA-10   3ï¿½ï¿½ABA-8   4ï¿½ï¿½ABA-5   Ä¬ï¿½ï¿½ÎªWG34 */
+	char cOutPutFormat;         /* Î¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ£ï¿½0-ï¿½ï¿½ï¿½Å£ï¿½1-ï¿½ï¿½ï¿½ï¿½ */
+	char caOoutPutContent[16];   /* Ñ¡ï¿½ï¿½Ì¶ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ Òªï¿½ï¿½Ğ´ï¿½ï¿½ï¿½Ö¶ï¿½  */
+	unsigned short cErrorId;    /* Ê§ï¿½ï¿½id  ï¿½ï¿½Î§ï¿½ï¿½0-65534  ï¿½ï¿½Ñ¡ï¿½ï¿½Ø±ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Îªï¿½Ø±Õ¡ï¿½ */
+	unsigned short usAreaCode;  /* ï¿½ï¿½ï¿½ï¿½ Î¤ï¿½ï¿½26 <= 254 Î¤ï¿½ï¿½34 <= 65534 */
+}CONFIG_WIEGAND_STR;
+
+/* Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+typedef struct ConfigSync
+{
+	char caIp[16];              /* Í¬ï¿½ï¿½ï¿½ï¿½ï¿½Üµï¿½ï¿½ï¿½IPï¿½ï¿½Ö· */
+	char caPwd[10];				/* Í¬ï¿½ï¿½ï¿½ï¿½ï¿½Üµï¿½ï¿½ï¿½ï¿½ï¿½*/
+	unsigned char ucSwitch;		/* Í¬ï¿½ï¿½: 0 ï¿½ï¿½ ; 1 ï¿½ï¿½ */
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 }CONFIG_SYNC_STR;	
 
 
 
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º GetConfigBase
-** ¹¦ÄÜ£º »ñÈ¡»ù±¾ÅäÖÃ
-** ²ÎÊı£º pstrConfigBase Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-06-21
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š GetConfigBase
+** åŠŸèƒ½ï¼š è·å–åŸºæœ¬é…ç½®
+** å‚æ•°ï¼š pstrConfigBase æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-06-21
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ GetConfigBase
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigBase Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-06-21
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void GetConfigBase(CONFIG_BASE_STR *pstrConfigBase);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º GetConfigNetWork
-** ¹¦ÄÜ£º »ñÈ¡ÍøÂçÅäÖÃ
-** ²ÎÊı£º pstrConfigNetwork Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-06-21
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š GetConfigNetWork
+** åŠŸèƒ½ï¼š è·å–ç½‘ç»œé…ç½®
+** å‚æ•°ï¼š pstrConfigNetwork æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-06-21
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ GetConfigNetWork
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigNetwork Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-06-21
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void GetConfigNetWork(CONFIG_NETWORK_STR *pstrConfigNetwork);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º GetConfigThreshold
-** ¹¦ÄÜ£º »ñÈ¡À«ÖµÅäÖÃ
-** ²ÎÊı£º pstrConfigThreshold Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-06-21
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š GetConfigThreshold
+** åŠŸèƒ½ï¼š è·å–é˜”å€¼é…ç½®
+** å‚æ•°ï¼š pstrConfigThreshold æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-06-21
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ GetConfigThreshold
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½È¡ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigThreshold Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-06-21
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void GetConfigThreshold(CONFIG_THRESHOLD_STR *pstrConfigThreshold);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º GetConfigSecurity
-** ¹¦ÄÜ£º »ñÈ¡°²È«ÅäÖÃ
-** ²ÎÊı£º pstrConfigSecurity Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-06-21
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š GetConfigSecurity
+** åŠŸèƒ½ï¼š è·å–å®‰å…¨é…ç½®
+** å‚æ•°ï¼š pstrConfigSecurity æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-06-21
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ GetConfigSecurity
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½È¡ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigSecurity Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-06-21
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void GetConfigSecurity(CONFIG_SECURITY_STR *pstrConfigSecurity);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º GetConfigAttendance
-** ¹¦ÄÜ£º »ñÈ¡¿¼ÇÚÅäÖÃ
-** ²ÎÊı£º pstrConfigAttendance Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-06-21
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š GetConfigAttendance
+** åŠŸèƒ½ï¼š è·å–è€ƒå‹¤é…ç½®
+** å‚æ•°ï¼š pstrConfigAttendance æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-06-21
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ GetConfigAttendance
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigAttendance Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-06-21
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void GetConfigAttendance(CONFIG_ATTENDANCE_STR *pstrConfigAttendance);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º GetConfigOthers
-** ¹¦ÄÜ£º »ñÈ¡ÆäËüÅäÖÃ
-** ²ÎÊı£º pstrConfigOthers Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-06-21
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š GetConfigOthers
+** åŠŸèƒ½ï¼š è·å–å…¶å®ƒé…ç½®
+** å‚æ•°ï¼š pstrConfigOthers æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-06-21
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ GetConfigOthers
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigOthers Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-06-21
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void GetConfigOthers(CONFIG_OTHERS_STR *pstrConfigOthers);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º GetConfigAudIo
-** ¹¦ÄÜ£º »ñÈ¡ÉùÒôÅäÖÃ
-** ²ÎÊı£º pstrConfigAudio Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-06-21
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š GetConfigAudIo
+** åŠŸèƒ½ï¼š è·å–å£°éŸ³é…ç½®
+** å‚æ•°ï¼š pstrConfigAudio æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-06-21
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ GetConfigAudIo
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigAudio Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-06-21
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void GetConfigAudIo(CONFIG_AUDIO_STR *pstrConfigAudio);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º GetConfigVideo
-** ¹¦ÄÜ£º »ñÈ¡ÉãÏñ»úÅäÖÃ
-** ²ÎÊı£º pstrConfigVideo Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-06-21
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š GetConfigVideo
+** åŠŸèƒ½ï¼š è·å–æ‘„åƒæœºé…ç½®
+** å‚æ•°ï¼š pstrConfigVideo æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-06-21
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ GetConfigVideo
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigVideo Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-06-21
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void GetConfigVideo(CONFIG_VIDEO_STR *pstrConfigVideo);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º GetConfigLoginReason
-** ¹¦ÄÜ£º »ñÈ¡¹¦ÄÜ¼üÅäÖÃ
-** ²ÎÊı£º pstrConfigLoginReason Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-06-21
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š GetConfigLoginReason
+** åŠŸèƒ½ï¼š è·å–åŠŸèƒ½é”®é…ç½®
+** å‚æ•°ï¼š pstrConfigLoginReason æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-06-21
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ GetConfigLoginReason
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ü¼ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigLoginReason Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-06-21
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void GetConfigLoginReason(CONFIG_LOGINREASON_STR *pstrConfigLoginReason);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º GetConfigGroupAttr
-** ¹¦ÄÜ£º »ñÈ¡×éÅäÖÃ
-** ²ÎÊı£º pstrConfigGroupAttr Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-06-21
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š GetConfigGroupAttr
+** åŠŸèƒ½ï¼š è·å–ç»„é…ç½®
+** å‚æ•°ï¼š pstrConfigGroupAttr æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-06-21
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ GetConfigGroupAttr
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigGroupAttr Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-06-21
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void GetConfigGroupAttr(CONFIG_GROUPATTR_STR *pstrConfigGroupAttr);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º GetConfigAutoOnOff
-** ¹¦ÄÜ£º »ñÈ¡×Ô¶¯¿ª¹Ø»úÅäÖÃ
-** ²ÎÊı£º pstrConfigAutoOnOff Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-06-21
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š GetConfigAutoOnOff
+** åŠŸèƒ½ï¼š è·å–è‡ªåŠ¨å¼€å…³æœºé…ç½®
+** å‚æ•°ï¼š pstrConfigAutoOnOff æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-06-21
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ GetConfigAutoOnOff
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½È¡ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Ø»ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigAutoOnOff Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-06-21
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void GetConfigAutoOnOff(CONFIG_AUTO_ON_OFF_STR *pstrConfigAutoOnOff);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º GetConfigRing
-** ¹¦ÄÜ£º »ñÈ¡ÏìÁåÅäÖÃ
-** ²ÎÊı£º pstrConfigRing Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-06-21
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š GetConfigRing
+** åŠŸèƒ½ï¼š è·å–å“é“ƒé…ç½®
+** å‚æ•°ï¼š pstrConfigRing æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-06-21
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ GetConfigRing
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigRing Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-06-21
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void GetConfigRing(CONFIG_RING_STR *pstrConfigRing);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º GetConfigHoliday
-** ¹¦ÄÜ£º »ñÈ¡½Ú¼ÙÈÕÅäÖÃ
-** ²ÎÊı£º pstrConfigHoliday Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-07-06
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š GetConfigHoliday
+** åŠŸèƒ½ï¼š è·å–èŠ‚å‡æ—¥é…ç½®
+** å‚æ•°ï¼š pstrConfigHoliday æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-07-06
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ GetConfigHoliday
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½È¡ï¿½Ú¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigHoliday Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-07-06
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void GetConfigHoliday(CONFIG_HOLIDAY_STR *pstrConfigHoliday);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º GetConfigWiegand
-** ¹¦ÄÜ£º »ñÈ¡Î¤¸ùÅäÖÃ
-** ²ÎÊı£º pstrConfigWiegand Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-06-21
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š GetConfigWiegand
+** åŠŸèƒ½ï¼š è·å–éŸ¦æ ¹é…ç½®
+** å‚æ•°ï¼š pstrConfigWiegand æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-06-21
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
 \**************************************************************/
 void GetConfigWiegand(CONFIG_WIEGAND_STR *pstrConfigWiegand);
 /**************************************************************\
-** º¯ÊıÃû³Æ£º GetConfigSync
-** ¹¦ÄÜ£º »ñÈ¡Í¬²½¹¦ÄÜÅäÖÃ
-** ²ÎÊı£º pstrConfigSync Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-10-18
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+** å‡½æ•°åç§°ï¼š GetConfigSync
+** åŠŸèƒ½ï¼š è·å–åŒæ­¥åŠŸèƒ½é…ç½®
+** å‚æ•°ï¼š pstrConfigSync æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-10-18
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ GetConfigWiegand
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½È¡Î¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigWiegand Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-06-21
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+\**************************************************************/
+void GetConfigWiegand(CONFIG_WIEGAND_STR *pstrConfigWiegand);
+/**************************************************************\
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ GetConfigSync
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½È¡Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigSync Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-10-18
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void GetConfigSync(CONFIG_SYNC_STR *pstrConfigSync);
 
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º SetConfigBase
-** ¹¦ÄÜ£º ÉèÖÃ»ù±¾ÅäÖÃ
-** ²ÎÊı£º pstrConfigBase Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-06-21
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š SetConfigBase
+** åŠŸèƒ½ï¼š è®¾ç½®åŸºæœ¬é…ç½®
+** å‚æ•°ï¼š pstrConfigBase æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-06-21
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ SetConfigBase
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigBase Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-06-21
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void SetConfigBase(CONFIG_BASE_STR *pstrConfigBase);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º SetConfigSys
-** ¹¦ÄÜ£º ÉèÖÃ»ù±¾ÅäÖÃ
-** ²ÎÊı£º pstrConfigSys Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-06-21
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š SetConfigSys
+** åŠŸèƒ½ï¼š è®¾ç½®åŸºæœ¬é…ç½®
+** å‚æ•°ï¼š pstrConfigSys æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-06-21
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ SetConfigSys
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigSys Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-06-21
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void SetConfigSys(CONFIG_SYS_STR *pstrConfigSys);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º SetConfigNetwork
-** ¹¦ÄÜ£º ÉèÖÃÍøÂçÅäÖÃ
-** ²ÎÊı£º pstrConfigNetwork Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-06-27
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š SetConfigNetwork
+** åŠŸèƒ½ï¼š è®¾ç½®ç½‘ç»œé…ç½®
+** å‚æ•°ï¼š pstrConfigNetwork æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-06-27
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ SetConfigNetwork
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigNetwork Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-06-27
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void SetConfigNetwork(CONFIG_NETWORK_STR *pstrConfigNetwork);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º SetConfigThreshold
-** ¹¦ÄÜ£º ÉèÖÃThresholdÅäÖÃ
-** ²ÎÊı£º pstrConfigThreshold Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-06-27
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š SetConfigThreshold
+** åŠŸèƒ½ï¼š è®¾ç½®Thresholdé…ç½®
+** å‚æ•°ï¼š pstrConfigThreshold æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-06-27
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ SetConfigThreshold
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½ï¿½ï¿½Thresholdï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigThreshold Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-06-27
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void SetConfigThreshold(CONFIG_THRESHOLD_STR *pstrConfigThreshold);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º SetConfigSecurity
-** ¹¦ÄÜ£º ÉèÖÃ°²È«ÅäÖÃ
-** ²ÎÊı£º pstrConfigSecurity Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-06-27
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š SetConfigSecurity
+** åŠŸèƒ½ï¼š è®¾ç½®å®‰å…¨é…ç½®
+** å‚æ•°ï¼š pstrConfigSecurity æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-06-27
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ SetConfigSecurity
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½ï¿½Ã°ï¿½È«ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigSecurity Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-06-27
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void SetConfigSecurity(CONFIG_SECURITY_STR *pstrConfigSecurity);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º SetConfigAttendance
-** ¹¦ÄÜ£º ÉèÖÃ¿¼ÇÚÅäÖÃ
-** ²ÎÊı£º pstrConfigAttendance Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-06-27
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š SetConfigAttendance
+** åŠŸèƒ½ï¼š è®¾ç½®è€ƒå‹¤é…ç½®
+** å‚æ•°ï¼š pstrConfigAttendance æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-06-27
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ SetConfigAttendance
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigAttendance Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-06-27
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void SetConfigAttendance(CONFIG_ATTENDANCE_STR *pstrConfigAttendance);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º SetConfigOthers
-** ¹¦ÄÜ£º ÉèÖÃ¿¼ÇÚÅäÖÃ
-** ²ÎÊı£º pstrConfigOthers Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-06-27
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š SetConfigOthers
+** åŠŸèƒ½ï¼š è®¾ç½®è€ƒå‹¤é…ç½®
+** å‚æ•°ï¼š pstrConfigOthers æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-06-27
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ SetConfigOthers
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigOthers Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-06-27
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void SetConfigOthers(CONFIG_OTHERS_STR *pstrConfigOthers);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º SetConfigAudIo
-** ¹¦ÄÜ£º ÉèÖÃÒôÁ¿Ïà¹ØÅäÖÃ
-** ²ÎÊı£º pstrConfigOthers Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-06-27
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š SetConfigAudIo
+** åŠŸèƒ½ï¼š è®¾ç½®éŸ³é‡ç›¸å…³é…ç½®
+** å‚æ•°ï¼š pstrConfigOthers æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-06-27
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ SetConfigAudIo
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigOthers Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-06-27
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void SetConfigAudIo(CONFIG_AUDIO_STR *pstrConfigAudio);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º SetConfigVideo
-** ¹¦ÄÜ£º ÉèÖÃÉãÏñÍ·Ïà¹ØÅäÖÃ
-** ²ÎÊı£º pstrConfigVideo Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-06-27
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š SetConfigVideo
+** åŠŸèƒ½ï¼š è®¾ç½®æ‘„åƒå¤´ç›¸å…³é…ç½®
+** å‚æ•°ï¼š pstrConfigVideo æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-06-27
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ SetConfigVideo
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigVideo Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-06-27
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void SetConfigVideo(CONFIG_VIDEO_STR *pstrConfigVideo);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º SetConfigLoginReason
-** ¹¦ÄÜ£º ÉèÖÃ¹¦ÄÜ¼üÏà¹ØÅäÖÃ
-** ²ÎÊı£º pstrConfigLoginReason Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-06-27
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š SetConfigLoginReason
+** åŠŸèƒ½ï¼š è®¾ç½®åŠŸèƒ½é”®ç›¸å…³é…ç½®
+** å‚æ•°ï¼š pstrConfigLoginReason æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-06-27
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ SetConfigLoginReason
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½ï¿½Ã¹ï¿½ï¿½Ü¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigLoginReason Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-06-27
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void SetConfigLoginReason(CONFIG_LOGINREASON_STR *pstrConfigLoginReason);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º SetConfigGroupAttr
-** ¹¦ÄÜ£º ÉèÖÃ¹¦ÄÜ¼üÏà¹ØÅäÖÃ
-** ²ÎÊı£º pstrConfigGroupAttr Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-06-27
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š SetConfigGroupAttr
+** åŠŸèƒ½ï¼š è®¾ç½®åŠŸèƒ½é”®ç›¸å…³é…ç½®
+** å‚æ•°ï¼š pstrConfigGroupAttr æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-06-27
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ SetConfigGroupAttr
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½ï¿½Ã¹ï¿½ï¿½Ü¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigGroupAttr Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-06-27
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void SetConfigGroupAttr(CONFIG_GROUPATTR_STR *pstrConfigGroupAttr);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º SetConfigAutoOnOff
-** ¹¦ÄÜ£º ÉèÖÃ×Ô¶¯¿ª¹Ø»úÏà¹ØÅäÖÃ
-** ²ÎÊı£º pstrConfigAutoOnOff Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-06-27
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š SetConfigAutoOnOff
+** åŠŸèƒ½ï¼š è®¾ç½®è‡ªåŠ¨å¼€å…³æœºç›¸å…³é…ç½®
+** å‚æ•°ï¼š pstrConfigAutoOnOff æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-06-27
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ SetConfigAutoOnOff
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Ø»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigAutoOnOff Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-06-27
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void SetConfigAutoOnOff(CONFIG_AUTO_ON_OFF_STR *pstrConfigAutoOnOff);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º SetConfigRing
-** ¹¦ÄÜ£º ÉèÖÃÏìÁåÏà¹ØÅäÖÃ
-** ²ÎÊı£º pstrConfigRing Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-06-27
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š SetConfigRing
+** åŠŸèƒ½ï¼š è®¾ç½®å“é“ƒç›¸å…³é…ç½®
+** å‚æ•°ï¼š pstrConfigRing æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-06-27
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ SetConfigRing
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigRing Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-06-27
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void SetConfigRing(CONFIG_RING_STR *pstrConfigRing);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º SetConfigHoliday
-** ¹¦ÄÜ£º ÉèÖÃ½Ú¼ÙÈÕÅäÖÃ
-** ²ÎÊı£º pstrConfigHoliday Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-07-06
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š SetConfigHoliday
+** åŠŸèƒ½ï¼š è®¾ç½®èŠ‚å‡æ—¥é…ç½®
+** å‚æ•°ï¼š pstrConfigHoliday æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-07-06
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ SetConfigHoliday
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½ï¿½Ã½Ú¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigHoliday Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-07-06
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void SetConfigHoliday(CONFIG_HOLIDAY_STR *pstrConfigHoliday);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º SetConfigWiegand
-** ¹¦ÄÜ£º ÉèÖÃÎ¤¸ùÅäÖÃ
-** ²ÎÊı£º pstrConfigWiegand Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-06-21
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š SetConfigWiegand
+** åŠŸèƒ½ï¼š è®¾ç½®éŸ¦æ ¹é…ç½®
+** å‚æ•°ï¼š pstrConfigWiegand æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-06-21
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
 \**************************************************************/
 void SetConfigWiegand(CONFIG_WIEGAND_STR *pstrConfigWiegand);
 /**************************************************************\
-** º¯ÊıÃû³Æ£º SetConfigSync
-** ¹¦ÄÜ£º ÉèÖÃÍ¬²½ÅäÖÃ
-** ²ÎÊı£º pstrConfigSync Ö¸Õë
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-10-18
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+** å‡½æ•°åç§°ï¼š SetConfigSync
+** åŠŸèƒ½ï¼š è®¾ç½®åŒæ­¥é…ç½®
+** å‚æ•°ï¼š pstrConfigSync æŒ‡é’ˆ
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-10-18
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ SetConfigWiegand
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½ï¿½ï¿½Î¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigWiegand Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-06-21
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+\**************************************************************/
+void SetConfigWiegand(CONFIG_WIEGAND_STR *pstrConfigWiegand);
+/**************************************************************\
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ SetConfigSync
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pstrConfigSync Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-10-18
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void SetConfigSync(CONFIG_SYNC_STR *pstrConfigSync);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º WriteFlash
-** ¹¦ÄÜ£º ÍùÉè±¸ÖĞĞ´ÈëÄÚÈİ
-** ²ÎÊı£º mtd	Ğ´ÈëµÄÉè±¸
-          offsetĞ´ÈëµÄÆ«ÒÆÁ¿
-          pData	Ğ´ÈëµÄÊı¾İ»º´æ
-          nLen	Ğ´ÈëÊı¾İµÄ³¤¶È
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-10-18
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š WriteFlash
+** åŠŸèƒ½ï¼š å¾€è®¾å¤‡ä¸­å†™å…¥å†…å®¹
+** å‚æ•°ï¼š mtd	å†™å…¥çš„è®¾å¤‡
+          offsetå†™å…¥çš„åç§»é‡
+          pData	å†™å…¥çš„æ•°æ®ç¼“å­˜
+          nLen	å†™å…¥æ•°æ®çš„é•¿åº¦
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-10-18
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ WriteFlash
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½ï¿½è±¸ï¿½ï¿½Ğ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ mtd	Ğ´ï¿½ï¿½ï¿½ï¿½è±¸
+          offsetĞ´ï¿½ï¿½ï¿½Æ«ï¿½ï¿½ï¿½ï¿½
+          pData	Ğ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ»ï¿½ï¿½ï¿½
+          nLen	Ğ´ï¿½ï¿½ï¿½ï¿½ï¿½İµÄ³ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-10-18
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 int WriteFlash(char* mtd, int offset, char* pData, int nLen);
 
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º ReadFlash
-** ¹¦ÄÜ£º ´ÓÉè±¸ÖĞ¶ÁÄÚÈİ
-** ²ÎÊı£º mtd	Ğ´ÈëµÄÉè±¸
-          offsetĞ´ÈëµÄÆ«ÒÆÁ¿
-          pData	Ğ´ÈëµÄÊı¾İ»º´æ
-          nLen	Ğ´ÈëÊı¾İµÄ³¤¶È
-** ·µ»Ø£º 
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-10-18
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š ReadFlash
+** åŠŸèƒ½ï¼š ä»è®¾å¤‡ä¸­è¯»å†…å®¹
+** å‚æ•°ï¼š mtd	å†™å…¥çš„è®¾å¤‡
+          offsetå†™å…¥çš„åç§»é‡
+          pData	å†™å…¥çš„æ•°æ®ç¼“å­˜
+          nLen	å†™å…¥æ•°æ®çš„é•¿åº¦
+** è¿”å›ï¼š 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-10-18
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ ReadFlash
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½ï¿½è±¸ï¿½Ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ mtd	Ğ´ï¿½ï¿½ï¿½ï¿½è±¸
+          offsetĞ´ï¿½ï¿½ï¿½Æ«ï¿½ï¿½ï¿½ï¿½
+          pData	Ğ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ»ï¿½ï¿½ï¿½
+          nLen	Ğ´ï¿½ï¿½ï¿½ï¿½ï¿½İµÄ³ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-10-18
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 int ReadFlash(char* mtd, int offset, int nBufLen, char* pBuf);
 
 /******************************************************************************
- * º¯ÊıÃû³Æ£º   SetNet
- * ¹¦ÄÜ£º       ÉèÖÃÍøÂç²ÎÊı
- * ²ÎÊı£º 	pIfName:Éè±¸Ãû
- 		dwIpAddr:IPµØÖ·
- 		dwSubMask:×ÓÍøÑÚÂë
- 		pGW:Íø¹Ø
- 		pDNS:Ê×Ñ¡DNS·şÎñÆ÷
- 		pDNS2:´ÎÑ¡DNS·şÎñÆ÷
- 		pMac:MacµØÖ·
- 		pHostname:Ö÷»úÃû
- 		nMTU£º×î´ó´«Êäµ¥Ôª
- 		bOnBoot£ºÆô¶¯Ê±ÊÇ·ñ¼¤»îÍø¿¨
- * ·µ»Ø£º       0£º³É¹¦£»ÆäËü£ºÊ§°Ü
- * ´´½¨×÷Õß£º 
- * ´´½¨ÈÕÆÚ£º 2012-6-21
- * ĞŞ¸Ä×÷Õß£º
- * ĞŞ¸ÄÈÕÆÚ£º
+<<<<<<< HEAD
+ * å‡½æ•°åç§°ï¼š   SetNet
+ * åŠŸèƒ½ï¼š       è®¾ç½®ç½‘ç»œå‚æ•°
+ * å‚æ•°ï¼š 	pIfName:è®¾å¤‡å
+ 		dwIpAddr:IPåœ°å€
+ 		dwSubMask:å­ç½‘æ©ç 
+ 		pGW:ç½‘å…³
+ 		pDNS:é¦–é€‰DNSæœåŠ¡å™¨
+ 		pDNS2:æ¬¡é€‰DNSæœåŠ¡å™¨
+ 		pMac:Macåœ°å€
+ 		pHostname:ä¸»æœºå
+ 		nMTUï¼šæœ€å¤§ä¼ è¾“å•å…ƒ
+ 		bOnBootï¼šå¯åŠ¨æ—¶æ˜¯å¦æ¿€æ´»ç½‘å¡
+ * è¿”å›ï¼š       0ï¼šæˆåŠŸï¼›å…¶å®ƒï¼šå¤±è´¥
+ * åˆ›å»ºä½œè€…ï¼š 
+ * åˆ›å»ºæ—¥æœŸï¼š 2012-6-21
+ * ä¿®æ”¹ä½œè€…ï¼š
+ * ä¿®æ”¹æ—¥æœŸï¼š
+=======
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½   SetNet
+ * ï¿½ï¿½ï¿½Ü£ï¿½       ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 	pIfName:ï¿½è±¸ï¿½ï¿½
+ 		dwIpAddr:IPï¿½ï¿½Ö·
+ 		dwSubMask:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ 		pGW:ï¿½ï¿½ï¿½ï¿½
+ 		pDNS:ï¿½ï¿½Ñ¡DNSï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ 		pDNS2:ï¿½ï¿½Ñ¡DNSï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ 		pMac:Macï¿½ï¿½Ö·
+ 		pHostname:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ 		nMTUï¿½ï¿½ï¿½ï¿½ï¿½ï¿½äµ¥Ôª
+ 		bOnBootï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½Ç·ñ¼¤»ï¿½ï¿½ï¿½ï¿½ï¿½
+ * ï¿½ï¿½ï¿½Ø£ï¿½       0ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-6-21
+ * ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½
+ * ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
  ******************************************************************************/
 int SetNet(char* pIfName, unsigned long dwIpAddr, unsigned long dwSubMask, char* pGW, char* pDNS, char* pDNS2, char* pMac, char* pHostname, unsigned short nMTU, int bOnBoot);
 
 /******************************************************************************
- * º¯ÊıÃû³Æ£º getnet
- * ¹¦ÄÜ£º µÃµ½ÍøÂç²ÎÊı
- * ²ÎÊı£º 	pIfName:Éè±¸Ãû
- 			pdwIpAddrp:IPµØÖ·
- 			pdwSubMask:×ÓÍøÑÚÂë
- 			pGW:Íø¹Ø
- 			pDNS:DNS·şÎñÆ÷
+<<<<<<< HEAD
+ * å‡½æ•°åç§°ï¼š getnet
+ * åŠŸèƒ½ï¼š å¾—åˆ°ç½‘ç»œå‚æ•°
+ * å‚æ•°ï¼š 	pIfName:è®¾å¤‡å
+ 			pdwIpAddrp:IPåœ°å€
+ 			pdwSubMask:å­ç½‘æ©ç 
+ 			pGW:ç½‘å…³
+ 			pDNS:DNSæœåŠ¡å™¨
  			pDNS2:
- 			pMac:MacµØÖ·
- 			pHostname:Ö÷»úÃû
- * ·µ»Ø£º 
- * ´´½¨×÷Õß£º 
- * ´´½¨ÈÕÆÚ£º 2012-6-21
- * ĞŞ¸Ä×÷Õß£º
- * ĞŞ¸ÄÈÕÆÚ£º
+ 			pMac:Macåœ°å€
+ 			pHostname:ä¸»æœºå
+ * è¿”å›ï¼š 
+ * åˆ›å»ºä½œè€…ï¼š 
+ * åˆ›å»ºæ—¥æœŸï¼š 2012-6-21
+ * ä¿®æ”¹ä½œè€…ï¼š
+ * ä¿®æ”¹æ—¥æœŸï¼š
+=======
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ getnet
+ * ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 	pIfName:ï¿½è±¸ï¿½ï¿½
+ 			pdwIpAddrp:IPï¿½ï¿½Ö·
+ 			pdwSubMask:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ 			pGW:ï¿½ï¿½ï¿½ï¿½
+ 			pDNS:DNSï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ 			pDNS2:
+ 			pMac:Macï¿½ï¿½Ö·
+ 			pHostname:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * ï¿½ï¿½ï¿½Ø£ï¿½ 
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-6-21
+ * ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½
+ * ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
  ******************************************************************************/
 int getnet(char* pIfName, unsigned long* pdwIpAddr, unsigned long* pdwSubMask, char* pGW, char* pDNS, char* pDNS2, char* pMac, char* pHostname);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º GetIPAddr
-** ¹¦ÄÜ£º »ñÈ¡IPµØÖ·
-** ²ÎÊı£º pIP	»ñÈ¡µ½µÄIP
-          len	Òª»ñÈ¡µÄ³¤¶È
-** ·µ»Ø£º ÎŞ
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-07-02
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š GetIPAddr
+** åŠŸèƒ½ï¼š è·å–IPåœ°å€
+** å‚æ•°ï¼š pIP	è·å–åˆ°çš„IP
+          len	è¦è·å–çš„é•¿åº¦
+** è¿”å›ï¼š æ— 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-07-02
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ GetIPAddr
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½È¡IPï¿½ï¿½Ö·
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pIP	ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½IP
+          len	Òªï¿½ï¿½È¡ï¿½Ä³ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-07-02
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 int GetIPAddr(char *pIP,int len);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º DelAllRecord
-** ¹¦ÄÜ£º É¾³ıÈ«²¿¼ÇÂ¼ºÍË÷ÒıÎÄ¼ş
-** ²ÎÊı£º ÎŞ
-** ·µ»Ø£º  0 : ³É¹¦; -1 : Ê§°Ü
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-07-02
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š DelAllRecord
+** åŠŸèƒ½ï¼š åˆ é™¤å…¨éƒ¨è®°å½•å’Œç´¢å¼•æ–‡ä»¶
+** å‚æ•°ï¼š æ— 
+** è¿”å›ï¼š  0 : æˆåŠŸ; -1 : å¤±è´¥
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-07-02
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ DelAllRecord
+** ï¿½ï¿½ï¿½Ü£ï¿½ É¾ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½  0 : ï¿½É¹ï¿½; -1 : Ê§ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-07-02
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 int DelAllRecord();
 
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º DelRecords
-** ¹¦ÄÜ£º É¾³ıiUserID Ä³¸öÊ±¼äÒÔÇ°µÄ¼ÇÂ¼
-** ²ÎÊı£º tCurtime£ºÄ³¸öÊ±¼ä
-          iUserID : Ä³¸öÓÃ»§Id
-** ·µ»Ø£º ÎŞ
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-07-02
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š DelRecords
+** åŠŸèƒ½ï¼š åˆ é™¤iUserID æŸä¸ªæ—¶é—´ä»¥å‰çš„è®°å½•
+** å‚æ•°ï¼š tCurtimeï¼šæŸä¸ªæ—¶é—´
+          iUserID : æŸä¸ªç”¨æˆ·Id
+** è¿”å›ï¼š æ— 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-07-02
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ DelRecords
+** ï¿½ï¿½ï¿½Ü£ï¿½ É¾ï¿½ï¿½iUserID Ä³ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ç°ï¿½Ä¼ï¿½Â¼
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ tCurtimeï¿½ï¿½Ä³ï¿½ï¿½Ê±ï¿½ï¿½
+          iUserID : Ä³ï¿½ï¿½ï¿½Ã»ï¿½Id
+** ï¿½ï¿½ï¿½Ø£ï¿½ ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-07-02
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 int DelRecords(time_t tCurtime, int iUserID);
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º GetItemList
-** ¹¦ÄÜ£º  »ñÈ¡¼òÒª¼ÇÂ¼¶ÓÁĞÍ·Ö¸Õë
-** ²ÎÊı£º ÎŞ
-** ·µ»Ø£º  
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-07-02
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š GetItemList
+** åŠŸèƒ½ï¼š  è·å–ç®€è¦è®°å½•é˜Ÿåˆ—å¤´æŒ‡é’ˆ
+** å‚æ•°ï¼š æ— 
+** è¿”å›ï¼š  
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-07-02
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ GetItemList
+** ï¿½ï¿½ï¿½Ü£ï¿½  ï¿½ï¿½È¡ï¿½ï¿½Òªï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½Í·Ö¸ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½  
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-07-02
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 //FEATURE_Q_HEADER * GetItemList();
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º FreeRecordList
-** ¹¦ÄÜ£º ÊÍ·ÅÒÑ¾­²éÑ¯µÄ¼òÒª¼ÇÂ¼¶ÓÁĞ
-** ²ÎÊı£º ÎŞ
-** ·µ»Ø£º ÎŞ
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-07-02
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š FreeRecordList
+** åŠŸèƒ½ï¼š é‡Šæ”¾å·²ç»æŸ¥è¯¢çš„ç®€è¦è®°å½•é˜Ÿåˆ—
+** å‚æ•°ï¼š æ— 
+** è¿”å›ï¼š æ— 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-07-02
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ FreeRecordList
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½Í·ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½Ñ¯ï¿½Ä¼ï¿½Òªï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-07-02
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void FreeRecordList();
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º DelRecordsByTime
-** ¹¦ÄÜ£º É¾³ıËùÓĞÓÃ»§Ä³¸öÊ±¼äÒÔÇ°µÄ¼ÇÂ¼
-** ²ÎÊı£º tCurtime£ºÄ³¸öÊ±¼ä
-** ·µ»Ø£º 0£º³É¹¦£»-1£ºÊ§°Ü£»
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-07-02
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š DelRecordsByTime
+** åŠŸèƒ½ï¼š åˆ é™¤æ‰€æœ‰ç”¨æˆ·æŸä¸ªæ—¶é—´ä»¥å‰çš„è®°å½•
+** å‚æ•°ï¼š tCurtimeï¼šæŸä¸ªæ—¶é—´
+** è¿”å›ï¼š 0ï¼šæˆåŠŸï¼›-1ï¼šå¤±è´¥ï¼›
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-07-02
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ DelRecordsByTime
+** ï¿½ï¿½ï¿½Ü£ï¿½ É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ä³ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ç°ï¿½Ä¼ï¿½Â¼
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ tCurtimeï¿½ï¿½Ä³ï¿½ï¿½Ê±ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ 0ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½-1ï¿½ï¿½Ê§ï¿½Ü£ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-07-02
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 int DelRecordsByTime(time_t tCurtime);
 
 
 /******************************************************************************
- * º¯ÊıÃû³Æ£º GetSearchRecordNum
- * ¹¦ÄÜ£º »ñÈ¡µ±Ç°²éÑ¯¼ÇÂ¼ÌõÊı
- * ²ÎÊı£º ÎŞ
- * ·µ»Ø£º ³öÇÚÊ±¼ä
- * ´´½¨×÷Õß£º LPH
- * ´´½¨ÈÕÆÚ£º 2012-11-05
- * ĞŞ¸Ä×÷Õß£º
- * ĞŞ¸ÄÈÕÆÚ£º
+<<<<<<< HEAD
+ * å‡½æ•°åç§°ï¼š GetSearchRecordNum
+ * åŠŸèƒ½ï¼š è·å–å½“å‰æŸ¥è¯¢è®°å½•æ¡æ•°
+ * å‚æ•°ï¼š æ— 
+ * è¿”å›ï¼š å‡ºå‹¤æ—¶é—´
+ * åˆ›å»ºä½œè€…ï¼š LPH
+ * åˆ›å»ºæ—¥æœŸï¼š 2012-11-05
+ * ä¿®æ”¹ä½œè€…ï¼š
+ * ä¿®æ”¹æ—¥æœŸï¼š
+=======
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ GetSearchRecordNum
+ * ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½Ñ¯ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+ * ï¿½ï¿½ï¿½Ø£ï¿½ ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ LPH
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-11-05
+ * ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½
+ * ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
  ******************************************************************************/
 int GetSearchRecordNum();
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º GetCurUSBTransNum
-** ¹¦ÄÜ£º »ñÈ¡µ±Ç°UÅÌÒÑµ¼Èë/µ¼³ö¼ÇÂ¼¡¢ÓÃ»§ÌõÊı
-** ²ÎÊı£º ÎŞ
-** ·µ»Ø£º µ±Ç°¼ÇÂ¼No
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-07-02
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š GetCurUSBTransNum
+** åŠŸèƒ½ï¼š è·å–å½“å‰Uç›˜å·²å¯¼å…¥/å¯¼å‡ºè®°å½•ã€ç”¨æˆ·æ¡æ•°
+** å‚æ•°ï¼š æ— 
+** è¿”å›ï¼š å½“å‰è®°å½•No
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-07-02
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ GetCurUSBTransNum
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½È¡ï¿½ï¿½Ç°Uï¿½ï¿½ï¿½Ñµï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+** ï¿½ï¿½ï¿½Ø£ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½Â¼No
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-07-02
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 int GetCurUSBTransNum();
 
 /**************************************************************\
-** º¯ÊıÃû³Æ£º SetCurUSBTransNum
-** ¹¦ÄÜ£º ÉèÖÃµ±Ç°UÅÌÒÑµ¼Èë/µ¼³ö¼ÇÂ¼¡¢ÓÃ»§ÌõÊı
-** ²ÎÊı£º iValue£ºÒªÉèÖÃµÄÖµ
-** ·µ»Ø£º ÎŞ
-** ´´½¨×÷Õß£º Öì¼á
-** ´´½¨ÈÕÆÚ£º 2012-07-02
-** ĞŞ¸Ä×÷Õß£º 
-** ĞŞ¸ÄÈÕÆÚ£º 
+<<<<<<< HEAD
+** å‡½æ•°åç§°ï¼š SetCurUSBTransNum
+** åŠŸèƒ½ï¼š è®¾ç½®å½“å‰Uç›˜å·²å¯¼å…¥/å¯¼å‡ºè®°å½•ã€ç”¨æˆ·æ¡æ•°
+** å‚æ•°ï¼š iValueï¼šè¦è®¾ç½®çš„å€¼
+** è¿”å›ï¼š æ— 
+** åˆ›å»ºä½œè€…ï¼š æœ±åš
+** åˆ›å»ºæ—¥æœŸï¼š 2012-07-02
+** ä¿®æ”¹ä½œè€…ï¼š 
+** ä¿®æ”¹æ—¥æœŸï¼š 
+=======
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ SetCurUSBTransNum
+** ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½ï¿½Ãµï¿½Ç°Uï¿½ï¿½ï¿½Ñµï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ iValueï¿½ï¿½Òªï¿½ï¿½ï¿½Ãµï¿½Öµ
+** ï¿½ï¿½ï¿½Ø£ï¿½ ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ ï¿½ï¿½ï¿½
+** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-07-02
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½ 
+** ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 \**************************************************************/
 void SetCurUSBTransNum(int iValue);
 
 
 
 /******************************************************************************
- * º¯ÊıÃû³Æ£º formatSDEx
- * ¹¦ÄÜ£º ¸ñÊ½»¯SD¿¨
- * ²ÎÊı£º ÎŞ
- * ·µ»Ø£º 0£º³É¹¦£¬-1£ºÊ§°Ü£»
- * ´´½¨×÷Õß£º LPH
- * ´´½¨ÈÕÆÚ£º 2012-11-05
- * ĞŞ¸Ä×÷Õß£º
- * ĞŞ¸ÄÈÕÆÚ£º
+<<<<<<< HEAD
+ * å‡½æ•°åç§°ï¼š formatSDEx
+ * åŠŸèƒ½ï¼š æ ¼å¼åŒ–SDå¡
+ * å‚æ•°ï¼š æ— 
+ * è¿”å›ï¼š 0ï¼šæˆåŠŸï¼Œ-1ï¼šå¤±è´¥ï¼›
+ * åˆ›å»ºä½œè€…ï¼š LPH
+ * åˆ›å»ºæ—¥æœŸï¼š 2012-11-05
+ * ä¿®æ”¹ä½œè€…ï¼š
+ * ä¿®æ”¹æ—¥æœŸï¼š
+=======
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ formatSDEx
+ * ï¿½ï¿½ï¿½Ü£ï¿½ ï¿½ï¿½Ê½ï¿½ï¿½SDï¿½ï¿½
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+ * ï¿½ï¿½ï¿½Ø£ï¿½ 0ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½-1ï¿½ï¿½Ê§ï¿½Ü£ï¿½
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ LPH
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 2012-11-05
+ * ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ß£ï¿½
+ * ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Ú£ï¿½
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
  ******************************************************************************/
 int formatSDEx();
 
