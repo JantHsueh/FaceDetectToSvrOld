@@ -107,14 +107,8 @@ public class ExcelUtils {
 					for (int i = 0; i < list.size(); i++) {
 						sheet.addCell(new Label(i, j+1, list.get(i), arial12format));
 					}
-					//sheet.addCell(new Label(j, j+1, objList.get(j).toString(), arial12format));
 				}
-//				for (int j = 0; j < objList.size(); j++) {
-//					ArrayList<String> list=(ArrayList<String>) objList.get(j);
-//					for (int i = 0; i < list.size(); i++) {
-//						sheet.addCell(new Label(i, j+1, list.get(i), arial12format));
-//					}
-//				}
+
 				writebook.write();
 				Toast.makeText(c, "导出excles成功，手机自带存储设备下找 RunVision文件夹 下的worlk.xls ", Toast.LENGTH_SHORT).show();
 
