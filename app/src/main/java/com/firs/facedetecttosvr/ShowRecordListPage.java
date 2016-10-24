@@ -41,6 +41,7 @@ import android.widget.Toast;
 import com.firs.cn.MyDataBaseAdapter;
 import com.firs.view.CalendarView;
 import com.firs.view.ExcelUtils;
+
 public class ShowRecordListPage extends Activity implements OnClickListener{
 	//日期组件
 	private ImageButton calendar_Left,calendar_Right;

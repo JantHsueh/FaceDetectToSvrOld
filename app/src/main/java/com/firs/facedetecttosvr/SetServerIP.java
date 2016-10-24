@@ -1,27 +1,24 @@
 package com.firs.facedetecttosvr;
 
-import com.firs.cn.FaceNative;
-
-import android.R.integer;
+import android.app.Activity;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.text.Editable;
-import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
-import android.view.Window;
 import android.view.ViewGroup.LayoutParams;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.firs.cn.FaceNative;
 
 public class SetServerIP extends Activity {
 	
@@ -29,7 +26,6 @@ public class SetServerIP extends Activity {
 	EditText edit_port;
 	Button  bnt_setServer;
 	Button bnt_return;
-	
 
 	private Thread newThread;         //声明一个子线程
 
@@ -39,7 +35,6 @@ public class SetServerIP extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);//去掉标题栏
-
 		//getActionBar().setBackgroundDrawable(this.getResources().getDrawable(R.drawable.action_bar_bg));
 		setContentView(R.layout.activity_setsvr);
 		bnt_setServer = (Button)findViewById(R.id.btn_setserverip);

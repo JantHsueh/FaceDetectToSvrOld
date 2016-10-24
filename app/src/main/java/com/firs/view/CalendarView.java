@@ -1,7 +1,4 @@
 package com.firs.view;
-import java.util.Calendar;
-import java.util.Date;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -12,6 +9,9 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+
+import java.util.Calendar;
+import java.util.Date;
 public class CalendarView extends View implements View.OnTouchListener {  
     private final static String TAG = "anCalendar";  
     private Date selectedStartDate;  

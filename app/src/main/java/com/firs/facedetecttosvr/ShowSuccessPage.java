@@ -1,37 +1,29 @@
 package com.firs.facedetecttosvr;
 
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.view.Display;
+import android.view.Gravity;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.firs.cn.FaceNative;
+import com.firs.cn.MyDataBaseAdapter;
+import com.firs.cn.compareresult;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import com.firs.cn.FaceNative;
-import com.firs.cn.MyDataBaseAdapter;
-import com.firs.cn.compareresult;
-import com.firs.facedetecttosvr.R.id;
-
-import android.R.integer;
-import android.os.Bundle;
-import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.view.Display;
-import android.view.Gravity;
-import android.view.Menu;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class ShowSuccessPage extends Activity {
 	
@@ -93,8 +85,7 @@ public class ShowSuccessPage extends Activity {
 	   //创建数据库
         database = new MyDataBaseAdapter(this);
 		
-		//取得数据库对象 
-
+		//取得数据库对象
         database.open();
 	}
 	
@@ -117,7 +108,9 @@ public class ShowSuccessPage extends Activity {
 		compareresult cpmrest = new compareresult();
 		FaceNative.getCompareResult(cpmrest);
 		 MyApp.log("Long.toString(lTime)"+Long.toString(lTime));
-		 //插入数据库
+
+		 //插入数据库 
+
 		
 		database.insertRecordInfoData(Long.toString(lTime), Integer.toString(cpmrest.score/1000000), cpmrest.name,  Integer.toString(cpmrest.faceId),
 				"facePic_temp.jpg","","others");
