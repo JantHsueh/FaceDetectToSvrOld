@@ -3,17 +3,17 @@
 #define NETDEAL_H
 #include<unistd.h>
 #include "netComm.h"
-/* ÖØÁ¬·şÎñÆ÷³¬Ê±Ê±¼ä */
+/* é‡è¿æœåŠ¡å™¨è¶…æ—¶æ—¶é—´ */
 #define RECONNECT_SERVER_TIME 8
 extern int g_iCliePort;
-/* ÖÕ¶Ë×÷Îª·şÎñÆ÷¶ËµÄIP */
+/* ç»ˆç«¯ä½œä¸ºæœåŠ¡å™¨ç«¯çš„IP */
 extern char g_acClieIp[16];
-extern int g_ipChangeFlag;			//·şÎñÆ÷ip¡¡±ä¸ü±êÖ¾
+extern int g_ipChangeFlag;			//æœåŠ¡å™¨ipã€€å˜æ›´æ ‡å¿—
 extern char g_chUserName[32];
 extern char g_chPwd[32];
 
 extern int giClieFd;
-//ÓÃ»§Ä£°åÕÕÆ¬ĞÅÏ¢
+//ç”¨æˆ·æ¨¡æ¿ç…§ç‰‡ä¿¡æ¯
 typedef struct
 {
 	char photoName[256];
@@ -33,7 +33,7 @@ int DealDoSendHeartbeat(CommLayerTcp *&TcpObj);
 int snedGetSvrPicture(unsigned int faceId);
 int DealMsgGetFace(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROTOCOL_PACK *OutStrProPack);
 
-/* 1.Á¬½Ó½¨Á¢ */
+/* 1.è¿æ¥å»ºç«‹ */
 int DealResponse(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROTOCOL_PACK *OutStrProPack);
 int DealMsgAuth(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROTOCOL_PACK *OutStrProPack);
 int ClientSendAuth(char* pUserName, char* pPwd);
@@ -45,7 +45,7 @@ int getServerSockFlag();
 
 void setServerSockFlag(int serverSockFlag);
 
-unsigned short check_sum(unsigned char* data, int  data_len); //¼ÆËãÊı¾İĞ£ÑéºÍ
+unsigned short check_sum(unsigned char* data, int  data_len); //è®¡ç®—æ•°æ®æ ¡éªŒå’Œ
 
 #endif
 

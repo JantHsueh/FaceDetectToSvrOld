@@ -1,37 +1,29 @@
 package com.firs.facedetecttosvr;
 
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.view.Display;
+import android.view.Gravity;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.firs.cn.FaceNative;
+import com.firs.cn.MyDataBaseAdapter;
+import com.firs.cn.compareresult;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import com.firs.cn.FaceNative;
-import com.firs.cn.MyDataBaseAdapter;
-import com.firs.cn.compareresult;
-import com.firs.facedetecttosvr.R.id;
-
-import android.R.integer;
-import android.os.Bundle;
-import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.view.Display;
-import android.view.Gravity;
-import android.view.Menu;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class ShowSuccessPage extends Activity {
 	
@@ -47,14 +39,14 @@ public class ShowSuccessPage extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);//Òş²Ø±êÌâ 
+		requestWindowFeature(Window.FEATURE_NO_TITLE);//éšè—æ ‡é¢˜ 
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-		WindowManager.LayoutParams.FLAG_FULLSCREEN); // Òş²Ø×´Ì¬À¸
+		WindowManager.LayoutParams.FLAG_FULLSCREEN); // éšè—çŠ¶æ€æ 
 		//getActionBar().setBackgroundDrawable(this.getResources().getDrawable(R.drawable.action_bar_bg));
 		setContentView(R.layout.activity_show);
 		compareresult cpmrest = new compareresult();
 		
-		Display currDisplay = getWindowManager().getDefaultDisplay();//»ñÈ¡ÆÁÄ»µ±Ç°·Ö±æÂÊ
+		Display currDisplay = getWindowManager().getDefaultDisplay();//è·å–å±å¹•å½“å‰åˆ†è¾¨ç‡
 //		btn_save = (Button)findViewById(R.id.btnSave);
 //		btn_unSave = (Button)findViewById(R.id.btnUnSave);
 //		btn_save.setWidth(currDisplay.getWidth()/4);
@@ -66,30 +58,30 @@ public class ShowSuccessPage extends Activity {
 		
 		//edit_remark = (EditText)findViewById(R.id.editRemarks);
 		
-		FaceNative.getCompareResult(cpmrest);//»ñÈ¡Ïà»ú±È¶Ô½á¹û
-//		text_score.setText("ÏàËÆ¶È: "+cpmrest.score/1000000+" %");
-//		text_name.setText("×¢²áÃû³Æ: "+cpmrest.name);
+		FaceNative.getCompareResult(cpmrest);//è·å–ç›¸æœºæ¯”å¯¹ç»“æœ
+//		text_score.setText("ç›¸ä¼¼åº¦: "+cpmrest.score/1000000+" %");
+//		text_name.setText("æ³¨å†Œåç§°: "+cpmrest.name);
 		
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		lTime = (System.currentTimeMillis()/1000)*1000;
- 		Date    curDate = new Date(lTime);//»ñÈ¡µ±Ç°Ê±¼ä       
+ 		Date    curDate = new Date(lTime);//è·å–å½“å‰æ—¶é—´       
  		str = formatter.format(curDate);
 		//database.insertRecordInfoData(str, smilar.toString(), "wifi", "no");
-//		text_time.setText("±È¶ÔÊ±¼ä£º"+str);
+//		text_time.setText("æ¯”å¯¹æ—¶é—´ï¼š"+str);
 		
 		ImageView image1 = (ImageView) findViewById(R.id.imageView1);
 		ImageView image2 = (ImageView) findViewById(R.id.imageView2);
-	    Bitmap bitmap = getLoacalBitmap("/data/data/com.firs.facedetecttosvr/temp/facePic_temp.jpg"); //´Ó±¾µØÈ¡Í¼Æ¬
-	    Bitmap bitmap2 = getLoacalBitmap("/data/data/com.firs.facedetecttosvr/temp/"+cpmrest.faceId+".jpg"); //´Ó±¾µØÈ¡Í¼Æ¬
-	    image1.setImageBitmap(bitmap);	//ÉèÖÃBitmap
-	    image2.setImageBitmap(bitmap2);	//ÉèÖÃBitmap
+	    Bitmap bitmap = getLoacalBitmap("/data/data/com.firs.facedetecttosvr/temp/facePic_temp.jpg"); //ä»æœ¬åœ°å–å›¾ç‰‡
+	    Bitmap bitmap2 = getLoacalBitmap("/data/data/com.firs.facedetecttosvr/temp/"+cpmrest.faceId+".jpg"); //ä»æœ¬åœ°å–å›¾ç‰‡
+	    image1.setImageBitmap(bitmap);	//è®¾ç½®Bitmap
+	    image2.setImageBitmap(bitmap2);	//è®¾ç½®Bitmap
 	    
 	    copyFile("/data/data/com.firs.facedetecttosvr/temp/facePic_temp.jpg",MyApp.FACE_PATH+Long.toString(lTime)+".jpg");
 	     
-	   //´´½¨Êı¾İ¿â
+	   //åˆ›å»ºæ•°æ®åº“
         database = new MyDataBaseAdapter(this);
 		
-		//È¡µÃÊı¾İ¿â¶ÔÏó 
+		//å–å¾—æ•°æ®åº“å¯¹è±¡ 
         database.open();
 	}
 	
@@ -112,15 +104,15 @@ public class ShowSuccessPage extends Activity {
 		compareresult cpmrest = new compareresult();
 		FaceNative.getCompareResult(cpmrest);
 		 MyApp.log("Long.toString(lTime)"+Long.toString(lTime));
-		 //²åÈëÊı¾İ¿â 
+		 //æ’å…¥æ•°æ®åº“ 
 		
 		database.insertRecordInfoData(Long.toString(lTime), Integer.toString(cpmrest.score/1000000), cpmrest.name,  Integer.toString(cpmrest.faceId),
 				"facePic_temp.jpg","","others");
 		copyFile("/data/data/com.firs.facedetecttosvr/temp/"+cpmrest.faceId+".jpg",MyApp.FACE_PATH+Long.toString(lTime)+cpmrest.faceId+".jpg");
 		if(true == bSave){
-			toast= Toast.makeText(getApplicationContext(), "¼ÇÂ¼±£´æ±£´æ³É¹¦!", Toast.LENGTH_SHORT);
+			toast= Toast.makeText(getApplicationContext(), "è®°å½•ä¿å­˜ä¿å­˜æˆåŠŸ!", Toast.LENGTH_SHORT);
 		}else {
-			toast= Toast.makeText(getApplicationContext(), "¼ÇÂ¼±£´æÊ§°Ü!", Toast.LENGTH_SHORT);
+			toast= Toast.makeText(getApplicationContext(), "è®°å½•ä¿å­˜å¤±è´¥!", Toast.LENGTH_SHORT);
 		}
 		toast.setGravity(Gravity.CENTER, 0, 0);
 		toast.show();
@@ -128,7 +120,7 @@ public class ShowSuccessPage extends Activity {
 		ShowSuccessPage.this.finish();
 	}
 	/**
-	* ¼ÓÔØ±¾µØÍ¼Æ¬
+	* åŠ è½½æœ¬åœ°å›¾ç‰‡
 	* http://bbs.3gstdy.com
 	* @param url
 	* @return
@@ -177,7 +169,7 @@ public class ShowSuccessPage extends Activity {
 	
 	public void  goBack (View v){
 		//ShowSuccessPage.this.finish();
-		saveRecord();//±£´æ¼ÇÂ¼  µ¯³ö¿òÌáÊ¾
+		saveRecord();//ä¿å­˜è®°å½•  å¼¹å‡ºæ¡†æç¤º
 	}
     public void  toHistory (View v){
     	Intent intent = new Intent(this,ShowRecordListPage.class);

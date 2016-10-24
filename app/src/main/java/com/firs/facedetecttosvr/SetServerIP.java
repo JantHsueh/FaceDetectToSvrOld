@@ -1,27 +1,24 @@
 package com.firs.facedetecttosvr;
 
-import com.firs.cn.FaceNative;
-
-import android.R.integer;
+import android.app.Activity;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.text.Editable;
-import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
-import android.view.Window;
 import android.view.ViewGroup.LayoutParams;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.firs.cn.FaceNative;
 
 public class SetServerIP extends Activity {
 	
@@ -30,13 +27,13 @@ public class SetServerIP extends Activity {
 	Button  bnt_setServer;
 	Button bnt_return;
 	
-	private Thread newThread;         //ÉùÃ÷Ò»¸ö×ÓÏß³Ì
+	private Thread newThread;         //å£°æ˜ä¸€ä¸ªå­çº¿ç¨‹
 	public static ProgressBar  progressBar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);//È¥µô±êÌâÀ¸
+		requestWindowFeature(Window.FEATURE_NO_TITLE);//å»æ‰æ ‡é¢˜æ 
 		//getActionBar().setBackgroundDrawable(this.getResources().getDrawable(R.drawable.action_bar_bg));
 		setContentView(R.layout.activity_setsvr);
 		bnt_setServer = (Button)findViewById(R.id.btn_setserverip);
@@ -46,7 +43,7 @@ public class SetServerIP extends Activity {
 		
 		SharedPreferences sharedPreferences = getSharedPreferences("serversettings", this.MODE_PRIVATE);
 		//2016.10.13    update (183.62.134.182)to(116.205.1.86)
-		String serverip = sharedPreferences.getString("serverip", "116.205.1.86");//before£¨183.62.134.182£©
+		String serverip = sharedPreferences.getString("serverip", "116.205.1.86");//beforeï¼ˆ183.62.134.182ï¼‰
 		int port = sharedPreferences.getInt("port", 32108);
 		edit_svrip.setText(serverip);
 		edit_port.setText(Integer.toString(port));
@@ -56,7 +53,7 @@ public class SetServerIP extends Activity {
 		
 		progressBar=new ProgressBar(this,null,android.R.attr.progressBarStyleLarge);
 		progressBar.setIndeterminateDrawable(getResources().getDrawable(R.drawable.progressbar));
-		Display currDisplay = getWindowManager().getDefaultDisplay();//»ñÈ¡ÆÁÄ»µ±Ç°·Ö±æÂÊ
+		Display currDisplay = getWindowManager().getDefaultDisplay();//è·å–å±å¹•å½“å‰åˆ†è¾¨ç‡
 		int round = currDisplay.getWidth()/4;
         int displayWidth = currDisplay.getWidth()/2 - round/2;
         int displayHeight = currDisplay.getHeight()/4 - round/2-5;
@@ -80,23 +77,23 @@ public class SetServerIP extends Activity {
 			switch (msg.what){
 				case 1:
 					SharedPreferences settings = getSharedPreferences("serversettings",SetServerIP.MODE_PRIVATE);
-					Editor editor = settings.edit();//»ñÈ¡±à¼­Æ÷
+					Editor editor = settings.edit();//è·å–ç¼–è¾‘å™¨
 					editor.putString("serverip", edit_svrip.getText().toString());
 					editor.putInt("port", Integer.valueOf(edit_port.getText().toString()));
-					bSave = editor.commit();//Ìá½»ĞŞ¸Ä
-					//Toast.makeText(this, "²ÎÊı±£´æ³É¹¦!",
+					bSave = editor.commit();//æäº¤ä¿®æ”¹
+					//Toast.makeText(this, "å‚æ•°ä¿å­˜æˆåŠŸ!",
 					//Toast.LENGTH_SHORT).show();
 					if(true == bSave)
 					{
-						toast= Toast.makeText(getApplicationContext(), "·şÎñÆ÷ÉèÖÃ³É¹¦!", Toast.LENGTH_SHORT);
+						toast= Toast.makeText(getApplicationContext(), "æœåŠ¡å™¨è®¾ç½®æˆåŠŸ!", Toast.LENGTH_SHORT);
 					}else {
-						toast= Toast.makeText(getApplicationContext(), "²ÎÊı±£´æÊ§°Ü!", Toast.LENGTH_SHORT);
+						toast= Toast.makeText(getApplicationContext(), "å‚æ•°ä¿å­˜å¤±è´¥!", Toast.LENGTH_SHORT);
 					}
 					toast.setGravity(Gravity.CENTER, 0, 0);
 					toast.show();
 					break;
 				case 2:
-					toast= Toast.makeText(getApplicationContext(), "·şÎñÆ÷ipÉèÖÃÊ§°Ü,ÇëÁªÏµ¹ÜÀíÔ±¡£", Toast.LENGTH_SHORT);
+					toast= Toast.makeText(getApplicationContext(), "æœåŠ¡å™¨ipè®¾ç½®å¤±è´¥,è¯·è”ç³»ç®¡ç†å‘˜ã€‚", Toast.LENGTH_SHORT);
 					toast.setGravity(Gravity.CENTER, 0, 0);
 					toast.show();
 					break;
@@ -113,20 +110,20 @@ public class SetServerIP extends Activity {
 	{
 		SetServerIP.this.finish();
 	}
-	//µã»÷ÉèÖÃ°´Å¥  
+	//ç‚¹å‡»è®¾ç½®æŒ‰é’®  
 	public void  set_Server(View v) {
 		bnt_setServer.setEnabled(false);
 		progressBar.setVisibility(View.VISIBLE);
-		//°ÑÎÄ±¾¿òÊäÈëµÄÖµ±£´æµ½   ±¾µØ
+		//æŠŠæ–‡æœ¬æ¡†è¾“å…¥çš„å€¼ä¿å­˜åˆ°   æœ¬åœ°
 		FaceNative.SetServerIP(edit_svrip.getText().toString().getBytes(), Integer.valueOf(edit_port.getText().toString()), 1);
 		new Thread() {
 		@Override
 		public void run() {
-		     //ÕâÀïĞ´Èë×ÓÏß³ÌĞèÒª×öµÄ¹¤×÷
+		     //è¿™é‡Œå†™å…¥å­çº¿ç¨‹éœ€è¦åšçš„å·¥ä½œ
 			//timeout 60s
 			long start_time = System.currentTimeMillis()/1000;
 			while(true)
-			{	//1.±£´æ³É¹¦
+			{	//1.ä¿å­˜æˆåŠŸ
 				if(FaceNative.getServerSockFlag() == 1)
 				{
 					Message message = new Message();
@@ -134,7 +131,7 @@ public class SetServerIP extends Activity {
 					handler.sendMessage(message);
 					break;
 				}
-				//2.±£´æÊ±Á´½Ó³¬Ê±
+				//2.ä¿å­˜æ—¶é“¾æ¥è¶…æ—¶
 				if(System.currentTimeMillis()/1000 - start_time >= 30)
 				{
 					Message message = new Message();

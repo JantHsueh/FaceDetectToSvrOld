@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+//apply plugin: 'com.android.model.application'
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.3"
@@ -16,6 +16,11 @@ android {
     }
 
     buildTypes {
+
+        debug{
+            jniDebuggable true
+            jniDebuggable = true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
