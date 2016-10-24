@@ -336,7 +336,6 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 		private View getview(View view, int position){
 			mHolder01 = new ViewHolder01();
 			view = inflater.inflate(R.layout.mylist_item, null);
-			mHolder01.itemLy = (LinearLayout) view.findViewById(R.id.itemLy);
 			mHolder01.isCheck= (ImageView)view.findViewById(R.id.isCheck);
 			mHolder01.textView01 = (TextView) view.findViewById(R.id.item01_txt);
 			mHolder01.textView02 = (TextView) view.findViewById(R.id.item02_txt);
@@ -367,7 +366,6 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 			private TextView textView03;
 			private TextView textView04;
 			private ImageView isCheck;
-			private LinearLayout itemLy;
 		}
 	}
 	//处理记录listview
