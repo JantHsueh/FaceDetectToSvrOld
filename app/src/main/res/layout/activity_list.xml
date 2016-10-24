@@ -16,8 +16,9 @@
 	android:layout_weight="9"
     android:layout_height="match_parent"
 	>
-	
- <LinearLayout 
+
+
+ <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
@@ -38,9 +39,54 @@
          >
      <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="20dp" 
+    android:layout_height="20dp"
+
          >
-     <!-- 选择日历日期 -->    
+         <!-- 搜索 -->
+         <LinearLayout
+             android:layout_alignParentLeft="true"
+             android:layout_width="wrap_content"
+             android:layout_height="17dp"
+             android:background="@drawable/input_n"
+             android:orientation="horizontal"
+             android:gravity="center_vertical"
+             >
+         <LinearLayout
+             android:layout_width="wrap_content"
+             android:layout_height="match_parent"
+             android:gravity="center_vertical"
+             android:layout_gravity="center"
+             >
+         <EditText
+             android:id="@+id/search_input"
+             android:layout_marginLeft="5dp"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textSize="8sp"
+             android:textColor="@color/line_buttom"
+             android:background="@null"
+             android:hint="输入搜索关键字"
+             android:textColorHint="@color/line_buttom"
+             />
+         </LinearLayout>
+          <LinearLayout
+          android:layout_marginLeft="15dp"
+          android:layout_width="25dp"
+          android:layout_height="match_parent"
+          android:orientation="horizontal"
+          android:background="@drawable/ok_n"
+              >
+          <Button
+            android:id="@+id/search_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:text="搜索"
+            android:textSize="8sp"
+                 />
+              </LinearLayout>
+         </LinearLayout>
+         <!-- 选择日历日期 -->
      <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="match_parent" 
@@ -111,18 +157,83 @@
     android:orientation="vertical"  
     
        >
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="20dp"
+           android:orientation="horizontal"
+           android:background="#1A6FA6"
+           >
+           <LinearLayout
+               android:layout_width="wrap_content"
+               android:layout_height="match_parent"
+               android:gravity="center"
+               >
+               <ImageView
+                   android:layout_marginLeft="5dp"
+                   android:layout_marginRight="5dp"
+                   android:layout_width="7dp"
+                   android:layout_height="7dp"
+                   android:src="@drawable/bt_n"
+                   android:gravity="center"
+                   />
+           </LinearLayout>
+           <TextView
+               android:layout_width="0dp"
+               android:layout_weight="1"
+               android:layout_height="match_parent"
+               android:textSize="8sp"
+               android:text="日期"
+               android:textColor="@color/white"
+               android:gravity="center"
+               />
+
+           <TextView
+
+               android:layout_width="0dp"
+               android:layout_weight="1"
+               android:layout_height="match_parent"
+               android:textSize="8sp"
+               android:text="时间"
+               android:textColor="@color/white"
+               android:gravity="center"
+
+               />
+
+           <TextView
+               android:layout_width="0dp"
+               android:layout_weight="1"
+               android:layout_height="match_parent"
+               android:textSize="8sp"
+               android:text="状态"
+               android:textColor="@color/white"
+               android:gravity="center"
+               />
+
+           <TextView
+               android:layout_width="0dp"
+               android:layout_weight="1"
+               android:layout_height="match_parent"
+               android:textSize="8sp"
+               android:text="相识度"
+               android:textColor="@color/white"
+               android:gravity="center"
+               />
+
+       </LinearLayout>
     <View
     android:layout_width="match_parent"
     android:layout_height="0.5dp"
     android:background="@color/line_buttom" 
         />
+       <!--标题-->
+
      <ListView
     android:id="@+id/listView1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:dividerHeight="0.5dp"
     android:divider="@color/line_buttom"
-            />
+         />
      <View
     android:layout_width="match_parent"
     android:layout_height="0.5dp"
@@ -133,29 +244,31 @@
       
      <LinearLayout
     android:layout_marginTop="5dp"
+         android:layout_marginLeft="10dp"
     android:layout_width="match_parent"
-    android:layout_height="15dp" 
+    android:layout_height="16dp"
     android:orientation="horizontal"
          >
     <Button
-    android:id="@+id/bt1"
+
     android:layout_marginLeft="10dp"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:text="导出" 
+    android:text="删除"
     android:textSize="11sp"
     android:textColor="@color/white"
     android:background="@drawable/ok_n"
             />
     <Button
+    android:id="@+id/bt1"
     android:layout_marginLeft="10dp"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:text="取消" 
+    android:text="导出"
     android:textSize="11sp"
     android:textColor="@color/white"
-    android:background="@drawable/cancle_n"
-    android:onClick="goBack"
+        android:background="@drawable/ok_n"
+
             />
      </LinearLayout> 
     </LinearLayout>
@@ -178,11 +291,24 @@
     android:layout_width="0dp"
     android:layout_weight="2"
     android:layout_height="match_parent" 
-    android:orientation="vertical" 
+    android:orientation="vertical"
     android:layout_marginRight="10dp"
     android:layout_marginTop="5dp"
     android:layout_marginBottom="15dp"
          >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="goBack"
+        >
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="13dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/close"
+
+            />
     <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -192,6 +318,7 @@
     android:layout_marginLeft="25dp"  
         
         />
+         </RelativeLayout>
     <LinearLayout
     android:layout_width="match_parent"
     android:layout_weight="1"
@@ -240,43 +367,14 @@
 	            />
     </LinearLayout>
      </LinearLayout>
-     
-     
-    <!--  
-     <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" 
-    android:layout_marginTop="15dp" 
-         >
-     <View
-         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/line_buttom"
-        android:layout_marginLeft="15dp"
-        />      
-     <ListView
-            android:id="@+id/listView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:dividerHeight="0.5dp"
-            android:divider="@color/line_buttom"
-            android:layout_marginLeft="15dp"
-            
-             >
-        </ListView>
-        <View
-         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/line_buttom"
-        android:layout_marginLeft="15dp"
-        /> 
-        </LinearLayout> -->
-        
 
 
 
-        
+
+
+
+
+
 </LinearLayout>
 </RelativeLayout>
 <View
