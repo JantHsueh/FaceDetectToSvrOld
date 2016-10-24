@@ -9,7 +9,9 @@
 #define R unsigned char
 #define G unsigned char
 #define B unsigned char
+
 //每个像素的字节数
+
 #define m_nBytesPerPixel  3
 
 #define RGB unsigned long
@@ -41,7 +43,9 @@ if(p != NULL)   \
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////
+
 // 基本类型定义
+
 ///////////////////////////////////////////////////////////////////////////////////////
 #if defined(WIN32) || defined(OS_WINDOWS) || defined(SDK_WIN32)
 
@@ -112,6 +116,7 @@ if(p != NULL)   \
 
 
 
+
 // 设置特征共享缓冲区大小（默认是20M） 
 #define OD_CODEC_BUF_SIZE  (1 * 1024)
 #define FACIAL_LIB_PATH     "/mnt/sdcard/faciallib"    /* 算法配置目录 */
@@ -128,6 +133,7 @@ if(p != NULL)   \
 #define FACEDETECT_FIND_NO_FACE		-255	/* 检测不到人脸场景时返回的错误码 */
 
 /* 摄像头部分 */
+
 #if 0
 #define SCREEN_WIDTH        240
 #define SCREEN_HEIGHT       320
@@ -160,7 +166,9 @@ if(p != NULL)   \
 #define V4L2_FRM_FMT_TILE       ('T')         /* YUV420 tile(macro block) mode */
 #define V4L2_FRM_FMT_PACK       ('P')         /* package frame format */
 
+
 //彩色 yuv420SP to RGB244
+
 #define YCbCrtoR(Y,Cb,Cr)       (100*Y + 114*(Cr-128))/100
 #define YCbCrtoG(Y,Cb,Cr)       (100*Y - 39*(Cb-128) - 58*(Cr-128))/100
 #define YCbCrtoB(Y,Cb,Cr)       (100*Y + 203*(Cb-128))/100
@@ -330,7 +338,9 @@ static const signed short blueAdjust[] = {
 227, 229, 231, 233, 235, 238, 240, 242,
 };
 
+
 //存储2 个像素点
+
 struct RGB24x2
 {
     R r0;
@@ -406,6 +416,7 @@ void Yuyv2Rgb565Rotate90Mirror(const void *pYuyvData, void *pRgb565Data, const u
 void Yuyv2yuv420pRotate90Mirror(const void *pYuyvData, void *pYuv420pData, const unsigned int w, const unsigned int h);
 
 /**************************************
+
 direct: 1 ---顺时针
         0 ---逆时针
 

@@ -29,9 +29,11 @@
  *  Created on: 2013-11-8
  *      Author: Administrator
  */
-//Ê¶±ğ²É¼¯jpgÍ¼Æ¬ÖÊÁ¿
+
+//è¯†åˆ«é‡‡é›†jpgå›¾ç‰‡è´¨é‡
 #define DEFAULT_JPGE_QUALITY 100
-//Í¼Æ¬×î´óĞı×ª´ÎÊı
+//å›¾ç‰‡æœ€å¤§æ—‹è½¬æ¬¡æ•°
+
 #define IMAGE_MAX_ROTATE_TIMES 2
 
 #define INVALID         0xFFFFFFFF
@@ -41,32 +43,34 @@
 #define INVALID_HANDLE_VALUE    ((HANDLE)INVALID)
 #endif
 
-/*******************************************È«¾Ö±äÁ¿*****************************************/
-/* È«¾ÖµÄ´«ÈëËã·¨µÄÌØÕ÷Ö¸Õë */
+
+/*******************************************å…¨å±€å˜é‡*****************************************/
+/* å…¨å±€çš„ä¼ å…¥ç®—æ³•çš„ç‰¹å¾æŒ‡é’ˆ */
 char * gpUsersFeature = NULL;
 
-/* ´ò¿ªËã·¨¿âµÄ¾ä±ú */
+/* æ‰“å¼€ç®—æ³•åº“çš„å¥æŸ„ */
 OD_CE_HANDLE ghCe = NULL;
 
-/* ´ò¿ªËã·¨¿â±àÂëÄ£¿éµÄ¾ä±ú */
+/* æ‰“å¼€ç®—æ³•åº“ç¼–ç æ¨¡å—çš„å¥æŸ„ */
 OD_CODEC_HANDLE ghFacialCodec;
 
-/* ´ò¿ªËã·¨¿â±àÂëÄ£¿éµÄ´íÎóÂë */
+/* æ‰“å¼€ç®—æ³•åº“ç¼–ç æ¨¡å—çš„é”™è¯¯ç  */
 int giCodecErrorNo = 0;
 
-/* Ó¦ÓÃ³ÌĞòÓëËã·¨Ö®¼äµÄ¹²ÏíÄÚ´æ£¬20M×Ö½Ú */
+/* åº”ç”¨ç¨‹åºä¸ç®—æ³•ä¹‹é—´çš„å…±äº«å†…å­˜ï¼Œ20Må­—èŠ‚ */
 void* gpSharedMem = NULL;
 
-/* Ó¦ÓÃ³ÌĞòÓëËã·¨Ö®¼äµÄ¹²ÏíÄÚ´æ´óĞ¡ */
+/* åº”ç”¨ç¨‹åºä¸ç®—æ³•ä¹‹é—´çš„å…±äº«å†…å­˜å¤§å° */
 int giSharedMemSize = 0;
 
-/* ÌØÕ÷ÊıÄ¿ */
+/* ç‰¹å¾æ•°ç›® */
 int giTotalFeatureNum = 0;
 
-/* ´æ´¢ÌØÕ÷ÖµÃÜÔ¿ */
+/* å­˜å‚¨ç‰¹å¾å€¼å¯†é’¥ */
 char gcaFeaturePwd[33] = { 0 };
 
-/* ¼ÇÂ¼È«²¿ÓÃ»§Óë¹ÜÀíÔ±µÄĞÅÏ¢ */
+/* è®°å½•å…¨éƒ¨ç”¨æˆ·ä¸ç®¡ç†å‘˜çš„ä¿¡æ¯ */
+
 USERINFO gstrUserList[MAX_USER_NUM] = { 0 };
 
 static char s_D1_BUF[D1_WIDTH * D1_HEIGHT * 2];
@@ -75,7 +79,9 @@ static char s_SIF_BUF_TMP[2][SIF_HEIGHT * SIF_WIDTH * 2] = { { 0 } };
 
 char g_SIF_BUF_Send[SIF_HEIGHT * SIF_WIDTH * 2] = { 0 };
 
-/* ÁÙÊ±¹²Ïíbuf */
+
+/* ä¸´æ—¶å…±äº«buf */
+
 char g_cShareMem[20 * 1024] = { 0 };
 
 HANDLE g_hVideoColor = INVALID_HANDLE_VALUE;
@@ -93,9 +99,11 @@ pthread_t gtReadIrdaID = 0;
 
 static char *s_pShareMem = NULL;
 
-/* ÓÃ»§×ÜÊı */
+
+/* ç”¨æˆ·æ€»æ•° */
 int giUserNum = 0;
-//ÊÇ·ñ´æÔÚ×¥ÅÄµ½ÈËÁ³µÄÕÕÆ¬
+//æ˜¯å¦å­˜åœ¨æŠ“æ‹åˆ°äººè„¸çš„ç…§ç‰‡
+
 int giPictureFaceFlag = 0;
 
 
@@ -107,12 +115,14 @@ extern void StartNetModule();
 
 FI_FACIAL_DETECT_PARAM detect_param;
 
-// ´ò¿ªËã·¨¿âÒıÇæ
+
+// æ‰“å¼€ç®—æ³•åº“å¼•æ“
 OD_CE_HANDLE OD_OpenEngine() {
     OD_CE_HANDLE hCe = NULL;
 
-    /* modified by ytj 20110808£¬¸ù¾İ5.2.2ºìÍâÆÕÍ¨Ëã·¨½Ó¿Ú£¬
-     FI_OpenEngineº¯Êıºó2¸ö²ÎÊıĞèÒªÖ¸¶¨cmemkÄÚ´æµÄÆğÊ¼µØÖ·Óë½áÊøµØÖ· */
+    /* modified by ytj 20110808ï¼Œæ ¹æ®5.2.2çº¢å¤–æ™®é€šç®—æ³•æ¥å£ï¼Œ
+     FI_OpenEngineå‡½æ•°å2ä¸ªå‚æ•°éœ€è¦æŒ‡å®šcmemkå†…å­˜çš„èµ·å§‹åœ°å€ä¸ç»“æŸåœ°å€ */
+
     hCe = (OD_CE_HANDLE) FI_OpenEngine(FI_FALSE, 0x88000000, 0x8BFFFFFF);
 
     return hCe;
@@ -231,7 +241,9 @@ void OD_CloseFacialCodec(OD_CODEC_HANDLE hCodec) {
     }
 }
 
-// ¹Ø±ÕËã·¨¿âÒıÇæ
+
+// å…³é—­ç®—æ³•åº“å¼•æ“
+
 void OD_CloseEngine(OD_CE_HANDLE hCe) {
     //TRACE("%s %d \r\n", __FUNCTION__, __LINE__);
 
@@ -252,7 +264,9 @@ int OD_DetectFacial(OD_CODEC_HANDLE hCodec, char* pYBuf, int nWidth,
     detect_param.bDetectEyeStatus = 1;
     detect_param.bDetectMouth = 1;
 
-    /* added by ytj 20110808£¬6446Æ½Ì¨Ê¹ÓÃ ÆÕÍ¨Ëã·¨ */
+
+    /* added by ytj 20110808ï¼Œ6446å¹³å°ä½¿ç”¨ æ™®é€šç®—æ³• */
+
     if (hCodec) {
         //LOGD("OD_DetectFacial() hCodec:%p line:%d", hCodec, __LINE__);
         ret = FI_FACIAL_DetectX(hCodec, pYBuf, &detect_param, pResult);
@@ -260,7 +274,9 @@ int OD_DetectFacial(OD_CODEC_HANDLE hCodec, char* pYBuf, int nWidth,
     return ret;
 }
 
-/* ´ò×® */
+
+/* æ‰“æ¡© */
+
 int DM2016_Authentication(char* pEncryptedCode, char* pPlanCode) {
     return 0;
 }
@@ -325,27 +341,35 @@ void DeInitFacial() {
 }
 
 /**
- *  ³õÊ¼»¯ÈËÁ³Ê¶±ğËã·¨¿â
- *  return ·µ»ØÖ´ĞĞ½á¹û
+
+ *  åˆå§‹åŒ–äººè„¸è¯†åˆ«ç®—æ³•åº“
+ *  return è¿”å›æ‰§è¡Œç»“æœ
+
  */
 
 //void initFaceLib(JNIEnv* env, jobject thiz) {
 JNIEXPORT void JNICALL Java_com_firs_cn_FaceNative_initFaceLib(JNIEnv* env, jobject thiz) {
     //LOGD("initFaceLib()");
-    //³õÊ¼»¯Ëã·¨
+
+    //åˆå§‹åŒ–ç®—æ³•
+
     InitFacial();
     LOGD("DoTcpSendThreadPool %s %d\r\n", __FUNCTION__, __LINE__);
 }
 
 /**
- *  ÊÍ·Å³õÊ¼»¯ÈËÁ³Ê¶±ğËã·¨¿â
- *  return ·µ»ØÖ´ĞĞ½á¹û
+
+ *  é‡Šæ”¾åˆå§‹åŒ–äººè„¸è¯†åˆ«ç®—æ³•åº“
+ *  return è¿”å›æ‰§è¡Œç»“æœ
+
  */
 
 //void releaseFaceLib(JNIEnv* env, jobject thiz) {
 JNIEXPORT void JNICALL Java_com_firs_cn_FaceNative_releaseFaceLib(JNIEnv* env, jobject thiz) {
     //LOGD("releaseFaceLib()");
-    //ÊÍ·ÅÉêÇë×ÊÔ´
+
+    //é‡Šæ”¾ç”³è¯·èµ„æº
+
     DeInitFacial();
 }
 
@@ -357,7 +381,9 @@ void RoateData(LONG width, LONG height, unsigned char * srcData, unsigned char *
 	unsigned char *tmpSrc = srcData;
 	unsigned char *tmpDst = dstData;
 	
-	width *= Bpp;		//Ã¿ÏñËØÕ¼Èı×Ö½Ú
+
+	width *= Bpp;		//æ¯åƒç´ å ä¸‰å­—èŠ‚
+
 	for (i = 0; i < width; i += Bpp)
 		//for (i = width - 3; i >= 0 ; i -= 3)
 	{
@@ -377,7 +403,9 @@ void RoateData(LONG width, LONG height, unsigned char * srcData, unsigned char *
     {  
          
         int wh = width * height;  
-        //Ğı×ªY  
+
+        //æ—‹è½¬Y  
+
         int k = 0;  
         for(int i=0;i<width;i++) {  
             for(int j=0;j<height;j++)   
@@ -400,8 +428,10 @@ void RoateData(LONG width, LONG height, unsigned char * srcData, unsigned char *
     } 
 
 /**
- *  ÈËÁ³Ê¶±ğ
- *  return ·µ»ØÖ´ĞĞ½á¹û
+
+ *  äººè„¸è¯†åˆ«
+ *  return è¿”å›æ‰§è¡Œç»“æœ
+
  */
 JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* env, jobject thiz, jint width,
         jint height, jboolean isFront, jbyteArray imgData) {
@@ -411,23 +441,27 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
     int ret1 = 10;
     int yWidth = width;
     int yHeight = height;
-    //Ê¶±ğÄ£Ê½£¬Ä¬ÈÏÎª1×¢²áÄ£Ê½
+
+    //è¯†åˆ«æ¨¡å¼ï¼Œé»˜è®¤ä¸º1æ³¨å†Œæ¨¡å¼
+
     int iMode = 1;
     int iEyeWidthMin = 0;
     int iEyeWidthMax = 0;
     int iEyeWidth = 0;
     int i = 0;
 
-    //Ä¬ÈÏĞı×ª90¶È
+
+    //é»˜è®¤æ—‹è½¬90åº¦
     signed short rotateValue = 0;
-    // ·µ»ØÈËÁ³×ø±ê(left, top, right, bottom)
+    // è¿”å›äººè„¸åæ ‡(left, top, right, bottom)
     jint pFace[13] = { 0 };
     FI_FACIAL_DETECTX_RESULT strFacialInfo;
-    // ´«ÈëµÄÍ¼ÏñÊı¾İ
+    // ä¼ å…¥çš„å›¾åƒæ•°æ®
     jbyte* jbts = (env)->GetByteArrayElements(imgData, 0);
-    //´«ÈëµÄÊı¾İ³¤¶È
+    //ä¼ å…¥çš„æ•°æ®é•¿åº¦
     jsize len = (env)->GetArrayLength(imgData);
-    // Í¼Æ¬Êı¾İ´æ´¢¿Õ¼ä
+    // å›¾ç‰‡æ•°æ®å­˜å‚¨ç©ºé—´
+
 
     char* g_SIF_BUF = new char[yWidth * yHeight * 2];
     memset(g_SIF_BUF, 0, yWidth * yHeight * 2);
@@ -444,7 +478,9 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
     //LOGD("recognizeFace() width:%d height:%d imgData.length:%d %s %d\r\n",width, height, len, __FUNCTION__, __LINE__);
     if (JNI_TRUE == isFront) {
         rotateValue = 270;
-        //Ê¶±ğÄæÊ±ÕëĞı×ª90¶È
+
+        //è¯†åˆ«é€†æ—¶é’ˆæ—‹è½¬90åº¦
+
         //void YUV420SPToYUV420P ( void * yuv420sp,  void * yuv420,  int  width,  int  height )
         //LOGD("yWidth[%d] yHeight[%d]\r\n",yWidth,yHeight);
 
@@ -458,11 +494,13 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
         if (ret <= 0 || strFacialInfo.faceNum <= 0) {
             //LOGD("ret <= 0 || strFacialInfo.faceNum <= 0 %s %d\r\n",
             //        __FUNCTION__, __LINE__);
-            //²»Ğı×ª
+
+            //ä¸æ—‹è½¬
             rotateValue = 0;
             memset(g_SIF_BUF, 0, yWidth * yHeight * 2);
             memcpy(g_SIF_BUF, jbts, len);
-            // Ê¶±ğÔ­Ê¼Í¼Æ¬
+            // è¯†åˆ«åŸå§‹å›¾ç‰‡
+
             memset(&strFacialInfo, 0, sizeof(strFacialInfo));
             ret = OD_DetectFacial(ghFacialCodec, g_SIF_BUF, yWidth, yHeight,
                     &strFacialInfo);
@@ -470,10 +508,12 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
             if (ret <= 0 || strFacialInfo.faceNum <= 0) {
                 int j = 0;
                 //LOGD("ret <= 0 %s %d\r\n", __FUNCTION__, __LINE__);
-                //¿½±´Êı¾İµ½Ä¿±êÇøÓò¡£
+
+                //æ‹·è´æ•°æ®åˆ°ç›®æ ‡åŒºåŸŸã€‚
                 memset(g_Temp_BUF, 0, yWidth * yHeight * 2);
                 memcpy(g_Temp_BUF, jbts, len);
-                // Ê¶±ğÆäËûÁ½¸ö½Ç¶ÈµÄÍ¼Æ¬
+                // è¯†åˆ«å…¶ä»–ä¸¤ä¸ªè§’åº¦çš„å›¾ç‰‡
+
                 for (j = 0; j < IMAGE_MAX_ROTATE_TIMES; j++) {
                     int mWidth = yHeight;
                     rotateValue = ((j + 1) * 90);
@@ -492,7 +532,9 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
                     if (ret > 0 && strFacialInfo.faceNum > 0) {
                         break;
                     }
-                    //¿½±´Êı¾İµ½Ä¿±êÇøÓò¡£
+
+                    //æ‹·è´æ•°æ®åˆ°ç›®æ ‡åŒºåŸŸã€‚
+
                     memset(g_Temp_BUF, 0, yWidth * yHeight * 2);
                     memcpy(g_Temp_BUF, g_SIF_BUF, yWidth * yHeight * 2);
                 }
@@ -501,7 +543,9 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
         }
     } else {
         rotateValue = 90;
-        //Ê¶±ğÄæÊ±ÕëĞı×ª90¶È
+
+        //è¯†åˆ«é€†æ—¶é’ˆæ—‹è½¬90åº¦
+
 		YUV420SPToYUV420P( g_Temp_BUF,  g_Temp_BUF2,  yWidth,yHeight);
         rotate90_yuv420p(g_Temp_BUF2, yWidth, yHeight, g_SIF_BUF, TRUE, 1);
 		
@@ -514,11 +558,13 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
         if (ret <= 0 || strFacialInfo.faceNum <= 0) {
             //LOGD("ret <= 0 || strFacialInfo.faceNum <= 0 %s %d\r\n",
             //        __FUNCTION__, __LINE__);
-            //²»Ğı×ª
+
+            //ä¸æ—‹è½¬
             rotateValue = 0;
             memset(g_Temp_BUF, 0, yWidth * yHeight * 2);
             memcpy(g_Temp_BUF, jbts, len);
-            // Ê¶±ğÔ­Ê¼Í¼Æ¬
+            // è¯†åˆ«åŸå§‹å›¾ç‰‡
+
             memset(&strFacialInfo, 0, sizeof(strFacialInfo));
             ret = OD_DetectFacial(ghFacialCodec, g_Temp_BUF, yWidth, yHeight,
                     &strFacialInfo);
@@ -526,10 +572,12 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
             if (ret <= 0 || strFacialInfo.faceNum <= 0) {
                 int j = 0;
                 //LOGD("ret <= 0 %s %d\r\n", __FUNCTION__, __LINE__);
-                //¿½±´Êı¾İµ½Ä¿±êÇøÓò¡£
+
+                //æ‹·è´æ•°æ®åˆ°ç›®æ ‡åŒºåŸŸã€‚
                 memset(g_Temp_BUF, 0, yWidth * yHeight * 2);
                 memcpy(g_Temp_BUF, g_SIF_BUF,  yWidth * yHeight * 2);
-                // Ê¶±ğÆäËûÁ½¸ö½Ç¶ÈµÄÍ¼Æ¬
+                // è¯†åˆ«å…¶ä»–ä¸¤ä¸ªè§’åº¦çš„å›¾ç‰‡
+
                 for (j = 0; j < IMAGE_MAX_ROTATE_TIMES; j++) {
                     int mWidth = yHeight;
                     rotateValue = ((j + 1) * 90);
@@ -548,7 +596,9 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
                     if (ret > 0 && strFacialInfo.faceNum > 0) {
                         break;
                     }
-                    //¿½±´Êı¾İµ½Ä¿±êÇøÓò¡£
+
+                    //æ‹·è´æ•°æ®åˆ°ç›®æ ‡åŒºåŸŸã€‚
+
                     memset(g_Temp_BUF, 0, yWidth * yHeight * 2);
                     memcpy(g_Temp_BUF, g_SIF_BUF, yWidth * yHeight * 2);
                 }
@@ -560,7 +610,9 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
    // delete[] g_SIF_BUF;
     //LOGD("recognizeFace() ret:%d nFaceNum:%d %s %d\r\n", ret, strFacialInfo.faceInfo[0].nFaceNum, __FUNCTION__, __LINE__);
     if (ret > 0) {
-        int index = 0; //±ê¼Ç·µ»ØµÄÈËÁ³Ë÷Òı
+
+        int index = 0; //æ ‡è®°è¿”å›çš„äººè„¸ç´¢å¼•
+
         int maxFace = 0;
         int sumLen = 0;
 		int result = 0;
@@ -573,12 +625,16 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
 
 		//rotateYUV240SP((unsigned char*)jbts,(unsigned char*)g_SIF_BUF_Send,width,height);
 		
-        // ±£´æÔ­Ê¼Í¼ÏñYUV420SP¸ñÊ½
+
+        // ä¿å­˜åŸå§‹å›¾åƒYUV420SPæ ¼å¼
+
         //saveRaw((unsigned char*) g_SIF_BUF_Send, SIF_HEIGHT * SIF_WIDTH * 2);
         RGB24x2 *bmp = (RGB24x2*) malloc(3 * width * height);
         memset((unsigned char*) bmp, 0, 3 * width * height);
 		
-        // ×ª»»Ô­Ê¼Í¼Æ¬ÎªRGB¸ñÊ½
+
+        // è½¬æ¢åŸå§‹å›¾ç‰‡ä¸ºRGBæ ¼å¼
+
         //yuv420sp_to_rgb(240, 320, (unsigned char*) g_SIF_BUF_Send, bmp);
 
 		yuv420p_to_rgb565_ex(240, 320, g_SIF_BUF_Send, bmp);
@@ -588,9 +644,11 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
 		//YUV420p_to_RGB24((unsigned char **)g_SIF_BUF_Send, (unsigned char *)bmp2, 240, 320);
 
 		//yuv420sp_to_rgb(width, height, (unsigned char*) g_SIF_BUF, bmp);
-        // ±£´æRGB¸ñÊ½Í¼Ïñ
+
+        // ä¿å­˜RGBæ ¼å¼å›¾åƒ
          //saveRgb((unsigned char*)bmp, 3 * width * height);
-        // ±£´æÍ¼ÏñÎªJPG¸ñÊ½
+        // ä¿å­˜å›¾åƒä¸ºJPGæ ¼å¼
+
         //LOGD("strFile[%s]\r\n",strFile);
 
 		//RoateData(width,height, (unsigned char*)bmp, (unsigned char*)bmp1, 1);
@@ -599,7 +657,9 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
         result = jpeg_compress((char*) strFile, (unsigned char*)bmp, 240,
                 320, TRUE, 100);
         if (0 != result) {
-            //  JPGÍ¼Ïñ×ª»»³É¹¦¡£
+
+            //  JPGå›¾åƒè½¬æ¢æˆåŠŸã€‚
+
             ret = result;
         }
 		pthread_mutex_unlock(&gRwPicMutex);
@@ -621,7 +681,9 @@ JNIEXPORT jintArray JNICALL Java_com_firs_cn_FaceNative_recognizeFace(JNIEnv* en
 	        }
 		*/
 
-        // ·µ»ØµÄ½á¹û¼¯
+
+        // è¿”å›çš„ç»“æœé›†
+
         pFace[0] = ret;
         pFace[1] = strFacialInfo.faceInfo[0].rcFace.left;
         pFace[2] = strFacialInfo.faceInfo[0].rcFace.top;
@@ -684,7 +746,9 @@ JNIEXPORT jint JNICALL Java_com_firs_cn_FaceNative_UserAuth( JNIEnv* env,jobject
 	char chUserName[32] = {0};
 	char chPwd[32] = {0};
 
-	//¶ÁÈ¡ÓÃ»§Ãû
+
+	//è¯»å–ç”¨æˆ·å
+
 	jbyte* jbtsUser = (env)->GetByteArrayElements(username, 0);
     jsize lenuser = (env)->GetArrayLength(username);
 	if(lenuser > sizeof(chUserName))
@@ -693,7 +757,9 @@ JNIEXPORT jint JNICALL Java_com_firs_cn_FaceNative_UserAuth( JNIEnv* env,jobject
 	}
 	memcpy(chUserName, jbtsUser, lenuser);
 
-	//¶ÁÈ¡ÃÜÂë
+
+	//è¯»å–å¯†ç 
+
 	jbyte* jbtspwd = (env)->GetByteArrayElements(pwd, 0);
 	jsize lenpwd = (env)->GetArrayLength(pwd);
 	if(lenpwd > sizeof(chPwd))
@@ -720,9 +786,11 @@ JNIEXPORT void JNICALL Java_com_firs_cn_FaceNative_SetServerIP( JNIEnv* env,jobj
 {
 	char acIp[16] = {0};
 	
-	 // ´«ÈëµÄÊı¾İ
+
+	 // ä¼ å…¥çš„æ•°æ®
     jbyte* jbts = (env)->GetByteArrayElements(ip, 0);
-    //Êı¾İ³¤¶È
+    //æ•°æ®é•¿åº¦
+
     jsize len = (env)->GetArrayLength(ip);
 
 	if(len > sizeof(acIp))

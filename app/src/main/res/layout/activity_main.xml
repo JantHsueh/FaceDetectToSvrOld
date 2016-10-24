@@ -137,11 +137,14 @@
     android:layout_height="match_parent"
         />
     </LinearLayout>
+
     <!--<View
+
     android:id="@+id/v_h_buttom"
     android:layout_width="match_parent"
     android:layout_weight="1"
     android:layout_height="0dp"
+
         />-->
     <RelativeLayout
         android:id="@+id/v_h_buttom"
@@ -184,5 +187,6 @@
 
 </LinearLayout>
     </RelativeLayout>
+
 
 </LinearLayout>

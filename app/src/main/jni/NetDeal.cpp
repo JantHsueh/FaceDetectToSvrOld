@@ -1,4 +1,5 @@
 /********************************************************************************
+
 **  Copyright (c) 2012, 深圳市飞瑞斯科技有限公司
 **  All rights reserved.
 **
@@ -12,6 +13,7 @@
 **
 **  修改作者：
 **  修改日期:
+
 ********************************************************************************/
 #include <arpa/inet.h>
 #include <sys/types.h>
@@ -40,6 +42,7 @@ char g_chPwd[32] = {0};
 
 //using namespace FrameWork;
 
+
 /* 终端作为客户端时，保存全局的socket id */
 int giClieFd = -1;
 int giServerFd[MAX_CONN_NUM] = {-1, -1, -1, -1, -1};
@@ -48,11 +51,13 @@ unsigned int gaiResponsePkts = 1; 	//主动上报的应答数
 unsigned int gLastResponsePkt = 0;  //主动上报的上次最后应答数
 unsigned int guiUpResponseNum = 0;  //主动上报记录应答的总数，30条写一次时间配置
 
+
 COMPARE_RESULT g_CompareResult;
 int g_Score = 30;
 
 
 /**************************************************************\
+
 ** 函数名称： DoTcpServer
 ** 功能： 终端作为服务器端，协议处理函数
 ** 参数：   
@@ -63,6 +68,7 @@ int g_Score = 30;
 ** 创建日期： 2012-8-22
 ** 修改作者： 
 ** 修改日期： 
+
 \**************************************************************/
 int DoTcpServer(CommLayerTcp *&TcpObj, int InFd)
 {
@@ -71,8 +77,10 @@ int DoTcpServer(CommLayerTcp *&TcpObj, int InFd)
 	PROTOCOL_PACK InStrProPack, OutStrProPack;
 	INLINK_SHARE StrInlinkShare;
 
+
 	time_t tRecvTime = 0;	/* SDK接收到数据包的时间 */
 	time_t tNoRecvTime = 0; /* SDK收不到数据的时间 */
+
 
 	memset(&OutStrProPack, 0, sizeof(PROTOCOL_PACK));
 	OutStrProPack.data = NULL;
@@ -98,10 +106,12 @@ int DoTcpServer(CommLayerTcp *&TcpObj, int InFd)
 
 		ret = -1;
 
+
 		/* 读取报文头部分 */
 		ret = TcpObj->ReadN(InFd, RECV_TIME_OUT, (void *)(&InStrProPack.head), sizeof(InStrProPack.head));
 #if 0
 		/* 如果ret为-2，表明没有收到数据，则continue */
+
 		if (ret == -2)
 		{
 			continue;
@@ -109,10 +119,12 @@ int DoTcpServer(CommLayerTcp *&TcpObj, int InFd)
 #endif
 		if(ret == -2)
 		{
+
 			/* 如果ret为-2，表明没有收到数据，则continue */
 			tNoRecvTime = time(NULL);
 
 			/* 收不到SDK时间为3个心跳周期则重连 */
+
 			//TRACE("%d ... %s %d\r\n", tNoRecvTime - tRecvTime, __FUNCTION__, __LINE__);
 			if(tNoRecvTime - tRecvTime > 30)
 			{
@@ -126,7 +138,9 @@ int DoTcpServer(CommLayerTcp *&TcpObj, int InFd)
 
 		tRecvTime = time(NULL);
 
+
 		/* 如果ret为0或为-1，表明网络异常，则break，重连 */
+
 		if ((ret == 0) || (ret == -1))
 		{
 			LOGD("ret %d %s %d\r\n", ret, __FUNCTION__, __LINE__);
@@ -153,7 +167,9 @@ int DoTcpServer(CommLayerTcp *&TcpObj, int InFd)
 			ret = -1;
 			memset(InStrProPack.data, 0, sizeof(char)*(InStrProPack.head.dataLen + 1));
 
+
 			/* 读取报文内容部分 */
+
 			ret = TcpObj->ReadN(InFd, RECV_TIME_OUT, (void *)InStrProPack.data, InStrProPack.head.dataLen);
 			if(ret <= 0)
 			{
@@ -170,12 +186,14 @@ int DoTcpServer(CommLayerTcp *&TcpObj, int InFd)
 			}			
 		}
 
+
 		/* 进行报文内容解析 */
 		ret = AllDealTcp(InFd, &StrInlinkShare, &InStrProPack, &OutStrProPack);
 		if (ret == 0)
 		{
 			/* 如果数据包子类型为识别用户或注册人脸，则不在此处集中发送应答包，
 			   而由这2个子类型的具体处理函数来发送应答包 */
+
 			if ((USER_VERIFY_USER != InStrProPack.head.subType) && (USER_ENROLL_FACE != InStrProPack.head.subType))
 			{
 				if(CommLayerTcp::PushSendDataQueue(InFd, &OutStrProPack) == false)
@@ -199,6 +217,7 @@ int DoTcpServer(CommLayerTcp *&TcpObj, int InFd)
 }
 
 /**************************************************************\
+
 ** 函数名称： DoTcpClient
 ** 功能： 终端作为客户端，协议处理函数
 ** 参数：   
@@ -208,6 +227,7 @@ int DoTcpServer(CommLayerTcp *&TcpObj, int InFd)
 ** 创建日期： 2012-8-22
 ** 修改作者： 
 ** 修改日期： 
+
 \**************************************************************/
 int DoTcpClient(CommLayerTcp *&TcpObj)
 {
@@ -220,8 +240,10 @@ int DoTcpClient(CommLayerTcp *&TcpObj)
 	bool IfReconn = false;
 	time_t tLastTime;
 	
+
 	time_t tRecvTime = 0;	/* SDK接收到数据包的时间 */
 	time_t tNoRecvTime = 0; /* SDK收不到数据的时间 */
+
 
 	int i = 0;
 	int iClientAuthSucc = 0;
@@ -259,7 +281,9 @@ int DoTcpClient(CommLayerTcp *&TcpObj)
 			LOGD("ret %d %s %d\r\n", ret, __FUNCTION__, __LINE__);
 		}
 
+
 		/* 连接服务器端 */
+
 		if(!(TcpObj->CreateTcpClient()))
 		{
 			LOGD(">>>>>>>>>>>>>>>>>>>>>>> %s %d\r\n",__FUNCTION__, __LINE__);
@@ -277,7 +301,9 @@ int DoTcpClient(CommLayerTcp *&TcpObj)
 
 		//sleep(8);
 		
+
 		/* 连接认证 */
+
 		ClientSendAuth(g_chUserName, g_chPwd);
 		
 		tRecvTime = time(NULL);
@@ -312,10 +338,12 @@ int DoTcpClient(CommLayerTcp *&TcpObj)
 		
 			ret = -1;
 
+
 			/* 读取报文头部分 */
 			ret = TcpObj->ReadN(ClieFd, RECV_TIME_OUT, (void *)(&InStrProPack.head), sizeof(InStrProPack.head));
 
 			/* 如果ret为0或为-1，表明网络异常，则break，重连 */
+
 			if ((ret == 0) || (ret == -1)/* || (iUploadRecord == -3)*/)
 			{
 				LOGD("ret %d %s %d\r\n", ret, __FUNCTION__, __LINE__);
@@ -326,10 +354,12 @@ int DoTcpClient(CommLayerTcp *&TcpObj)
 			}
 			else if(ret == -2)
 			{
+
 				/* 如果ret为-2，表明没有收到数据，则continue */
 				tNoRecvTime = time(NULL);
 
 				/* 收不到SDK时间为3个心跳周期则重连 */
+
 				//TRACE("%d ... %s %d\r\n", tNoRecvTime - tRecvTime, __FUNCTION__, __LINE__);
 				if(tNoRecvTime - tRecvTime > 30)
 				{
@@ -395,7 +425,9 @@ int DoTcpClient(CommLayerTcp *&TcpObj)
 
 				ret = -1;
 				
+
 				/* 读取报文内容部分 */
+
 				ret = TcpObj->ReadN(ClieFd, RECV_TIME_OUT, (void *)InStrProPack.data, InStrProPack.head.dataLen);
 				if((unsigned int)ret != InStrProPack.head.dataLen)
 				{
@@ -409,7 +441,9 @@ int DoTcpClient(CommLayerTcp *&TcpObj)
 
 			chksum += check_sum((unsigned char*)InStrProPack.data, InStrProPack.head.dataLen);
 
+
 			//读取校验和包尾巴 
+
 			
 			memset(ucProTail, 0, sizeof(ucProTail));
 			ret = TcpObj->ReadN(ClieFd, RECV_TIME_OUT, (void *)ucProTail, 3);
@@ -436,7 +470,9 @@ int DoTcpClient(CommLayerTcp *&TcpObj)
 			//InStrProPack.csuffix = ntohs(InStrProPack.csuffix);
 			LOGD("InStrProPack.csuffix[%02x]\r\n",InStrProPack.csuffix);
 
+
 			// 校验结果比较和包尾比较 
+
 		//	TRACE("ucCheckXor: %x ucProTail: %x %s %d\r\n",ucCheckXor, ucProTail[0],__FUNCTION__, __LINE__);
 			//TRACE("InStrProPack.usTail: %x %s %d\r\n",InStrProPack.usTail, __FUNCTION__, __LINE__);
 			if(InStrProPack.csuffix != PROTOCOL_TAIL_FLAG)
@@ -445,12 +481,14 @@ int DoTcpClient(CommLayerTcp *&TcpObj)
 				//continue;
 			}
 			
+
 			/* 进行报文内容解析，并将欲发回的数据OutStrProPack插入队列 */
 			ret = AllDealTcp(ClieFd, &StrInlinkShare, &InStrProPack, &OutStrProPack);
 			if (ret == 0)
 			{
 				/* 如果数据包子类型为识别用户或注册人脸，则不在此处集中发送应答包，
 				   而由这2个子类型的具体处理函数来发送应答包 */
+
 				/*
 				if ((USER_VERIFY_USER != InStrProPack.head.subType) && (USER_ENROLL_FACE != InStrProPack.head.subType))
 				{
@@ -463,11 +501,13 @@ int DoTcpClient(CommLayerTcp *&TcpObj)
 			Free(InStrProPack.data);
 			Free(OutStrProPack.data);
 
+
 			//临时使用下
 			//g_AuthFlag = 1;
 			//StrInlinkShare.authFlag = 1;
 
 			/* 服务器验证失败，重连 */
+
 			if(StrInlinkShare.authFlag == -2)
 			{
 				LOGD("Reconnect... %s %d\r\n", __FUNCTION__, __LINE__);
@@ -480,7 +520,9 @@ int DoTcpClient(CommLayerTcp *&TcpObj)
 				iClientAuthSucc = TcpObj->GetClientAuthSucc();
 				if(iClientAuthSucc == 0)
 				{
+
 					/* 认证成功，可以发心跳 */
+
 					TcpObj->SetClientAuthSucc(1);
 				}
 			}
@@ -500,7 +542,9 @@ int DoTcpClient(CommLayerTcp *&TcpObj)
 
             giClieFd = -1;
 
+
 			/* 重置 */
+
 			TcpObj->SetClientAuthSucc(0);
             
 			//sleep(RECONNECT_SERVER_TIME);
@@ -532,7 +576,9 @@ int dataRcr(unsigned char* data, int len)
 	return sum;
 }
 
+
 unsigned short check_sum(unsigned char* data, int  data_len) //计算数据校验和
+
 {
     if ((NULL == data) || (0 == data_len))
     {
@@ -555,6 +601,7 @@ unsigned short check_sum(unsigned char* data, int  data_len) //计算数据校�
 
 
 /**************************************************************\
+
 ** 函数名称： TcpSendPack
 ** 功能： 构造发送数据包
 ** 参数：
@@ -571,6 +618,7 @@ unsigned short check_sum(unsigned char* data, int  data_len) //计算数据校�
 ** 创建日期： 2012-5-21
 ** 修改作者：
 ** 修改日期：
+
 \**************************************************************/
 int TcpSendPack(unsigned short flag, unsigned short index,
 			unsigned short packType,unsigned int msgtype, unsigned short subType, unsigned int dataLen, void *data, PROTOCOL_PACK *OutStrProPack)
@@ -610,6 +658,7 @@ int TcpSendPack(unsigned short flag, unsigned short index,
 }
 
 /**************************************************************\
+
 ** 函数名称： AllDealTcp
 ** 功能： 协议解析，进行相应包类型处理
 ** 参数： 
@@ -622,6 +671,7 @@ int TcpSendPack(unsigned short flag, unsigned short index,
 ** 创建日期： 2012-5-21
 ** 修改作者：
 ** 修改日期：
+
 \**************************************************************/
 int AllDealTcp(int SockFd, INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack,
 	PROTOCOL_PACK *OutStrProPack)
@@ -638,16 +688,20 @@ int AllDealTcp(int SockFd, INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrPro
 			//InStrProPack->head.packType, InStrProPack->head.subType, __FUNCTION__, __LINE__);
 	}
 
+
 	//不是手机数据报，返回报错
+
 	if(InStrProPack->head.packType != NTYPE_FACECAP_WORK)
 	{
 		return -1;
 	}
 
 
+
 	switch(InStrProPack->head.msgtype)		/* 分析数据包类型 */
 	{
 		case NMSG_CNT_LOGIN://处理登录返回结果
+
 		{
 			StrInlinkShare->authFlag = DealMsgAuth(StrInlinkShare, InStrProPack, OutStrProPack);
 			if(StrInlinkShare->authFlag < 0)
@@ -661,7 +715,9 @@ int AllDealTcp(int SockFd, INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrPro
 			
 			break;
 		}
+
 		case NMSG_FACE_COMPARE://处理验证返回结果
+
 		{
 			LOGD("InStrProPack->head.packType %d InStrProPack->head.subType %d %s %d\r\n", 
 			InStrProPack->head.packType, InStrProPack->head.subType, __FUNCTION__, __LINE__);
@@ -678,7 +734,9 @@ int AllDealTcp(int SockFd, INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrPro
 			
 			break;
 		}
+
 		case NMSG_FLIB_GET_SUB://处理获取人脸模板照片
+
 		{
 			LOGD("InStrProPack->head.packType %d InStrProPack->head.subType %d %s %d\r\n", 
 			InStrProPack->head.packType, InStrProPack->head.subType, __FUNCTION__, __LINE__);
@@ -709,7 +767,9 @@ int AllDealTcp(int SockFd, INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrPro
 			break;
 		}
 		
+
 		default://包类型错误 
+
 		{
 			retVal = -1;
 
@@ -722,9 +782,11 @@ int AllDealTcp(int SockFd, INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrPro
 
 /* ------------------------------------------------------------------------- */
 /*
+
 **  函数: 查询请求（GET）
 **  功能: 传入一个数据包，根据数据包的子类型做不同的处理
 **  返回: 该函数处理成功返回0，出错则返回-1
+
 */
 int DealMsgGet(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROTOCOL_PACK *OutStrProPack)
 {
@@ -732,7 +794,7 @@ int DealMsgGet(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROTOC
 	int iret  = 0;
 	COMPARE_RESULT compareResult;
 	int score = 0;
-	
+
 	// 处理该子类型信息
 	switch(InStrProPack->head.subType)
 	{
@@ -809,7 +871,7 @@ int DealMsgGetFace(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PR
 	unsigned int faceLen = 0;
 	unsigned int faceId = 0;
 	char bufFile[256] = {0};
-	
+
 	// 处理该子类型信息
 	switch(InStrProPack->head.subType)
 	{
@@ -897,6 +959,7 @@ int DealMsgGetFace(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PR
 ** 创建日期： 2012-8-22
 ** 修改作者：
 ** 修改日期：
+
 \**************************************************************/
 int DealHeartbeat(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROTOCOL_PACK *OutStrProPack)
 {

@@ -53,6 +53,10 @@ public class WelcomeActivity extends Activity {
         
 	}
 
+
+	/**
+	 * 测试使用登陆账号
+	 */
 	 private void auth() {
 	     FaceNative.UserAuth(name.toString().getBytes(), pwd.toString().getBytes());//进行登录
          FaceNative.getAuth();

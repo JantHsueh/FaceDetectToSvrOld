@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 public class ShowFailPage extends Activity {
 	
 	TextView text_failshow;

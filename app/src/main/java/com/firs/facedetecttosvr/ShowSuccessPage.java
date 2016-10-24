@@ -47,14 +47,18 @@ public class ShowSuccessPage extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		requestWindowFeature(Window.FEATURE_NO_TITLE);//隐藏标题 
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 		WindowManager.LayoutParams.FLAG_FULLSCREEN); // 隐藏状态栏
+
 		//getActionBar().setBackgroundDrawable(this.getResources().getDrawable(R.drawable.action_bar_bg));
 		setContentView(R.layout.activity_show);
 		compareresult cpmrest = new compareresult();
 		
+
 		Display currDisplay = getWindowManager().getDefaultDisplay();//获取屏幕当前分辨率
+
 //		btn_save = (Button)findViewById(R.id.btnSave);
 //		btn_unSave = (Button)findViewById(R.id.btnUnSave);
 //		btn_save.setWidth(currDisplay.getWidth()/4);
@@ -65,7 +69,7 @@ public class ShowSuccessPage extends Activity {
 //		text_time = (TextView)findViewById(R.id.textTime);
 		
 		//edit_remark = (EditText)findViewById(R.id.editRemarks);
-		
+
 		FaceNative.getCompareResult(cpmrest);//获取相机比对结果
 //		text_score.setText("相似度: "+cpmrest.score/1000000+" %");
 //		text_name.setText("注册名称: "+cpmrest.name);
@@ -90,6 +94,7 @@ public class ShowSuccessPage extends Activity {
         database = new MyDataBaseAdapter(this);
 		
 		//取得数据库对象 
+
         database.open();
 	}
 	
@@ -112,15 +117,17 @@ public class ShowSuccessPage extends Activity {
 		compareresult cpmrest = new compareresult();
 		FaceNative.getCompareResult(cpmrest);
 		 MyApp.log("Long.toString(lTime)"+Long.toString(lTime));
-		 //插入数据库 
+		 //插入数据库
 		
 		database.insertRecordInfoData(Long.toString(lTime), Integer.toString(cpmrest.score/1000000), cpmrest.name,  Integer.toString(cpmrest.faceId),
 				"facePic_temp.jpg","","others");
 		copyFile("/data/data/com.firs.facedetecttosvr/temp/"+cpmrest.faceId+".jpg",MyApp.FACE_PATH+Long.toString(lTime)+cpmrest.faceId+".jpg");
 		if(true == bSave){
+
 			toast= Toast.makeText(getApplicationContext(), "记录保存保存成功!", Toast.LENGTH_SHORT);
 		}else {
 			toast= Toast.makeText(getApplicationContext(), "记录保存失败!", Toast.LENGTH_SHORT);
+
 		}
 		toast.setGravity(Gravity.CENTER, 0, 0);
 		toast.show();
@@ -177,7 +184,9 @@ public class ShowSuccessPage extends Activity {
 	
 	public void  goBack (View v){
 		//ShowSuccessPage.this.finish();
+
 		saveRecord();//保存记录  弹出框提示
+
 	}
     public void  toHistory (View v){
     	Intent intent = new Intent(this,ShowRecordListPage.class);

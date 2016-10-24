@@ -70,7 +70,7 @@ int CommLayerTcp::iInstance= 0;
 ** 创建作者： 颜廷军
 ** 创建日期： 2012-8-22
 ** 修改作者： 
-** 修改日期： 
+** 修改日期：
 \**************************************************************/
 CommLayerTcp::CommLayerTcp()
 {
@@ -173,7 +173,7 @@ void CommLayerTcp::CommLayerResetIpAndPort(const SERVER_OR_CLIENT InModel, const
 ** 创建作者： 颜廷军
 ** 创建日期： 2012-8-22
 ** 修改作者： 
-** 修改日期： 
+** 修改日期：
 \**************************************************************/
 int CommLayerTcp::CommLayerTcpInit(const SERVER_OR_CLIENT InModel, const char *Ip, const int Port)
 {
@@ -223,7 +223,7 @@ int CommLayerTcp::CommLayerTcpInit(const SERVER_OR_CLIENT InModel, const char *I
 ** 创建作者： 颜廷军
 ** 创建日期： 2012-8-22
 ** 修改作者： 
-** 修改日期： 
+** 修改日期：
 \**************************************************************/
 void CommLayerTcp::CommLayerTcpDestroy()
 {
@@ -272,8 +272,8 @@ void CommLayerTcp::CommLayerTcpDestroy()
 ** 创建作者： 颜廷军
 ** 创建日期： 2012-8-22
 ** 修改作者： 
-** 修改日期： 
-\**************************************************************/
+** 修改日期：
+*************/
 CommLayerTcp::~CommLayerTcp()
 {	
 	CommLayerTcpDestroy();
@@ -288,7 +288,7 @@ CommLayerTcp::~CommLayerTcp()
 ** 创建作者： 颜廷军
 ** 创建日期： 2012-8-22
 ** 修改作者： 
-** 修改日期： 
+** 修改日期：
 \**************************************************************/
 bool CommLayerTcp::CreateTcpServ()
 {
@@ -373,7 +373,7 @@ FAIL:
 ** 创建作者： 颜廷军
 ** 创建日期： 2012-8-22
 ** 修改作者： 
-** 修改日期： 
+** 修改日期：
 \**************************************************************/
 void CommLayerTcp::CreateTcpAccept()
 {
@@ -457,7 +457,7 @@ FAIL:
 ** 创建作者： 颜廷军
 ** 创建日期： 2012-8-22
 ** 修改作者： 
-** 修改日期： 
+** 修改日期：
 \**************************************************************/
 bool CommLayerTcp::CreateTcpClient()
 {
@@ -794,6 +794,7 @@ int CommLayerTcp::GetSocketServFd()
 }
 
 /**************************************************************\
+
 ** 函数名称： GetSocketClieFd
 ** 功能： 获得GetSocketClieFd
 ** 参数：
@@ -802,6 +803,7 @@ int CommLayerTcp::GetSocketServFd()
 ** 创建日期： 2012-5-21
 ** 修改作者：
 ** 修改日期：
+
 \**************************************************************/
 int CommLayerTcp::GetSocketClieFd()
 {
@@ -875,7 +877,7 @@ int CommLayerTcp::GetCurrConnNum()
 ** 创建作者： 颜廷军
 ** 创建日期： 2012-8-22
 ** 修改作者： 
-** 修改日期： 
+** 修改日期：
 \**************************************************************/
 bool CommLayerTcp::AddAllFd(int InFd)
 {
@@ -1166,6 +1168,7 @@ bool CommLayerTcp::PushSendDataQueue(int iFd, PROTOCOL_PACK *InStrProPack)
 }
 
 /**************************************************************\
+
 ** 函数名称： TcpSendThreadPool
 ** 功能： 创建发送线程池
 ** 参数： 无
@@ -1174,6 +1177,7 @@ bool CommLayerTcp::PushSendDataQueue(int iFd, PROTOCOL_PACK *InStrProPack)
 ** 创建日期： 2012-5-21
 ** 修改作者：
 ** 修改日期：
+
 \**************************************************************/
 void *TcpSendThreadPool(void *arg)
 {
@@ -1212,7 +1216,7 @@ void *TcpSendThreadPool(void *arg)
 ** 创建作者： 颜廷军
 ** 创建日期： 2012-8-22
 ** 修改作者： 
-** 修改日期： 
+** 修改日期：
 \**************************************************************/
 void *TcpServSubThread(void *arg)
 {
@@ -1278,6 +1282,7 @@ void *TcpSrvAccept(void *arg)
 }
 
 /**************************************************************\
+
 ** 函数名称： DoingAllForTcpServerThread
 ** 功能： 终端作为服务器端线程
 ** 参数：   
@@ -1287,6 +1292,7 @@ void *TcpSrvAccept(void *arg)
 ** 创建日期： 2012-8-22
 ** 修改作者： 
 ** 修改日期： 
+
 \**************************************************************/
 void *DoingAllForTcpServerThread(void *arg)
 {
@@ -1323,7 +1329,9 @@ void *DoingAllForTcpServerThread(void *arg)
 	FreeCharMatrix(&AllIp, IpNum);
 
 	LOGD(">>>>>>>>>>>>>>>>>>>>>>> %s %d\r\n",__FUNCTION__, __LINE__);
+
 	/* 创建发送线程 */
+
 	for(i = 0; i < MAX_SEND_THREADS; i++)
 	{
 		if(pthread_create(&ThreadId, NULL, &TcpSendThreadPool, (void *)TcpObj) != 0)
@@ -1339,13 +1347,17 @@ void *DoingAllForTcpServerThread(void *arg)
 	{
 	sleep(1000);
 	# if 1
+
 		/* TCP参数初始化 */
+
 		if(TcpObj->CommLayerTcpInit(TCP_SERVER, TPTemp.acServIp, TPTemp.iServPort) < 0)
 		{
 			goto ServerThreadEnd;
 		}
 
+
 		/* TCP服务器端创建过程，停留在listen阶段 */
+
 		if(!(TcpObj->CreateTcpServ()))
 		{
             sleep(1);
@@ -1363,7 +1375,7 @@ void *DoingAllForTcpServerThread(void *arg)
 		while(1)
 		{
 			usleep(10*1000);
-            
+
 			/* 接收到重连服务器消息消息，则重连服务器 */
 /*
 			if (MessageGet(MSG_SRV_RESET, NULL, 0, 0) >= 0)
@@ -1391,7 +1403,9 @@ void *DoingAllForTcpServerThread(void *arg)
 		memset(&TmpConfigNetWork, 0, sizeof(TmpConfigNetWork));
 		//GetConfigNetWork(&TmpConfigNetWork);
 
+
 		/* 设置ip生效 */
+
 		unsigned long ulIP = inet_addr(TmpConfigNetWork.caIp);
 		unsigned long ulNetMask = inet_addr(TmpConfigNetWork.caNetMask);
 		/*
@@ -1475,6 +1489,7 @@ ServerThreadEnd:
 }
 
 /**************************************************************\
+
 ** 函数名称： DoingAllForTcpClientThread
 ** 功能： 终端作为客户端线程
 ** 参数：   
@@ -1484,6 +1499,7 @@ ServerThreadEnd:
 ** 创建日期： 2012-8-22
 ** 修改作者： 
 ** 修改日期： 
+
 \**************************************************************/
 void *DoingAllForTcpClientThread(void *arg)
 {
@@ -1514,8 +1530,10 @@ void *DoingAllForTcpClientThread(void *arg)
 
 	TcpObj = new CommLayerTcp();
 
+
 	/* 创建发送线程 */
     //取消掉客户端的发送数据线程TcpSendThreadPool
+
 	for(i = 0; i < MAX_SEND_THREADS; i++)
 	{
 		if(pthread_create(&ThreadId, NULL, &TcpSendThreadPool, (void *)TcpObj) != 0)
@@ -1544,7 +1562,6 @@ void *DoingAllForTcpClientThread(void *arg)
 		{
 			goto ClientThreadEnd;
 		}
-
 		/* 创建发送心跳线程 */
 		
 		if(pthread_create(&ThreadId, NULL, &ClientSendHeartbeatThread, (void *)TcpObj) != 0)
@@ -1633,7 +1650,9 @@ void *ClientSendHeartbeatThread(void *arg)
 	
 	while(1)
 	{
+
 		/* 接收到重连服务器消息消息，则重连服务器 */
+
 		/*
 		if (MessageGet(MSG_NET_HEARTBEAT_QUIT, NULL, 0, 0) >= 0)
 		{

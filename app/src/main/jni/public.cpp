@@ -7,7 +7,9 @@
 
 int giBytesPerPixel = 2;
 int giDepth = 16;
+
 //YUV2RGB算法参数
+
 int D[256],F[256],E[256];
 ////////////////////////////////////////////////////////////////////////////////
 // CMutex class
@@ -87,6 +89,7 @@ RGB yuv2rgb(BYTE y, BYTE u, BYTE v)
 }
 
 /******************************************************************************
+
  * 函数名称： CFramebuffer.CreateBmpFromYBuf
  * 功能： 由Y分量数据输出Bmp图像
  * 参数： 	nWidth: 宽度
@@ -97,6 +100,7 @@ RGB yuv2rgb(BYTE y, BYTE u, BYTE v)
  * 创建日期： 2012-6-18
  * 修改作者：
  * 修改日期：
+
  ******************************************************************************/
 LPBMP CreateBmpFromYBuf(int nWidth, int nHeight, char* pYBuf)
 {
@@ -238,6 +242,7 @@ int jpeg_compress(char* pFileName, unsigned char* pData, int nWidth, int nHeight
 }
 
 /******************************************************************************
+
  * 函数名称： CFramebuffer.SaveJpg
  * 功能： 保存JPG图片
  * 参数： pFileName保存的图片名
@@ -249,6 +254,7 @@ int jpeg_compress(char* pFileName, unsigned char* pData, int nWidth, int nHeight
  * 创建日期： 
  * 修改作者：
  * 修改日期：2012-6-14
+
  ******************************************************************************/
 BOOL SaveJpg(char* pFileName, LPBMP pBmp, BOOL bColor, int nQuality)
 {
@@ -368,9 +374,11 @@ void saveRgb(unsigned char* pRawBuf, int iLen)
 }
 
 /**************************************
+
 // YUV420SP逆时针旋转90度
 // direct: 1 ---顺时针
         0 ---逆时针
+
 **************************************/
 void YUV420SPRotate90(void* pYuv420,void*pOutYuv420,int width,int height,int nDirect)
 {
@@ -430,7 +438,11 @@ void YUV420SPToYUV420P(char * yuv420sp,  char * yuv420, int  width,  int  height
     }
 
  #if 0
+<<<<<<< HEAD
  	//420SP格式: YYYYUV
+=======
+ 	//420SP��ʽ: YYYYUV
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
     //copy  Cb(U)
     i = 0;
     for (j = 0;  j < PixelsCount / 2;  j+=2)
@@ -447,7 +459,9 @@ void YUV420SPToYUV420P(char * yuv420sp,  char * yuv420, int  width,  int  height
        i++;
     }
 #else
+
 	//420SP格式: YYYYVU
+
     //copy  Cb(U)
     i = 0;
     for (j = 0;  j < PixelsCount / 2;  j+=2)
@@ -549,8 +563,10 @@ return pBmp;
 
 
 /**************************************
+
 direct: 1 ---顺时针
         0 ---逆时针
+
 
 **************************************/
 /*
@@ -736,8 +752,10 @@ void* rotate90_yuv420p(void* pYuv420, int nWidth, int nHeight, void*pOutYuv420, 
 }
 */
 /**************************************
+
 direct: 1 ---顺时针
 		0 ---逆时针
+
 
 **************************************/
 void* rotate90_yuv420p(void* pYuv420, int nWidth, int nHeight, void*pOutYuv420, BOOL bUV, int nDirect)
@@ -1183,13 +1201,17 @@ static unsigned int Conv_YCbCr_Rgb(unsigned char y0, unsigned char y1, unsigned 
 	return(rgb);
 }
 
+
 //平面YUV420转RGB24
+
 void YUV420p_to_RGB24(unsigned char *yuv420[3], unsigned char *rgb24, int width, int height) 
 {
 //  int begin = GetTickCount();
  int R1,G1,B1,Y,U,V;
  int x,y;
+
  int nWidth = width>>1; //色度信号宽度
+
  for (y=0;y<height;y++)
  {
   for (x=0;x<width;x++)
@@ -1201,7 +1223,9 @@ void YUV420p_to_RGB24(unsigned char *yuv420[3], unsigned char *rgb24, int width,
    G1 = Y - 0.34414*(U-128) - 0.71414*(V-128);
    B1 = Y + 1.772*(U-128);
 
+
    //防止越界
+
    if (R1>255)R1=255;
    if (R1<0)R1=0;
    if (G1>255)G1=255;
@@ -1309,7 +1333,9 @@ void yuv420p_to_rgb565_ex(int size_x, int size_y, char * pSrcBuf, RGB24x2 *pbuff
 	}
 }
 
+
 // 将YUV420sp图像转换为RGB24图像
+
 void yuv420sp_to_rgb(int width, int height, unsigned char * pSrcBuf, RGB24x2 *pbuff)
 {
 	unsigned char *buffer_y = NULL;
@@ -1418,7 +1444,9 @@ void saveFile(const char* pSrcFile,unsigned char* pRawBuf, int iLen)
 
 
 /*
+
 	//初始化YUV2RGB参数数组
+
 	void table_init()
 	{
 	    int i;
@@ -1446,7 +1474,9 @@ void saveFile(const char* pSrcFile,unsigned char* pRawBuf, int iLen)
 	    {
 	       int r,g,b,y;
 
+
 	        r = D[in[i].r];//查表
+
 	        g = E[in[i].g];
 	        b = F[in[i].b];
 	        y = r + g + b;
@@ -1462,17 +1492,21 @@ void saveFile(const char* pSrcFile,unsigned char* pRawBuf, int iLen)
 	    int in[] = {0};
 	    int out[] = {0};
 
+
 	    for(i = 0; i < IMGSIZE; i += 2) //一次并行处理2个数据
 	    {
 	       int r,g,b,y,r1,g1,b1,y1;
 
 	        r = D[in[i].r];//查表 //这里给第一个ALU执行
+
 	        g = E[in[i].g];
 	        b = F[in[i].b];
 	        y = r + g + b;
 	        out[i] = y;
 
+
 	        r1 = D[in[i + 1].r];//查表 //这里给第二个ALU执行
+
 	        g1 = E[in[i + 1].g];
 	        b1 = F[in[i + 1].b];
 	        y = r1 + g1 + b1;

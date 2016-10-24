@@ -60,6 +60,7 @@
          <item name="android:textSize">8dp</item>
          </style>
 
+
     <style name="SampleThemeLight" parent="android:Theme.Holo.Light.DarkActionBar">
         <!-- 设置自定义布局的背景透明 -->
         <item  name="android:windowBackground">@android:color/transparent</item>
@@ -77,4 +78,5 @@
         <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
 
     </style>
+
 </resources>

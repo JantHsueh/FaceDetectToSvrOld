@@ -1,4 +1,4 @@
-package com.ldm.excel;
+package com.firs.view;
 
 import java.io.File;
 
@@ -13,7 +13,7 @@ public class CreateExcel {
 	private WritableSheet sheet;
 	/**创建Excel工作薄*/
 	private WritableWorkbook wwb;
-	private String[] title = { "日期", "食物支出", "日用品项", "交通话费", "旅游出行", "穿着支出", "医疗保健", "人情客往", "宝宝专项", "房租水电", "其它支出", "备注说明" };
+	private String[] title = { "姓名", "日期", "状态", "相识度"};
 
 	public CreateExcel() {
 		excelCreate();
@@ -22,14 +22,14 @@ public class CreateExcel {
 	public void excelCreate() {
 		try {
 			/**输出的excel文件的路径*/
-			String filePath = Environment.getExternalStorageDirectory() + "/family_bill";
-			File file = new File(filePath, "bill.xls");
+			String filePath = Environment.getExternalStorageDirectory() + "/RunVision";
+			File file = new File(filePath, "worlk.xls");
 			if (!file.exists()) {
 				file.createNewFile();
 			}
 			wwb = Workbook.createWorkbook(file);
 			/**添加第一个工作表并设置第一个Sheet的名字*/
-			sheet = wwb.createSheet("家庭帐务表", 0);
+			sheet = wwb.createSheet("人脸识别登记表", 0);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

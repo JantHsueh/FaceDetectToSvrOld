@@ -16,20 +16,22 @@
 #include "faceLib.h"
 
 
-/* ×îºóÒ»ÌõÉÏ´«¼ÇÂ¼Ê±¼ä */
+
+/* æœ€åä¸€æ¡ä¸Šä¼ è®°å½•æ—¶é—´ */
 time_t lastRecordTime = 0;
 char s_nVerifyTrapMode = 0;
 int g_AuthFlag = 0;
-int g_CompareFlag = 0;	//0Ã»·µ»Ø,1³É¹¦2,Ê§°Ü,3½ÓÊÕ×¢²áÈËÁ³³É¹¦,4½ÓÊÕ×¢²áÈËÁ³Ê§°Ü
-//·şÎñÆ÷IPÉèÖÃ×´Ì¬
+int g_CompareFlag = 0;	//0æ²¡è¿”å›,1æˆåŠŸ2,å¤±è´¥,3æ¥æ”¶æ³¨å†Œäººè„¸æˆåŠŸ,4æ¥æ”¶æ³¨å†Œäººè„¸å¤±è´¥
+//æœåŠ¡å™¨IPè®¾ç½®çŠ¶æ€
 int g_ServerSockFlag = 0;
 
-#define _TERMINAL_TYPE_NO      "0" /* ±àºÅ */
+#define _TERMINAL_TYPE_NO      "0" /* ç¼–å· */
 #define _SIGNATURE		       ""
 
 /*
-**  ´¦Àí¿Í»§Ó¦´ğÇëÇó
-0-³É¹¦;¸ºÊı-Ê§°Ü
+**  å¤„ç†å®¢æˆ·åº”ç­”è¯·æ±‚
+0-æˆåŠŸ;è´Ÿæ•°-å¤±è´¥
+
 */
 int DealResponse(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROTOCOL_PACK *OutStrProPack)
 {
@@ -45,7 +47,11 @@ int DealResponse(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROT
 	int nRandom;
 	//MD5_CONTEXT md5_context;
 
-	/*  ÅĞ¶ÏÊı¾İ°üÀàĞÍ */
+<<<<<<< HEAD
+	/*  ï¿½Ğ¶ï¿½ï¿½ï¿½ï¿½İ°ï¿½ï¿½ï¿½ï¿½ï¿½ */
+=======
+	/*  åˆ¤æ–­æ•°æ®åŒ…ç±»å‹ */
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 	if ((InStrProPack->head.subType == ACK) 
 		&& (InStrProPack->head.dataLen == 4) 
 		&& (InStrProPack->head.index == AUTH_INDEX))
@@ -76,7 +82,11 @@ int DealResponse(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROT
 		//MD5Update(&md5_context, (unsigned char*)szPlain, nPlainLen);
 		//MD5Final(md5HashCode, &md5_context);
 
-		/* ÖÕ¶ËÊÕµ½´ËÈÏÖ¤ÇëÇóºó£¬·µ»ØÈÏÖ¤Ëæ»úÊı */
+<<<<<<< HEAD
+		/* ï¿½Õ¶ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ó£¬·ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½ */
+=======
+		/* ç»ˆç«¯æ”¶åˆ°æ­¤è®¤è¯è¯·æ±‚åï¼Œè¿”å›è®¤è¯éšæœºæ•° */
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 		//retVal = TcpSendPack(PROTOCOL_HEAD_FLAG, InStrProPack->head.index, AUTH,
 		//	AUTH_AUTHENTICATE, sizeof( md5HashCode ), (void *)md5HashCode, OutStrProPack);
 	}
@@ -85,10 +95,17 @@ int DealResponse(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROT
 		&& (InStrProPack->head.index == AUTH_INDEX))
 	{
 		TRACE("Sucess Sucess Sucess Sucess Sucess ..............%s %d\r\n", __FUNCTION__, __LINE__);
-		/* ·şÎñÆ÷ÈÏÖ¤³É¹¦ */
+<<<<<<< HEAD
+		/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½É¹ï¿½ */
 		StrInlinkShare->authFlag = 1;
 
-		/* ²»ĞèÒª·µ»Ø */
+		/* ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ */
+=======
+		/* æœåŠ¡å™¨è®¤è¯æˆåŠŸ */
+		StrInlinkShare->authFlag = 1;
+
+		/* ä¸éœ€è¦è¿”å› */
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 		retVal = -1;
 	}
 	else if((InStrProPack->head.subType == NAK) 
@@ -96,10 +113,17 @@ int DealResponse(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROT
 		&& (InStrProPack->head.index == AUTH_INDEX))
 	{
 		TRACE("Validation fails ..............%s %d\r\n", __FUNCTION__, __LINE__);
-		/* ·şÎñÆ÷ÈÏÖ¤Ê§°Ü */
+<<<<<<< HEAD
+		/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤Ê§ï¿½ï¿½ */
 		StrInlinkShare->authFlag = -2;
 
-		/* ²»ĞèÒª·µ»Ø */
+		/* ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ */
+=======
+		/* æœåŠ¡å™¨è®¤è¯å¤±è´¥ */
+		StrInlinkShare->authFlag = -2;
+
+		/* ä¸éœ€è¦è¿”å› */
+>>>>>>> d932a900d620ef7c491e7c0cedff613c7f7fa916
 		retVal = -1;
 	}
 	else
@@ -112,8 +136,10 @@ int DealResponse(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROT
 
 /* ------------------------------------------------------------------------- */
 /*
-**  ´¦Àí¿Í»§Á¬½ÓÈÏÖ¤ÇëÇó
-**  »ñÈ¡ÈÏÖ¤Ëæ»úÊı³É¹¦·µ»Ø0£¬ÈÏÖ¤³É¹¦·µ»Ø1£¬ÈÏÖ¤Ê§°Ü·µ»Ø¸ºÊı
+
+**  å¤„ç†å®¢æˆ·è¿æ¥è®¤è¯è¯·æ±‚
+**  è·å–è®¤è¯éšæœºæ•°æˆåŠŸè¿”å›0ï¼Œè®¤è¯æˆåŠŸè¿”å›1ï¼Œè®¤è¯å¤±è´¥è¿”å›è´Ÿæ•°
+
 */
 int DealMsgAuth(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROTOCOL_PACK *OutStrProPack)
 {
@@ -121,10 +147,11 @@ int DealMsgAuth(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROTO
 	int retVal = 1;
 	CONFIG_SECURITY_STR strCfgSecurity;
 
-	/*  ÅĞ¶ÏÊı¾İ°üÀàĞÍ */
+
+	/*  åˆ¤æ–­æ•°æ®åŒ…ç±»å‹ */
 	if((InStrProPack->head.subType == NMSG_SUBTYPE_RESPONSE) 
 		&& (InStrProPack->head.dataLen >0))
-	{//µÇÂ¼³É¹¦
+	{//ç™»å½•æˆåŠŸ
 		retVal = 1;
 		
 		g_AuthFlag = 1;
@@ -137,7 +164,9 @@ int DealMsgAuth(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROTO
 		g_AuthFlag = -1;
 
 	}
-	else//ÆäËü£¬·µ»Ø´íÎó
+
+	else//å…¶å®ƒï¼Œè¿”å›é”™è¯¯
+
 	{
 		retVal = -1;
 		g_AuthFlag = 0;
@@ -146,13 +175,14 @@ int DealMsgAuth(INLINK_SHARE *StrInlinkShare, PROTOCOL_PACK *InStrProPack, PROTO
 }
 
 /**********************************
-º¯ÊıÃû³Æ£º ClientSendAuth
-º¯Êı¹¦ÄÜ: ·¢ËÍÓë·şÎñÆ÷Á¬½Ó¼øÈ¨º¯Êı
-Èë¿Ú²ÎÊı£º
+
+å‡½æ•°åç§°ï¼š ClientSendAuth
+å‡½æ•°åŠŸèƒ½: å‘é€ä¸æœåŠ¡å™¨è¿æ¥é‰´æƒå‡½æ•°
+å…¥å£å‚æ•°ï¼š
 		sockID	: socket ID
-·µ»ØÖµ  £º
-		0	: ³É¹¦
-		ÆäËü: Ê§°Ü
+è¿”å›å€¼  ï¼š
+		0	: æˆåŠŸ
+		å…¶å®ƒ: å¤±è´¥
 ************************************/
 int ClientSendAuth(char* pUserName, char* pPwd)
 {

@@ -13,6 +13,7 @@ static const char *TAG="Face_Identify";
 static const char* classname = "com/firs/facedetecttosvr/common/Face_Native";
 
 /********************************************************************************
+
 **  Copyright (c) 2012, 深圳市飞瑞斯科技有限公司
 **  All rights reserved.
 **
@@ -26,10 +27,12 @@ static const char* classname = "com/firs/facedetecttosvr/common/Face_Native";
 **
 **  修改作者： 
 **  修改日期: 
+
 ********************************************************************************/
 
 #ifndef __FACE_LIB_H__
 #define __FACE_LIB_H__
+
 
 /* 该结构体为检测到的人眼、脸位置坐标 */
 typedef struct __FacePositionData
@@ -47,6 +50,7 @@ typedef struct __FacePositionData
 }FACE_POSITION_DATA_STR;
 
 // 算法库句柄
+
 typedef void* OD_CE_HANDLE;
 typedef void* OD_CODEC_HANDLE;
 
@@ -60,7 +64,9 @@ typedef struct
 extern "C" {
 #endif
 
+
 // 打开算法库引擎
+
 OD_CE_HANDLE OD_OpenEngine();
 
 OD_CODEC_HANDLE OD_OpenFacialCodec(OD_CE_HANDLE hCe, char* pStrAuxDir, char** ppFeatureInBuf, int* pnErrNo);
@@ -73,18 +79,23 @@ char *OD_mallocShareMem();
 void OD_CloseFacialCodec(OD_CODEC_HANDLE hCodec);
 
 
+
 // 关闭算法库引擎
+
 void OD_CloseEngine(OD_CE_HANDLE hCe);
 
 
 int OD_DetectFacial(OD_CODEC_HANDLE hCodec, char* pYBuf, int nWidth, int nHeight, FI_FACIAL_DETECTX_RESULT* pResult);
 
 
+
 /* 打桩 */
+
 int DM2016_Authentication(char* pEncryptedCode, char* pPlanCode);
 
 
 /******************************************************************************
+
  * 函数名称： InitFaceLib
  * 功能： 初始化人脸库
  * 参数： piUserId: 用户id数组 iUserNum: 用户数
@@ -93,10 +104,12 @@ int DM2016_Authentication(char* pEncryptedCode, char* pPlanCode);
  * 创建日期： 2013-11-27
  * 修改作者：
  * 修改日期：
+
  ******************************************************************************/
 void InitFaceLib(int* piUserId, int iUserNum);
 
 /******************************************************************************
+
  * 函数名称： DeinitFaceLib
  * 功能： 释放人脸库资源
  * 参数： 无
@@ -105,10 +118,12 @@ void InitFaceLib(int* piUserId, int iUserNum);
  * 创建日期： 2013-11-27
  * 修改作者：
  * 修改日期：
+
  ******************************************************************************/
 void DeinitFaceLib();
 
 /******************************************************************************
+
  * 函数名称： GetFacePosition
  * 功能： 获取检测到的人脸的位置坐标
  * 参数： pFacePositionData： 			
@@ -117,10 +132,12 @@ void DeinitFaceLib();
  * 创建日期： 2012-12-3
  * 修改作者：
  * 修改日期：
+
  ******************************************************************************/
 void GetFacePosition(FACE_POSITION_DATA_STR *pFacePositionData);
 
 /******************************************************************************
+
  * 函数名称： ClearFacePosition
  * 功能： 清掉人脸坐标信息
  * 参数： 
@@ -129,10 +146,12 @@ void GetFacePosition(FACE_POSITION_DATA_STR *pFacePositionData);
  * 创建日期： 2013-4-11
  * 修改作者：
  * 修改日期：
+
  ******************************************************************************/
 void ClearFacePosition();
 
 /******************************************************************************
+
  * 函数名称： VerifyFace
  * 功能： 识别人脸 
  * 参数： puiMaxCompId:最大分数对应id，piMaxCompVal:最大分数，
@@ -142,10 +161,12 @@ void ClearFacePosition();
  * 创建日期： 2013-11-20
  * 修改作者：
  * 修改日期：
+
  ******************************************************************************/
 int VerifyFace(unsigned int* puiMaxCompId, int* piMaxCompVal, unsigned int uiId);
 
 /******************************************************************************
+
  * 函数名称： EnrollFace
  * 功能： 注册人脸
  * 参数： uiId:用户id，iMaxNum:最大注册张数
@@ -156,6 +177,7 @@ int VerifyFace(unsigned int* puiMaxCompId, int* piMaxCompVal, unsigned int uiId)
  * 创建日期： 2013-11-20
  * 修改作者：
  * 修改日期：
+
  ******************************************************************************/
 int EnrollFace(unsigned int uiId, int iMaxNum);
 

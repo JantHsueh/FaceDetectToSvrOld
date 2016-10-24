@@ -1,4 +1,6 @@
-package com.ldm.excel;
+
+package com.firs.view;
+
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -36,7 +38,9 @@ public class SaveToExcel {
 	static HashMap map = new HashMap();
 
 	/*
+
 	 * 这个更全
+
 	 */
 	public static void main(String[] args) {
 		try {
@@ -50,7 +54,9 @@ public class SaveToExcel {
 			// copyDateAndFormat(new File("c:/a.xls"), 0, "c:/a2.xls");
 		}
 		catch (Exception e) {
+
 			// TODO 自动生成 catch 块
+
 			e.printStackTrace();
 		}
 	}
@@ -70,6 +76,7 @@ public class SaveToExcel {
 		cell.setCellFormat(cf);
 
 		// 设置下划线
+
 		cell = sheet.getWritableCell(0, 1);
 		WritableFont underline = new WritableFont(WritableFont.ARIAL, WritableFont.DEFAULT_POINT_SIZE, WritableFont.NO_BOLD, false, UnderlineStyle.SINGLE);
 		cf = new WritableCellFormat(underline);
@@ -126,6 +133,7 @@ public class SaveToExcel {
 	public static void copyDateAndFormat(File inputFile, int inputFileSheetIndex, String outputFilePath) throws Exception {
 		Workbook book = null;
 		Cell cell = null;
+
 		// 1.避免乱码的设置
 		WorkbookSettings setting = new WorkbookSettings();
 		java.util.Locale locale = new java.util.Locale("zh", "CN");
@@ -203,6 +211,7 @@ public class SaveToExcel {
 	}
 
 	public static void writeExcelUseFormat(String outputFilePath, String outputFileSheetName) throws Exception {
+
 		OutputStream os = new FileOutputStream(outputFilePath);// 输出的Excel文件URL
 		WritableWorkbook wwb = Workbook.createWorkbook(os);// 创建可写工作薄
 		WritableSheet sheet = wwb.createSheet(outputFileSheetName, 0);// 创建可写工作表
@@ -233,10 +242,12 @@ public class SaveToExcel {
 		sheet.addCell(labelC);
 
 		// 3.添加带有formatting的Number对象
+
 		jxl.write.NumberFormat nf = new jxl.write.NumberFormat("#.##");
 		jxl.write.WritableCellFormat wcfN = new jxl.write.WritableCellFormat(nf);
 		jxl.write.Number labelNF = new jxl.write.Number(0, 2, 3.1415926, wcfN);
 		sheet.addCell(labelNF);
+
 
 		// 4.添加Boolean对象
 		jxl.write.Boolean labelB = new jxl.write.Boolean(0, 3, false);
@@ -254,10 +265,12 @@ public class SaveToExcel {
 		sheet.addCell(label);
 
 		// 7.数字的公式计算
+
 		jxl.write.Number n = new jxl.write.Number(0, 9, 4.5);// A10
 		sheet.addCell(n);
 		n = new jxl.write.Number(1, 9, 8);// B10
 		sheet.addCell(n);
+
 		NumberFormat dp3 = new NumberFormat("#.###"); // 设置单元格里面的数字格式
 		WritableCellFormat dp3cell = new WritableCellFormat(dp3);
 		dp3cell.setWrap(true);
@@ -276,6 +289,7 @@ public class SaveToExcel {
 		sheet.mergeCells(0, 5, 1, 7);// 合并单元格：合并A6B8也就是1列6行 与 2列7行之间的矩形
 
 		// 9.设置边框
+
 		drawRect(sheet, 5, 6, 7, 6, BorderLineStyle.THICK, Colour.BLACK, null);
 
 		sheet.mergeCells(1, 2, 3, 3);
@@ -288,6 +302,7 @@ public class SaveToExcel {
 	public static void drawRect(WritableSheet sheet, int x, int y, int width, int height, BorderLineStyle style, Colour BorderColor, Colour bgColor) throws WriteException {
 		for (int w = 0; w < width; w++) {
 			for (int h = 0; h < height; h++) {
+
 				WritableCellFormat alignStyle = new WritableCellFormat(); // 单元格样式
 				alignStyle.setAlignment(Alignment.CENTRE); // 设置对齐方式
 				alignStyle.setVerticalAlignment(VerticalAlignment.CENTRE);// 设置对齐方式
@@ -304,6 +319,7 @@ public class SaveToExcel {
 					alignStyle.setBorder(Border.BOTTOM, style, BorderColor);// 设置边框的颜色和样式
 				// drawLine(sheet, x, y, Border.BOTTOM);
 				if (bgColor != null) alignStyle.setBackground(bgColor); // 背静色
+
 				Label mergelabel = new Label(x, y, "", alignStyle);
 				// topleftXIndex, topleftYIndex, bottomRightXIndex,
 				// bottomRightYIndex
@@ -320,7 +336,9 @@ public class SaveToExcel {
 		ArrayList<String> list = new ArrayList<String>();
 		Workbook book = null;
 		Cell cell = null;
+
 		// 避免乱码的设置
+
 		WorkbookSettings setting = new WorkbookSettings();
 		java.util.Locale locale = new java.util.Locale("zh", "CN");
 		setting.setLocale(locale);
@@ -328,14 +346,18 @@ public class SaveToExcel {
 		book = Workbook.getWorkbook(inputFile, setting);
 
 		Sheet sheet = book.getSheet(inputFileSheetIndex);
+
 		for (int rowIndex = 0; rowIndex < sheet.getRows(); rowIndex++) {// Excel第一行为表头,因此J初值设为1
 			for (int colIndex = 0; colIndex < sheet.getColumns(); colIndex++) {// 只需从Excel中取出2列
+
 				cell = sheet.getCell(colIndex, rowIndex);
 				list.add(cell.getContents());
 			}
 		}
 
+
 		// 【问题：如果在实际部署的时候没有写下面这句是否会导致不断消耗掉服务器的内存？jxl里面有个ReadWrite.java没有关闭读的，只关闭了写的】
+
 		book.close();
 
 		return list;
@@ -352,8 +374,10 @@ public class SaveToExcel {
 			sheet.addCell(new Label(cell.getColumn(), cell.getRow(), (String) newValue, new jxl.write.WritableCellFormat(cell.getCellFormat())));
 		}
 		else {
+
 			throw new Exception("不支持的其它单元格类型：" + type);
 			// System.err.println("不支持的其它单元格类型：" + cell.getType() + " at " +
+
 			// cell.getColumn() + "," + cell.getRow() +" current content:" +
 			// cell.getContents());
 		}

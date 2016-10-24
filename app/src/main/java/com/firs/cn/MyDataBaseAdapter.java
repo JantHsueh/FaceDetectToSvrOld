@@ -7,14 +7,9 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.widget.Toast;
+
 
 import com.firs.facedetecttosvr.MyApp;
-import com.firs.facedetecttosvr.ShowRecordListPage;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
 
 public class MyDataBaseAdapter {
 	// 用于打印log
@@ -31,6 +26,7 @@ public class MyDataBaseAdapter {
 
 	// 数据库名称为data
 	private static final String DB_NAME = "facedetect.db";
+
 	
 	/*
 	//用户信息数据库表名
@@ -42,6 +38,7 @@ public class MyDataBaseAdapter {
 	public static final String	USER_PHONE_NUM		= "user_phone_num";
 	*/
 
+
 	//记录数据库表名
 	private static final String DB_RECORD_TABLE = "record_info";
 
@@ -52,6 +49,7 @@ public class MyDataBaseAdapter {
 	public static final String FACE_DETECT = "facedetect";
 	public static final String REMARKS2 = "remarks2";
 	public static final String OTHERSNAME = "othersname";
+
 	
 	/*
 	//记录数据库表名
@@ -63,11 +61,13 @@ public class MyDataBaseAdapter {
 	public static final String	SVR_TYPE	= "svr";
 	*/
 
+
 	// 数据库版本
 	private static final int DB_VERSION = 1;
 
 	// 本地Context对象
 	private Context mContext = null;
+
 	
 	/*
 	//创建用户信息表
@@ -76,10 +76,12 @@ public class MyDataBaseAdapter {
 			+ USER_PHONE_NUM + " TEXT)";
 	*/
 
+
 	//创建记录信息表
 	private static final String DB_RECORD_INFO_CREATE = "CREATE TABLE " + DB_RECORD_TABLE
 			+ " (" + TIME_RECORD + " TEXT," + SCORE_RECORD + " TEXT," + FACE_NAME + " TEXT,"
 			+ FACE_ID + " TEXT," + FACE_DETECT + " TEXT," + REMARKS2 + " TEXT," + OTHERSNAME + " TEXT)";
+
 	
 		/*
 	//创建刷脸类型表
@@ -89,6 +91,7 @@ public class MyDataBaseAdapter {
 			*/
 
 	// 执行open（）打开数据库时，保存返回的数据库对象
+
 	private SQLiteDatabase mSQLiteDatabase = null;
 
 	// 由SQLiteOpenHelper继承过来
@@ -98,6 +101,7 @@ public class MyDataBaseAdapter {
 	private static class DatabaseHelper extends SQLiteOpenHelper {
 		/* 构造函数-创建一个数据库 */
 		DatabaseHelper(Context context) {
+
 			//当调用getWritableDatabase() 
 			//或 getReadableDatabase()方法时
 			//则创建一个数据库
@@ -108,7 +112,9 @@ public class MyDataBaseAdapter {
 
 		/* 创建一个表 */
 		@Override
+
 		public void onCreate(SQLiteDatabase db) {
+
 			// 数据库没有表时创建一个
 			//db.execSQL(DB_USER_INFO_CREATE);
 			//创建记录表
@@ -119,6 +125,7 @@ public class MyDataBaseAdapter {
 
 		/* 升级数据库 */
 		@Override
+
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 			if (newVersion == 2) {
 				//db.execSQL(DB_CHECK_TYPE_CREATE);
@@ -132,21 +139,26 @@ public class MyDataBaseAdapter {
 
 	/* 构造函数-取得Context */
 	public MyDataBaseAdapter(Context context) {
+
 		mContext = context;
 	}
 
 
 	// 打开数据库，返回数据库对象
+
 	public void open() throws SQLException {
+
 		mDatabaseHelper = new DatabaseHelper(mContext);
 		mSQLiteDatabase = mDatabaseHelper.getWritableDatabase();
 	}
 
 
 	// 关闭数据库
+
 	public void close() {
 		mDatabaseHelper.close();
 	}
+
 
 	/*
 
@@ -240,7 +252,9 @@ public class MyDataBaseAdapter {
 	//FACE_DETECT + "TEXT," + REMARKS + "TEXT," + OTHERS + "TEXT)";
 	//插入一条记录信息数据
 	public long insertRecordInfoData(String time, String score, String name, String faceid, String faceDetect
+
 			, String remarks, String others) {
+
 		ContentValues initialValues = new ContentValues();
 		initialValues.put(TIME_RECORD, time);
 		initialValues.put(SCORE_RECORD, score);
@@ -250,6 +264,7 @@ public class MyDataBaseAdapter {
 		initialValues.put(REMARKS2, remarks);
 		initialValues.put(OTHERSNAME, others);
 		MyApp.log("insertRecordInfoData");
+
 
 		return mSQLiteDatabase.insert(DB_RECORD_TABLE, null, initialValues);
 	}
@@ -262,13 +277,17 @@ public class MyDataBaseAdapter {
 
 	//查询记录信息
 	public Cursor fetchRecordInfoData() throws SQLException {
-		Cursor mCursor = mSQLiteDatabase.query(true, DB_RECORD_TABLE,
-				//new String[] { TIME_RECORD, SCORE_RECORD, FACE_NAME, FACE_ID },
-				new String[]{TIME_RECORD, SCORE_RECORD, FACE_NAME, FACE_ID, FACE_DETECT, REMARKS2, OTHERSNAME},
-				null,
-				null, null, null, null, null);
+
+		Cursor mCursor =
+
+				mSQLiteDatabase.query(true, DB_RECORD_TABLE,
+						//new String[] { TIME_RECORD, SCORE_RECORD, FACE_NAME, FACE_ID },
+						new String[]{TIME_RECORD, SCORE_RECORD, FACE_NAME, FACE_ID, FACE_DETECT, REMARKS2, OTHERSNAME},
+						null,
+						null, null, null, null, null);
 
 		if (mCursor != null) {
+
 			mCursor.moveToFirst();
 		}
 		return mCursor;
@@ -277,18 +296,22 @@ public class MyDataBaseAdapter {
 
 	//获取类型信息
 	public Cursor fetchCheckRecordInfoData(String datetime) throws SQLException {
+
 		Cursor mCursor =
+
 				mSQLiteDatabase.query(true, DB_RECORD_TABLE,
 						new String[]{TIME_RECORD, SCORE_RECORD, FACE_NAME, FACE_ID, FACE_DETECT, REMARKS2, OTHERSNAME},
 						TIME_RECORD + "=" + datetime,
 						null, null, null, null, null);
 
 		if (mCursor != null) {
+
 			mCursor.moveToFirst();
 		}
 		return mCursor;
 
 	}
+
 
 	//删除一条数据 
 	public boolean deleteRecordInfoData(String datetime) {
@@ -344,17 +367,5 @@ public class MyDataBaseAdapter {
 		return mSQLiteDatabase.update(DB_TABLE, args, KEY_ID + "=" + rowId, null) > 0;
 	}
 	*/
-
-
-	//获取时间信息   根据时间查询
-//	public HashMap<String, String> seachToTimes(String datetime) throws SQLException {
-//		HashMap<String, String>	map=null;
-//		Cursor mCursor=mSQLiteDatabase.query(DB_RECORD_TABLE, null, "time_record=?", new String[]{TIME_RECORD}, null, null, null);
-//		if(mCursor.moveToNext()){
-//		String	oneCuo=mCursor.getString(mCursor.getColumnIndex("face_name"));
-//		}
-//		return map;
-//	}
-
 
 }

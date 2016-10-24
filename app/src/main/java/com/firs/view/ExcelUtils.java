@@ -102,22 +102,18 @@ public class ExcelUtils {
 				writebook = Workbook.createWorkbook(new File(fileName), workbook);
 				WritableSheet sheet = writebook.getSheet(0);
 				for (int j = 0; j < objList.size(); j++) {
-					Toast.makeText(c, "5555", Toast.LENGTH_SHORT).show();
-					ArrayList<String> list=new ArrayList<String>();
-					list.add( (String)objList.get(j));
-					Toast.makeText(c, "6666666", Toast.LENGTH_SHORT).show();
-					for (int i = 0; i < list.size(); i++) {
 
-							sheet.addCell(new Label(i,j + 1, list.get(i).toString(), arial12format));
-
-					}
+						sheet.addCell(new Label(j, j+1, objList.get(j).toString(), arial12format));
 				}
 //				for (int j = 0; j < objList.size(); j++) {
-//					sheet.addCell(new Label(j, j+1, objList.get(j).toString(), arial12format));
+//					ArrayList<String> list=(ArrayList<String>) objList.get(j);
+//					for (int i = 0; i < list.size(); i++) {
+//						sheet.addCell(new Label(i, j+1, list.get(i), arial12format));
+//					}
 //				}
-
 				writebook.write();
-				Toast.makeText(c, "保存成功", Toast.LENGTH_SHORT).show();
+				Toast.makeText(c, "导出excles成功，手机自带存储设备下找 RunVision文件夹 下的worlk.xls ", Toast.LENGTH_SHORT).show();
+
 			}
 			catch (Exception e) {
 				e.printStackTrace();
@@ -144,7 +140,6 @@ public class ExcelUtils {
 
 		}
 	}
-
 
 	public static Object getValueByRef(Class cls, String fieldName) {
 		Object value = null;

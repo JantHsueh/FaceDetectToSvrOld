@@ -16,17 +16,17 @@ public class CalendarView extends View implements View.OnTouchListener {
     private final static String TAG = "anCalendar";  
     private Date selectedStartDate;  
     private Date selectedEndDate;  
-    private Date curDate; // µ±Ç°ÈÕÀúÏÔÊ¾µÄÔÂ  
-    private Date today; // ½ñÌìµÄÈÕÆÚÎÄ×ÖÏÔÊ¾ºìÉ«  
-    private Date downDate; // ÊÖÖ¸°´ÏÂ×´Ì¬Ê±ÁÙÊ±ÈÕÆÚ  
-    private Date showFirstDate, showLastDate; // ÈÕÀúÏÔÊ¾µÄµÚÒ»¸öÈÕÆÚºÍ×îºóÒ»¸öÈÕÆÚ  
-    private int downIndex; // °´ÏÂµÄ¸ñ×ÓË÷Òı  
+    private Date curDate; // å½“å‰æ—¥å†æ˜¾ç¤ºçš„æœˆ  
+    private Date today; // ä»Šå¤©çš„æ—¥æœŸæ–‡å­—æ˜¾ç¤ºçº¢è‰²  
+    private Date downDate; // æ‰‹æŒ‡æŒ‰ä¸‹çŠ¶æ€æ—¶ä¸´æ—¶æ—¥æœŸ  
+    private Date showFirstDate, showLastDate; // æ—¥å†æ˜¾ç¤ºçš„ç¬¬ä¸€ä¸ªæ—¥æœŸå’Œæœ€åä¸€ä¸ªæ—¥æœŸ  
+    private int downIndex; // æŒ‰ä¸‹çš„æ ¼å­ç´¢å¼•  
     private Calendar calendar;  
     private Surface surface;  
-    private int[] date = new int[42]; // ÈÕÀúÏÔÊ¾Êı×Ö  
-    private int curStartIndex, curEndIndex; // µ±Ç°ÏÔÊ¾µÄÈÕÀúÆğÊ¼µÄË÷Òı  
-    //private boolean completed = false; // Îªfalse±íÊ¾Ö»Ñ¡ÔñÁË¿ªÊ¼ÈÕÆÚ£¬true±íÊ¾½áÊøÈÕÆÚÒ²Ñ¡ÔñÁË  
-    //¸ø¿Ø¼şÉèÖÃ¼àÌıÊÂ¼ş  
+    private int[] date = new int[42]; // æ—¥å†æ˜¾ç¤ºæ•°å­—  
+    private int curStartIndex, curEndIndex; // å½“å‰æ˜¾ç¤ºçš„æ—¥å†èµ·å§‹çš„ç´¢å¼•  
+    //private boolean completed = false; // ä¸ºfalseè¡¨ç¤ºåªé€‰æ‹©äº†å¼€å§‹æ—¥æœŸï¼Œtrueè¡¨ç¤ºç»“æŸæ—¥æœŸä¹Ÿé€‰æ‹©äº†  
+    //ç»™æ§ä»¶è®¾ç½®ç›‘å¬äº‹ä»¶  
     private OnItemClickListener onItemClickListener;  
       
     public CalendarView(Context context) {  
@@ -84,19 +84,19 @@ public class CalendarView extends View implements View.OnTouchListener {
     @Override  
     protected void onDraw(Canvas canvas) {  
         Log.d(TAG, "onDraw");  
-        // »­¿ò  
+        // ç”»æ¡†  
         canvas.drawPath(surface.boxPath, surface.borderPaint);  
-        // ÄêÔÂ  
+        // å¹´æœˆ  
         //String monthText = getYearAndmonth();  
         //float textWidth = surface.monthPaint.measureText(monthText);  
         //canvas.drawText(monthText, (surface.width - textWidth) / 2f,  
         //      surface.monthHeight * 3 / 4f, surface.monthPaint);  
-        // ÉÏÒ»ÔÂ/ÏÂÒ»ÔÂ  
+        // ä¸Šä¸€æœˆ/ä¸‹ä¸€æœˆ  
         //canvas.drawPath(surface.preMonthBtnPath, surface.monthChangeBtnPaint);  
         //canvas.drawPath(surface.nextMonthBtnPath, surface.monthChangeBtnPaint);  
-        // ĞÇÆÚ  
+        // æ˜ŸæœŸ  
         float weekTextY = surface.monthHeight + surface.weekHeight * 3 / 4f;  
-        // ĞÇÆÚ±³¾°  
+        // æ˜ŸæœŸèƒŒæ™¯  
 //      surface.cellBgPaint.setColor(surface.textColor);  
 //      canvas.drawRect(surface.weekHeight, surface.width, surface.weekHeight, surface.width, surface.cellBgPaint);  
         for (int i = 0; i < surface.weekText.length; i++) {  
@@ -108,9 +108,9 @@ public class CalendarView extends View implements View.OnTouchListener {
                     surface.weekPaint);  
         }  
           
-        // ¼ÆËãÈÕÆÚ  
+        // è®¡ç®—æ—¥æœŸ  
         calculateDate();  
-        // °´ÏÂ×´Ì¬£¬Ñ¡Ôñ×´Ì¬±³¾°É«  
+        // æŒ‰ä¸‹çŠ¶æ€ï¼Œé€‰æ‹©çŠ¶æ€èƒŒæ™¯è‰²  
         drawDownOrSelectedBg(canvas);  
         // write date number  
         // today index  
@@ -149,7 +149,7 @@ public class CalendarView extends View implements View.OnTouchListener {
         if (monthStart == 1) {  
             monthStart = 8;  
         }  
-        monthStart -= 1;  //ÒÔÈÕÎª¿ªÍ·-1£¬ÒÔĞÇÆÚÒ»Îª¿ªÍ·-2  
+        monthStart -= 1;  //ä»¥æ—¥ä¸ºå¼€å¤´-1ï¼Œä»¥æ˜ŸæœŸä¸€ä¸ºå¼€å¤´-2  
         curStartIndex = monthStart;  
         date[monthStart] = 1;  
         // last month  
@@ -179,7 +179,7 @@ public class CalendarView extends View implements View.OnTouchListener {
             date[i] = i - (monthStart + monthDay) + 1;  
         }  
         if (curEndIndex < 42) {  
-            // ÏÔÊ¾ÁËÏÂÒ»ÔÂµÄ  
+            // æ˜¾ç¤ºäº†ä¸‹ä¸€æœˆçš„  
             calendar.add(Calendar.DAY_OF_MONTH, 1);  
         }  
         calendar.set(Calendar.DAY_OF_MONTH, date[41]);  
@@ -304,7 +304,7 @@ public class CalendarView extends View implements View.OnTouchListener {
         return i / 7 + 1; // 1 2 3 4 5 6  
     }  
   
-    // »ñµÃµ±Ç°Ó¦¸ÃÏÔÊ¾µÄÄêÔÂ  
+    // è·å¾—å½“å‰åº”è¯¥æ˜¾ç¤ºçš„å¹´æœˆ  
     public String getYearAndmonth() {  
         calendar.setTime(curDate);  
         int year = calendar.get(Calendar.YEAR);  
@@ -312,7 +312,7 @@ public class CalendarView extends View implements View.OnTouchListener {
         return year + "-" + surface.monthText[month];  
     }  
       
-    //ÉÏÒ»ÔÂ  
+    //ä¸Šä¸€æœˆ  
     public String clickLeftMonth(){  
         calendar.setTime(curDate);  
         calendar.add(Calendar.MONTH, -1);  
@@ -320,7 +320,7 @@ public class CalendarView extends View implements View.OnTouchListener {
         invalidate();  
         return getYearAndmonth();  
     }  
-    //ÏÂÒ»ÔÂ  
+    //ä¸‹ä¸€æœˆ  
     public String clickRightMonth(){  
         calendar.setTime(curDate);  
         calendar.add(Calendar.MONTH, 1);  
@@ -386,7 +386,7 @@ public class CalendarView extends View implements View.OnTouchListener {
 //                  completed = false;  
 //              }  
                 selectedStartDate = selectedEndDate = downDate;  
-                //ÏìÓ¦¼àÌıÊÂ¼ş  
+                //å“åº”ç›‘å¬äº‹ä»¶  
                 onItemClickListener.OnItemClick(selectedStartDate);  
                 // Log.d(TAG, "downdate:" + downDate.toLocaleString());  
                 //Log.d(TAG, "start:" + selectedStartDate.toLocaleString());  
@@ -399,60 +399,60 @@ public class CalendarView extends View implements View.OnTouchListener {
         return true;  
     }  
       
-    //¸ø¿Ø¼şÉèÖÃ¼àÌıÊÂ¼ş  
+    //ç»™æ§ä»¶è®¾ç½®ç›‘å¬äº‹ä»¶  
     public void setOnItemClickListener(OnItemClickListener onItemClickListener){  
         this.onItemClickListener =  onItemClickListener;  
     }  
-    //¼àÌı½Ó¿Ú  
+    //ç›‘å¬æ¥å£  
     public interface OnItemClickListener {  
         void OnItemClick(Date date);  
     }  
   
     /** 
      *  
-     * 1. ²¼¾Ö³ß´ç 2. ÎÄ×ÖÑÕÉ«£¬´óĞ¡ 3. µ±Ç°ÈÕÆÚµÄÑÕÉ«£¬Ñ¡ÔñµÄÈÕÆÚÑÕÉ« 
+     * 1. å¸ƒå±€å°ºå¯¸ 2. æ–‡å­—é¢œè‰²ï¼Œå¤§å° 3. å½“å‰æ—¥æœŸçš„é¢œè‰²ï¼Œé€‰æ‹©çš„æ—¥æœŸé¢œè‰² 
      */  
     private class Surface {  
         public float density;  
-        public int width; // Õû¸ö¿Ø¼şµÄ¿í¶È  
-        public int height; // Õû¸ö¿Ø¼şµÄ¸ß¶È  
-        public float monthHeight; // ÏÔÊ¾ÔÂµÄ¸ß¶È  
-        //public float monthChangeWidth; // ÉÏÒ»ÔÂ¡¢ÏÂÒ»ÔÂ°´Å¥¿í¶È  
-        public float weekHeight; // ÏÔÊ¾ĞÇÆÚµÄ¸ß¶È  
-        public float cellWidth; // ÈÕÆÚ·½¿ò¿í¶È  
-        public float cellHeight; // ÈÕÆÚ·½¿ò¸ß¶È    
+        public int width; // æ•´ä¸ªæ§ä»¶çš„å®½åº¦  
+        public int height; // æ•´ä¸ªæ§ä»¶çš„é«˜åº¦  
+        public float monthHeight; // æ˜¾ç¤ºæœˆçš„é«˜åº¦  
+        //public float monthChangeWidth; // ä¸Šä¸€æœˆã€ä¸‹ä¸€æœˆæŒ‰é’®å®½åº¦  
+        public float weekHeight; // æ˜¾ç¤ºæ˜ŸæœŸçš„é«˜åº¦  
+        public float cellWidth; // æ—¥æœŸæ–¹æ¡†å®½åº¦  
+        public float cellHeight; // æ—¥æœŸæ–¹æ¡†é«˜åº¦    
         public float borderWidth;  
-        public int bgColor = Color.parseColor("#105E8F"); //±³¾°É« 
+        public int bgColor = Color.parseColor("#105E8F"); //èƒŒæ™¯è‰² 
         private int textColor = Color.WHITE;  
         private int textSelectedColor=Color.BLACK;
         //private int textColorUnimportant = Color.parseColor("#666666");  
         private int btnColor = Color.parseColor("#666666");  
         private int borderColor = Color.parseColor("#3EC2BD"); //#3EC2BD
-        private int noColor = Color.parseColor("#cccccc"); //µ±ÔÂÈÕÆÚÒÔÍâµÄ ÈÕÆÚÑÕÉ« 
-        public int todayNumberColor = Color.RED;  //½ñÌìµÄÈÕÆÚ ºìÉ«
+        private int noColor = Color.parseColor("#cccccc"); //å½“æœˆæ—¥æœŸä»¥å¤–çš„ æ—¥æœŸé¢œè‰² 
+        public int todayNumberColor = Color.RED;  //ä»Šå¤©çš„æ—¥æœŸ çº¢è‰²
         public int cellDownColor =Color.parseColor("#CCFFFF"); 
-        public int cellSelectedColor =Color.parseColor("#42b4e2"); //ÈÕÆÚ°´ÏÂµÄÑÕÉ«   //Color.WHITE
+        public int cellSelectedColor =Color.parseColor("#42b4e2"); //æ—¥æœŸæŒ‰ä¸‹çš„é¢œè‰²   //Color.WHITE
         public Paint borderPaint;  
         public Paint monthPaint;  
         public Paint weekPaint;  
         public Paint datePaint;  
         public Paint monthChangeBtnPaint;  
         public Paint cellBgPaint;  
-        public Path boxPath; // ±ß¿òÂ·¾¶  
-        //public Path preMonthBtnPath; // ÉÏÒ»ÔÂ°´Å¥Èı½ÇĞÎ  
-        //public Path nextMonthBtnPath; // ÏÂÒ»ÔÂ°´Å¥Èı½ÇĞÎ  
+        public Path boxPath; // è¾¹æ¡†è·¯å¾„  
+        //public Path preMonthBtnPath; // ä¸Šä¸€æœˆæŒ‰é’®ä¸‰è§’å½¢  
+        //public Path nextMonthBtnPath; // ä¸‹ä¸€æœˆæŒ‰é’®ä¸‰è§’å½¢  
        // public String[] weekText = { "Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};  
-        public String[] weekText = { "ÖÜÈÕ ","ÖÜÒ»","ÖÜ¶ş", "ÖÜÈı", "ÖÜËÄ", "ÖÜÎå", "ÖÜÁù" };  
+        public String[] weekText = { "å‘¨æ—¥ ","å‘¨ä¸€","å‘¨äºŒ", "å‘¨ä¸‰", "å‘¨å››", "å‘¨äº”", "å‘¨å…­" };  
 
-        public String[] monthText = {"Ò»ÔÂ","¶şÔÂ","ÈıÔÂ","ËÄÔÂ","ÎåÔÂ","ÁùÔÂ","ÆßÔÂ","°ËÔÂ","¾ÅÔÂ","Ê®ÔÂ","Ê®Ò»ÔÂ","Ê®¶şÔÂ"};  
+        public String[] monthText = {"ä¸€æœˆ","äºŒæœˆ","ä¸‰æœˆ","å››æœˆ","äº”æœˆ","å…­æœˆ","ä¸ƒæœˆ","å…«æœˆ","ä¹æœˆ","åæœˆ","åä¸€æœˆ","åäºŒæœˆ"};  
              
         public void init() {  
             float temp = height / 7f;  
             monthHeight = 0;//(float) ((temp + temp * 0.3f) * 0.6);  
             //monthChangeWidth = monthHeight * 1.5f;  
             weekHeight = (float) ((temp + temp * 0.3f) * 0.5);  
-            cellHeight = (height - monthHeight - weekHeight) / 10f; //ridiÈÕÆÚ·½¿ò¸ß¶È ÖµÔ½Ğ¡¸ßÔ½´ó  
-            cellWidth = width / 16.2f;  //ridiÈÕÆÚ·½¿ò¿í¶È ÖµÔ½Ğ¡¿íÔ½´ó 
+            cellHeight = (height - monthHeight - weekHeight) / 10f; //ridiæ—¥æœŸæ–¹æ¡†é«˜åº¦ å€¼è¶Šå°é«˜è¶Šå¤§  
+            cellWidth = width / 16.2f;  //ridiæ—¥æœŸæ–¹æ¡†å®½åº¦ å€¼è¶Šå°å®½è¶Šå¤§ 
             borderPaint = new Paint();  
             borderPaint.setColor(borderColor);  
             borderPaint.setStyle(Paint.Style.STROKE);  
@@ -463,7 +463,7 @@ public class CalendarView extends View implements View.OnTouchListener {
             monthPaint = new Paint();  
             monthPaint.setColor(textColor);  
             monthPaint.setAntiAlias(true);  
-            float textSize = cellHeight * 0.1f; //ridi×ÖÌå´óĞ¡ 
+            float textSize = cellHeight * 0.1f; //ridiå­—ä½“å¤§å° 
             monthPaint.setTextSize(textSize);  
             monthPaint.setTypeface(Typeface.DEFAULT_BOLD);  
             weekPaint = new Paint();  
@@ -475,7 +475,7 @@ public class CalendarView extends View implements View.OnTouchListener {
             datePaint = new Paint();  
             datePaint.setColor(textColor);  
             datePaint.setAntiAlias(true);  
-            float cellTextSize = cellHeight * 0.4f; //0.5 ridiÈÕÀúÖĞµÄ×ÖÌå´óĞ¡   Öµ´ó ×Ö´ó
+            float cellTextSize = cellHeight * 0.4f; //0.5 ridiæ—¥å†ä¸­çš„å­—ä½“å¤§å°   å€¼å¤§ å­—å¤§
             datePaint.setTextSize(cellTextSize);  
             datePaint.setTypeface(Typeface.DEFAULT_BOLD);  
             boxPath = new Path();  
