@@ -371,8 +371,6 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 				}
 
 			}
-
-
 		}
 	}
 

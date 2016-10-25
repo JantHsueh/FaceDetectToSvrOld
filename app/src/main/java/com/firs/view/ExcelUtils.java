@@ -1,14 +1,14 @@
 package com.firs.view;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
-
-import com.firs.facedetecttosvr.ShowRecordListPage;
 
 import jxl.Workbook;
 import jxl.WorkbookSettings;
@@ -19,8 +19,6 @@ import jxl.write.WritableFont;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
-import android.content.Context;
-import android.widget.Toast;
 
 public class ExcelUtils {
 	public static WritableFont arial14font = null;
@@ -37,8 +35,8 @@ public class ExcelUtils {
 	public static void format() {
 		try {
 			arial14font = new WritableFont(WritableFont.ARIAL, 14, WritableFont.BOLD);
-			arial14font.setColour(jxl.format.Colour.LIGHT_BLUE);//±êÌâ  À¶É«´ÖÌå
-			arial14format = new WritableCellFormat(arial14font);//¶¨Òåµ¥Ôª¸ñ¸ñÊ½
+			arial14font.setColour(jxl.format.Colour.LIGHT_BLUE);//æ ‡é¢˜  è“è‰²ç²—ä½“
+			arial14format = new WritableCellFormat(arial14font);//å®šä¹‰å•å…ƒæ ¼æ ¼å¼
 			arial14format.setAlignment(jxl.format.Alignment.CENTRE);
 			arial14format.setBorder(jxl.format.Border.ALL, jxl.format.BorderLineStyle.THIN);
 			arial14format.setBackground(jxl.format.Colour.VERY_LIGHT_YELLOW);
@@ -55,9 +53,9 @@ public class ExcelUtils {
 			e.printStackTrace();
 		}
 	}
-	//´´½¨±í
+	//åˆ›å»ºè¡¨
 	public static void initExcel(String fileName, String[] colName) {
-		format();//»­±í¸ñ  ×ÖÌåÑÕÉ«
+		format();//ç”»è¡¨æ ¼  å­—ä½“é¢œè‰²
 		WritableWorkbook workbook = null;
 		try {
 			File file = new File(fileName);
@@ -65,7 +63,7 @@ public class ExcelUtils {
 				file.createNewFile();
 			}
 			workbook = Workbook.createWorkbook(file);
-			WritableSheet sheet = workbook.createSheet("Ê¶±ğ±í", 0);
+			WritableSheet sheet = workbook.createSheet("è¯†åˆ«è¡¨", 0);
 			sheet.addCell((WritableCell) new Label(0, 0, fileName, arial14format));
 			for (int col = 0; col < colName.length; col++) {
 				sheet.addCell(new Label(col, 0, colName[col], arial10format));
@@ -112,7 +110,7 @@ public class ExcelUtils {
 //					}
 //				}
 				writebook.write();
-				Toast.makeText(c, "µ¼³öexcles³É¹¦£¬ÊÖ»ú×Ô´ø´æ´¢Éè±¸ÏÂÕÒ RunVisionÎÄ¼ş¼Ğ ÏÂµÄworlk.xls ", Toast.LENGTH_SHORT).show();
+				Toast.makeText(c, "å¯¼å‡ºexclesæˆåŠŸï¼Œæ‰‹æœºè‡ªå¸¦å­˜å‚¨è®¾å¤‡ä¸‹æ‰¾ RunVisionæ–‡ä»¶å¤¹ ä¸‹çš„worlk.xls ", Toast.LENGTH_SHORT).show();
 
 			}
 			catch (Exception e) {
