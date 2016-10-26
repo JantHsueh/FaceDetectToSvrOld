@@ -48,9 +48,7 @@ public class OtherSetPage extends Activity {
 		
 		//取得数据库对象 
         database.open();
-		
-		
-	    
+
 	}
 	@Override
     protected void onDestroy() {

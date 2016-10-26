@@ -1,34 +1,30 @@
 apply plugin: 'com.android.application'
-//model {
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.3"
 
-
-
     defaultConfig {
         applicationId "com.firs.facedetecttosvr"
-        minSdkVersion 14
+        minSdkVersion 19
         targetSdkVersion 21
+        versionCode 1
+        versionName "1.0"
         ndk {
-            moduleName "libface_identify"
-            abiFilters 'armeabi', 'armeabi-v7a'
+            moduleName "face_identify"
+            abiFilters 'armeabi','armeabi-v7a'
+//            abiFilters 'armeabi-v7a'
         }
-
     }
 
     buildTypes {
 
-        debug {
-//                jniDebuggable true
-
-        }
         release {
             minifyEnabled false
 //            proguardFiles.add(file('proguard-rules.pro'))
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+
     externalNativeBuild {
         ndkBuild {
             path 'src/main/jni/Android.mk'

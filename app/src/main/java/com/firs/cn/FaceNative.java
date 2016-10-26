@@ -2,8 +2,8 @@ package com.firs.cn;
 
 public class FaceNative {
     static {
-//        System.loadLibrary("stlport_shared");
-//        System.loadLibrary("jpeg");
+        System.loadLibrary("stlport_shared");
+        System.loadLibrary("jpeg");
         System.loadLibrary("face_identify");
     }
 

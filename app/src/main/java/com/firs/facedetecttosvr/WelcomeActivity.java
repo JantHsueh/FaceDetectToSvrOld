@@ -1,6 +1,4 @@
 package com.firs.facedetecttosvr;
-
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,7 +6,6 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -31,8 +28,6 @@ public class WelcomeActivity extends Activity {
 
     private void initDate() {
         SharedPreferences sharedPreferences = getSharedPreferences("useraccount", this.MODE_PRIVATE);
-        String useraccount = sharedPreferences.getString("account", "test");
-        String pwd = sharedPreferences.getString("pwd", "123456");
         String saveflag = sharedPreferences.getString("saveflag", "0");
         if (saveflag.equals("0")) {
             bSave = true;
@@ -43,28 +38,26 @@ public class WelcomeActivity extends Activity {
         SharedPreferences sharedPreferences2 = getSharedPreferences("serversettings", this.MODE_PRIVATE);
         String serverip = sharedPreferences2.getString("serverip", "116.205.1.86");
         int port = sharedPreferences2.getInt("port", 32108);
-        FaceNative.SetServerIP(serverip.getBytes(), port, 0);//链接服务器
+        FaceNative.SetServerIP(serverip.getBytes(), port, 0);//连接服务器
         SharedPreferences sharedPreferences3 = getSharedPreferences("setting", this.MODE_PRIVATE);
         int sorce = Integer.valueOf(sharedPreferences3.getString("score", "60"));
         FaceNative.SetScore(sorce);//链接服务器
         //感知刷身份证
-        auth();
-
-
+        loginService();
     }
 
     /**
      * 测试使用登陆账号
      */
-    private void auth() {
+    private void loginService() {
         FaceNative.UserAuth(name.toString().getBytes(), pwd.toString().getBytes());//进行登录
-        FaceNative.getAuth();
         //Toast.makeText(getApplicationContext(), "====="+FaceNative.getAuth(), Toast.LENGTH_SHORT).show();
         new Thread() {
             @Override
             public void run() {
                 long start_time = System.currentTimeMillis() / 1000;
                 while (true) {
+                    //认证成功
                     if (FaceNative.getAuth() == 1) {
                         bSave = true;
                         break;
@@ -98,7 +91,7 @@ public class WelcomeActivity extends Activity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-                    if ((true == bSave)) {
+                    if ((bSave)) {
                         SharedPreferences settings = getSharedPreferences("useraccount", WelcomeActivity.MODE_PRIVATE);
                         Editor editor = settings.edit();//获取编辑器
                         editor.putString("account", name.toString());
@@ -117,8 +110,8 @@ public class WelcomeActivity extends Activity {
                     if (FaceNative.getAuth() == 1) {
                         Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
                         startActivity(intent);
+                        Toast.makeText(getApplicationContext(), "登录成功!", Toast.LENGTH_SHORT).show();
                         WelcomeActivity.this.finish();
-                        toast = Toast.makeText(getApplicationContext(), "登录成功!", Toast.LENGTH_SHORT);
                     } else {
                         if (FaceNative.getAuth() == -1) {
                             toast = Toast.makeText(getApplicationContext(), "登录失败!用户名和密码不匹配。", Toast.LENGTH_SHORT);
@@ -128,8 +121,8 @@ public class WelcomeActivity extends Activity {
                             toast = Toast.makeText(getApplicationContext(), "服务器连接失败!请重新登录。", Toast.LENGTH_SHORT);
                         }
                     }
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
+//                    toast.setGravity(Gravity.CENTER, 0, 0);
+//                    toast.show();
                     break;
             }
             super.handleMessage(msg);
@@ -155,7 +148,5 @@ public class WelcomeActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
     }
-
-
 
 }
