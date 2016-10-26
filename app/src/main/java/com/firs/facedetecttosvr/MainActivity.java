@@ -141,13 +141,13 @@ public class MainActivity extends Activity implements View.OnClickListener,
         super.onResume();
         setFaceQuality(); //获取摄像头设备索引
         //getFrontCameraIndex();//切换摄像头
-//        initCamera(); // 打开摄像头
+        initCamera(); // 打开摄像头
         surfaceCreated(surfaceHolder);//设置目标界面
         initFaceDetect();//记录人脸坐标，算法库，进行识别      (识别类型为1对1识别recType = userId)
+        //创建异步任务，必须传送非零的width和height
         mTask = new RecognizeTask(width, height, isFront);//异步操作   摄像头可用240  320  true
         mTask.setRecognizeListener(this);//重写接口方法
         mTask.execute(0);
-
     }
 
     @Override

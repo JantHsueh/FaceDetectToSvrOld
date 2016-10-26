@@ -11,13 +11,17 @@ android {
         versionName "1.0"
         ndk {
             moduleName "face_identify"
-            abiFilters 'armeabi','armeabi-v7a'
+            abiFilters 'armeabi', 'armeabi-v7a'
 //            abiFilters 'armeabi-v7a'
         }
     }
 
     buildTypes {
 
+        debug {
+            jniDebuggable true
+            jniDebuggable = true
+        }
         release {
             minifyEnabled false
 //            proguardFiles.add(file('proguard-rules.pro'))

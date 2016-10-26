@@ -33,6 +33,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE    := face_identify
 LOCAL_SRC_FILES := facelib.cpp Public.cpp  maintcp.cpp CommLayerTcp.cpp NetAuth.cpp NetDeal.cpp NetPublic.cpp gb2312.cpp
 LOCAL_MODULE_FILENAME = libface_identify
+#LOCAL_LDFLAGS += -fuse-ld=bfd
 LOCAL_SHARED_LIBRARIES := jpegtemp
 LOCAL_STATIC_LIBRARIES := facetemp
 LOCAL_LDLIBS := -llog -lstdc++
