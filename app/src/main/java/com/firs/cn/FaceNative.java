@@ -44,6 +44,4 @@ public class FaceNative {
     public static native compareresult getCompareResult(compareresult cmprest);
     public static native int getServerSockFlag();
     public static native void SetScore(int iScore);
-
-    
 }

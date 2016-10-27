@@ -15,7 +15,7 @@ import com.firs.cn.FaceNative;
 
 public class WelcomeActivity extends Activity {
     private String name = "test", pwd = "123456";
-    private boolean bSave = false;//是否有刷身份证
+    private boolean mISSavePassword = false;//是否有刷身份证
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,18 +28,15 @@ public class WelcomeActivity extends Activity {
     }
 
     private void initDate() {
-        SharedPreferences sharedPreferences = getSharedPreferences("useraccount", this.MODE_PRIVATE);
-        String saveflag = sharedPreferences.getString("saveflag", "0");
-        if (saveflag.equals("0")) {
-            bSave = true;
-        } else {
-            bSave = false;
-        }
+        SharedPreferences userAccount = getSharedPreferences("useraccount", this.MODE_PRIVATE);
+        String saveflag = userAccount.getString("saveflag", "0");
+        mISSavePassword = saveflag.equals("0");
 
-        SharedPreferences sharedPreferences2 = getSharedPreferences("serversettings", this.MODE_PRIVATE);
-        String serverip = sharedPreferences2.getString("serverip", "116.205.1.86");
-        int port = sharedPreferences2.getInt("port", 32108);
+        SharedPreferences serverSettings = getSharedPreferences("serversettings", this.MODE_PRIVATE);
+        String serverip = serverSettings.getString("serverip", "116.205.1.86");
+        int port = serverSettings.getInt("port", 32108);
         FaceNative.SetServerIP(serverip.getBytes(), port, 0);//连接服务器
+
         SharedPreferences sharedPreferences3 = getSharedPreferences("setting", this.MODE_PRIVATE);
         int sorce = Integer.valueOf(sharedPreferences3.getString("score", "60"));
         FaceNative.SetScore(sorce);//链接服务器
@@ -60,16 +57,15 @@ public class WelcomeActivity extends Activity {
                 while (true) {
                     //认证成功
                     if (FaceNative.getAuth() == 1) {
-                        bSave = true;
                         break;
                     }
                     if (FaceNative.getAuth() == 2) {
-                        bSave = false;
+                        mISSavePassword = false;
                         break;
                     }
 
                     if (System.currentTimeMillis() / 1000 - start_time >= 30) {
-                        bSave = false;
+                        mISSavePassword = false;
                         break;
                     }
                     try {
@@ -92,7 +88,7 @@ public class WelcomeActivity extends Activity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-                    if ((bSave)) {
+                    if ((mISSavePassword)) {
                         SharedPreferences settings = getSharedPreferences("useraccount", WelcomeActivity.MODE_PRIVATE);
                         Editor editor = settings.edit();//获取编辑器
                         editor.putString("account", name.toString());
@@ -100,7 +96,7 @@ public class WelcomeActivity extends Activity {
                         editor.putString("saveflag", "0");
                         editor.commit();//提交修改
                     }
-                    if (!bSave) {
+                    if (!mISSavePassword) {
                         SharedPreferences settings = getSharedPreferences("useraccount", WelcomeActivity.MODE_PRIVATE);
                         Editor editor = settings.edit();//获取编辑器
                         editor.putString("account", name.toString());
@@ -140,7 +136,7 @@ public class WelcomeActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-        if (false == bSave) {
+        if (false == mISSavePassword) {
             FaceNative.setThreadExit();
         }
     }

@@ -339,8 +339,6 @@ public class MainActivity extends Activity implements View.OnClickListener,
             camera.startPreview();
             isPreview = true;
         }
-        // 打开摄像头
-		initCamera();
     }
 
 
@@ -946,7 +944,7 @@ public class MainActivity extends Activity implements View.OnClickListener,
 
     void startFace() {
         // 打开摄像头
-        initCamera();
+//        initCamera();
         surfaceCreated(surfaceHolder);
 
         initFaceDetect();
