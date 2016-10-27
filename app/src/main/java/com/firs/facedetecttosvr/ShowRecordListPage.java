@@ -32,8 +32,10 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,10 +50,14 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 	private TextView calendar_Center1;
 	private CalendarView calendar;
 	public Date date;
-	public String CalendarDate=null,SQLtimes=null;//日历点击的日期
+	public String CalendarDate=null,SQLtimes=null,input=null;//日历点击的日期
 	//创建listview
 	private ListView listView;
 	private List<Map<String, String>> items;
+	private Map<String, String> map = null;
+	private HashMap<String, String> Allmap =new  HashMap<String, String>();
+	private List<Map<String, String>> Allitems=new ArrayList<Map<String, String>>();//输入关键字的查询集合
+	private List<Map<String, String>>  getAll=null;
 	private final static String DATETIME = "datetime";
 	private final static String SCORE = "score";
 	private final static String NAME = "name";
@@ -62,12 +68,17 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 
 	public static MyDataBaseAdapter database;
 	//导出excel数据
-	private Button bt1;
+	private Button bt1,search_bt;
+	private EditText search_input;
 	private File file;
 	private String[] title = { "姓名", "日期", "状态", "相识度"};
 	private String[] saveData;//输入的数据源
 	ArrayList<Integer> numberList=new ArrayList<Integer>();
-	ArrayList<String> beanList=new ArrayList<String>();
+	List<String> beanList=new ArrayList<String>();
+
+	public ShowRecordListPage() {
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -82,7 +93,7 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 			Date data=new Date();
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			CalendarDate=formatter.format(data);
-			Toast.makeText(ShowRecordListPage.this ,"当前日期："+CalendarDate, Toast.LENGTH_LONG).show();
+			//Toast.makeText(ShowRecordListPage.this ,"当前日期："+CalendarDate, Toast.LENGTH_LONG).show();
 		}
 
 
@@ -98,10 +109,14 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 		imageView1 = (ImageView)findViewById(R.id.imageView1);
 		imageView2 = (ImageView)findViewById(R.id.imageView2);
 
+		search_input=(EditText)findViewById(R.id.search_input);//搜索输入框
+		search_bt=(Button)findViewById(R.id.search_bt);//搜索按钮
 		bt1=(Button)findViewById(R.id.bt1);
 
 		String[] YearAndMonth = calendar.getYearAndmonth().split("-");  //获取日历中年月 ya[0]为年，ya[1]为月（格式大家可以自行在日历控件中改）
 		calendar_Center1.setText(YearAndMonth[0]+YearAndMonth[1]);
+
+		search_bt.setOnClickListener(this);
 		calendar_Left.setOnClickListener(this);
 		calendar_Right.setOnClickListener(this);
 		bt1.setOnClickListener(this);
@@ -113,21 +128,10 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
 				Object o = listView.getItemAtPosition(position);
 				final ImageView isCheck= (ImageView) arg1.findViewById(R.id.isCheck);
-				isCheck.setImageResource(R.drawable.bt_h);
-				if (numberList.size() > 0) {
-					for (int i = 0; i < numberList.size(); i++) {
-						if(numberList.get(i)==position){
-							isCheck.setImageResource(R.drawable.bt_n);
-							numberList.remove(i);//重复的移除
-						}
-					}
-				}else{
-					isCheck.setImageResource(R.drawable.bt_h);
-					numberList.add(position);//点击 的某一项添加到数组
-				}
-//	           Intent myIntent = new Intent(ShowRecordListPage.this, ShowRecordDetailPage.class);
-//	           myIntent.putExtra("DATETIME",items.get(position).get(DATETIME));
-//	           startActivity(myIntent);
+				isCheck.setImageResource(R.drawable.bt_n);
+				numberList.add(position);//点击 的某一项添加到数组
+
+
 				showItemInfo(items.get(position).get(DATETIME));
 			}
 		});
@@ -188,17 +192,48 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 				String[] YearAndMonth1 = rightYearAndmonth.split("-");
 				calendar_Center1.setText(YearAndMonth1[0]+YearAndMonth1[1]);
 				break;
-			case R.id.bt1:
+			case R.id.bt1://导出数据
 				file = new File(getSDPath() + "/RunVision");
 				makeDir(file);//创建文件
-				//Toast.makeText(this, "cheng=="+beanList.size(), Toast.LENGTH_SHORT).show();
 				ExcelUtils.initExcel(file.toString() + "/worlk.xls", title);//创建表
-				//写入数据信息     1. 数据集合   2.SDCARD路径
+				//写入数据信息     1. 数据集合   2.SDCARD路径    getAll/items
 				ExcelUtils.writeObjListToExcel(beanList, getSDPath() + "/RunVision/worlk.xls", this);//"/Family/bill.xls"
+				break;
+			case R.id.search_bt://条件查询
+				input=search_input.getText().toString();
+				if(input!=null&&!input.equals("")&&!input.isEmpty()){//输入有内容
+					searchToInput();
+				}else{
+					Toast.makeText(ShowRecordListPage.this ,"请输入查询关键字", Toast.LENGTH_LONG).show();
+				}
 				break;
 			default:
 				break;
 		}
+
+	}
+//	//搜索关键字 查询数据库
+	private void searchToInput() {
+		getAll = new ArrayList<Map<String, String>>();
+        //遍历items数据，看每一个item（map对象）中是否包含输入的这个值。如果有，则提取出来放入getAll的集合中。填充到适配器
+		for(int i=0;i<items.size();i++) {
+			if (items.get(i).containsValue(input)) {
+				getAll.add(items.get(i));//点击日历时，清空集合
+			} else {
+			}
+			if(CalendarDate.equals(SQLtimes)) {//时间是否是点击的时间
+				if (getAll != null) {
+					listView.setVisibility(View.VISIBLE);
+					listView.setAdapter(new MyAdapter(getAll));
+					new MyAdapter(getAll).notifyDataSetChanged();
+				}
+			}
+
+
+
+
+		}
+
 
 	}
 
@@ -207,6 +242,9 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 	class calendarItemClick implements com.firs.view.CalendarView.OnItemClickListener{
 		@Override
 		public void OnItemClick(Date date) {
+//			if(getAll!=null) {
+//				getAll.clear();//清除搜索数据
+//			}
 			ShowRecordListPage.this.date=date;
 			SimpleDateFormat  fomt=new SimpleDateFormat("yyyy-MM-dd");
 			CalendarDate=fomt.format(date);//根据日期去条件查询当天的记录
@@ -263,9 +301,11 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 		private ViewHolder01 mHolder01;
 		private Map<Integer, View> viewMap;
 		private LayoutInflater inflater;
-		public MyAdapter() {
+		private List<Map<String, String>> items;
+		 public MyAdapter(List<Map<String, String>> items) {
 			viewMap = new HashMap<Integer, View>();
 			inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			 this.items=items;
 		}
 		@Override
 		public int getCount() {
@@ -288,17 +328,20 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 			} else {
 				getTagHolder(view,position);
 			}
-			setItemInfo(position);
+			setItemInfo(position);//上数据
+
 			return view;
 		}
 
 		private View getview(View view, int position){
 			mHolder01 = new ViewHolder01();
 			view = inflater.inflate(R.layout.mylist_item, null);
+			mHolder01.isCheck= (ImageView)view.findViewById(R.id.isCheck);
 			mHolder01.textView01 = (TextView) view.findViewById(R.id.item01_txt);
 			mHolder01.textView02 = (TextView) view.findViewById(R.id.item02_txt);
 			mHolder01.textView03 = (TextView) view.findViewById(R.id.item03_txt);
 			mHolder01.textView04 = (TextView) view.findViewById(R.id.item04_txt);
+
 			view.setTag(mHolder01);
 			viewMap.put(position, view);
 			return view;
@@ -314,6 +357,7 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 			mHolder01.textView02.setText(str[1]);
 			mHolder01.textView03.setText(items.get(position).get(STATUS));
 			mHolder01.textView04.setText(items.get(position).get(SCORE));
+
 		}
 
 		class ViewHolder01 {
@@ -321,6 +365,7 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 			private TextView textView02;
 			private TextView textView03;
 			private TextView textView04;
+			private ImageView isCheck;
 		}
 	}
 	//处理记录listview
@@ -345,7 +390,7 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 				items =  new ArrayList<Map<String,String>>();
 			}
 			cur.moveToLast();
-			Map<String, String> map = null;
+
 			for (int i = 0; i < cou; i++) {
 				map = new HashMap<String, String>();
 				Date    curDate = new Date(Long.parseLong(cur.getString(0)));//获取当前时间
@@ -353,8 +398,13 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 				String[] times=str.split(" ");
 				SQLtimes=times[0];
 				//times[0] 年份 如果日期选择的年份==数据库查到的年份，显示到界面
-				Toast.makeText(ShowRecordListPage.this, CalendarDate+"数据库日期是："+times[0], Toast.LENGTH_LONG).show();
+				//Toast.makeText(ShowRecordListPage.this, CalendarDate+"数据库日期是："+times[0], Toast.LENGTH_LONG).show();
 				//2016.10.23
+				Allmap.put(DATETIME, str);
+				Allmap.put(SCORE, cur.getString(1));
+				Allmap.put(NAME, cur.getString(2));
+				Allmap.put(STATUS, "验证通过");
+				Allitems.add(Allmap);
 				if(CalendarDate.equals(SQLtimes)){//条件查询数据库
 					map.put(DATETIME, str);
 					map.put(SCORE, cur.getString(1));
@@ -362,7 +412,7 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 					map.put(STATUS, "验证通过");
 					items.add(map);
 					beanList.add(cur.getString(2).toString()+str.toString()+"验证通过"+cur.getString(1).toString());
-					listView.setAdapter(new MyAdapter());
+					listView.setAdapter(new MyAdapter(items));
 
 				}
 
