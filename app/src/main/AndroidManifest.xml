@@ -56,8 +56,12 @@
         <!--  -->
         <activity
             android:name="com.firs.facedetecttosvr.ShowSuccessPage"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Animation.Dialog"
             android:label="比对成功"
-            android:screenOrientation="landscape" >
+
+
+            >
 
             <!--
                  android:theme="@android:style/Theme.Translucent"
@@ -68,14 +72,16 @@
         <activity
             android:name="com.firs.facedetecttosvr.ShowFailPage"
             android:label="比对失败"
-            android:screenOrientation="landscape" >
+            android:screenOrientation="landscape"
+             >
 
             <!-- ActionSheetDialogStyle /Animation.Dialog   android:configChanges="orientation|keyboardHidden"   android:launchMode="singleTask" android:screenOrientation="portrait" -->
         </activity>
         <activity
             android:name="com.firs.facedetecttosvr.ShowRecordListPage"
             android:label="查询记录"
-            android:screenOrientation="landscape" >
+            android:screenOrientation="landscape"
+            >
         </activity>
         <activity
             android:name="com.firs.facedetecttosvr.ShowRecordDetailPage"

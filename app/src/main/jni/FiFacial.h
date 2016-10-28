@@ -10,10 +10,10 @@ extern "C" {
 #endif
 
 #if defined(WIN32)
-	#if defined(LIB_EXPORTS)	// ¶¯Ì¬¿â
+	#if defined(LIB_EXPORTS)	// ï¿½ï¿½Ì¬ï¿½ï¿½
 		#define FI_FACIAL_API __declspec(dllexport)
 	#else
-		#if defined(_LIB)		// ¾²Ì¬¿â
+		#if defined(_LIB)		// ï¿½ï¿½Ì¬ï¿½ï¿½
 			#define FI_FACIAL_API 
 		#elif defined(_VRE)
 			#define FI_FACIAL_API 
@@ -26,158 +26,158 @@ extern "C" {
 #endif
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//									³õÊ¼»¯/·´³õÊ¼»¯»·¾³
+//									ï¿½ï¿½Ê¼ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// È«¾Ö½öÐèÒªµ÷ÓÃÒ»´Î£¬¼´ÔÚÏµÍ³³õÊ¼»¯ºÍÔÚÏµÍ³ÍË³öÊ±¸÷µ÷ÓÃÒ»´Î
+// È«ï¿½Ö½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½Ò»ï¿½Î£ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÍ³ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÍ³ï¿½Ë³ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
 FI_FACIAL_API FI_BOOL FI_FACIAL_InitContext();
 FI_FACIAL_API void FI_FACIAL_UninitContext();
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//									Í¨µÀ»ù±¾º¯Êý
+//									Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// ÉèÖÃÌØÕ÷¹²Ïí»º³åÇø´óÐ¡£¨Ä¬ÈÏÊÇ20M£©
-// ±ØÐëÔÚFI_FACIAL_OpenCodec Ö®Ç°µ÷ÓÃ·½ÓÐÐ§
-// Ä¿Ç°ÔÊÐíÉèÖÃµÄ´óÐ¡ÊÇ>0 && <=20
-FI_FACIAL_API FI_BOOL FI_FACIAL_SetInFeatureBufSize(int buf_size_m/*µ¥Î»ÊÇM*/);
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½Ä¬ï¿½ï¿½ï¿½ï¿½20Mï¿½ï¿½
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½FI_FACIAL_OpenCodec Ö®Ç°ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½Ð§
+// Ä¿Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÃµÄ´ï¿½Ð¡ï¿½ï¿½>0 && <=20
+FI_FACIAL_API FI_BOOL FI_FACIAL_SetInFeatureBufSize(int buf_size_m/*ï¿½ï¿½Î»ï¿½ï¿½M*/);
 
-// ´ò¿ªCodec£¬³É¹¦·µ»Ø0£¬Ê§°Ü·µ»Ø-1
+// ï¿½ï¿½Codecï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½Ê§ï¿½Ü·ï¿½ï¿½ï¿½-1
 FI_FACIAL_API FI_HANDLE FI_FACIAL_OpenCodec(FI_HANDLE hFiCe, char authKeys[32]);
 
-// ³õÊ¼»¯Codec
-// ·µ»ØÖµ:
-// ==0 ³õÊ¼»¯Ê§°Ü
-// ==1 ³õÊ¼»¯³É¹¦£¬²¢ÇÒÈÏÖ¤Í¨¹ý
-// ==2 ³õÊ¼»¯³É¹¦£¬Ç¿ÖÆ°æÈ¨±£»¤	
+// ï¿½ï¿½Ê¼ï¿½ï¿½Codec
+// ï¿½ï¿½ï¿½ï¿½Öµ:
+// ==0 ï¿½ï¿½Ê¼ï¿½ï¿½Ê§ï¿½ï¿½
+// ==1 ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤Í¨ï¿½ï¿½
+// ==2 ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½Ç¿ï¿½Æ°ï¿½È¨ï¿½ï¿½ï¿½ï¿½	
 FI_FACIAL_API int FI_FACIAL_InitCodec(FI_HANDLE hFiCodec, char randkeys[32]);
 
-// ¹Ø±ÕCodec
+// ï¿½Ø±ï¿½Codec
 FI_FACIAL_API void FI_FACIAL_CloseCodec(FI_HANDLE hFiCodec);
 
-// ÉèÖÃ¸¨ÖúÄ¿Â¼
-// ·ÅÖÃÄ£ÐÍÊý¾ÝµÈ£¬
-// Èç¹ûÃ»ÓÐÉèÖÃ£¬ÔòÄ¬ÈÏÎªµ±Ç°Â·¾¶£¬
-// ÔÚFI_FACIAL_OpenCodec Ö®ºó£¬ÔÚFI_FACIAL_InitCodec  Ö®Ç°µ÷ÓÃ¡£
+// ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½Ä¿Â¼
+// ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ÝµÈ£ï¿½
+// ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Îªï¿½ï¿½Ç°Â·ï¿½ï¿½ï¿½ï¿½
+// ï¿½ï¿½FI_FACIAL_OpenCodec Ö®ï¿½ï¿½ï¿½ï¿½FI_FACIAL_InitCodec  Ö®Ç°ï¿½ï¿½ï¿½Ã¡ï¿½
 FI_FACIAL_API void FI_FACIAL_SetAuxDir(FI_HANDLE hFiCodec, char strAuxDir[256]);
 
-// »ñÈ¡Ëã·¨°æ±¾ºÅ
-// °æ±¾ºÅ¶¨Òå¸ñÊ½:  ModelMainVers . ModelSubVers . ProjDiffVers . Reserve
-// ÓÉÓÚarm  Ê¹ÓÃÐ¡¶ËÐò£¬¹ÊµÃµ½µÄunsigned int  version ½âÎöÈçÏÂ:
+// ï¿½ï¿½È¡ï¿½ã·¨ï¿½æ±¾ï¿½ï¿½
+// ï¿½æ±¾ï¿½Å¶ï¿½ï¿½ï¿½ï¿½Ê½:  ModelMainVers . ModelSubVers . ProjDiffVers . Reserve
+// ï¿½ï¿½ï¿½ï¿½arm  Ê¹ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ò£¬¹ÊµÃµï¿½ï¿½ï¿½unsigned int  version ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:
 // ModelMainVers 	= (unsigned char)(version>>0);
 // ModelSubVers 	= (unsigned char)(version>>8);
 // ProjDiffVers 	= (unsigned char)(version>>16);
 // Reserve 		= (unsigned char)(version>>24);
-// Èç¹û·µ»ØµÄ°æ±¾ºÅÊÇ0£¬Ôò±íÊ¾»ñÈ¡°æ±¾ºÅÊ§°Ü
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ØµÄ°æ±¾ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½È¡ï¿½æ±¾ï¿½ï¿½Ê§ï¿½ï¿½
 FI_FACIAL_API unsigned int FI_FACIAL_GetVersion(FI_HANDLE hFiCodec);
 
-// »ñÈ¡Ëã·¨ÐòÁÐºÅ
-// ·µ»ØÖµÊÇSN  µÄ×Ö·û¸öÊý
-// Èç¹û·µ»ØµÄSN  ×Ö·û¸öÊýÊÇ0£¬Ôò±íÊ¾»ñÈ¡ÐòÁÐºÅÊ§°Ü
+// ï¿½ï¿½È¡ï¿½ã·¨ï¿½ï¿½ï¿½Ðºï¿½
+// ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½SN  ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½SN  ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ðºï¿½Ê§ï¿½ï¿½
 FI_FACIAL_API int FI_FACIAL_GetAlgorSN(FI_HANDLE hFiCodec, char strSN[256]);
 
 
-// »ñÈ¡ÊäÈëÌØÕ÷¹²Ïí»º³åÇø( 20 M )   µØÖ·
+// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½( 20 M )   ï¿½ï¿½Ö·
 FI_FACIAL_API char * FI_FACIAL_GetInFeatureBuf(FI_HANDLE hFiCodec);
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//									ÈËÁ³ÈËÑÛ¼ì²â
+//									ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û¼ï¿½ï¿½
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-// ÈËÁ³ÐÅÏ¢¼ì²â(  ºìÍâÍ¨ÓÃ°æ±¾)
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½(  ï¿½ï¿½ï¿½ï¿½Í¨ï¿½Ã°æ±¾)
 FI_FACIAL_API int FI_FACIAL_Detect_IR_GN(FI_HANDLE hFiCodec, const char* pYBuf, int nWidth, int nHeight, LPFI_FACIAL_FACE_INFO pResult);
 
-// ÈËÁ³ÐÅÏ¢¼ì²â(  ºìÍâ¿ìËÙ°æ±¾)
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½(  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù°æ±¾)
 FI_FACIAL_API int FI_FACIAL_Detect_IR_FP(FI_HANDLE hFiCodec, const char* pYBuf, int nWidth, int nHeight, LPFI_FACIAL_FACE_INFO pResult);
 
-// ÈËÁ³ÐÅÏ¢¼ì²â(  ¿É¼û¹âÍ¨ÓÃ°æ±¾)
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½(  ï¿½É¼ï¿½ï¿½ï¿½Í¨ï¿½Ã°æ±¾)
 FI_FACIAL_API int FI_FACIAL_Detect_VR_GN(FI_HANDLE hFiCodec, const char* pYBuf, int nWidth, int nHeight, LPFI_FACIAL_FACE_INFO pResult);
 
-// ÈËÁ³ÐÅÏ¢¼ì²â(  ¿É¼û¹â¿ìËÙ°æ±¾)
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½(  ï¿½É¼ï¿½ï¿½ï¿½ï¿½ï¿½Ù°æ±¾)
 FI_FACIAL_API int FI_FACIAL_Detect_VR_FP(FI_HANDLE hFiCodec, const char* pYBuf, int nWidth, int nHeight, LPFI_FACIAL_FACE_INFO pResult);
 
 
 //
-// ÈËÁ³ÐÅÏ¢¼ì²â
-// ·µ»ØÖµ:
-//	== -1 	¼ì²âÊ§°Ü
-// 	>=  0	¼ì²âµ½µÄÈËÁ³¸öÊý
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½
+// ï¿½ï¿½ï¿½ï¿½Öµ:
+//	== -1 	ï¿½ï¿½ï¿½Ê§ï¿½ï¿½
+// 	>=  0	ï¿½ï¿½âµ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //
-// FI_FACIAL_DETECT_WAY_INVALID        ÎÞÐ§
-// FI_FACIAL_DETECT_WAY_IR_GN		ºìÍâÈËÁ³¼ì²âÆÕÍ¨°æ±¾
-// FI_FACIAL_DETECT_WAY_IR_FP		ºìÍâÈËÁ³¼ì²â¿ìËÙ°æ±¾
-// FI_FACIAL_DETECT_WAY_VR_GN		¿É¼û¹âÈËÁ³¼ì²âÆÕÍ¨°æ±¾
-// FI_FACIAL_DETECT_WAY_VR_FP		¿É¼û¹âÈËÁ³¼ì²â¿ìËÙ°æ±¾
-// FI_FACIAL_DETECT_WAY_EyeStatus	×¨ÓÃÑÛ¾¦±ÕºÏ×´Ì¬¼ì²â(»ìºÏ°æ±¾£¬ÖØÔÚÌá¸ßÖÊÁ¿)
-//							ÈËÑÛ±ÕºÏ×´Ì¬¼ì²â×¨ÓÃ°æ±¾£¬Ê¹ÓÃ¿É¼û¹âÈËÁ³+  ºìÍâÈËÑÛ+  ºìÍâÈËÑÛ×´Ì¬
+// FI_FACIAL_DETECT_WAY_INVALID        ï¿½ï¿½Ð§
+// FI_FACIAL_DETECT_WAY_IR_GN		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½æ±¾
+// FI_FACIAL_DETECT_WAY_IR_FP		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù°æ±¾
+// FI_FACIAL_DETECT_WAY_VR_GN		ï¿½É¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½æ±¾
+// FI_FACIAL_DETECT_WAY_VR_FP		ï¿½É¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù°æ±¾
+// FI_FACIAL_DETECT_WAY_EyeStatus	×¨ï¿½ï¿½ï¿½Û¾ï¿½ï¿½Õºï¿½×´Ì¬ï¿½ï¿½ï¿½(ï¿½ï¿½Ï°æ±¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+//							ï¿½ï¿½ï¿½Û±Õºï¿½×´Ì¬ï¿½ï¿½ï¿½×¨ï¿½Ã°æ±¾ï¿½ï¿½Ê¹ï¿½Ã¿É¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½+  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½+  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
 FI_FACIAL_API int FI_FACIAL_DetectX(FI_HANDLE hFiCodec, const char* pYBuf, const FI_FACIAL_DETECT_PARAM* pDetectParam, FI_FACIAL_DETECTX_RESULT *pResult/*, unsigned char * pIcon*/);
 
 typedef enum FI_FACIAL_CROP_ICON_TYPE
 {
-	FI_FACIAL_CROP_FACE_ICON_FOR_DETECT,		/* ÈËÁ³¼ì²âÊ±µÄÈËÁ³Ð¡Í¼£¬·Ö±æÂÊÊÇ120x142 */
-	FI_FACIAL_CROP_FACE_ICON_FOR_EYESTATUS,	/* Æ£ÀÍ¼ì²âÊ±µÄÈËÁ³Ð¡Í¼£¬·Ö±æÂÊÊÇ120x142 */
-	FI_FACIAL_CROP_FACE_ICON_FOR_FEATURE1,		/* ÌáÈ¡ÌØÕ÷Ê±µÄÈËÁ³Ð¡Í¼£¬·Ö±æÂÊÊÇ120x142 */
-	FI_FACIAL_CROP_FACE_ICON_FOR_FEATURE2,		/* ÌáÈ¡ÌØÕ÷Ê±µÄÈËÁ³Ð¡Í¼£¬·Ö±æÂÊÊÇ128x128 */
-	FI_FACIAL_CROP_EYE_ICON_FOR_EYESTATUS,		/* Æ£ÀÍ¼ì²âÊ±µÄÑÛ¾¦Ð¡Í¼£¬·Ö±æÂÊÊÇ24x12 */
+	FI_FACIAL_CROP_FACE_ICON_FOR_DETECT,		/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡Í¼ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½120x142 */
+	FI_FACIAL_CROP_FACE_ICON_FOR_EYESTATUS,	/* Æ£ï¿½Í¼ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡Í¼ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½120x142 */
+	FI_FACIAL_CROP_FACE_ICON_FOR_FEATURE1,		/* ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡Í¼ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½120x142 */
+	FI_FACIAL_CROP_FACE_ICON_FOR_FEATURE2,		/* ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡Í¼ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½128x128 */
+	FI_FACIAL_CROP_EYE_ICON_FOR_EYESTATUS,		/* Æ£ï¿½Í¼ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Û¾ï¿½Ð¡Í¼ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½24x12 */
 }FI_FACIAL_CROP_ICON_TYPE;
 
 typedef struct FI_FACIAL_CROP_ICON_PARAM
 {
-	int width;							/* Í¼Ïñ¿í¶È*/
-	int height;							/* Í¼Ïñ¸ß¶È*/
-	FI_RECT  rtFace;						/* ÈËÁ³×ø±ê*/
-	FI_POINT ptLeftEye;					/* ×óÑÛ×ø±ê*/
-	FI_POINT ptRightEye;					/* ÓÒÑÛ×ø±ê*/
-	FI_POINT ptMouth;					/* ÓÒÑÛ×ø±ê*/
-	FI_FACIAL_CROP_ICON_TYPE type;		/* ²Ã¼ôÀàÐÍ*/
+	int width;							/* Í¼ï¿½ï¿½ï¿½ï¿½*/
+	int height;							/* Í¼ï¿½ï¿½ß¶ï¿½*/
+	FI_RECT  rtFace;						/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
+	FI_POINT ptLeftEye;					/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
+	FI_POINT ptRightEye;					/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
+	FI_POINT ptMouth;					/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
+	FI_FACIAL_CROP_ICON_TYPE type;		/* ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ï¿½*/
 }FI_FACIAL_CROP_ICON_PARAM;
 
 FI_FACIAL_API FI_BOOL FI_FACIAL_CropIcon(FI_HANDLE hFiCodec, const unsigned char* pYBuf, FI_FACIAL_CROP_ICON_PARAM param, unsigned char* pIconBuf, int* nIconWidth, int* nIconHeight);
 
 
-//// old£¬don't use
-//// ±¾½Ó¿ÚÒÑ¾­¹ýÊ±£¬½ö½öÊÇ¼æÈÝÒÔÇ°ÀÏ°æ±¾
+//// oldï¿½ï¿½don't use
+//// ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¼ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½Ï°æ±¾
 static int FI_FACIAL_Detect(FI_HANDLE hFiCodec, const char* pYBuf, int nWidth, int nHeight, LPFI_FACIAL_FACE_INFO pResult)
 {
 	return FI_FACIAL_Detect_IR_GN(hFiCodec, pYBuf, nWidth, nHeight, pResult);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//									ÈËÁ³¶ÔÏó¸ú×Ù
+//									ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////
-// º¯ÊýÃû³Æ£ºFI_FACIAL_TrackX
-// º¯ÊýÃèÊö£ºÈËÁ³¶ÔÏó¸ú×Ù
-// ÊäÈë²ÎÊý£º
-//				hFiCodec		Í¨µÀ¾ä±ú£¨FI_HANDLE£©
-//				pBufYUV420	Í¼ÏñÊý¾Ý( RGB  ¸ñÊ½)
-//				detectParam	¼ì²â²ÎÊý
-// Êä³ö²ÎÊý£º
-//				pResult		Êä³ö¸ú×Ùµ½µÄÈËÁ³¶ÔÏóÐÅÏ¢
-// ·µ»Ø½á¹û£º
-//				==-1 µ÷ÓÃÊ§°Ü; >=0  ¸ú×Ùµ½µÄ¶ÔÏó¸öÊý
-// ¸½¼ÓËµÃ÷£º
-//				µ÷ÓÃ±¾½Ó¿Ú»á½øÐÐÈËÁ³¶ÔÏó¸ú×Ù£¬²¢·µ»ØËùÓÐ¸ú×Ùµ½µÄÈËÁ³¶ÔÏóÐÅÏ¢¡£
-//				Ã¿´Î·µ»ØµÄ¶ÔÏó°üÀ¨ÊµÊ±¶ÔÏóºÍ¾¯±¨¶ÔÏó£»
-//				ÊµÊ±¶ÔÏó:  ¼´µ±Ç°Ö¡ÓÐÐ§¸ú×ÙµÄ¶ÔÏó£¬´ËÊ±µ÷ÓÃFI_FACIAL_GetNewlyPhoto  ½Ó¿Ú»ñÈ¡ÊµÊ±ÕÕÆ¬£»
-//				¾¯±¨¶ÔÏó:  ¼´ÒÑ¾­Ê§×ÙµÄ¶ÔÏó£¬´ËÊ±µ÷ÓÃFI_FACIAL_GetBestPhoto  ½Ó¿Ú»ñÈ¡×î¼ÑÕÕÆ¬£»
-//				Í¨¹ýFI_FACIAL_OBJ_INFO  ½á¹¹µÄbAlarm  À´ÅÐ¶Ï¶ÔÏóÊÇÊµÊ±¶ÔÏó»¹ÊÇ¾¯±¨¶ÔÏó¡£
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½FI_FACIAL_TrackX
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//				hFiCodec		Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½FI_HANDLEï¿½ï¿½
+//				pBufYUV420	Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½( RGB  ï¿½ï¿½Ê½)
+//				detectParam	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//				pResult		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ùµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+// ï¿½ï¿½ï¿½Ø½ï¿½ï¿½ï¿½ï¿½
+//				==-1 ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½; >=0  ï¿½ï¿½ï¿½Ùµï¿½ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½
+//				ï¿½ï¿½ï¿½Ã±ï¿½ï¿½Ó¿Ú»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¸ï¿½ï¿½Ùµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½
+//				Ã¿ï¿½Î·ï¿½ï¿½ØµÄ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÊµÊ±ï¿½ï¿½ï¿½ï¿½Í¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//				ÊµÊ±ï¿½ï¿½ï¿½ï¿½:  ï¿½ï¿½ï¿½ï¿½Ç°Ö¡ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ÙµÄ¶ï¿½ï¿½ó£¬´ï¿½Ê±ï¿½ï¿½ï¿½ï¿½FI_FACIAL_GetNewlyPhoto  ï¿½Ó¿Ú»ï¿½È¡ÊµÊ±ï¿½ï¿½Æ¬ï¿½ï¿½
+//				ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:  ï¿½ï¿½ï¿½Ñ¾ï¿½Ê§ï¿½ÙµÄ¶ï¿½ï¿½ó£¬´ï¿½Ê±ï¿½ï¿½ï¿½ï¿½FI_FACIAL_GetBestPhoto  ï¿½Ó¿Ú»ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½
+//				Í¨ï¿½ï¿½FI_FACIAL_OBJ_INFO  ï¿½á¹¹ï¿½ï¿½bAlarm  ï¿½ï¿½ï¿½Ð¶Ï¶ï¿½ï¿½ï¿½ï¿½ï¿½ÊµÊ±ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //				
 //				FI_FACIAL_OBJ_INFO objInfo;
 //				if (objInfo.bAlarm)
 //				{
-//					// ¾¯±¨¶ÔÏó
+//					// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //
-//					// »ñÈ¡×î¼ÑÕÕÆ¬£¬ÓÃÓÚ±£´æ
+//					// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½
 //					FI_FACIAL_GetBestPhoto(...);
 //				}
 //				else
 //				{
-//					// ÊµÊ±¶ÔÏó
+//					// ÊµÊ±ï¿½ï¿½ï¿½ï¿½
 //					
-//					// »ñÈ¡ÊµÊ±ÕÕÆ¬£¬ÓÃÓÚÏÔÊ¾
+//					// ï¿½ï¿½È¡ÊµÊ±ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾
 //					FI_FACIAL_GetNewlyPhoto(...);
 //				}
 //
@@ -185,113 +185,113 @@ static int FI_FACIAL_Detect(FI_HANDLE hFiCodec, const char* pYBuf, int nWidth, i
 FI_FACIAL_API int FI_FACIAL_TrackX(FI_HANDLE hFiCodec, const char* pBufYUV420, const FI_FACIAL_DETECT_PARAM* pDetectParam, FI_FACIAL_TRACKX_RESULT *pResult);
 
 ///////////////////////////////////////////////////////////
-// º¯ÊýÃû³Æ£ºFI_FACIAL_GetNewlyPhoto
-// º¯ÊýÃèÊö£º»ñÈ¡ÈËÁ³¶ÔÏó×îÐÂÕÕÆ¬
-// ÊäÈë²ÎÊý£º
-//				hFiCodec		Í¨µÀ¾ä±ú£¨FI_HANDLE£©
-//				nObjID			¶ÔÏóID
-// Êä³ö²ÎÊý£º
-//				pImageData		Êä³öÕÕÆ¬Êý¾Ý£¬Îª RGB 24 ¸ñÊ½£¬¿Õ¼äÓÉµ÷ÓÃÕß·ÖÅäºÍÊÍ·Å£¬µ÷ÓÃÇ°±ØÐë·ÖÅä×ã¹»´óÐ¡µÄ¿Õ¼ä
-//				nImageWidth		Êä³öÕÕÆ¬¿í¶È
-//				nImageHeight	Êä³öÕÕÆ¬¸ß¶È
-// ·µ»Ø½á¹û£º
-//				ÊÇ·ñ³É¹¦£º==TRUE ³É¹¦£»==FALSE Ê§°Ü£»
-// ¸½¼ÓËµÃ÷£º
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½FI_FACIAL_GetNewlyPhoto
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//				hFiCodec		Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½FI_HANDLEï¿½ï¿½
+//				nObjID			ï¿½ï¿½ï¿½ï¿½ID
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//				pImageData		ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½Ý£ï¿½Îª RGB 24 ï¿½ï¿½Ê½ï¿½ï¿½ï¿½Õ¼ï¿½ï¿½Éµï¿½ï¿½ï¿½ï¿½ß·ï¿½ï¿½ï¿½ï¿½ï¿½Í·Å£ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã¹»ï¿½ï¿½Ð¡ï¿½Ä¿Õ¼ï¿½
+//				nImageWidth		ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½
+//				nImageHeight	ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½ß¶ï¿½
+// ï¿½ï¿½ï¿½Ø½ï¿½ï¿½ï¿½ï¿½
+//				ï¿½Ç·ï¿½É¹ï¿½ï¿½ï¿½==TRUE ï¿½É¹ï¿½ï¿½ï¿½==FALSE Ê§ï¿½Ü£ï¿½
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½
 ///////////////////////////////////////////////////////////
 FI_FACIAL_API FI_BOOL FI_FACIAL_GetNewlyPhoto(FI_HANDLE hFiCodec, int nObjID, 
 													unsigned char *pImageData, int *nImageWidth, int *nImageHeight);
 
 
 ///////////////////////////////////////////////////////////
-// º¯ÊýÃû³Æ£ºFI_FACIAL_GetBestPhoto
-// º¯ÊýÃèÊö£º»ñÈ¡ÈËÁ³¶ÔÏó×î¼ÑÕÕÆ¬
-// ÊäÈë²ÎÊý£º
-//				hFiCodec		Í¨µÀ¾ä±ú£¨FI_HANDLE£©
-//				nObjID			¶ÔÏóID
-// Êä³ö²ÎÊý£º
-//				pImageData		Êä³öÕÕÆ¬Êý¾Ý£¬Îª RGB 24 ¸ñÊ½£¬¿Õ¼äÓÉµ÷ÓÃÕß·ÖÅäºÍÊÍ·Å£¬µ÷ÓÃÇ°±ØÐë·ÖÅä×ã¹»´óÐ¡µÄ¿Õ¼ä
-//				nImageWidth		Êä³öÕÕÆ¬¿í¶È
-//				nImageHeight	Êä³öÕÕÆ¬¸ß¶È
-// ·µ»Ø½á¹û£º
-//				ÊÇ·ñ³É¹¦£º==TRUE ³É¹¦£»==FALSE Ê§°Ü£»
-// ¸½¼ÓËµÃ÷£º
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½FI_FACIAL_GetBestPhoto
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//				hFiCodec		Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½FI_HANDLEï¿½ï¿½
+//				nObjID			ï¿½ï¿½ï¿½ï¿½ID
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//				pImageData		ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½Ý£ï¿½Îª RGB 24 ï¿½ï¿½Ê½ï¿½ï¿½ï¿½Õ¼ï¿½ï¿½Éµï¿½ï¿½ï¿½ï¿½ß·ï¿½ï¿½ï¿½ï¿½ï¿½Í·Å£ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã¹»ï¿½ï¿½Ð¡ï¿½Ä¿Õ¼ï¿½
+//				nImageWidth		ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½
+//				nImageHeight	ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½ß¶ï¿½
+// ï¿½ï¿½ï¿½Ø½ï¿½ï¿½ï¿½ï¿½
+//				ï¿½Ç·ï¿½É¹ï¿½ï¿½ï¿½==TRUE ï¿½É¹ï¿½ï¿½ï¿½==FALSE Ê§ï¿½Ü£ï¿½
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½
 ///////////////////////////////////////////////////////////
 FI_FACIAL_API FI_BOOL FI_FACIAL_GetBestPhoto(FI_HANDLE hFiCodec,  int nObjID,
 									   				unsigned char *pImageData, int *nImageWidth, int *nImageHeight);
 
 ///////////////////////////////////////////////////////////
-// º¯ÊýÃû³Æ£ºFI_FACIAL_GetBestPhotoBackground
-// º¯ÊýÃèÊö£º»ñÈ¡ÈËÁ³¶ÔÏó×î¼ÑÕÕÆ¬±³¾°Í¼Ïñ
-// ÊäÈë²ÎÊý£º
-//				hFiCodec		Í¨µÀ¾ä±ú£¨FI_HANDLE£©
-//				nObjID			¶ÔÏóID
-// Êä³ö²ÎÊý£º
-//				pImageData		Êä³öÕÕÆ¬Êý¾Ý£¬Îª RGB 24 ¸ñÊ½£¬¿Õ¼äÓÉµ÷ÓÃÕß·ÖÅäºÍÊÍ·Å£¬µ÷ÓÃÇ°±ØÐë·ÖÅä×ã¹»´óÐ¡µÄ¿Õ¼ä
-//				nImageWidth		Êä³öÕÕÆ¬¿í¶È
-//				nImageHeight	Êä³öÕÕÆ¬¸ß¶È
-// ·µ»Ø½á¹û£º
-//				ÊÇ·ñ³É¹¦£º==TRUE ³É¹¦£»==FALSE Ê§°Ü£»
-// ¸½¼ÓËµÃ÷£º
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½FI_FACIAL_GetBestPhotoBackground
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//				hFiCodec		Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½FI_HANDLEï¿½ï¿½
+//				nObjID			ï¿½ï¿½ï¿½ï¿½ID
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//				pImageData		ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½Ý£ï¿½Îª RGB 24 ï¿½ï¿½Ê½ï¿½ï¿½ï¿½Õ¼ï¿½ï¿½Éµï¿½ï¿½ï¿½ï¿½ß·ï¿½ï¿½ï¿½ï¿½ï¿½Í·Å£ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã¹»ï¿½ï¿½Ð¡ï¿½Ä¿Õ¼ï¿½
+//				nImageWidth		ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½
+//				nImageHeight	ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½ß¶ï¿½
+// ï¿½ï¿½ï¿½Ø½ï¿½ï¿½ï¿½ï¿½
+//				ï¿½Ç·ï¿½É¹ï¿½ï¿½ï¿½==TRUE ï¿½É¹ï¿½ï¿½ï¿½==FALSE Ê§ï¿½Ü£ï¿½
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½
 ///////////////////////////////////////////////////////////
 FI_FACIAL_API FI_BOOL FI_FACIAL_GetBestPhotoBackground(FI_HANDLE hFiCodec,  int nObjID,
 									   				unsigned char *pImageData, int *nImageWidth, int *nImageHeight);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//									ÈËÑÛ×´Ì¬¼ì²â
+//									ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// ºìÍâÈËÑÛ×´Ì¬¼ì²â
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½
 // *pEyeStatus
-// 		==0 ÍêÈ«±ÕÑÛ
-//		==1 Ë«ÑÛÕö¿ª
-//		==2 ×óÑÛÕö¿ª
-//		==3 ÓÒÑÛÕö¿ª
-// ºìÍâÈËÁ³±ÕºÏ×´Ì¬¼ì²â²ÉÓÃÐÂËã·¨Ô­Àí£¬Ð§¹û±È¿É¼û¹â°æ±¾(±È½Ï¾ÉµÄËã·¨Ô­Àí) ºÃ
+// 		==0 ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½
+//		==1 Ë«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//		==2 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//		==3 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õºï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã·¨Ô­ï¿½ï¿½Ð§ï¿½ï¿½ï¿½È¿É¼ï¿½ï¿½ï¿½æ±¾(ï¿½È½Ï¾Éµï¿½ï¿½ã·¨Ô­ï¿½ï¿½) ï¿½ï¿½
 FI_FACIAL_API int FI_FACIAL_DetectEyeStatusIR(FI_HANDLE hFiCodec, char* pYBuf, int nWidth, int nHeight, FI_POINT ptLeftEye, FI_POINT ptRightEye, int *pEyeStatus);
 
-// ¿É¼û¹âÈËÑÛ×´Ì¬¼ì²â
+// ï¿½É¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½
 // *pEyeStatus
-// 		==0 ÍêÈ«±ÕÑÛ
-//		==1 Ë«ÑÛÕö¿ª
-//		==2 ×óÑÛÕö¿ª
-//		==3 ÓÒÑÛÕö¿ª
+// 		==0 ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½
+//		==1 Ë«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//		==2 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//		==3 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 FI_FACIAL_API int FI_FACIAL_DetectEyeStatusVR(FI_HANDLE hFiCodec, char* pYBuf, int nWidth, int nHeight, FI_POINT ptLeftEye, FI_POINT ptRightEye, int *pEyeStatus);
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//									ÌØÕ÷ÌáÈ¡±È¶Ô
+//									ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½È¶ï¿½
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// JNM ÈËÁ³ÌØÕ÷
+// JNM ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 /***************************************************************
- * ·µ»ØµÄÊý¾Ý:
- * 1. ÌáÈ¡µÄÌØÕ÷Êý¾Ý(1024 Byte)
- * 2. ´«µÝ½øÀ´µÄ»Ò¶ÈÍ¼(width x height)
- * 3. ICON1, ²Ã¼ôµÄ³õÊ¼Ð¡Í¼(120 x 142)
- * 4. ICON2, ¾­¹ýÖ±·½Í¼ÂË²¨µÄÐ¡Í¼(120 x 142)
- ·µ»ØÖµ:
- ==0    ³É¹¦
- ==-1  Âß¼­Òì³£Ê§°Ü
- ==-2  ÕÕÆ¬¹¥»÷Ê§°Ü(Ä¿Ç°½ö½öÖ§³ÖFI_FACIAL_GetJNMFeature  ½Ó¿Ú)
+ * ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½:
+ * 1. ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(1024 Byte)
+ * 2. ï¿½ï¿½ï¿½Ý½ï¿½ï¿½ï¿½ï¿½Ä»Ò¶ï¿½Í¼(width x height)
+ * 3. ICON1, ï¿½Ã¼ï¿½ï¿½Ä³ï¿½Ê¼Ð¡Í¼(120 x 142)
+ * 4. ICON2, ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½Í¼ï¿½Ë²ï¿½ï¿½ï¿½Ð¡Í¼(120 x 142)
+ ï¿½ï¿½ï¿½ï¿½Öµ:
+ ==0    ï¿½É¹ï¿½
+ ==-1  ï¿½ß¼ï¿½ï¿½ì³£Ê§ï¿½ï¿½
+ ==-2  ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½(Ä¿Ç°ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½FI_FACIAL_GetJNMFeature  ï¿½Ó¿ï¿½)
  ****************************************************************
 */ 
 FI_FACIAL_API int FI_FACIAL_GetJNMFeature(FI_HANDLE hFiCodec, const char* pYBuf, int nWidth, int nHeight, LPFI_FACIAL_FACE_INFO pFacial, char* pFeatureJNM, int nFeatureBufSize);
 FI_FACIAL_API int FI_FACIAL_GetJNMFeatureAdjust(FI_HANDLE hFiCodec, const char* pYBuf, int nWidth, int nHeight, LPFI_FACIAL_FACE_INFO pFacial, char* pFeatureJNM, int nFeatureBufSize, float fBrightnessReference, int nAdjust);
 FI_FACIAL_API int FI_FACIAL_GetJNMFeature_FromIcon(FI_HANDLE hFiCodec, const char* pIconYBuf, char* pFeatureJNM);
 
-// ÌáÈ¡´Ö²ÚÌØÕ÷£¬ÓÃÓÚÌØÕ÷ÑµÁ·
+// ï¿½ï¿½È¡ï¿½Ö²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñµï¿½ï¿½
 FI_FACIAL_API FI_BOOL FI_FACIAL_GetJNMRawFeature(FI_HANDLE hFiCodec, char* pYBuf, int nWidth, int nHeight, LPFI_FACIAL_FACE_INFO pFacial, FI_FACIAL_MBLBP_RAW_FEA_STG* pJNMRawFea);
 
-// ÊäÈë¶þ½øÖÆÌØÕ÷
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 FI_FACIAL_API float FI_FACIAL_CompareJNMFeature(FI_HANDLE hFiCodec, char* pCurFeature, char* pRefFeature);
 
-// ÊäÈëÔ­Ê¼char  ÌØÕ÷
+// ï¿½ï¿½ï¿½ï¿½Ô­Ê¼char  ï¿½ï¿½ï¿½ï¿½
 FI_FACIAL_API float FI_FACIAL_CompareJNMFeatureByRawFea(FI_HANDLE hFiCodec, char* pCurFeature, char* pRefFeature, int nFeaLength);
 
 /*
 	pCurFeature = Feature(1024Byte) + UserFeaNum(1Byte) + UserFeaNum(1Byte) + UserFeaNum(1Byte) + UserFeaNum(1Byte) ...
 	pRefFeature = Feature(1024Byte) + Feature(1024Byte) + Feature(1024Byte) + Feature(1024Byte) + Feature(1024Byte) + ...
-	UserFeaNum ±íÊ¾pRefFeature  ´æ´¢µÄ²Î¿¼ÌØÕ÷Êý×éÖÐ£¬µÚ¼¸¸öÓÃ»§ÓµÓÐ¼¸¸ö²Î¿¼ÌØÕ÷¡£
+	UserFeaNum ï¿½ï¿½Ê¾pRefFeature  ï¿½æ´¢ï¿½Ä²Î¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½Ú¼ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Óµï¿½Ð¼ï¿½ï¿½ï¿½ï¿½Î¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 */
 FI_FACIAL_API int FI_FACIAL_CompareJNMFeatureMore(FI_HANDLE hFiCodec, char* pCurFeature, char* pRefFeature, int nRefFeatureNum, LPFI_FACIAL_COMPARE_FEATURE_RESULT pResult);
 FI_FACIAL_API int FI_FACIAL_Proj_Comp(FI_HANDLE hFiCodec, char* pDataInBuf, char* pCompResult);
@@ -302,11 +302,11 @@ FI_FACIAL_API int FI_FACIAL_CompareJNMFeatureX(FI_HANDLE hFiCodec, LPFI_FACIAL_C
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 //
-//									Êý×ÖÍ¼Ïñ´¦Àí
+//									ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
-// Í¼Ïñ´¦Àí
+// Í¼ï¿½ï¿½ï¿½ï¿½
 FI_FACIAL_API int FI_FACIAL_Rolate_Yuv422_D1_To_Y_VGA_AND_SIF(FI_HANDLE hFiCodec, char* pD1Yuv422, char* pVga, char* pSif);
 FI_FACIAL_API int FI_FACIAL_Rolate_Yuv422_D1_To_YUV420P_SIF(FI_HANDLE hFiCodec, char* pD1Yuv422, char* pSif, int nAngle, int bMirror, int nOffsetX, int nOffsetY, int nZoom);
 FI_FACIAL_API int FI_FACIAL_Rolate_Yuv422_D1_To_YUV420P_2SIF(FI_HANDLE hFiCodec, char* pD1Yuv422, char* pSif1, char* pSif2, int nOffsetX, int nOffsetY, int nZoom);
@@ -315,7 +315,7 @@ FI_FACIAL_API int FI_FACIAL_Rolate_Y_Rotate_320x240_to_240x320(FI_HANDLE hFiCode
 
 FI_FACIAL_API void FI_FACIAL_YUV422VGA_TO_YUV420P_And_Rotate90(FI_HANDLE hFiCodec, char* pYuv422Vga, char* pVga, char* pSif, FI_BOOL bUV);
 
-// ²âÊÔ
+// ï¿½ï¿½ï¿½ï¿½
 FI_FACIAL_API int FI_FACIAL_Test_Mem(FI_HANDLE hFiCodec, char* pInBuf, char* pOutBuf, int nLen);
 
 

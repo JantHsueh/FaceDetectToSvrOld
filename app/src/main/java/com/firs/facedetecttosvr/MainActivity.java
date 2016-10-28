@@ -151,6 +151,7 @@ public class MainActivity extends Activity implements View.OnClickListener,
 		mTask.setRecognizeListener(this);//重写接口方法
 		mTask.execute(0);
 
+
 	}
 	@Override
 	protected void onPause() {

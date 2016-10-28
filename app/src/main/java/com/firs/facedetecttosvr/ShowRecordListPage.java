@@ -415,7 +415,7 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 					listView.setAdapter(new MyAdapter(items));
 
 				}
-
+				//2016.10.25修改了一行代码
 				if(!cur.isFirst()){
 					cur.moveToPrevious();
 				}
