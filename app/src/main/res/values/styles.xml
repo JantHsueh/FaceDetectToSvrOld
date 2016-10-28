@@ -16,22 +16,24 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-<style name="LodingDialog" parent="@android:style/Theme.Dialog">
+
+    <style name="LodingDialog" parent="@android:style/Theme.Dialog">
         <item name="android:background">#00000000</item>
- <!-- 设置自定义布局的背景透明 -->
+        <!-- 设置自定义布局的背景透明 -->
         <item name="android:windowBackground">@android:color/transparent</item>
- <!-- 设置window背景透明，也就是去边框 -->
+        <!-- 设置window背景透明，也就是去边框 -->
         <item name="android:windowFrame">@null</item>
- <!-- 边框 -->
+        <!-- 边框 -->
         <item name="android:windowIsFloating">true</item>
- <!-- 是否浮现在activity之上 -->
+        <!-- 是否浮现在activity之上 -->
         <item name="android:windowIsTranslucent">false</item>
- <!-- 半透明 -->
+        <!-- 半透明 -->
         <item name="android:windowNoTitle">true</item>
- <!-- 无标题 -->
+        <!-- 无标题 -->
         <item name="android:backgroundDimEnabled">false</item>
- <!-- 模糊 -->
+        <!-- 模糊 -->
     </style>
+
     <style name="ActionSheetDialogStyle" parent="@android:style/Theme.Dialog">
 
         <!-- 背景透明 -->
@@ -55,15 +57,15 @@
         <item name="android:windowExitAnimation">@anim/actionsheet_dialog_out</item>
     </style>
      -->
-     <style name="w_text" >
-         <item name="android:textColor">@color/white</item>
-         <item name="android:textSize">8dp</item>
-         </style>
+    <style name="w_text">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">8dp</item>
+    </style>
 
 
     <style name="SampleThemeLight" parent="android:Theme.Holo.Light.DarkActionBar">
         <!-- 设置自定义布局的背景透明 -->
-        <item  name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:background">#00000000</item>
         <!-- 是否浮现在activity之上 -->
         <!-- 半透明 -->

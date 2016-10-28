@@ -1,12 +1,16 @@
 package com.firs.facedetecttosvr;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+import com.firs.facedetecttosvr.getidcardinfor.BluetoothActivity;
+import com.firs.facedetecttosvr.getidcardinfor.CaptureActivity;
+import com.firs.facedetecttosvr.getidcardinfor.ImageActivity;
+import com.firs.facedetecttosvr.getidcardinfor.RealTimeActivity;
 
+public class MainActivity extends Activity {
 
 
 

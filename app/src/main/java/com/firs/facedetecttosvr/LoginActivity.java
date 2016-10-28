@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firs.cn.FaceNative;
+import com.firs.facedetecttosvr.getidcardinfor.CaptureActivity;
 
 public class LoginActivity extends Activity {
 	EditText edit_account;

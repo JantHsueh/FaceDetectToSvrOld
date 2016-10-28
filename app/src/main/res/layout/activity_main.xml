@@ -20,8 +20,8 @@
         android:text="蓝牙模式"
         >
 
-
         </Button>
+
 
     <Button
         android:id="@+id/CaptureButton"
@@ -30,7 +30,6 @@
         android:onClick="startCaptureActivity"
         android:layout_height="50dp"
         android:layout_width="150dp">
-
 
     </Button>
 

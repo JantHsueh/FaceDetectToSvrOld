@@ -36,8 +36,10 @@ public class ExcelUtils {
 	public static void format() {
 		try {
 			arial14font = new WritableFont(WritableFont.ARIAL, 14, WritableFont.BOLD);
+
 			arial14font.setColour(jxl.format.Colour.LIGHT_BLUE);//标题  蓝色粗体
 			arial14format = new WritableCellFormat(arial14font);//定义单元格格式
+
 			arial14format.setAlignment(jxl.format.Alignment.CENTRE);
 			arial14format.setBorder(jxl.format.Border.ALL, jxl.format.BorderLineStyle.THIN);
 			arial14format.setBackground(jxl.format.Colour.VERY_LIGHT_YELLOW);
@@ -54,9 +56,11 @@ public class ExcelUtils {
 			e.printStackTrace();
 		}
 	}
+
 	//创建表
 	public static void initExcel(String fileName, String[] colName) {
 		format();//画表格  字体颜色
+
 		WritableWorkbook workbook = null;
 		try {
 			File file = new File(fileName);
@@ -64,7 +68,9 @@ public class ExcelUtils {
 				file.createNewFile();
 			}
 			workbook = Workbook.createWorkbook(file);
+
 			WritableSheet sheet = workbook.createSheet("识别表", 0);
+
 			sheet.addCell((WritableCell) new Label(0, 0, fileName, arial14format));
 			for (int col = 0; col < colName.length; col++) {
 				sheet.addCell(new Label(col, 0, colName[col], arial10format));
@@ -110,6 +116,7 @@ public class ExcelUtils {
 
 				writebook.write();
 				Toast.makeText(c, "导出excles成功，手机自带存储设备下找 RunVision文件夹 下的worlk.xls ", Toast.LENGTH_SHORT).show();
+
 
 			}
 			catch (Exception e) {

@@ -5,7 +5,7 @@
  * data：2013-12-18
  */
 
-package com.firs.facedetecttosvr;
+package com.firs.facedetecttosvr.getidcardinfor;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -44,6 +44,15 @@ import com.firs.cn.FaceNative;
 import com.firs.cn.FacePosition;
 import com.firs.cn.RecognizeTask;
 import com.firs.cn.RecognizeTask.RecognizeListener;
+import com.firs.facedetecttosvr.MyApplication;
+import com.firs.facedetecttosvr.NewSettingActivity;
+import com.firs.facedetecttosvr.OtherSetActivity;
+import com.firs.facedetecttosvr.R;
+import com.firs.facedetecttosvr.SetServerIPActivity;
+import com.firs.facedetecttosvr.SettingActivity;
+import com.firs.facedetecttosvr.ShowFailActivity;
+import com.firs.facedetecttosvr.ShowRecordListActivity;
+import com.firs.facedetecttosvr.ShowSuccessActivity;
 
 import java.io.IOException;
 import java.util.Iterator;

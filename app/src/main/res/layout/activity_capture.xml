@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/main_bg"
     android:orientation="vertical"
-    tools:context=".CaptureActivity">
+    tools:context=".getidcardinfor.CaptureActivity">
 
     <RelativeLayout
         android:id="@+id/relativeLayout_surfaceview"

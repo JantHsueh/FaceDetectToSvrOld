@@ -1,6 +1,6 @@
 package com.firs.cn;
 
-import com.firs.facedetecttosvr.CaptureActivity;
+import com.firs.facedetecttosvr.getidcardinfor.CaptureActivity;
 
 public class FacePosition implements Comparable<FacePosition>{
     public final static String TAG = "FacePosition";

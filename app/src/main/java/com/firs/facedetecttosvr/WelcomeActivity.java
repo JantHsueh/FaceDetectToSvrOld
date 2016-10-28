@@ -135,7 +135,7 @@ public class WelcomeActivity extends Activity {
                     }
                     if (FaceNative.getAuth() == 1) {
                         Toast.makeText(getApplicationContext(), "登录成功!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(WelcomeActivity.this, CaptureActivity.class);
+                        Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
                         startActivity(intent);
                         WelcomeActivity.this.finish();
                     } else {
