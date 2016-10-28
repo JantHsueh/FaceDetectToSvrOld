@@ -3,7 +3,7 @@ package com.firs.cn;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.firs.facedetecttosvr.MyApp;
+import com.firs.facedetecttosvr.MyApplication;
 
 public class RecognizeTask extends AsyncTask<Integer , FacePosition, Boolean> {
     public final static String TAG = "recognizeTask";
@@ -51,7 +51,7 @@ public class RecognizeTask extends AsyncTask<Integer , FacePosition, Boolean> {
         byte[] picData = null;
         FacePosition pos = new FacePosition(DEFAULT_POSITION);
         while (!isCancelled()) {
-             //log("MyApp.faceRec.recognizeFace(rType)");
+             //log("MyApplication.faceRec.recognizeFace(rType)");
             picData = getPicData();
             if (picData == null) {
                 continue;
@@ -122,7 +122,7 @@ public class RecognizeTask extends AsyncTask<Integer , FacePosition, Boolean> {
 
     // 添加log
     private void log(String msg) {
-        if (MyApp.APP_DEBUG) {
+        if (MyApplication.APP_DEBUG) {
             Log.e(TAG, msg);
         }
     }

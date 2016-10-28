@@ -13,18 +13,13 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -35,7 +30,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,7 +38,7 @@ import com.firs.cn.MyDataBaseAdapter;
 import com.firs.view.CalendarView;
 import com.firs.view.ExcelUtils;
 
-public class ShowRecordListPage extends Activity implements OnClickListener{
+public class ShowRecordListActivity extends Activity implements OnClickListener{
 	//日期组件
 	private ImageButton calendar_Left,calendar_Right;
 	private TextView calendar_Center1;
@@ -76,7 +70,7 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 	ArrayList<Integer> numberList=new ArrayList<Integer>();
 	List<String> beanList=new ArrayList<String>();
 
-	public ShowRecordListPage() {
+	public ShowRecordListActivity() {
 	}
 
 	@Override
@@ -93,7 +87,7 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 			Date data=new Date();
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			CalendarDate=formatter.format(data);
-			//Toast.makeText(ShowRecordListPage.this ,"当前日期："+CalendarDate, Toast.LENGTH_LONG).show();
+			//Toast.makeText(ShowRecordListActivity.this ,"当前日期："+CalendarDate, Toast.LENGTH_LONG).show();
 		}
 
 
@@ -142,8 +136,8 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 			String str = Long.toString(formatter.parse(datetime).getTime());
 			Cursor cur = database.fetchCheckRecordInfoData(str);
 			if(cur != null && cur.getCount() == 1) {
-				Bitmap bitmap = getLoacalBitmap(MyApp.FACE_PATH+cur.getString(0)+".jpg"); //从本地取图片
-				Bitmap bitmap2 = getLoacalBitmap(MyApp.FACE_PATH + cur.getString(0) + cur.getShort(3)+".jpg"); //从本地取图片
+				Bitmap bitmap = getLoacalBitmap(MyApplication.FACE_PATH+cur.getString(0)+".jpg"); //从本地取图片
+				Bitmap bitmap2 = getLoacalBitmap(MyApplication.FACE_PATH + cur.getString(0) + cur.getShort(3)+".jpg"); //从本地取图片
 				imageView1.setImageBitmap(bitmap2);	//设置数据库Bitmap
 				imageView2.setImageBitmap(bitmap);	//设置照相存入的Bitmap
 
@@ -204,7 +198,7 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 				if(input!=null&&!input.equals("")&&!input.isEmpty()){//输入有内容
 					searchToInput();
 				}else{
-					Toast.makeText(ShowRecordListPage.this ,"请输入查询关键字", Toast.LENGTH_LONG).show();
+					Toast.makeText(ShowRecordListActivity.this ,"请输入查询关键字", Toast.LENGTH_LONG).show();
 				}
 				break;
 			default:
@@ -245,12 +239,12 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 //			if(getAll!=null) {
 //				getAll.clear();//清除搜索数据
 //			}
-			ShowRecordListPage.this.date=date;
+			ShowRecordListActivity.this.date=date;
 			SimpleDateFormat  fomt=new SimpleDateFormat("yyyy-MM-dd");
 			CalendarDate=fomt.format(date);//根据日期去条件查询当天的记录
 			Date nowdata=new Date(); //今天
 			String tady=fomt.format(date);
-			Toast.makeText(ShowRecordListPage.this, "您选择的日期是："+CalendarDate, 0).show();
+			Toast.makeText(ShowRecordListActivity.this, "您选择的日期是："+CalendarDate, 0).show();
 			if(!CalendarDate.equals(SQLtimes)){
 				listView.setVisibility(View.GONE);
 			}else{
@@ -377,7 +371,7 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 		if(cur != null)
 		{
 			int cou = cur.getCount();
-			MyApp.log("record count[]"+cou);
+			MyApplication.log("record count[]"+cou);
 			int colCount = cur.getColumnCount();
 
 			if(items != null)
@@ -398,7 +392,7 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 				String[] times=str.split(" ");
 				SQLtimes=times[0];
 				//times[0] 年份 如果日期选择的年份==数据库查到的年份，显示到界面
-				//Toast.makeText(ShowRecordListPage.this, CalendarDate+"数据库日期是："+times[0], Toast.LENGTH_LONG).show();
+				//Toast.makeText(ShowRecordListActivity.this, CalendarDate+"数据库日期是："+times[0], Toast.LENGTH_LONG).show();
 				//2016.10.23
 				Allmap.put(DATETIME, str);
 				Allmap.put(SCORE, cur.getString(1));
@@ -440,12 +434,12 @@ public class ShowRecordListPage extends Activity implements OnClickListener{
 //									{
 //										//点击“确定”
 //										database.clearRecordInfoData();
-//										File dir=new File(MyApp.FACE_PATH);
+//										File dir=new File(MyApplication.FACE_PATH);
 //										File[] lst=dir.listFiles();
 //										for (File f:lst){
 //											f.delete();
 //										}
-//										dir=new File(MyApp.FACE_TEMP_PATH);
+//										dir=new File(MyApplication.FACE_TEMP_PATH);
 //										lst=dir.listFiles();
 //										for (File f:lst){
 //											f.delete();

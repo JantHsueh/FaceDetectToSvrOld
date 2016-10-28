@@ -6,20 +6,16 @@
  */
 
 package com.firs.facedetecttosvr;
+import android.app.Application;
+import android.util.Log;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import com.firs.cn.FaceNative;
-
-import android.app.Application;
-import android.content.SharedPreferences;
-import android.os.Environment;
-import android.util.Log;
-
-public class MyApp extends Application {
+public class MyApplication extends Application {
     private final static String TAG = "MyApplication";
     public final static boolean APP_DEBUG = true;
     private final static String TEMP_FIFACE_CONFIG = "FiFaceConfig.ini";
@@ -40,8 +36,8 @@ public class MyApp extends Application {
 		String serverip = sharedPreferences.getString("serverip", "183.62.134.182");
 		int port = sharedPreferences.getInt("port", 32108);
 		
-        FaceNative.SetServerIP(serverip.getBytes(), port, 0);
-        log("create MyApp  ................");
+        FaceNative.SetServerIPActivity(serverip.getBytes(), port, 0);
+        log("create MyApplication  ................");
         FaceNative.initTcp();
         */
         // 配置算法库配置文件

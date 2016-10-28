@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-public class NewSettingPage extends Activity {
+public class NewSettingActivity extends Activity {
     private ImageView m1_im1,m1_im2;
     private ImageView m2_im1,m2_im2;
     private ImageView m3_im1,m3_im2,m3_im3,m3_im1_1,m3_im2_2,m3_im3_3;
@@ -29,7 +29,7 @@ public class NewSettingPage extends Activity {
 	}
 
    public void goBack(View v){
-	   NewSettingPage.this.finish(); 
+	   NewSettingActivity.this.finish();
    }
 
 }

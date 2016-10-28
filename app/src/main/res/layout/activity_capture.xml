@@ -1,0 +1,87 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg"
+    android:orientation="vertical"
+    tools:context=".CaptureActivity">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout_surfaceview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="45dp">
+
+        <FrameLayout
+            android:id="@+id/preview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:background="@color/line_frame">
+
+            <SurfaceView
+                android:id="@+id/surfaceView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:onClick="click_Surface" />
+
+        </FrameLayout>
+
+        <SeekBar
+            android:id="@+id/seekBar1"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="200dp"
+            android:rotation="270"
+            android:transformPivotX="150dp" />
+
+        <Button
+            android:id="@+id/imgViewMiddle"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/btn_takepicture"
+            android:onClick="SendPicture" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@drawable/back"
+        android:onClick="goBack"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/relativeLayout_surfaceview"
+        android:layout_marginBottom="12dp"
+        android:id="@+id/close_image" />
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@drawable/history"
+        android:onClick="toHistory"
+        android:layout_alignTop="@+id/close_image"
+        android:layout_toLeftOf="@+id/close_image"
+        android:id="@+id/history_image" />
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@drawable/setting"
+        android:onClick="toSetting"
+        android:layout_alignTop="@+id/history_image"
+        android:layout_toLeftOf="@+id/history_image"
+        android:id="@+id/imageView5" />
+
+
+</RelativeLayout>

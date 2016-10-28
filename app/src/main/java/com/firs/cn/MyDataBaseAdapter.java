@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 
-import com.firs.facedetecttosvr.MyApp;
+import com.firs.facedetecttosvr.MyApplication;
 
 public class MyDataBaseAdapter {
 	// 用于打印log
@@ -263,7 +263,7 @@ public class MyDataBaseAdapter {
 		initialValues.put(FACE_DETECT, faceDetect);
 		initialValues.put(REMARKS2, remarks);
 		initialValues.put(OTHERSNAME, others);
-		MyApp.log("insertRecordInfoData");
+		MyApplication.log("insertRecordInfoData");
 
 
 		return mSQLiteDatabase.insert(DB_RECORD_TABLE, null, initialValues);

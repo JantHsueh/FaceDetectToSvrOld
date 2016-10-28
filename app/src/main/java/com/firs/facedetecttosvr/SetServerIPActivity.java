@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.firs.cn.FaceNative;
 
-public class SetServerIP extends Activity {
+public class SetServerIPActivity extends Activity {
 	
 	EditText edit_svrip;
 	EditText edit_port;
@@ -79,7 +79,7 @@ public class SetServerIP extends Activity {
 		{
 			switch (msg.what){
 				case 1:
-					SharedPreferences settings = getSharedPreferences("serversettings",SetServerIP.MODE_PRIVATE);
+					SharedPreferences settings = getSharedPreferences("serversettings", SetServerIPActivity.MODE_PRIVATE);
 					Editor editor = settings.edit();//获取编辑器
 					editor.putString("serverip", edit_svrip.getText().toString());
 					editor.putInt("port", Integer.valueOf(edit_port.getText().toString()));
@@ -114,7 +114,7 @@ public class SetServerIP extends Activity {
 	
 	public void set_return(View v)
 	{
-		SetServerIP.this.finish();
+		SetServerIPActivity.this.finish();
 	}
 
 	//点击设置按钮  

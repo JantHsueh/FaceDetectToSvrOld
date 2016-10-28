@@ -4,7 +4,6 @@ package com.firs.facedetecttosvr;
 import java.io.File;
 import java.util.ArrayList;
 
-import com.firs.cn.FaceNative;
 import com.firs.cn.GridViewAdapter;
 
 
@@ -36,7 +35,7 @@ public class GridViewActivity extends Activity {
 		 gView = (GridView) this.findViewById(R.id.gridview);
 	        flag=1;
 	        /*
-	        albums = getPictureNames(MyApp.FACE_PATH,albums);
+	        albums = getPictureNames(MyApplication.FACE_PATH,albums);
 	        
 	        Log.i("xxxxxxxxxxxxx", "====44444444444444 here====");
 	        gView.setAdapter(new GridViewAdapter(this,flag, name, albums));
@@ -70,7 +69,7 @@ public class GridViewActivity extends Activity {
     protected void onResume() {
         //Log.e("11","onResume()");
         super.onResume();
-        albums = getPictureNames(MyApp.FACE_PATH,albums);
+        albums = getPictureNames(MyApplication.FACE_PATH,albums);
         
         Log.i("xxxxxxxxxxxxx", "====44444444444444 here====");
         gView.setAdapter(new GridViewAdapter(this,flag, name, albums));
@@ -107,7 +106,7 @@ public class GridViewActivity extends Activity {
 			   //Log.i("test",str[i]+"strlen"+str[i].length());
 			   if(str[i].length()<= 17)
 			   {
-				   pathArray.add(MyApp.FACE_PATH+str[i]);
+				   pathArray.add(MyApplication.FACE_PATH+str[i]);
 			   }
 			   //System.out.println(str[i]);
 		  }

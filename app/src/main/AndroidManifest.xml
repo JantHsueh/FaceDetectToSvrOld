@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.firs.facedetecttosvr"
-    >
+    package="com.firs.facedetecttosvr">
 
     <!-- 授予程序使用摄像头的权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -16,14 +16,14 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.firs.facedetecttosvr.MyApp"
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/logo_app"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
-            android:name="com.firs.facedetecttosvr.WelcomeActivity"
-            android:screenOrientation="landscape" >
+            android:name=".WelcomeActivity"
+            android:screenOrientation="landscape">
 
             <!-- android:screenOrientation="landscape" -->
             <intent-filter>
@@ -33,76 +33,71 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.firs.facedetecttosvr.SetServerIP"
-            android:label="设置服务器" >
-        </activity>
+            android:name=".SetServerIPActivity"
+            android:label="设置服务器" />
         <activity
-            android:name="com.firs.facedetecttosvr.Login"
-            android:label="欢迎使用" >
+            android:name=".LoginActivity"
+            android:label="欢迎使用">
 
-            <!-- WelcomeActivity    Login -->
+            <!-- WelcomeActivity    LoginActivity -->
         </activity>
         <!-- 主界面 -->
         <activity
-            android:name="com.firs.facedetecttosvr.MainActivity"
+            android:name=".CaptureActivity"
             android:label="@string/app_name"
-            android:screenOrientation="sensorPortrait" >
-        </activity>
+            android:screenOrientation="sensorPortrait" />
         <!--  -->
         <activity
-            android:name="com.firs.facedetecttosvr.ShowSuccessPage"
+            android:name=".ShowSuccessActivity"
             android:label="比对成功"
-            android:screenOrientation="landscape" >
+            android:screenOrientation="landscape">
 
             <!--
                  android:theme="@android:style/Theme.Translucent"
             	android:theme="@style/ActionSheetDialogStyle" 
-
             -->
         </activity>
         <activity
-            android:name="com.firs.facedetecttosvr.ShowFailPage"
+            android:name=".ShowFailActivity"
             android:label="比对失败"
-            android:screenOrientation="landscape" >
+            android:screenOrientation="landscape">
 
             <!-- ActionSheetDialogStyle /Animation.Dialog   android:configChanges="orientation|keyboardHidden"   android:launchMode="singleTask" android:screenOrientation="portrait" -->
         </activity>
         <activity
-            android:name="com.firs.facedetecttosvr.ShowRecordListPage"
+            android:name=".ShowRecordListActivity"
             android:label="查询记录"
-            android:screenOrientation="landscape" >
-        </activity>
+            android:screenOrientation="landscape" />
         <activity
-            android:name="com.firs.facedetecttosvr.ShowRecordDetailPage"
-            android:label="详细记录" >
-        </activity>
+            android:name=".ShowRecordDetailActivity"
+            android:label="详细记录" />
         <activity
-            android:name="com.firs.facedetecttosvr.SettingPage"
-            android:label="设置参数" >
-        </activity>
+            android:name=".SettingActivity"
+            android:label="设置参数" />
         <activity
-            android:name="com.firs.facedetecttosvr.OtherSetPage"
-            android:label="设置参数" >
-        </activity>
+            android:name=".OtherSetActivity"
+            android:label="设置参数" />
         <activity
-            android:name="com.firs.facedetecttosvr.GridViewActivity"
-            android:label="图片预览" >
-        </activity>
+            android:name=".GridViewActivity"
+            android:label="图片预览" />
         <activity
-            android:name="com.firs.facedetecttosvr.ImageViewActivity"
-            android:label="图片预览" >
-        </activity>
-        <activity android:name="com.firs.facedetecttosvr.AboutPage" >
-        </activity>
+            android:name=".ImageViewActivity"
+            android:label="图片预览" />
+        <activity android:name=".AboutActivity" />
         <activity
-            android:name="com.firs.facedetecttosvr.NewSettingPage"
+            android:name=".NewSettingActivity"
             android:label="设置"
             android:screenOrientation="landscape"
-            android:theme="@style/ActionSheetDialogStyle" >
-        </activity>
+            android:theme="@style/ActionSheetDialogStyle" />
         <!-- android:windowSoftInputMode="stateHidden" -->
-        
+
+        <activity
+            android:name=".MainActivity"
+            android:label="模式选择"
+            android:screenOrientation="landscape" />
+        <activity android:name=".BluetoothActivity" />
+        <activity android:name=".ImageActivity" />
+        <activity android:name=".RealTimeActivity"></activity>
     </application>
 
 </manifest>
-

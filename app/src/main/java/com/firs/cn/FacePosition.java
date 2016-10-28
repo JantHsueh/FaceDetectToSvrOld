@@ -1,6 +1,6 @@
 package com.firs.cn;
 
-import com.firs.facedetecttosvr.MainActivity;
+import com.firs.facedetecttosvr.CaptureActivity;
 
 public class FacePosition implements Comparable<FacePosition>{
     public final static String TAG = "FacePosition";
@@ -43,7 +43,7 @@ public class FacePosition implements Comparable<FacePosition>{
             this.mTop = value[2];
             this.mRight = value[3];
             this.mBottom = value[4];
-            this.mRotate = (value[5] + MainActivity.DEFAULT_ROTATE_VALUE) % 360;
+            this.mRotate = (value[5] + CaptureActivity.DEFAULT_ROTATE_VALUE) % 360;
             this.mEyeStatus = value[6];
             this.mLEX = value[7];
             this.mLEY = value[8];
@@ -176,7 +176,7 @@ public class FacePosition implements Comparable<FacePosition>{
             this.mTop = value[2];
             this.mRight = value[3];
             this.mBottom = value[4];
-            this.mRotate = (value[5].intValue() + MainActivity.DEFAULT_ROTATE_VALUE) % 360;
+            this.mRotate = (value[5].intValue() + CaptureActivity.DEFAULT_ROTATE_VALUE) % 360;
             this.mEyeStatus = value[6].intValue();
             this.mLEX = value[7];
             this.mLEY = value[8];
@@ -202,7 +202,7 @@ public class FacePosition implements Comparable<FacePosition>{
             this.mTop = value[2];
             this.mRight = value[3];
             this.mBottom = value[4];
-            this.mRotate = (value[5] + MainActivity.DEFAULT_ROTATE_VALUE) % 360;
+            this.mRotate = (value[5] + CaptureActivity.DEFAULT_ROTATE_VALUE) % 360;
             this.mEyeStatus = value[6];
             this.mLEX = value[7];
             this.mLEY = value[8];

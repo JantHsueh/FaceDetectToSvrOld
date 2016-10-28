@@ -24,7 +24,7 @@ import android.widget.Toast;
 
 import com.firs.cn.FaceNative;
 
-public class Login extends Activity {
+public class LoginActivity extends Activity {
 	EditText edit_account;
 	EditText edit_pwd;
 	CheckBox cb_pwd;
@@ -105,7 +105,7 @@ public class Login extends Activity {
 		String serverip = sharedPreferences2.getString("serverip", "116.205.1.86");
 		int port = sharedPreferences2.getInt("port", 32108);
 		FaceNative.SetServerIP(serverip.getBytes(), port, 0);
-		//log("create MyApp  ................");
+		//log("create MyApplication  ................");
 		//FaceNative.initTcp();
 
 		SharedPreferences sharedPreferences3= getSharedPreferences("setting", this.MODE_PRIVATE);
@@ -155,7 +155,7 @@ public class Login extends Activity {
 					if(cb_pwd.isChecked() &&(true == bSave))
 					{
 						//save account and pwd
-						SharedPreferences settings = getSharedPreferences("useraccount",Login.MODE_PRIVATE);
+						SharedPreferences settings = getSharedPreferences("useraccount", LoginActivity.MODE_PRIVATE);
 						Editor editor = settings.edit();//获取编辑器
 						editor.putString("account", edit_account.getText().toString());
 						editor.putString("pwd", edit_pwd.getText().toString());
@@ -168,7 +168,7 @@ public class Login extends Activity {
 					if(!cb_pwd.isChecked())
 					{
 						//save account and pwd
-						SharedPreferences settings = getSharedPreferences("useraccount",Login.MODE_PRIVATE);
+						SharedPreferences settings = getSharedPreferences("useraccount", LoginActivity.MODE_PRIVATE);
 						Editor editor = settings.edit();//获取编辑器
 						editor.putString("account", edit_account.getText().toString());
 						editor.putString("pwd", "");
@@ -182,9 +182,9 @@ public class Login extends Activity {
 
 					if(FaceNative.getAuth() == 1)
 					{
-						Intent intent = new Intent(Login.this,MainActivity.class);
+						Intent intent = new Intent(LoginActivity.this,CaptureActivity.class);
 						startActivity(intent);
-						Login.this.finish();
+						LoginActivity.this.finish();
 						toast= Toast.makeText(getApplicationContext(), "登录成功!", Toast.LENGTH_SHORT);
 					}else {
 						if(FaceNative.getAuth() == -1)
@@ -216,7 +216,7 @@ public class Login extends Activity {
 	}
 	public void setServerIp(View v)//设置
 	{
-		Intent intent = new Intent(Login.this,SetServerIP.class);
+		Intent intent = new Intent(LoginActivity.this,SetServerIPActivity.class);
 		startActivity(intent);
 	}
 	public void saveAccountPwd(View v) {

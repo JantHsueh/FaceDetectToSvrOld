@@ -25,7 +25,7 @@ import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ShowSuccessPage extends Activity {
+public class ShowSuccessActivity extends Activity {
 	
 //	Button btn_save;
 //	Button btn_unSave;
@@ -80,7 +80,7 @@ public class ShowSuccessPage extends Activity {
 	    image1.setImageBitmap(bitmap);	//设置Bitmap
 	    image2.setImageBitmap(bitmap2);	//设置Bitmap
 	    
-	    copyFile("/data/data/com.firs.facedetecttosvr/temp/facePic_temp.jpg",MyApp.FACE_PATH+Long.toString(lTime)+".jpg");
+	    copyFile("/data/data/com.firs.facedetecttosvr/temp/facePic_temp.jpg", MyApplication.FACE_PATH+Long.toString(lTime)+".jpg");
 	     
 	   //创建数据库
         database = new MyDataBaseAdapter(this);
@@ -99,7 +99,7 @@ public class ShowSuccessPage extends Activity {
 	
 	public void unsaveRecord()
 	{
-		ShowSuccessPage.this.finish();
+		ShowSuccessActivity.this.finish();
 	}
 	
 	public void  saveRecord() {
@@ -107,14 +107,14 @@ public class ShowSuccessPage extends Activity {
 		boolean bSave = true;
 		compareresult cpmrest = new compareresult();
 		FaceNative.getCompareResult(cpmrest);
-		 MyApp.log("Long.toString(lTime)"+Long.toString(lTime));
+		 MyApplication.log("Long.toString(lTime)"+Long.toString(lTime));
 
 		 //插入数据库 
 
 		
 		database.insertRecordInfoData(Long.toString(lTime), Integer.toString(cpmrest.score/1000000), cpmrest.name,  Integer.toString(cpmrest.faceId),
 				"facePic_temp.jpg","","others");
-		copyFile("/data/data/com.firs.facedetecttosvr/temp/"+cpmrest.faceId+".jpg",MyApp.FACE_PATH+Long.toString(lTime)+cpmrest.faceId+".jpg");
+		copyFile("/data/data/com.firs.facedetecttosvr/temp/"+cpmrest.faceId+".jpg", MyApplication.FACE_PATH+Long.toString(lTime)+cpmrest.faceId+".jpg");
 		if(true == bSave){
 
 			toast= Toast.makeText(getApplicationContext(), "记录保存保存成功!", Toast.LENGTH_SHORT);
@@ -125,7 +125,7 @@ public class ShowSuccessPage extends Activity {
 		toast.setGravity(Gravity.CENTER, 0, 0);
 		toast.show();
 		setResult(1);
-		ShowSuccessPage.this.finish();
+		ShowSuccessActivity.this.finish();
 	}
 	/**
 	* 加载本地图片
@@ -176,18 +176,18 @@ public class ShowSuccessPage extends Activity {
 	  }
 	
 	public void  goBack (View v){
-		//ShowSuccessPage.this.finish();
+		//ShowSuccessActivity.this.finish();
 
 		saveRecord();//保存记录  弹出框提示
 
 	}
     public void  toHistory (View v){
-    	Intent intent = new Intent(this,ShowRecordListPage.class);
+    	Intent intent = new Intent(this,ShowRecordListActivity.class);
 		startActivity(intent);
 		this.finish();
 	}
     public void  toSetting (View v){
-    	Intent intent = new Intent(this,NewSettingPage.class);
+    	Intent intent = new Intent(this,NewSettingActivity.class);
 		startActivity(intent);
 		this.finish();
 }

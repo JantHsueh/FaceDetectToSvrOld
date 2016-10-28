@@ -4,31 +4,19 @@ package com.firs.facedetecttosvr;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import com.firs.cn.FaceNative;
-import com.firs.cn.compareresult;
-import com.firs.facedetecttosvr.R.id;
-
-import android.R.integer;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.view.Gravity;
-import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
-public class ShowFailPage extends Activity {
+public class ShowFailActivity extends Activity {
 	
 	TextView text_failshow;
 	long lTime;
@@ -56,12 +44,12 @@ public class ShowFailPage extends Activity {
 		ImageView image1 = (ImageView) findViewById(R.id.imageView1);	
 	    Bitmap bitmap = getLoacalBitmap("/data/data/com.firs.facedetecttosvr/temp/facePic_temp.jpg"); //从本地取图片	  
 	    image1.setImageBitmap(bitmap);	//设置Bitmap
-	    ShowSuccessPage.copyFile("/data/data/com.firs.facedetecttosvr/temp/facePic_temp.jpg",MyApp.FACE_PATH+Long.toString(lTime)+".jpg");
+	    ShowSuccessActivity.copyFile("/data/data/com.firs.facedetecttosvr/temp/facePic_temp.jpg", MyApplication.FACE_PATH+Long.toString(lTime)+".jpg");
 	}
 	
 	public void unsaveRecord(View v)
 	{
-		ShowFailPage.this.finish();
+		ShowFailActivity.this.finish();
 	}
 	
 	/**
@@ -87,12 +75,12 @@ public class ShowFailPage extends Activity {
 		//saveRecord();//保存记录  弹出框提示
 	}
     public void  toHistory (View v){
-    	Intent intent = new Intent(this,ShowRecordListPage.class);
+    	Intent intent = new Intent(this,ShowRecordListActivity.class);
 		startActivity(intent);
 		this.finish();
 	}
     public void  toSetting (View v){
-    	Intent intent = new Intent(this,NewSettingPage.class);
+    	Intent intent = new Intent(this,NewSettingActivity.class);
 		startActivity(intent);
 		this.finish();
 }

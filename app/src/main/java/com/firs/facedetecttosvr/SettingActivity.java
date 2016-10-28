@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 import com.firs.cn.FaceNative;
 
-public class SettingPage extends Activity {
+public class SettingActivity extends Activity {
 	EditText edit_score;
 	RadioGroup radioGroup;
 	//public static ProgressBar  progressBar;
@@ -81,7 +81,7 @@ public class SettingPage extends Activity {
 
 	public void settingReturn(View v)
 	{
-		SettingPage.this.finish();
+		SettingActivity.this.finish();
 	}
 	public void saveSetting(View v) {
 		int score = Integer.valueOf(edit_score.getText().toString());
@@ -122,7 +122,7 @@ public class SettingPage extends Activity {
 					quality = 0;
 				}
 				//save account and pwd
-				SharedPreferences settings = getSharedPreferences("setting",Login.MODE_PRIVATE);
+				SharedPreferences settings = getSharedPreferences("setting", LoginActivity.MODE_PRIVATE);
 				Editor editor = settings.edit();//获取编辑器
 				editor.putString("score", edit_score.getText().toString());
 				editor.putString("quality",Integer.toString(quality));

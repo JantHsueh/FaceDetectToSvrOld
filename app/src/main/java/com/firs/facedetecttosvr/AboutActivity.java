@@ -12,7 +12,7 @@ import android.view.Window;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class AboutPage extends Activity {
+public class AboutActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class AboutPage extends Activity {
 	
 	public void unsaveRecord(View v)
 	{
-		AboutPage.this.finish();
+		AboutActivity.this.finish();
 	}
 	
 	/**

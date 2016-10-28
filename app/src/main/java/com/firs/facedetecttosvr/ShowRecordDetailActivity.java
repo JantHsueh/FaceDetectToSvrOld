@@ -8,38 +8,25 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.firs.cn.FaceNative;
 import com.firs.cn.MyDataBaseAdapter;
-import com.firs.cn.compareresult;
-import com.firs.facedetecttosvr.R.id;
 
-import android.R.integer;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 import android.view.Display;
-import android.view.Gravity;
-import android.view.Menu;
 import android.view.View;
 import android.view.Window;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class ShowRecordDetailPage extends Activity {
+public class ShowRecordDetailActivity extends Activity {
 
 	TextView text_score,text_name,text_time;
 	//EditText edit_remark;
@@ -85,7 +72,7 @@ public class ShowRecordDetailPage extends Activity {
 		Cursor cur = database.fetchCheckRecordInfoData(str);
 		if(cur != null && cur.getCount() == 1)
 		{
-			MyApp.log("cur.count:"+cur.getCount()+ "timelong"+str);
+			MyApplication.log("cur.count:"+cur.getCount()+ "timelong"+str);
 			text_score.setText("相似度: "+cur.getString(1)+" %");
 			text_name.setText("注册名称: "+cur.getString(2));
 
@@ -96,8 +83,8 @@ public class ShowRecordDetailPage extends Activity {
 
 			ImageView image1 = (ImageView) findViewById(R.id.imageView1);
 			ImageView image2 = (ImageView) findViewById(R.id.imageView2);
-			Bitmap bitmap = getLoacalBitmap(MyApp.FACE_PATH+cur.getString(0)+".jpg"); //从本地取图片
-			Bitmap bitmap2 = getLoacalBitmap(MyApp.FACE_PATH + cur.getString(0) + cur.getShort(3)+".jpg"); //从本地取图片
+			Bitmap bitmap = getLoacalBitmap(MyApplication.FACE_PATH+cur.getString(0)+".jpg"); //从本地取图片
+			Bitmap bitmap2 = getLoacalBitmap(MyApplication.FACE_PATH + cur.getString(0) + cur.getShort(3)+".jpg"); //从本地取图片
 			image1.setImageBitmap(bitmap);	//设置Bitmap
 			image2.setImageBitmap(bitmap2);	//设置Bitmap
 		}
@@ -140,12 +127,12 @@ public class ShowRecordDetailPage extends Activity {
 								Cursor cur = database.fetchCheckRecordInfoData(str);
 								if(cur != null && cur.getCount() == 1)
 								{
-									deleteFile(MyApp.FACE_PATH+cur.getString(0)+".jpg");
-									deleteFile(MyApp.FACE_PATH + cur.getString(0) + cur.getShort(3)+".jpg");
+									deleteFile(MyApplication.FACE_PATH+cur.getString(0)+".jpg");
+									deleteFile(MyApplication.FACE_PATH + cur.getString(0) + cur.getShort(3)+".jpg");
 								}
 								//点击“确定”
 								database.deleteRecordInfoData(str);
-								ShowRecordDetailPage.this.finish();
+								ShowRecordDetailActivity.this.finish();
 							}
 						}).setNeutralButton("取消",
 						new DialogInterface.OnClickListener()
@@ -162,7 +149,7 @@ public class ShowRecordDetailPage extends Activity {
 	public void returnBack(View v)
 	{
 
-		ShowRecordDetailPage.this.finish();
+		ShowRecordDetailActivity.this.finish();
 	}
 
 	/**

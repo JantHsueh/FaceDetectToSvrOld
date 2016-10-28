@@ -21,7 +21,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class OtherSetPage extends Activity {
+public class OtherSetActivity extends Activity {
 	
 	TextView text_name;
 	
@@ -60,29 +60,29 @@ public class OtherSetPage extends Activity {
 	
 	public void set_server(View v)
 	{
-		Intent intent = new Intent(OtherSetPage.this,SetServerIP.class);
+		Intent intent = new Intent(OtherSetActivity.this,SetServerIPActivity.class);
 		startActivity(intent);
-		//OtherSetPage.this.finish();
+		//OtherSetActivity.this.finish();
 	}
 	
 	public void set_param(View v)
 	{
-		Intent intent = new Intent(OtherSetPage.this,SettingPage.class);
+		Intent intent = new Intent(OtherSetActivity.this,SettingActivity.class);
 		startActivity(intent);
-		//OtherSetPage.this.finish();
+		//OtherSetActivity.this.finish();
 	}
 	public void Check_record(View v)
 	{
-		Intent intent = new Intent(OtherSetPage.this,ShowRecordListPage.class);
+		Intent intent = new Intent(OtherSetActivity.this,ShowRecordListActivity.class);
 		startActivity(intent);
-		//OtherSetPage.this.finish();
+		//OtherSetActivity.this.finish();
 	}
 	
 	public void ShowPicture(View v)
 	{
-		Intent intent = new Intent(OtherSetPage.this,GridViewActivity.class);
+		Intent intent = new Intent(OtherSetActivity.this,GridViewActivity.class);
 		startActivity(intent);
-		//OtherSetPage.this.finish();
+		//OtherSetActivity.this.finish();
 	}
 	
 	public void clear_record(View v)
@@ -97,12 +97,12 @@ public class OtherSetPage extends Activity {
 			{
 				//点击“确定”
 				database.clearRecordInfoData();
-				File dir=new File(MyApp.FACE_PATH);
+				File dir=new File(MyApplication.FACE_PATH);
 				File[] lst=dir.listFiles();
 				for (File f:lst){
 					f.delete();
 				}
-				dir=new File(MyApp.FACE_TEMP_PATH);
+				dir=new File(MyApplication.FACE_TEMP_PATH);
 				lst=dir.listFiles();
 				for (File f:lst){
 					f.delete();
@@ -121,7 +121,7 @@ public class OtherSetPage extends Activity {
 	
 		// 显示对话框
 		dialog.show();
-		//OtherSetPage.this.finish();
+		//OtherSetActivity.this.finish();
 	}
 	
 	public void back_mainpage(View v)
@@ -137,7 +137,7 @@ public class OtherSetPage extends Activity {
 				//点击“确定”
 				Intent in = new Intent();
 		         setResult(101, in );
-				 OtherSetPage.this.finish();
+				 OtherSetActivity.this.finish();
 			}
 		}).setNeutralButton("取消", 
 		new DialogInterface.OnClickListener() 
@@ -154,7 +154,7 @@ public class OtherSetPage extends Activity {
 	
 	public void about_page(View v)
 	{
-		Intent intent = new Intent(OtherSetPage.this,AboutPage.class);
+		Intent intent = new Intent(OtherSetActivity.this,AboutActivity.class);
 		startActivity(intent);
 	}
 	
