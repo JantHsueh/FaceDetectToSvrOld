@@ -1,5 +1,8 @@
 package com.firs.view;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -7,8 +10,6 @@ import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.firs.facedetecttosvr.ShowRecordListPage;
 
 import jxl.Workbook;
 import jxl.WorkbookSettings;
@@ -19,8 +20,6 @@ import jxl.write.WritableFont;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
-import android.content.Context;
-import android.widget.Toast;
 
 public class ExcelUtils {
 	public static WritableFont arial14font = null;
@@ -37,8 +36,10 @@ public class ExcelUtils {
 	public static void format() {
 		try {
 			arial14font = new WritableFont(WritableFont.ARIAL, 14, WritableFont.BOLD);
-			arial14font.setColour(jxl.format.Colour.LIGHT_BLUE);//????  ???????
-			arial14format = new WritableCellFormat(arial14font);//???宓�?????
+
+			arial14font.setColour(jxl.format.Colour.LIGHT_BLUE);//标题  蓝色粗体
+			arial14format = new WritableCellFormat(arial14font);//定义单元格格式
+
 			arial14format.setAlignment(jxl.format.Alignment.CENTRE);
 			arial14format.setBorder(jxl.format.Border.ALL, jxl.format.BorderLineStyle.THIN);
 			arial14format.setBackground(jxl.format.Colour.VERY_LIGHT_YELLOW);
@@ -55,9 +56,11 @@ public class ExcelUtils {
 			e.printStackTrace();
 		}
 	}
-	//??????
+
+	//创建表
 	public static void initExcel(String fileName, String[] colName) {
-		format();//?????  ???????
+		format();//画表格  字体颜色
+
 		WritableWorkbook workbook = null;
 		try {
 			File file = new File(fileName);
@@ -65,7 +68,9 @@ public class ExcelUtils {
 				file.createNewFile();
 			}
 			workbook = Workbook.createWorkbook(file);
-			WritableSheet sheet = workbook.createSheet("????", 0);
+
+			WritableSheet sheet = workbook.createSheet("识别表", 0);
+
 			sheet.addCell((WritableCell) new Label(0, 0, fileName, arial14format));
 			for (int col = 0; col < colName.length; col++) {
 				sheet.addCell(new Label(col, 0, colName[col], arial10format));
@@ -110,7 +115,8 @@ public class ExcelUtils {
 				}
 
 				writebook.write();
-				Toast.makeText(c, "????excles????????????娲�?璞�???? RunVision????? ???worlk.xls ", Toast.LENGTH_SHORT).show();
+				Toast.makeText(c, "导出excles成功，手机自带存储设备下找 RunVision文件夹 下的worlk.xls ", Toast.LENGTH_SHORT).show();
+
 
 			}
 			catch (Exception e) {
